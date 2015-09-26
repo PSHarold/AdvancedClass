@@ -1,0 +1,619 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A56638952C3463F4DA7C3E2A /* Pods_AdvancedClassStudent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 713E9A37182E3093207E6B0D /* Pods_AdvancedClassStudent.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		F21838AD1B945ACC0075DD47 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F21838AC1B945ACC0075DD47 /* Images.xcassets */; };
+		F220E27C1BB62C2100251C88 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = F220E27B1BB62C2100251C88 /* MBProgressHUD.m */; settings = {ASSET_TAGS = (); }; };
+		F22DAC981B81AC2B00360027 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22DAC971B81AC2B00360027 /* AppDelegate.swift */; };
+		F22DAC9D1B81AC2B00360027 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F22DAC9B1B81AC2B00360027 /* Main.storyboard */; };
+		F22DACA21B81AC2B00360027 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F22DACA01B81AC2B00360027 /* LaunchScreen.xib */; };
+		F22DACBD1B81ACB600360027 /* StudentQuestionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22DACB71B81ACB600360027 /* StudentQuestionTableViewController.swift */; };
+		F22DACBF1B81ACB600360027 /* StudentTestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22DACB91B81ACB600360027 /* StudentTestHelper.swift */; };
+		F22DACC01B81ACB600360027 /* StudentPreTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22DACBA1B81ACB600360027 /* StudentPreTestViewController.swift */; };
+		F22DACC11B81ACB600360027 /* StudentQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22DACBB1B81ACB600360027 /* StudentQuestion.swift */; };
+		F22DACC41B81ACD500360027 /* AdvancedClassStudentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22DACC31B81ACD500360027 /* AdvancedClassStudentTests.swift */; };
+		F241AE9F1B98170E00E30EAF /* StudentTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F241AE9E1B98170E00E30EAF /* StudentTest.swift */; };
+		F241AEA51B98771000E30EAF /* StudentTestTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F241AEA41B98771000E30EAF /* StudentTestTableViewController.swift */; };
+		F246DEBB1B9C619B0058DEA6 /* Student.swift in Sources */ = {isa = PBXBuildFile; fileRef = F246DEBA1B9C619B0058DEA6 /* Student.swift */; };
+		F246DEC31B9C654B0058DEA6 /* StudentCourse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F246DEC21B9C654B0058DEA6 /* StudentCourse.swift */; };
+		F246DEC51B9C662E0058DEA6 /* TeacherInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F246DEC41B9C662E0058DEA6 /* TeacherInfo.swift */; };
+		F25B8DFF1B9D910800A2587E /* StudentInfoHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25B8DFE1B9D910800A2587E /* StudentInfoHelper.swift */; };
+		F25B8E031B9D95B700A2587E /* StudentCourseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25B8E021B9D95B700A2587E /* StudentCourseHelper.swift */; };
+		F25B8E051B9DB16400A2587E /* StudentCourseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25B8E041B9DB16400A2587E /* StudentCourseTableViewController.swift */; };
+		F285A6F81BAE94B80057C5B4 /* StudentTestResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F285A6F71BAE94B80057C5B4 /* StudentTestResultsTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		F29957991B81B89D0003B64C /* StudentAnswerQuestionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29957981B81B89D0003B64C /* StudentAnswerQuestionsViewController.swift */; };
+		F2B5A52A1BA99CFB00A4E38B /* Seat.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B5A5261BA99CFB00A4E38B /* Seat.swift */; };
+		F2B5A52B1BA99CFB00A4E38B /* SeatButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B5A5271BA99CFB00A4E38B /* SeatButton.swift */; };
+		F2B5A52C1BA99CFB00A4E38B /* SeatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B5A5281BA99CFB00A4E38B /* SeatView.swift */; };
+		F2B5A52D1BA99CFB00A4E38B /* StudentSeatHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B5A5291BA99CFB00A4E38B /* StudentSeatHelper.swift */; };
+		F2B5A52F1BA9A02F00A4E38B /* StudentChooseSeatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B5A52E1BA9A02F00A4E38B /* StudentChooseSeatViewController.swift */; };
+		F2B5A5311BA9A10F00A4E38B /* StudentPreChooseSeatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B5A5301BA9A10F00A4E38B /* StudentPreChooseSeatViewController.swift */; };
+		F2D785341BB4E13F00B6DC9A /* StudentTestResultsScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D785331BB4E13F00B6DC9A /* StudentTestResultsScrollViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		F2E3DA3E1B96EDA600945513 /* DateTimeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E3DA3D1B96EDA600945513 /* DateTimeHelper.swift */; };
+		F2F7D52C1B944BF600E07304 /* StudentAuthenticationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F7D52B1B944BF600E07304 /* StudentAuthenticationHelper.swift */; };
+		F2F7D52E1B944FA000E07304 /* StudentLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F7D52D1B944FA000E07304 /* StudentLoginViewController.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F22DACA81B81AC2B00360027 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F22DAC8A1B81AC2B00360027 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F22DAC911B81AC2B00360027;
+			remoteInfo = AdvancedClassStudent;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		2EDF93A37027DC2F0A8D21E7 /* Pods-AdvancedClassStudent.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AdvancedClassStudent.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AdvancedClassStudent/Pods-AdvancedClassStudent.debug.xcconfig"; sourceTree = "<group>"; };
+		713E9A37182E3093207E6B0D /* Pods_AdvancedClassStudent.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AdvancedClassStudent.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		99F57689DB25ECF56BF07460 /* Pods-AdvancedClassStudent.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AdvancedClassStudent.release.xcconfig"; path = "Pods/Target Support Files/Pods-AdvancedClassStudent/Pods-AdvancedClassStudent.release.xcconfig"; sourceTree = "<group>"; };
+		F21838AC1B945ACC0075DD47 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		F220E2791BB62C2000251C88 /* AdvancedClassStudent-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AdvancedClassStudent-Bridging-Header.h"; sourceTree = "<group>"; };
+		F220E27A1BB62C2100251C88 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		F220E27B1BB62C2100251C88 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		F22DAC921B81AC2B00360027 /* AdvancedClassStudent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AdvancedClassStudent.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F22DAC961B81AC2B00360027 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F22DAC971B81AC2B00360027 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		F22DAC9C1B81AC2B00360027 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F22DACA11B81AC2B00360027 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		F22DACA71B81AC2B00360027 /* AdvancedClassStudentTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AdvancedClassStudentTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F22DACAC1B81AC2B00360027 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F22DACB71B81ACB600360027 /* StudentQuestionTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentQuestionTableViewController.swift; sourceTree = "<group>"; };
+		F22DACB91B81ACB600360027 /* StudentTestHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentTestHelper.swift; sourceTree = "<group>"; };
+		F22DACBA1B81ACB600360027 /* StudentPreTestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentPreTestViewController.swift; sourceTree = "<group>"; };
+		F22DACBB1B81ACB600360027 /* StudentQuestion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentQuestion.swift; sourceTree = "<group>"; };
+		F22DACC31B81ACD500360027 /* AdvancedClassStudentTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdvancedClassStudentTests.swift; sourceTree = "<group>"; };
+		F241AE9E1B98170E00E30EAF /* StudentTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentTest.swift; sourceTree = "<group>"; };
+		F241AEA41B98771000E30EAF /* StudentTestTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentTestTableViewController.swift; sourceTree = "<group>"; };
+		F246DEBA1B9C619B0058DEA6 /* Student.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Student.swift; sourceTree = "<group>"; };
+		F246DEC21B9C654B0058DEA6 /* StudentCourse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentCourse.swift; sourceTree = "<group>"; };
+		F246DEC41B9C662E0058DEA6 /* TeacherInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherInfo.swift; sourceTree = "<group>"; };
+		F25B8DFE1B9D910800A2587E /* StudentInfoHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentInfoHelper.swift; sourceTree = "<group>"; };
+		F25B8E021B9D95B700A2587E /* StudentCourseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentCourseHelper.swift; sourceTree = "<group>"; };
+		F25B8E041B9DB16400A2587E /* StudentCourseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentCourseTableViewController.swift; sourceTree = "<group>"; };
+		F285A6F71BAE94B80057C5B4 /* StudentTestResultsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentTestResultsTableViewController.swift; sourceTree = "<group>"; };
+		F29957981B81B89D0003B64C /* StudentAnswerQuestionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentAnswerQuestionsViewController.swift; sourceTree = "<group>"; };
+		F2B5A5261BA99CFB00A4E38B /* Seat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Seat.swift; sourceTree = "<group>"; };
+		F2B5A5271BA99CFB00A4E38B /* SeatButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeatButton.swift; sourceTree = "<group>"; };
+		F2B5A5281BA99CFB00A4E38B /* SeatView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeatView.swift; sourceTree = "<group>"; };
+		F2B5A5291BA99CFB00A4E38B /* StudentSeatHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentSeatHelper.swift; sourceTree = "<group>"; };
+		F2B5A52E1BA9A02F00A4E38B /* StudentChooseSeatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentChooseSeatViewController.swift; sourceTree = "<group>"; };
+		F2B5A5301BA9A10F00A4E38B /* StudentPreChooseSeatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentPreChooseSeatViewController.swift; sourceTree = "<group>"; };
+		F2D785331BB4E13F00B6DC9A /* StudentTestResultsScrollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentTestResultsScrollViewController.swift; sourceTree = "<group>"; };
+		F2E3DA3D1B96EDA600945513 /* DateTimeHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateTimeHelper.swift; sourceTree = "<group>"; };
+		F2F7D52B1B944BF600E07304 /* StudentAuthenticationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentAuthenticationHelper.swift; sourceTree = "<group>"; };
+		F2F7D52D1B944FA000E07304 /* StudentLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentLoginViewController.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F22DAC8F1B81AC2B00360027 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A56638952C3463F4DA7C3E2A /* Pods_AdvancedClassStudent.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F22DACA41B81AC2B00360027 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5E8F227542F11F06C406A797 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2EDF93A37027DC2F0A8D21E7 /* Pods-AdvancedClassStudent.debug.xcconfig */,
+				99F57689DB25ECF56BF07460 /* Pods-AdvancedClassStudent.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		C4ECA59C3F3E2C9CABD9F7C4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				713E9A37182E3093207E6B0D /* Pods_AdvancedClassStudent.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F22DAC891B81AC2B00360027 = {
+			isa = PBXGroup;
+			children = (
+				F22DAC941B81AC2B00360027 /* AdvancedClassStudent */,
+				F22DACAA1B81AC2B00360027 /* AdvancedClassStudentTests */,
+				F22DAC931B81AC2B00360027 /* Products */,
+				5E8F227542F11F06C406A797 /* Pods */,
+				C4ECA59C3F3E2C9CABD9F7C4 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		F22DAC931B81AC2B00360027 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F22DAC921B81AC2B00360027 /* AdvancedClassStudent.app */,
+				F22DACA71B81AC2B00360027 /* AdvancedClassStudentTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F22DAC941B81AC2B00360027 /* AdvancedClassStudent */ = {
+			isa = PBXGroup;
+			children = (
+				F220E27A1BB62C2100251C88 /* MBProgressHUD.h */,
+				F220E27B1BB62C2100251C88 /* MBProgressHUD.m */,
+				F22DAC971B81AC2B00360027 /* AppDelegate.swift */,
+				F2E3DA3D1B96EDA600945513 /* DateTimeHelper.swift */,
+				F21838AC1B945ACC0075DD47 /* Images.xcassets */,
+				F22DACA01B81AC2B00360027 /* LaunchScreen.xib */,
+				F22DAC9B1B81AC2B00360027 /* Main.storyboard */,
+				F2B5A5261BA99CFB00A4E38B /* Seat.swift */,
+				F2B5A5271BA99CFB00A4E38B /* SeatButton.swift */,
+				F2B5A5281BA99CFB00A4E38B /* SeatView.swift */,
+				F246DEBA1B9C619B0058DEA6 /* Student.swift */,
+				F29957981B81B89D0003B64C /* StudentAnswerQuestionsViewController.swift */,
+				F2F7D52B1B944BF600E07304 /* StudentAuthenticationHelper.swift */,
+				F2B5A52E1BA9A02F00A4E38B /* StudentChooseSeatViewController.swift */,
+				F246DEC21B9C654B0058DEA6 /* StudentCourse.swift */,
+				F25B8E021B9D95B700A2587E /* StudentCourseHelper.swift */,
+				F25B8E041B9DB16400A2587E /* StudentCourseTableViewController.swift */,
+				F25B8DFE1B9D910800A2587E /* StudentInfoHelper.swift */,
+				F2F7D52D1B944FA000E07304 /* StudentLoginViewController.swift */,
+				F2B5A5301BA9A10F00A4E38B /* StudentPreChooseSeatViewController.swift */,
+				F22DACBA1B81ACB600360027 /* StudentPreTestViewController.swift */,
+				F22DACBB1B81ACB600360027 /* StudentQuestion.swift */,
+				F22DACB71B81ACB600360027 /* StudentQuestionTableViewController.swift */,
+				F2B5A5291BA99CFB00A4E38B /* StudentSeatHelper.swift */,
+				F241AE9E1B98170E00E30EAF /* StudentTest.swift */,
+				F22DACB91B81ACB600360027 /* StudentTestHelper.swift */,
+				F2D785331BB4E13F00B6DC9A /* StudentTestResultsScrollViewController.swift */,
+				F285A6F71BAE94B80057C5B4 /* StudentTestResultsTableViewController.swift */,
+				F241AEA41B98771000E30EAF /* StudentTestTableViewController.swift */,
+				F22DAC951B81AC2B00360027 /* Supporting Files */,
+				F246DEC41B9C662E0058DEA6 /* TeacherInfo.swift */,
+				F220E2791BB62C2000251C88 /* AdvancedClassStudent-Bridging-Header.h */,
+			);
+			path = AdvancedClassStudent;
+			sourceTree = "<group>";
+		};
+		F22DAC951B81AC2B00360027 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F22DAC961B81AC2B00360027 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F22DACAA1B81AC2B00360027 /* AdvancedClassStudentTests */ = {
+			isa = PBXGroup;
+			children = (
+				F22DACC31B81ACD500360027 /* AdvancedClassStudentTests.swift */,
+				F22DACAB1B81AC2B00360027 /* Supporting Files */,
+			);
+			path = AdvancedClassStudentTests;
+			sourceTree = "<group>";
+		};
+		F22DACAB1B81AC2B00360027 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F22DACAC1B81AC2B00360027 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F22DAC911B81AC2B00360027 /* AdvancedClassStudent */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F22DACB11B81AC2B00360027 /* Build configuration list for PBXNativeTarget "AdvancedClassStudent" */;
+			buildPhases = (
+				F8A08BA9FA63B50212AFA2A9 /* Check Pods Manifest.lock */,
+				F22DAC8E1B81AC2B00360027 /* Sources */,
+				F22DAC8F1B81AC2B00360027 /* Frameworks */,
+				F22DAC901B81AC2B00360027 /* Resources */,
+				2618A4C5AFC837FA6367DA11 /* Embed Pods Frameworks */,
+				656264D94E552AB7CA0E0695 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AdvancedClassStudent;
+			productName = AdvancedClassStudent;
+			productReference = F22DAC921B81AC2B00360027 /* AdvancedClassStudent.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F22DACA61B81AC2B00360027 /* AdvancedClassStudentTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F22DACB41B81AC2B00360027 /* Build configuration list for PBXNativeTarget "AdvancedClassStudentTests" */;
+			buildPhases = (
+				F22DACA31B81AC2B00360027 /* Sources */,
+				F22DACA41B81AC2B00360027 /* Frameworks */,
+				F22DACA51B81AC2B00360027 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F22DACA91B81AC2B00360027 /* PBXTargetDependency */,
+			);
+			name = AdvancedClassStudentTests;
+			productName = AdvancedClassStudentTests;
+			productReference = F22DACA71B81AC2B00360027 /* AdvancedClassStudentTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F22DAC8A1B81AC2B00360027 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
+				ORGANIZATIONNAME = Harold;
+				TargetAttributes = {
+					F22DAC911B81AC2B00360027 = {
+						CreatedOnToolsVersion = 6.4;
+					};
+					F22DACA61B81AC2B00360027 = {
+						CreatedOnToolsVersion = 6.4;
+						TestTargetID = F22DAC911B81AC2B00360027;
+					};
+				};
+			};
+			buildConfigurationList = F22DAC8D1B81AC2B00360027 /* Build configuration list for PBXProject "AdvancedClassStudent" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F22DAC891B81AC2B00360027;
+			productRefGroup = F22DAC931B81AC2B00360027 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F22DAC911B81AC2B00360027 /* AdvancedClassStudent */,
+				F22DACA61B81AC2B00360027 /* AdvancedClassStudentTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F22DAC901B81AC2B00360027 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F21838AD1B945ACC0075DD47 /* Images.xcassets in Resources */,
+				F22DAC9D1B81AC2B00360027 /* Main.storyboard in Resources */,
+				F22DACA21B81AC2B00360027 /* LaunchScreen.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F22DACA51B81AC2B00360027 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2618A4C5AFC837FA6367DA11 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AdvancedClassStudent/Pods-AdvancedClassStudent-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		656264D94E552AB7CA0E0695 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AdvancedClassStudent/Pods-AdvancedClassStudent-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F8A08BA9FA63B50212AFA2A9 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F22DAC8E1B81AC2B00360027 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F2D785341BB4E13F00B6DC9A /* StudentTestResultsScrollViewController.swift in Sources */,
+				F246DEC31B9C654B0058DEA6 /* StudentCourse.swift in Sources */,
+				F25B8DFF1B9D910800A2587E /* StudentInfoHelper.swift in Sources */,
+				F2F7D52E1B944FA000E07304 /* StudentLoginViewController.swift in Sources */,
+				F2F7D52C1B944BF600E07304 /* StudentAuthenticationHelper.swift in Sources */,
+				F2B5A52B1BA99CFB00A4E38B /* SeatButton.swift in Sources */,
+				F2B5A5311BA9A10F00A4E38B /* StudentPreChooseSeatViewController.swift in Sources */,
+				F22DACC11B81ACB600360027 /* StudentQuestion.swift in Sources */,
+				F2B5A52D1BA99CFB00A4E38B /* StudentSeatHelper.swift in Sources */,
+				F220E27C1BB62C2100251C88 /* MBProgressHUD.m in Sources */,
+				F241AE9F1B98170E00E30EAF /* StudentTest.swift in Sources */,
+				F2B5A52C1BA99CFB00A4E38B /* SeatView.swift in Sources */,
+				F25B8E051B9DB16400A2587E /* StudentCourseTableViewController.swift in Sources */,
+				F246DEBB1B9C619B0058DEA6 /* Student.swift in Sources */,
+				F2B5A52A1BA99CFB00A4E38B /* Seat.swift in Sources */,
+				F22DACBD1B81ACB600360027 /* StudentQuestionTableViewController.swift in Sources */,
+				F22DACBF1B81ACB600360027 /* StudentTestHelper.swift in Sources */,
+				F2B5A52F1BA9A02F00A4E38B /* StudentChooseSeatViewController.swift in Sources */,
+				F246DEC51B9C662E0058DEA6 /* TeacherInfo.swift in Sources */,
+				F241AEA51B98771000E30EAF /* StudentTestTableViewController.swift in Sources */,
+				F25B8E031B9D95B700A2587E /* StudentCourseHelper.swift in Sources */,
+				F22DAC981B81AC2B00360027 /* AppDelegate.swift in Sources */,
+				F2E3DA3E1B96EDA600945513 /* DateTimeHelper.swift in Sources */,
+				F29957991B81B89D0003B64C /* StudentAnswerQuestionsViewController.swift in Sources */,
+				F285A6F81BAE94B80057C5B4 /* StudentTestResultsTableViewController.swift in Sources */,
+				F22DACC01B81ACB600360027 /* StudentPreTestViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F22DACA31B81AC2B00360027 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F22DACC41B81ACD500360027 /* AdvancedClassStudentTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F22DACA91B81AC2B00360027 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F22DAC911B81AC2B00360027 /* AdvancedClassStudent */;
+			targetProxy = F22DACA81B81AC2B00360027 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		F22DAC9B1B81AC2B00360027 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F22DAC9C1B81AC2B00360027 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		F22DACA01B81AC2B00360027 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F22DACA11B81AC2B00360027 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F22DACAF1B81AC2B00360027 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F22DACB01B81AC2B00360027 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F22DACB21B81AC2B00360027 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2EDF93A37027DC2F0A8D21E7 /* Pods-AdvancedClassStudent.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Wei Feng Hou (KBW9ML5K4W)";
+				INFOPLIST_FILE = AdvancedClassStudent/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "USTB.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "AdvancedClassStudent/AdvancedClassStudent-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		F22DACB31B81AC2B00360027 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 99F57689DB25ECF56BF07460 /* Pods-AdvancedClassStudent.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Wei Feng Hou (KBW9ML5K4W)";
+				INFOPLIST_FILE = AdvancedClassStudent/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "USTB.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "AdvancedClassStudent/AdvancedClassStudent-Bridging-Header.h";
+			};
+			name = Release;
+		};
+		F22DACB51B81AC2B00360027 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = AdvancedClassStudentTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "USTB.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AdvancedClassStudent.app/AdvancedClassStudent";
+			};
+			name = Debug;
+		};
+		F22DACB61B81AC2B00360027 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = AdvancedClassStudentTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "USTB.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AdvancedClassStudent.app/AdvancedClassStudent";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F22DAC8D1B81AC2B00360027 /* Build configuration list for PBXProject "AdvancedClassStudent" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F22DACAF1B81AC2B00360027 /* Debug */,
+				F22DACB01B81AC2B00360027 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F22DACB11B81AC2B00360027 /* Build configuration list for PBXNativeTarget "AdvancedClassStudent" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F22DACB21B81AC2B00360027 /* Debug */,
+				F22DACB31B81AC2B00360027 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F22DACB41B81AC2B00360027 /* Build configuration list for PBXNativeTarget "AdvancedClassStudentTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F22DACB51B81AC2B00360027 /* Debug */,
+				F22DACB61B81AC2B00360027 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F22DAC8A1B81AC2B00360027 /* Project object */;
+}

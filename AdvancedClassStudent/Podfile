@@ -1,0 +1,14 @@
+# Uncomment this line to define a global platform for your project
+platform :ios, '8.0'
+
+target 'AdvancedClassStudent' do
+pod 'Alamofire', '~> 2.0'
+pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
+pod 'Charts', :git => 'https://github.com/danielgindi/ios-charts.git'
+use_frameworks!
+end
+
+target 'AdvancedClassStudentTests' do
+
+end
+
