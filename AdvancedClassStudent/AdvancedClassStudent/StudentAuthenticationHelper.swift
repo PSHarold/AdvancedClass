@@ -27,12 +27,15 @@ class StudentAuthenticationHelper{
    // var request:Request
     //var courseHelper = StudentCourseHelper.defaultHelper()
     var delegate:StudentAuthenticationHelperDelegate!
-    let baseRootUrl:String = "http://192.168.2.1:5000/"
+
+    let baseRootUrl:String = TARGET_IPHONE_SIMULATOR == 0 ? "http://192.168.2.1:5000/" : "http://localhost:5000/"
+    
     let urlDict = ["knowledgePoints":"knowledge_points","questions":"questions","tests":"tests","results":"results","courses":"courses","students":"students","rooms":"rooms","seats":"seats"]
     
     
     
     func requestForSeatWithId(id:String) ->Request {
+        
         return self.alamofireManager.request(.GET, self.baseRootUrl + self.urlDict["seats"]! + "/\(id)", parameters: nil, encoding: ParameterEncoding.URL, headers: nil)
     }
     
