@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:StudentNotificationsTableViewController.swift">
+   </FileRef>
+   <FileRef
       location = "group:AdvancedClassStudent.xcodeproj">
    </FileRef>
    <FileRef

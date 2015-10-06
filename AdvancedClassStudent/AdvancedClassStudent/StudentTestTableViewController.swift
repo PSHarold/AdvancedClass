@@ -10,16 +10,17 @@ import UIKit
 
 class StudentTestTableViewController: UITableViewController,StudentTestHelperDelegate {
 
-    var testTelper = StudentTestHelper.defaultHelper()
+    var testHelper = StudentTestHelper.defaultHelper()
     let hud = MBProgressHUD()
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.tableView.tableFooterView = UIView(frame: CGRectZero)
     }
  
     override func viewWillAppear(animated: Bool) {
-        self.testTelper.delegate = self
+        super.viewWillAppear(true)
+        self.testHelper.delegate = self
+       
         self.tableView.reloadData()
     }
     
@@ -29,13 +30,13 @@ class StudentTestTableViewController: UITableViewController,StudentTestHelperDel
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.testTelper.testArray.count
+        return self.testHelper.testArray.count
     }
 
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("MyCell", forIndexPath: indexPath) 
-        let test = self.testTelper.testArray[indexPath.row]
+        let test = self.testHelper.testArray[indexPath.row]
         cell.textLabel?.text = test.startTime
         if test.expired{
             cell.detailTextLabel?.text = "已结束"
@@ -46,7 +47,7 @@ class StudentTestTableViewController: UITableViewController,StudentTestHelperDel
         }
         if test.finished{
             cell.detailTextLabel?.text = "已完成"
-            cell.detailTextLabel?.textColor = UIColor.cyanColor()
+            cell.detailTextLabel?.textColor = UIColor.blueColor()
         }
         
         return cell
@@ -54,21 +55,19 @@ class StudentTestTableViewController: UITableViewController,StudentTestHelperDel
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        let test = self.testTelper.testArray[indexPath.row]
-        if test.expired{
-            return
-        }
+        let test = self.testHelper.testArray[indexPath.row]
         self.hud.mode = .Indeterminate
         self.hud.labelText = "正在加载"
         self.view.addSubview(self.hud)
         self.hud.show(true)
+        self.testHelper.testToView = test
         if test.finished{
-            self.testTelper.getTestResultsWithTest(test)
+            self.testHelper.testToView = test
+            self.testHelper.getTestResultsWithTest(test)
             return
         }
-        self.testTelper.getQuestionsWithTest(test)
-        self.testTelper.testToTake = test
-        //self.performSegueWithIdentifier("TakeTest", sender: self)
+        self.testHelper.getQuestionsWithTest(test)
+        
     }
     
     func networkError() {
@@ -78,13 +77,12 @@ class StudentTestTableViewController: UITableViewController,StudentTestHelperDel
     }
     func allQuestionsAcquired() {
         self.hud.removeFromSuperview()
-        self.performSegueWithIdentifier("TakeTest", sender: self)
+        self.performSegueWithIdentifier("ShowTestDetails", sender: self)
     }   
     
     func testResultsAcquiredWithTestId(id: String) {
         self.hud.removeFromSuperview()
-        self.testTelper.testToViewResult = self.testTelper.testDict[id]
-        self.performSegueWithIdentifier("ShowResults", sender: self)
+        self.performSegueWithIdentifier("ShowTestDetails", sender: self)
     }
     
 }

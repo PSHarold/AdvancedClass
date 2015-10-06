@@ -232,7 +232,6 @@ class StudentSeatHelper {
         let request = self.authHelper.requestForSeatSelectionWithSeatId(seat.id, etag: seat.etag, patchDict: dict)
         request.responseJSON(){
             (_,_,result) in
-            
             switch result {
             case .Success(let data):
                 let json = JSON(data)
@@ -270,9 +269,6 @@ class StudentSeatHelper {
             print("404", terminator: "")
         default:
             break
-
-            
         }
-    }
-    
+    }    
 }

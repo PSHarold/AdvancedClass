@@ -18,6 +18,7 @@
 		F22DACC01B81ACB600360027 /* StudentPreTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22DACBA1B81ACB600360027 /* StudentPreTestViewController.swift */; };
 		F22DACC11B81ACB600360027 /* StudentQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22DACBB1B81ACB600360027 /* StudentQuestion.swift */; };
 		F22DACC41B81ACD500360027 /* AdvancedClassStudentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22DACC31B81ACD500360027 /* AdvancedClassStudentTests.swift */; };
+		F2329FEF1BC21AEC006A428F /* StudentTestInfoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2329FEE1BC21AEC006A428F /* StudentTestInfoTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		F241AE9F1B98170E00E30EAF /* StudentTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F241AE9E1B98170E00E30EAF /* StudentTest.swift */; };
 		F241AEA51B98771000E30EAF /* StudentTestTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F241AEA41B98771000E30EAF /* StudentTestTableViewController.swift */; };
 		F246DEBB1B9C619B0058DEA6 /* Student.swift in Sources */ = {isa = PBXBuildFile; fileRef = F246DEBA1B9C619B0058DEA6 /* Student.swift */; };
@@ -34,6 +35,8 @@
 		F2B5A52D1BA99CFB00A4E38B /* StudentSeatHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B5A5291BA99CFB00A4E38B /* StudentSeatHelper.swift */; };
 		F2B5A52F1BA9A02F00A4E38B /* StudentChooseSeatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B5A52E1BA9A02F00A4E38B /* StudentChooseSeatViewController.swift */; };
 		F2B5A5311BA9A10F00A4E38B /* StudentPreChooseSeatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B5A5301BA9A10F00A4E38B /* StudentPreChooseSeatViewController.swift */; };
+		F2BCB68E1BBFF5D200BF14F1 /* StudentNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2BCB68D1BBFF5D200BF14F1 /* StudentNotificationViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		F2BCB6901BBFF9DE00BF14F1 /* StudentNotificationDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2BCB68F1BBFF9DE00BF14F1 /* StudentNotificationDetailsViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		F2D785341BB4E13F00B6DC9A /* StudentTestResultsScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D785331BB4E13F00B6DC9A /* StudentTestResultsScrollViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		F2E3DA3E1B96EDA600945513 /* DateTimeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E3DA3D1B96EDA600945513 /* DateTimeHelper.swift */; };
 		F2F7D52C1B944BF600E07304 /* StudentAuthenticationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F7D52B1B944BF600E07304 /* StudentAuthenticationHelper.swift */; };
@@ -70,6 +73,7 @@
 		F22DACBA1B81ACB600360027 /* StudentPreTestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentPreTestViewController.swift; sourceTree = "<group>"; };
 		F22DACBB1B81ACB600360027 /* StudentQuestion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentQuestion.swift; sourceTree = "<group>"; };
 		F22DACC31B81ACD500360027 /* AdvancedClassStudentTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdvancedClassStudentTests.swift; sourceTree = "<group>"; };
+		F2329FEE1BC21AEC006A428F /* StudentTestInfoTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentTestInfoTableViewController.swift; sourceTree = "<group>"; };
 		F241AE9E1B98170E00E30EAF /* StudentTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentTest.swift; sourceTree = "<group>"; };
 		F241AEA41B98771000E30EAF /* StudentTestTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentTestTableViewController.swift; sourceTree = "<group>"; };
 		F246DEBA1B9C619B0058DEA6 /* Student.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Student.swift; sourceTree = "<group>"; };
@@ -86,6 +90,8 @@
 		F2B5A5291BA99CFB00A4E38B /* StudentSeatHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentSeatHelper.swift; sourceTree = "<group>"; };
 		F2B5A52E1BA9A02F00A4E38B /* StudentChooseSeatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentChooseSeatViewController.swift; sourceTree = "<group>"; };
 		F2B5A5301BA9A10F00A4E38B /* StudentPreChooseSeatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentPreChooseSeatViewController.swift; sourceTree = "<group>"; };
+		F2BCB68D1BBFF5D200BF14F1 /* StudentNotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentNotificationViewController.swift; sourceTree = "<group>"; };
+		F2BCB68F1BBFF9DE00BF14F1 /* StudentNotificationDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentNotificationDetailsViewController.swift; sourceTree = "<group>"; };
 		F2D785331BB4E13F00B6DC9A /* StudentTestResultsScrollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentTestResultsScrollViewController.swift; sourceTree = "<group>"; };
 		F2E3DA3D1B96EDA600945513 /* DateTimeHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateTimeHelper.swift; sourceTree = "<group>"; };
 		F2F7D52B1B944BF600E07304 /* StudentAuthenticationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentAuthenticationHelper.swift; sourceTree = "<group>"; };
@@ -151,13 +157,14 @@
 		F22DAC941B81AC2B00360027 /* AdvancedClassStudent */ = {
 			isa = PBXGroup;
 			children = (
-				F220E27A1BB62C2100251C88 /* MBProgressHUD.h */,
-				F220E27B1BB62C2100251C88 /* MBProgressHUD.m */,
+				F220E2791BB62C2000251C88 /* AdvancedClassStudent-Bridging-Header.h */,
 				F22DAC971B81AC2B00360027 /* AppDelegate.swift */,
 				F2E3DA3D1B96EDA600945513 /* DateTimeHelper.swift */,
 				F21838AC1B945ACC0075DD47 /* Images.xcassets */,
 				F22DACA01B81AC2B00360027 /* LaunchScreen.xib */,
 				F22DAC9B1B81AC2B00360027 /* Main.storyboard */,
+				F220E27A1BB62C2100251C88 /* MBProgressHUD.h */,
+				F220E27B1BB62C2100251C88 /* MBProgressHUD.m */,
 				F2B5A5261BA99CFB00A4E38B /* Seat.swift */,
 				F2B5A5271BA99CFB00A4E38B /* SeatButton.swift */,
 				F2B5A5281BA99CFB00A4E38B /* SeatView.swift */,
@@ -170,6 +177,8 @@
 				F25B8E041B9DB16400A2587E /* StudentCourseTableViewController.swift */,
 				F25B8DFE1B9D910800A2587E /* StudentInfoHelper.swift */,
 				F2F7D52D1B944FA000E07304 /* StudentLoginViewController.swift */,
+				F2BCB68F1BBFF9DE00BF14F1 /* StudentNotificationDetailsViewController.swift */,
+				F2BCB68D1BBFF5D200BF14F1 /* StudentNotificationViewController.swift */,
 				F2B5A5301BA9A10F00A4E38B /* StudentPreChooseSeatViewController.swift */,
 				F22DACBA1B81ACB600360027 /* StudentPreTestViewController.swift */,
 				F22DACBB1B81ACB600360027 /* StudentQuestion.swift */,
@@ -177,12 +186,12 @@
 				F2B5A5291BA99CFB00A4E38B /* StudentSeatHelper.swift */,
 				F241AE9E1B98170E00E30EAF /* StudentTest.swift */,
 				F22DACB91B81ACB600360027 /* StudentTestHelper.swift */,
+				F2329FEE1BC21AEC006A428F /* StudentTestInfoTableViewController.swift */,
 				F2D785331BB4E13F00B6DC9A /* StudentTestResultsScrollViewController.swift */,
 				F285A6F71BAE94B80057C5B4 /* StudentTestResultsTableViewController.swift */,
 				F241AEA41B98771000E30EAF /* StudentTestTableViewController.swift */,
 				F22DAC951B81AC2B00360027 /* Supporting Files */,
 				F246DEC41B9C662E0058DEA6 /* TeacherInfo.swift */,
-				F220E2791BB62C2000251C88 /* AdvancedClassStudent-Bridging-Header.h */,
 			);
 			path = AdvancedClassStudent;
 			sourceTree = "<group>";
@@ -266,6 +275,7 @@
 				TargetAttributes = {
 					F22DAC911B81AC2B00360027 = {
 						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = G939QJ6E49;
 					};
 					F22DACA61B81AC2B00360027 = {
 						CreatedOnToolsVersion = 6.4;
@@ -367,6 +377,7 @@
 			files = (
 				F2D785341BB4E13F00B6DC9A /* StudentTestResultsScrollViewController.swift in Sources */,
 				F246DEC31B9C654B0058DEA6 /* StudentCourse.swift in Sources */,
+				F2329FEF1BC21AEC006A428F /* StudentTestInfoTableViewController.swift in Sources */,
 				F25B8DFF1B9D910800A2587E /* StudentInfoHelper.swift in Sources */,
 				F2F7D52E1B944FA000E07304 /* StudentLoginViewController.swift in Sources */,
 				F2F7D52C1B944BF600E07304 /* StudentAuthenticationHelper.swift in Sources */,
@@ -375,7 +386,9 @@
 				F22DACC11B81ACB600360027 /* StudentQuestion.swift in Sources */,
 				F2B5A52D1BA99CFB00A4E38B /* StudentSeatHelper.swift in Sources */,
 				F220E27C1BB62C2100251C88 /* MBProgressHUD.m in Sources */,
+				F2BCB68E1BBFF5D200BF14F1 /* StudentNotificationViewController.swift in Sources */,
 				F241AE9F1B98170E00E30EAF /* StudentTest.swift in Sources */,
+				F2BCB6901BBFF9DE00BF14F1 /* StudentNotificationDetailsViewController.swift in Sources */,
 				F2B5A52C1BA99CFB00A4E38B /* SeatView.swift in Sources */,
 				F25B8E051B9DB16400A2587E /* StudentCourseTableViewController.swift in Sources */,
 				F246DEBB1B9C619B0058DEA6 /* Student.swift in Sources */,
@@ -522,7 +535,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Wei Feng Hou (KBW9ML5K4W)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = AdvancedClassStudent/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "USTB.$(PRODUCT_NAME:rfc1034identifier)";
@@ -538,7 +551,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Wei Feng Hou (KBW9ML5K4W)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = AdvancedClassStudent/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "USTB.$(PRODUCT_NAME:rfc1034identifier)";

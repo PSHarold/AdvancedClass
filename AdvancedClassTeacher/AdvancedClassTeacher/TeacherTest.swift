@@ -27,6 +27,7 @@ class TeacherTest{
     var total = 0
     var _current = 0
     var done = true
+    var deadlineDate:NSDate?
     var current:Int{
         get{
             return self._current
@@ -88,6 +89,13 @@ class TeacherTest{
         self.message = json["message"].stringValue
         self.randomNumber = json["random_num"].intValue
         self.etag = json["_etag"].stringValue
+        if self.deadline != "" && !self.expired{
+            let formatter = NSDateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd HH:mm"
+            self.deadlineDate = formatter.dateFromString(self.deadline)!
+            self.expired = self.deadlineDate!.compare(NSDate()) == NSComparisonResult.OrderedAscending
+        }
+
         if self.randomNumber == 0{
             self.total = self.questionIds.count
         }
@@ -106,13 +114,7 @@ class TeacherTest{
         self.questionIds.removeAll()
     }
     
-    func getQuestionIds() -> [String]{
-        var temp = [String]()
-        for (_,question) in self.questions{
-            temp.append(question.id)
-        }
-        return temp
-    }
+    
     
 }
 

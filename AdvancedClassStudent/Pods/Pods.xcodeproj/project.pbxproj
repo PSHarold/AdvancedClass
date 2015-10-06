@@ -680,6 +680,11 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0700;
+				TargetAttributes = {
+					9F3BE5C61C50B9617B0CF1D235C175E7 = {
+						DevelopmentTeam = G939QJ6E49;
+					};
+				};
 			};
 			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -859,6 +864,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8C472EB9BEEE70C46584E72569E6294E /* Charts-Private.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 2.1.3;
 				DEFINES_MODULE = YES;
@@ -886,6 +892,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 64F88A15A5FCFFF5585A7A3329101897 /* SwiftyJSON-Private.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 2.3.0;
 				DEFINES_MODULE = YES;
@@ -913,6 +920,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 64F88A15A5FCFFF5585A7A3329101897 /* SwiftyJSON-Private.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 2.3.0;
 				DEFINES_MODULE = YES;
@@ -941,6 +949,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8C472EB9BEEE70C46584E72569E6294E /* Charts-Private.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 2.1.3;
 				DEFINES_MODULE = YES;
@@ -969,6 +978,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 44616A95BD917A5C70727AC57633BF8B /* Alamofire-Private.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 2.0.1;
 				DEFINES_MODULE = YES;
@@ -996,6 +1006,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6253787F9869E19FEFE8171B953271B6 /* Pods-AdvancedClassStudent.release.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -1064,6 +1075,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2E3526299677475AB3E3461DE6443BAA /* Pods-AdvancedClassStudent.debug.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -1128,6 +1140,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 44616A95BD917A5C70727AC57633BF8B /* Alamofire-Private.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 2.0.1;
 				DEFINES_MODULE = YES;

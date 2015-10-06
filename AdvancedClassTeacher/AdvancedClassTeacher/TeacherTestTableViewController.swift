@@ -16,9 +16,11 @@ class TeacherTestTableViewController: UITableViewController,TeacherTestHelperDel
         super.viewDidLoad()
     }
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         self.testHelper.delegate = self
+        self.tableView.reloadData()
+        
     }
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
@@ -42,10 +44,12 @@ class TeacherTestTableViewController: UITableViewController,TeacherTestHelperDel
         hud.hide(true, afterDelay: 1.2)
         
     }
-    
-    func allQuestionsAcquired() {
+    func allKnowledgePointsAcquired() {
         self.hud.removeFromSuperview()
         performSegueWithIdentifier("SelectQuestions", sender: self)
+    }
+    func allQuestionsAcquired() {
+        self.testHelper.getKnowledgePoints(TeacherCourseHelper.defaultHelper().currentCourse.courseId)
     }
     
     func allQuestionsAcquiredWithTestId(id: String) {
@@ -89,7 +93,10 @@ class TeacherTestTableViewController: UITableViewController,TeacherTestHelperDel
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        self.testHelper.getQuestionsWithTest(self.testHelper.allTestArray[indexPath.row])
+        let test = self.testHelper.allTestArray[indexPath.row]
+        self.testHelper.testToView = test
+        self.performSegueWithIdentifier("ShowTestDetails", sender: self)
+        //self.testHelper.getQuestionsWithTest(test)
     }
     
 }

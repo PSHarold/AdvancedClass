@@ -12,7 +12,7 @@ import SwiftyJSON
 
 
 @objc protocol TeacherTestHelperDelegate{
-    optional func knowledgePointsAcquired()
+    optional func allKnowledgePointsAcquired()
     optional func testResultAcquired()
     optional func allQuestionsAcquired()
     func networkError()
@@ -85,6 +85,7 @@ class TeacherTestHelper {
     static var instance:TeacherTestHelper?
     var allQuestionArray = [Question]()
     var allQuestionDict = Dictionary<String,Question>()
+    var testToView:TeacherTest!
     var newTest:TeacherTest!{
         get{
             if let test = self._newTest{
@@ -234,7 +235,11 @@ class TeacherTestHelper {
     }
     
     func getQuestionsWithTest(test:TeacherTest){
-        let ids = test.getQuestionIds()
+        if test.questionArray.count != 0{
+            self.delegate.allQuestionsAcquiredWithTestId!(test.id)
+            return
+        }
+        let ids = test.questionIds
         for id in ids{
             self.getQuestionWithId(id,test: test)
         }
@@ -242,7 +247,24 @@ class TeacherTestHelper {
     
     
     
+    func endTestWithTest(test:TeacherTest){
+        if test.expired{
+            return
+        }
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
 
+        let request = self.authHelper.requestForTestModificationWithQuestionId(test.id, etag: test.etag, patchDict: ["expired":true,"deadline":dateFormatter.stringFromDate(NSDate())])
+        request.responseJSON(){
+            (_,_,result) in
+            switch result {
+            case .Success:
+                self.delegate.testUploaded!()
+            case .Failure:
+                self.delegate.networkError()
+            }
+        }
+    }
     
     
     func getAllQuestions() -> Int{
@@ -252,6 +274,19 @@ class TeacherTestHelper {
         }
         else{
             return self.updateAllQuestions()
+        }
+    }
+    
+    func modifyDeadlineWithTest(test:TeacherTest,date:String){
+        let request = self.authHelper.requestForTestModificationWithQuestionId(test.id, etag: test.etag, patchDict: ["deadline":date])
+        request.responseJSON(){
+            (_,_,result) in
+            switch result {
+            case .Success:
+                self.delegate.testUploaded!()
+            case .Failure:
+                self.delegate.networkError()
+            }
         }
     }
     
@@ -269,7 +304,16 @@ class TeacherTestHelper {
             (_,_,result) in
             switch result {
             case .Success(let data):
-                self.processQuestionList(JSON(data))
+                let questionList = JSON(data)["_items"]
+                if questionList == JSON.null {
+                    self.delegate.networkError()
+                    return
+                }
+                for (_,questionJSON) in questionList{
+                    self.questionAcquired(Question(json: questionJSON))
+                }
+                self.delegate.allQuestionsAcquired!()
+                
             case .Failure:
                 self.delegate.networkError()
             }
@@ -279,21 +323,7 @@ class TeacherTestHelper {
     
     
     func processQuestionList(list:JSON){
-        let questionList = list["_items"]
-        if questionList == JSON.null {
-            self.delegate.networkError()
-            return
-        }
-        //if questionList.count == 0 {
-        //   self.gotResult(.noQuestionsOrTest)
-        //   return
-        //}
         
-        for (_,questionJSON) in questionList{
-            self.questionAcquired(Question(json: questionJSON))
-        }
-        self.getKnowledgePoints(self.courseHelper.currentCourse.courseId)
-        self.delegate.allQuestionsAcquired!()
     }
     
     
@@ -320,8 +350,9 @@ class TeacherTestHelper {
     }
     
     func uploadTest() -> Int {
-        
-        let dict = ["question_list":self.newTest.getQuestionIds(), "has_hint":self.newTest.hasHint,"random_num":self.newTest.randomNumber,"course_id":self.courseHelper.currentCourse.courseId,"expired":false,"start_time":self.dateTimeHelper.currentTime,"time_limit":self.newTest.timeLimitInt,"info":"","message":"","sub_id":self.courseHelper.currentCourse.subId]
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+        let dict = ["question_list":self.newTest.questionIds, "has_hint":self.newTest.hasHint,"random_num":self.newTest.randomNumber,"course_id":self.courseHelper.currentCourse.courseId,"expired":false,"start_time":self.dateTimeHelper.currentTime,"time_limit":self.newTest.timeLimitInt,"info":"","message":self.newTest.message,"sub_id":self.courseHelper.currentCourse.subId,"deadline":self.newTest.deadlineDate == nil ? "" : dateFormatter.stringFromDate(self.newTest.deadlineDate!)]
         
         let request = self.authHelper.requestForTestUploading(dict as! Dictionary<String, AnyObject>)
         request.responseJSON(){
@@ -330,8 +361,8 @@ class TeacherTestHelper {
             case .Success:
                 self.delegate.testUploaded!()
                  self.newTest = nil
-            case .Failure(_, let error):
-                print("Request failed with error: \(error)")
+            case .Failure:
+                self.delegate.networkError()
             }
         }
         return 0
@@ -373,8 +404,8 @@ class TeacherTestHelper {
             switch result {
             case .Success:
                 self.delegate.questionUploaded!()
-            case .Failure(_, let error):
-               print(error)
+            case .Failure:
+               self.delegate.networkError()
             }
         }
         return 0
@@ -382,6 +413,10 @@ class TeacherTestHelper {
     
     
     func getKnowledgePoints(courseId:String){
+        if self.knowledgePoints != nil{
+            self.delegate.allKnowledgePointsAcquired!()
+            return
+        }
         let request = self.authHelper.requestForKnowledgePoints()
         request.responseJSON(){
             (_,_,result) in
@@ -397,14 +432,14 @@ class TeacherTestHelper {
                     self.knowledgePoints.addChapter(Chapter(chapterNo: chapter["chapter"].intValue, points:temp ))
                 }
                 self.knowledgePoints.sortByChapter()
-
+                self.delegate.allKnowledgePointsAcquired!()
             case .Failure(_, let error):
                 print("Request failed with error: \(error)")
             }
         }
     }
     
-    func getTestResults(testId:String){
+    func getTestResultsWithTest(test:TeacherTest){
         
     }
     

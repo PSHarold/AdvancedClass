@@ -27,7 +27,7 @@ import SwiftyJSON
 }
 
 
-class TeacherAuthenticationHelper:TeacherCourseHelperDelegate {
+class TeacherAuthenticationHelper {
     
     
     
@@ -35,8 +35,8 @@ class TeacherAuthenticationHelper:TeacherCourseHelperDelegate {
     var alamofireManager : Alamofire.Manager!
     var delegate:TeacherAuthenticationHelperDelegate!
     var myInfo:Teacher!
-    let baseRootUrl:String = "http://192.168.2.1:5000/"
-    let urlDict = ["knowledgePoints":"knowledge_points","questions":"questions","tests":"tests","results":"results","courses":"courses","students":"students","teachers":"teachers","rooms":"rooms"]
+    let baseRootUrl:String = TARGET_IPHONE_SIMULATOR == 0 ? "http://192.168.2.1:5000/" : "http://localhost:5000/"
+    let urlDict = ["knowledgePoints":"knowledge_points","questions":"questions","tests":"tests","results":"results","courses":"courses","students":"students","teachers":"teachers","rooms":"rooms","notifications":"notifications"]
     
 
     func updateMyInformation(){
@@ -70,6 +70,11 @@ class TeacherAuthenticationHelper:TeacherCourseHelperDelegate {
     
     func requestForQuestionWithId(id:String) ->Request {
         return self.alamofireManager.request(.GET, self.baseRootUrl + self.urlDict["questions"]! + "/\(id)", parameters: nil, encoding: ParameterEncoding.URL, headers: nil)
+    }
+    
+    func requestForNotificationsWithCourseId(id:String,subId:String) -> Request{
+        return self.alamofireManager.request(.GET, self.baseRootUrl + self.urlDict["courses"]! + "/" + id + "/" + subId + "/" + self.urlDict["notifications"]!, parameters: nil, encoding: ParameterEncoding.URL, headers: nil)
+
     }
     
     func requestForMyInfoWithUser(user:String,pass:String) ->Request {
@@ -116,10 +121,25 @@ class TeacherAuthenticationHelper:TeacherCourseHelperDelegate {
     func requestForQuestionsWithCourseId(id:String) ->Request {
         return self.alamofireManager.request(.GET, self.baseRootUrl + self.urlDict["courses"]! + "/\(id)/" + self.urlDict["questions"]!, parameters: nil, encoding: .JSON, headers: nil)
     }
+    
+    func requestForTestModificationWithQuestionId(id:String,etag:String,patchDict:Dictionary<String,AnyObject>) ->Request {
+        return self.alamofireManager.request(.PATCH, self.baseRootUrl + self.urlDict["tests"]! + "/\(id)", parameters: patchDict, encoding: .JSON, headers: ["If-Match":etag])
+    }
+    
     func requestForTestDeletionWithTestId(id:String,etag:String) ->Request{
         return self.alamofireManager.request(.DELETE, self.baseRootUrl + self.urlDict["tests"]! + "/\(id)", parameters: nil, encoding: .JSON, headers: ["If-Match":etag])
     }
     
+    func requestForNotificationUploading(notification:Dictionary<String,AnyObject>) -> Request {
+        return self.alamofireManager.request(.POST, self.baseRootUrl + self.urlDict["notifications"]!, parameters: notification, encoding: .JSON, headers: nil)
+    }
+    func requestForNoticationModificationWithId(id:String,etag:String,patchDict:Dictionary<String,AnyObject>) -> Request{
+        return self.alamofireManager.request(.PATCH, self.baseRootUrl + self.urlDict["notifications"]! + "/\(id)", parameters: patchDict, encoding: .JSON, headers: ["If-Match":etag])
+    }
+    
+    func requestForNotificationDeletionWithTestId(id:String,etag:String) ->Request{
+        return self.alamofireManager.request(.DELETE, self.baseRootUrl + self.urlDict["notifications"]! + "/\(id)", parameters: nil, encoding: .JSON, headers: ["If-Match":etag])
+    }
     func login(user:String,pass:String){
         let request = self.requestForMyInfoWithUser("B0000000",pass:"")
         request.responseJSON(){
@@ -128,16 +148,14 @@ class TeacherAuthenticationHelper:TeacherCourseHelperDelegate {
             case .Success(let data):
                 self.myInfo = Teacher(json: JSON(data))
                 self.delegate.loggedIn!()
-            case .Failure(_, let error):
+            case .Failure:
                 self.delegate.networkError()
             }
             
             
         }
     }
-    func allCoursesRequired(){
-        self.delegate.loggedIn!()
-    }
+    
     
     
     

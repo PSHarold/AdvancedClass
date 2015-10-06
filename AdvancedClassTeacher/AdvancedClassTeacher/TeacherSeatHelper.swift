@@ -90,6 +90,8 @@ class TeacherSeatHelper {
         }
     }
     
+    
+    
     func updateSeatMapWithRoomId(id:String){
         let request = self.authHelper.requestForSeatsWithRoomId(id)
         request.responseJSON(){
@@ -179,7 +181,9 @@ class TeacherSeatHelper {
         
     }
     
-    
+    func updateStudentList(){
+        
+    }
     
     
     

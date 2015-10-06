@@ -14,7 +14,10 @@ class TestSettingsTableViewController: UITableViewController,TeacherTestHelperDe
     @IBOutlet weak var timeLimitCell: UITableViewCell!
     @IBOutlet weak var hintCell: UITableViewCell!
     var hintSwitch = UISwitch()
+    @IBOutlet weak var deadlineLabel: UILabel!
     var timeLimit:Dictionary<String,Int>?
+    @IBOutlet weak var messageText: UITextField!
+    let hud = MBProgressHUD()
     var randomNumber:Int?
     var testHelper = TeacherTestHelper.defaultHelper()
     override func viewDidLoad() {
@@ -28,24 +31,36 @@ class TestSettingsTableViewController: UITableViewController,TeacherTestHelperDe
         self.testHelper.delegate = self
         self.loadTimeLimit()
         self.loadRandomNumber()
+        self.loadDeadline()
     }
     func testUploaded() {
-        let alert = UIAlertView()
-        alert.addButtonWithTitle("确定")
-        alert.message = "发送成功！"
-        alert.show()
-        self.navigationController?.popViewControllerAnimated(true)
+        self.hud.removeFromSuperview()
+        let alertController = UIAlertController(title: nil, message: "发送成功！", preferredStyle: .Alert)
+        alertController.addAction(UIAlertAction(title: "确定", style: UIAlertActionStyle.Default, handler: {Void in self.navigationController!.popViewControllerAnimated(true)}))
+        self.presentViewController(alertController, animated: true, completion: nil)
     }
     func networkError() {
-        let alert = UIAlertView()
-        alert.addButtonWithTitle("确定")
-        alert.message = "网络错误！"
-        alert.show()
+        self.hud.mode = .Text
+        self.hud.labelText = "网络错误！"
+        self.hud.show(true)
+        self.hud.hide(true, afterDelay: 1.0)
     }
     func sendTest(){
         self.testHelper.newTest.hasHint = self.hintSwitch.on
+        self.testHelper.newTest.message = self.messageText.text!
         testHelper.uploadTest()
       
+    }
+    
+    func loadDeadline(){
+        if let date = self.testHelper.newTest.deadlineDate{
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+            self.deadlineLabel.text = dateFormatter.stringFromDate(date)
+        }
+        else{
+            self.deadlineLabel.text = "无"
+        }
     }
     
     func loadRandomNumber(){
@@ -56,7 +71,6 @@ class TestSettingsTableViewController: UITableViewController,TeacherTestHelperDe
         self.randomCell.detailTextLabel?.text = "\(self.testHelper.newTest.randomNumber)道"
     }
     func loadTimeLimit() {
-        
         if let timeLimit = self.testHelper.newTest.timeLimitDict{
             if timeLimit["hour"]==0 && timeLimit["minute"]==0 && timeLimit["second"]==0{
                 timeLimitCell.detailTextLabel?.text = "无时限"
@@ -96,10 +110,19 @@ class TestSettingsTableViewController: UITableViewController,TeacherTestHelperDe
         self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
         switch indexPath.section{
         
-        case 3:
-            self.navigationController?.popViewControllerAnimated(true)
+            
         case 4:
-            self.sendTest()
+            if indexPath.row == 0{
+                self.hud.mode = .Indeterminate
+                self.hud.labelText = "正在发送"
+                self.view.addSubview(self.hud)
+                self.hud.show(true)
+                self.sendTest()
+            }
+            else{
+                self.navigationController?.popViewControllerAnimated(true)
+            }
+            
         default:
             return
         }

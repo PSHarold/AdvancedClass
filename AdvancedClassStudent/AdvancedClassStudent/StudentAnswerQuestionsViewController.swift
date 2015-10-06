@@ -39,7 +39,7 @@ class StudentAnswerQuestionsViewController: UIViewController,StudentTestHelperDe
     override func viewDidLoad() {
         super.viewDidLoad()
         self.scrollView = self.view.viewWithTag(101) as! UIScrollView
-        self.test = self.testHelper.testToTake
+        self.test = self.testHelper.testToView
         self.submitButton.hidden = true
         self.timeLimit = test.timeLimitInt
         self.timeLabel.text = "开始倒计时"
@@ -102,10 +102,15 @@ class StudentAnswerQuestionsViewController: UIViewController,StudentTestHelperDe
         self.presentViewController(alertController, animated: true, completion:nil)
     }
     
+
     func networkError() {
-        let alertController = UIAlertController(title: nil, message: "网络错误！", preferredStyle: .Alert)
+        let alertController = UIAlertController(title: nil, message: "提交失败！网络错误！", preferredStyle: .Alert)
         alertController.addAction(UIAlertAction(title: "确定", style: UIAlertActionStyle.Default, handler: nil))
         self.presentViewController(alertController, animated: true, completion: nil)
+        for vc in self.questionViewControllers{
+            vc.allowAnswering = false
+        }
+        self.submitButton.hidden = false
     }
 
     func answeringFinished(){

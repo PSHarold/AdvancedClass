@@ -50,7 +50,7 @@ class StudentLoginViewController: UIViewController,StudentAuthenticationHelperDe
         sender.resignFirstResponder()
     }
     
-    func allCoursesRequired() {
+    func allCoursesAcquired() {
         self.hud.removeFromSuperview()
         self.performSegueWithIdentifier("LoggedIn", sender: self)
 

@@ -16,6 +16,7 @@ class StudentChooseSeatViewController: UIViewController,SeatViewDataSource,SeatV
     var seatButtonDict = Dictionary<String,SeatButton>()
     var seatButtonArray = [[SeatButton]]()
     let hud = MBProgressHUD()
+    var currentSeat:Seat?
     @IBOutlet weak var seatView:SeatView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,7 +53,12 @@ class StudentChooseSeatViewController: UIViewController,SeatViewDataSource,SeatV
     }
     
     func networkError() {
-        
+        self.hud.mode = .Text
+        self.hud.labelText = "网络错误！"
+        self.view.addSubview(self.hud)
+        self.hud.show(true)
+        self.hud.hide(true, afterDelay: 1.0)
+
     }
     func tick(){
         seatHelper.updateSeatMapWithRoomId(self.courseHelper.getCurrentRoomId())
@@ -70,16 +76,28 @@ class StudentChooseSeatViewController: UIViewController,SeatViewDataSource,SeatV
     
     func didSelectSeatAtIndexPath(indexPath: NSIndexPath) {
         let seat = self.seatHelper.seatArray[indexPath.section][indexPath.item]!
+        if let curSeat = self.currentSeat{
+            if curSeat !== seat{
+                return
+            }
+        }
         if !seat.taken {
+            self.hud.mode = .Indeterminate
             if seat.checked{
+                self.hud.labelText = "正在释放座位"
+                self.view.addSubview(self.hud)
+                self.hud.show(true)
                 self.seatHelper.deselectSeat(seat)
+                //self.hud.removeFromSuperview()
             }
             else{
-                self.hud.mode = .Indeterminate
+                
                 self.hud.labelText = "正在锁定座位"
                 self.view.addSubview(self.hud)
                 self.hud.show(true)
                 self.seatHelper.selectSeat(seat)
+                //self.hud.removeFromSuperview()
+
             }
         }
     }
@@ -92,10 +110,17 @@ class StudentChooseSeatViewController: UIViewController,SeatViewDataSource,SeatV
         return seatButton
     }
     func seatSelectedWithId(seatId: String, checked: Bool) {
+        if checked{
+            self.currentSeat = self.seatHelper.seatDict[seatId]!
+        }
+        else{
+            self.currentSeat = nil
+        }
         self.seatButtonDict[seatId]!.checked = checked
         self.hud.mode = .Text
         self.hud.userInteractionEnabled = false
         self.hud.labelText = checked ? "选座成功！" : "座位已释放！"
+        self.view.addSubview(self.hud)
         self.hud.show(true)
         self.hud.hide(true, afterDelay: 0.5)
     }

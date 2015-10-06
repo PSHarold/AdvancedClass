@@ -26,6 +26,8 @@
 		F21345EE1B9D456000D3BDBF /* TeacherCourse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21345ED1B9D456000D3BDBF /* TeacherCourse.swift */; };
 		F21345F01B9D558000D3BDBF /* TeacherCourseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21345EF1B9D558000D3BDBF /* TeacherCourseTableViewController.swift */; };
 		F220E2781BB62BF300251C88 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = F220E2771BB62BF300251C88 /* MBProgressHUD.m */; settings = {ASSET_TAGS = (); }; };
+		F2329FED1BC20E2F006A428F /* TestExpirationSettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2329FEC1BC20E2F006A428F /* TestExpirationSettingsTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		F23457D11BC36CBE00AD0B87 /* TeacherTestInfoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23457D01BC36CBE00AD0B87 /* TeacherTestInfoTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		F23EE3841BAA931700B75501 /* Seat.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23EE3801BAA931700B75501 /* Seat.swift */; };
 		F23EE3851BAA931700B75501 /* SeatButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23EE3811BAA931700B75501 /* SeatButton.swift */; };
 		F23EE3861BAA931700B75501 /* SeatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23EE3821BAA931700B75501 /* SeatView.swift */; };
@@ -42,7 +44,9 @@
 		F26456531B9B204700205B6C /* TeacherCreateTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26456521B9B204700205B6C /* TeacherCreateTableViewController.swift */; };
 		F299579B1B81CBB20003B64C /* TestSettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F299579A1B81CBB20003B64C /* TestSettingsTableViewController.swift */; };
 		F299579D1B81D8C70003B64C /* TestTimeLimitSettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F299579C1B81D8C70003B64C /* TestTimeLimitSettingsTableViewController.swift */; };
+		F2C77C1D1BC0A5E3004FEBF9 /* TeacherCreateNotificationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C77C1C1BC0A5E3004FEBF9 /* TeacherCreateNotificationTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		F2D924331B9DDA99007A783D /* TeacherLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D924321B9DDA99007A783D /* TeacherLoginViewController.swift */; };
+		F2ECA79D1BC0B4E9004B0469 /* TeacherNotificationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2ECA79C1BC0B4E9004B0469 /* TeacherNotificationsTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +87,8 @@
 		F220E2751BB62BF200251C88 /* AdvancedClassTeacher-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AdvancedClassTeacher-Bridging-Header.h"; sourceTree = "<group>"; };
 		F220E2761BB62BF300251C88 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		F220E2771BB62BF300251C88 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		F2329FEC1BC20E2F006A428F /* TestExpirationSettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestExpirationSettingsTableViewController.swift; sourceTree = "<group>"; };
+		F23457D01BC36CBE00AD0B87 /* TeacherTestInfoTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherTestInfoTableViewController.swift; sourceTree = "<group>"; };
 		F23EE3801BAA931700B75501 /* Seat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Seat.swift; sourceTree = "<group>"; };
 		F23EE3811BAA931700B75501 /* SeatButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeatButton.swift; sourceTree = "<group>"; };
 		F23EE3821BAA931700B75501 /* SeatView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeatView.swift; sourceTree = "<group>"; };
@@ -99,7 +105,9 @@
 		F26456521B9B204700205B6C /* TeacherCreateTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherCreateTableViewController.swift; sourceTree = "<group>"; };
 		F299579A1B81CBB20003B64C /* TestSettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestSettingsTableViewController.swift; sourceTree = "<group>"; };
 		F299579C1B81D8C70003B64C /* TestTimeLimitSettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestTimeLimitSettingsTableViewController.swift; sourceTree = "<group>"; };
+		F2C77C1C1BC0A5E3004FEBF9 /* TeacherCreateNotificationTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherCreateNotificationTableViewController.swift; sourceTree = "<group>"; };
 		F2D924321B9DDA99007A783D /* TeacherLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherLoginViewController.swift; sourceTree = "<group>"; };
+		F2ECA79C1BC0B4E9004B0469 /* TeacherNotificationsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherNotificationsTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,8 +169,7 @@
 		F20A687E1B81B400000BFF24 /* AdvancedClassTeacher */ = {
 			isa = PBXGroup;
 			children = (
-				F220E2761BB62BF300251C88 /* MBProgressHUD.h */,
-				F220E2771BB62BF300251C88 /* MBProgressHUD.m */,
+				F220E2751BB62BF200251C88 /* AdvancedClassTeacher-Bridging-Header.h */,
 				F20A68811B81B400000BFF24 /* AppDelegate.swift */,
 				F20A565B1B95836D00B8AAB0 /* ChartViewController.swift */,
 				F2534AFA1B96CD40000192E7 /* DateTimeHelper.swift */,
@@ -170,6 +177,8 @@
 				F20A56601B95CF7500B8AAB0 /* KnowledgePointsTableViewController.swift */,
 				F20A688A1B81B400000BFF24 /* LaunchScreen.xib */,
 				F20A68851B81B400000BFF24 /* Main.storyboard */,
+				F220E2761BB62BF300251C88 /* MBProgressHUD.h */,
+				F220E2771BB62BF300251C88 /* MBProgressHUD.m */,
 				F20A68A81B81B478000BFF24 /* Question.swift */,
 				F23EE3801BAA931700B75501 /* Seat.swift */,
 				F23EE3811BAA931700B75501 /* SeatButton.swift */,
@@ -182,8 +191,10 @@
 				F21345ED1B9D456000D3BDBF /* TeacherCourse.swift */,
 				F25B8E001B9D91A400A2587E /* TeacherCourseHelper.swift */,
 				F21345EF1B9D558000D3BDBF /* TeacherCourseTableViewController.swift */,
+				F2C77C1C1BC0A5E3004FEBF9 /* TeacherCreateNotificationTableViewController.swift */,
 				F26456521B9B204700205B6C /* TeacherCreateTableViewController.swift */,
 				F2D924321B9DDA99007A783D /* TeacherLoginViewController.swift */,
+				F2ECA79C1BC0B4E9004B0469 /* TeacherNotificationsTableViewController.swift */,
 				F23EE38A1BAA970D00B75501 /* TeacherPreSeatViewController.swift */,
 				F20A68A51B81B478000BFF24 /* TeacherPreTestViewController.swift */,
 				F246DEB81B9BDAD00058DEA6 /* TeacherQuestionsInTestTableViewController.swift */,
@@ -193,9 +204,9 @@
 				F25B8DFC1B9D8B8D00A2587E /* TeacherStudentHelper.swift */,
 				F21313C61B9A89E80088C483 /* TeacherTest.swift */,
 				F246DEB61B9BDA180058DEA6 /* TeacherTestHelper.swift */,
+				F23457D01BC36CBE00AD0B87 /* TeacherTestInfoTableViewController.swift */,
 				F21313CB1B9AC2090088C483 /* TeacherTestTableViewController.swift */,
 				F29957A01B820CAB0003B64C /* TestSettings */,
-				F220E2751BB62BF200251C88 /* AdvancedClassTeacher-Bridging-Header.h */,
 			);
 			path = AdvancedClassTeacher;
 			sourceTree = "<group>";
@@ -231,6 +242,7 @@
 				F20A56621B96A76A00B8AAB0 /* RandomNumberTableViewController.swift */,
 				F299579C1B81D8C70003B64C /* TestTimeLimitSettingsTableViewController.swift */,
 				F299579A1B81CBB20003B64C /* TestSettingsTableViewController.swift */,
+				F2329FEC1BC20E2F006A428F /* TestExpirationSettingsTableViewController.swift */,
 			);
 			name = TestSettings;
 			sourceTree = "<group>";
@@ -412,9 +424,13 @@
 				F23EE3841BAA931700B75501 /* Seat.swift in Sources */,
 				F220E2781BB62BF300251C88 /* MBProgressHUD.m in Sources */,
 				F20A68821B81B400000BFF24 /* AppDelegate.swift in Sources */,
+				F2ECA79D1BC0B4E9004B0469 /* TeacherNotificationsTableViewController.swift in Sources */,
+				F2329FED1BC20E2F006A428F /* TestExpirationSettingsTableViewController.swift in Sources */,
+				F23457D11BC36CBE00AD0B87 /* TeacherTestInfoTableViewController.swift in Sources */,
 				F20A68AF1B81B478000BFF24 /* TeacherBrowseViewController.swift in Sources */,
 				F23EE3891BAA970200B75501 /* TeacherSeatViewController.swift in Sources */,
 				F246DEB71B9BDA180058DEA6 /* TeacherTestHelper.swift in Sources */,
+				F2C77C1D1BC0A5E3004FEBF9 /* TeacherCreateNotificationTableViewController.swift in Sources */,
 				F299579D1B81D8C70003B64C /* TestTimeLimitSettingsTableViewController.swift in Sources */,
 				F2D924331B9DDA99007A783D /* TeacherLoginViewController.swift in Sources */,
 				F21345F01B9D558000D3BDBF /* TeacherCourseTableViewController.swift in Sources */,

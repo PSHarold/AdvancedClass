@@ -18,7 +18,11 @@ class TeacherLoginViewController: UIViewController,TeacherAuthenticationHelperDe
         self.authHelper.delegate = self
         self.courseHelper.delegate = self
     }
-
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.courseHelper.delegate = self
+    }
 
     @IBAction func LoginIn(sender: AnyObject) {
         self.authHelper.login("B0000000",pass: "")
@@ -39,7 +43,7 @@ class TeacherLoginViewController: UIViewController,TeacherAuthenticationHelperDe
         
     }
     
-    func allCoursesRequired() {
+    func allCoursesAcquired() {
         self.hud.removeFromSuperview()
         performSegueWithIdentifier("LoggedIn", sender: self)
     }

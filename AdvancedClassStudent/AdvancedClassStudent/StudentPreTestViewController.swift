@@ -44,8 +44,12 @@ class StudentPreTestViewController: UIViewController, StudentTestHelperDelegate{
         self.hud.show(true)
         self.hud.hide(true, afterDelay: 1.0)
     }
-    func noQuestionsOrTest() {
-        alert.message = "无测验！"
-        alert.show()
+    func noTests() {
+        self.hud.mode = .Text
+        self.hud.labelText = "暂无测验！"
+        self.view.addSubview(self.hud)
+        self.hud.show(true)
+        self.hud.hide(true, afterDelay: 2)
+
     }
 }

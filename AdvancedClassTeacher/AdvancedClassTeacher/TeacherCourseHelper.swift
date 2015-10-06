@@ -9,8 +9,10 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
-protocol TeacherCourseHelperDelegate{
-    func allCoursesRequired()
+@objc protocol TeacherCourseHelperDelegate{
+    optional func allCoursesAcquired()
+    func networkError()
+    optional func notificationUploaded()
 }
 
 class TeacherCourseHelper {
@@ -69,12 +71,9 @@ class TeacherCourseHelper {
             (_,_,result) in
             switch result {
             case .Success(let data):
-                self.courseArray.append(TeacherCourse(json:JSON(data)["_items"][0]))
-                ++self.currentCourseNumber
-                if self.doneAcquiring{
-                    self.delegate.allCoursesRequired()
-                }
-                
+                let course = TeacherCourse(json:JSON(data)["_items"][0])
+                self.courseArray.append(course)
+                self.getNotificationsWithCourse(course)
             case .Failure(_, let error):
                 print("Request failed with error: \(error)")
             }
@@ -85,7 +84,54 @@ class TeacherCourseHelper {
         return "cs0000"
     }
     
+    
+    func getNotificationsWithCourse(course:TeacherCourse){
+        let request = self.authHelper.requestForNotificationsWithCourseId(course.courseId,subId:course.subId)
+        request.responseJSON(){
+            (_,_,result) in
+            switch result {
+            case .Success(let data):
+                let json = JSON(data)
+                for (_,jsonData) in json["_items"]{
+                    course.unsortedNotifications.append(Notification(json:jsonData))
+                }
+                course.sortNotifications()
+                ++self.currentCourseNumber
+                if self.doneAcquiring{
+                    self.delegate.allCoursesAcquired!()
+                }
+            case .Failure(_, let error):
+                print("Request failed with error: \(error)")
+            }
+        }
+    }
+    
+    func uploadNotification(notification:Notification){
+        let request = self.authHelper.requestForNotificationUploading(notification.toDict())
+        request.responseJSON(){
+            (_,_,result) in
+            switch result {
+            case .Success:
+                self.delegate.notificationUploaded!()
+            case .Failure:
+                self.delegate.networkError()
+            }
 
+        }
+    }
+    
+    func modifyNotifcation(notification:Notification){
+        let request = self.authHelper.requestForNoticationModificationWithId(notification.id, etag: notification.etag, patchDict: notification.toDict())
+        request.responseJSON(){
+            (_,_,result) in
+            switch result {
+            case .Success:
+                self.delegate.notificationUploaded!()
+            case .Failure:
+                self.delegate.networkError()
+            }            
+        }
+    }
     private init() {
         let configuration = NSURLSessionConfiguration.ephemeralSessionConfiguration()
         configuration.timeoutIntervalForResource = 3 // seconds

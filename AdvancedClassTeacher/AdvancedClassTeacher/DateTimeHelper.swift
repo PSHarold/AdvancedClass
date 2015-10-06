@@ -12,7 +12,9 @@ class DateTimeHelper {
     
     var currentTime:String{
         get{
-            return "测试时间"
+            let formatter = NSDateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            return formatter.stringFromDate(NSDate())
         }
     }
     private init(){

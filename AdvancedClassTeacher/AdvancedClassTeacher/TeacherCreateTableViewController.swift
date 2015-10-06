@@ -26,7 +26,7 @@ class TeacherCreateTableViewController: UITableViewController,TeacherTestHelperD
     var answerDetailText:UITextView!
     var answerDetailCell:UITableViewCell!
     let subscriptArray = ["A","B","C","D"]
-    
+    let hud = MBProgressHUD()
     var _chapterNo = -1
     var _selectedKnowledgePointNo = -1
     var _lastIndex = -1
@@ -215,14 +215,18 @@ class TeacherCreateTableViewController: UITableViewController,TeacherTestHelperD
     }
    
     func questionUploaded() {
+        self.hud.removeFromSuperview()
         self.presentViewController(self.getAlertControllerWithMessage("上传成功"), animated: true, completion: nil)
         if self.isCreateMode{
             self.clear()
         }
-
     }
-    func networkError(){
-        self.presentViewController(self.getAlertControllerWithMessage("网络错误"), animated: true, completion: nil)    }
+    func networkError() {
+        self.hud.mode = MBProgressHUDMode.Text
+        self.hud.labelText = "网络错误！"
+        self.hud.hide(true, afterDelay: 1.2)
+        
+    }
     
     func clear(){
         self.allResigneFirstResponder()
@@ -231,7 +235,6 @@ class TeacherCreateTableViewController: UITableViewController,TeacherTestHelperD
         for (_,field) in self.choiceLabels{
             field.text = ""
         }
-        
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -267,6 +270,10 @@ class TeacherCreateTableViewController: UITableViewController,TeacherTestHelperD
         
         if indexPath.section == 4{
             if indexPath.row == 0{
+                self.hud.mode = .Indeterminate
+                self.hud.labelText = "正在提交"
+                self.view.addSubview(self.hud)
+                self.hud.show(true)
                 self.uploadQuestion()
             }
             else{

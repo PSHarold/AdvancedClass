@@ -10,11 +10,12 @@ import Foundation
 class DateTimeHelper {
     static var instance:DateTimeHelper?
     
-    var currentTime:String{
+    var currentTimeString:String{
         get{
             return "测试时间"
         }
     }
+    
     private init(){
         
     }
@@ -27,6 +28,8 @@ class DateTimeHelper {
             return self.instance!
         }
     }
+    
+    
     
     
 }

@@ -29,6 +29,8 @@ class StudentQuestionTableViewController: UITableViewController,UIAlertViewDeleg
     var hintCell:UITableViewCell!
     var done = false
     var parentVC:StudentAnswerQuestionsViewController!
+    var allowAnswering = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hintCell = self.tableView.dequeueReusableCellWithIdentifier("HintCell")!
@@ -126,6 +128,9 @@ class StudentQuestionTableViewController: UITableViewController,UIAlertViewDeleg
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        if !self.allowAnswering{
+            return
+        }
         switch indexPath.section{
         case 0:
             if indexPath.row == 1{

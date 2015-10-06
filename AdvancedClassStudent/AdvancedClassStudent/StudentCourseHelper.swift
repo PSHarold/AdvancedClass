@@ -9,8 +9,10 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
-protocol StudentCourseHelperDelegate{
-    func allCoursesRequired()
+@objc protocol StudentCourseHelperDelegate{
+    optional func allCoursesAcquired()
+    optional func teacherInfoAcquired()
+    func networkError()
 }
 
 class StudentCourseHelper {
@@ -55,7 +57,22 @@ class StudentCourseHelper {
         }
     }
     
-    
+    func getTeacherInfoWithTeacherId(id:String,course:StudentCourse){
+        if course.teacher != nil{
+            return
+        }
+        let request = self.authHelper.requestForTeacherInfoWithTeacherId(id)
+        request.responseJSON(){
+            (_,_,result) in
+            switch result {
+            case .Success(let data):
+                course.teacher = TeacherInfo(json: JSON(data))
+            case .Failure:
+                self.delegate.networkError()
+            }
+        }
+
+    }
     
     func getAllCourses() -> Int{
         if self.courseArray.count == 0{
@@ -79,11 +96,9 @@ class StudentCourseHelper {
             (_,_,result) in
             switch result {
             case .Success(let data):
-                self.courseArray.append(StudentCourse(json:JSON(data)["_items"][0]))
-                ++self.currentCourseNumber
-                if self.doneAcquiring{
-                    self.delegate.allCoursesRequired()
-                }
+                let course = StudentCourse(json:JSON(data)["_items"][0])
+                self.courseArray.append(course)
+                self.getNotificationsWithCourse(course)
                 
             case .Failure(_, let error):
                 print("Request failed with error: \(error)")
@@ -91,6 +106,27 @@ class StudentCourseHelper {
         }
     }
     
+    func getNotificationsWithCourse(course:StudentCourse){
+        let request = self.authHelper.requestForNotificationsWithCourseId(course.courseId,subId:course.subId)
+        request.responseJSON(){
+            (_,_,result) in
+            switch result {
+            case .Success(let data):
+                let json = JSON(data)
+                for (_,jsonData) in json["_items"]{
+                    course.unsortedNotifications.append(Notification(json:jsonData))
+                }
+                course.sortNotifications()
+                ++self.currentCourseNumber
+                if self.doneAcquiring{
+                    self.delegate.allCoursesAcquired!()
+                }
+            case .Failure(_, let error):
+                print("Request failed with error: \(error)")
+            }
+        }
+    }
+
     
     func getCurrentRoomId() -> String{
         return "cs0000"

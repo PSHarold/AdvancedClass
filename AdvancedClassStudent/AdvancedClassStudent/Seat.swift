@@ -51,10 +51,6 @@ class Seat{
         
     }
     
-    func update(json:JSON){
-        
-    }
-    
     init(json:JSON){
         let row = json["row"].intValue
         let column = json["col"].intValue

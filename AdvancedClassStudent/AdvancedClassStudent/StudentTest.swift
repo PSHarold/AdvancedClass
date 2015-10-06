@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 class StudentTest{
-    
+    let dateTimeHelper = DateTimeHelper.defaultHelper()
     var questionIds = [String]()
     var questions = Dictionary<String,Question>()
     var questionArray = [Question]()
@@ -55,6 +55,12 @@ class StudentTest{
         self.deadline = json["deadline"].stringValue
         self.message = json["message"].stringValue
         self.randomNumber = json["random_num"].intValue
+        if self.deadline != "" && !self.expired{
+            let formatter = NSDateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd HH:mm"
+            let expiration = formatter.dateFromString(self.deadline)!
+            self.expired = expiration.compare(NSDate()) == NSComparisonResult.OrderedAscending
+        }
         if self.randomNumber == 0{
             self.total = self.questionIds.count
         }
@@ -67,14 +73,13 @@ class StudentTest{
         self.questions[question.id] = question
         self.questionArray.append(question)
         self.current = self.current + 1
-        
     }
     
     
     
     func undoAll(){
-        for q in self.questionArray{
-            q.result = ["my_choice":"N","is_correct":false]
+        for question in self.questionArray{
+            question.result = ["my_choice":"N","is_correct":false]
         }
     }
     

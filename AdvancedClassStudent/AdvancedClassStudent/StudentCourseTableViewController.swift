@@ -44,6 +44,14 @@ class StudentCourseTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.courseHelper.currentCourse = self.courseHelper.courseArray[indexPath.row]
         self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        self.performSegueWithIdentifier("ShowCourse", sender: self)
+        self.performSegueWithIdentifier("ShowNotifications", sender: self)
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "ShowNotifications"{
+            
+        }
+    }
+    
+    
 }

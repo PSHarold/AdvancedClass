@@ -30,8 +30,13 @@ class StudentAuthenticationHelper{
 
     let baseRootUrl:String = TARGET_IPHONE_SIMULATOR == 0 ? "http://192.168.2.1:5000/" : "http://localhost:5000/"
     
-    let urlDict = ["knowledgePoints":"knowledge_points","questions":"questions","tests":"tests","results":"results","courses":"courses","students":"students","rooms":"rooms","seats":"seats"]
+    let urlDict = ["knowledgePoints":"knowledge_points","questions":"questions","tests":"tests","results":"results","courses":"courses","students":"students","rooms":"rooms","seats":"seats","teachers":"teachers","notifications":"notifications"]
     
+    func requestForNotificationsWithCourseId(id:String,subId:String) -> Request{
+        return self.alamofireManager.request(.GET, self.baseRootUrl + self.urlDict["courses"]! + "/" + id + "/" + subId + "/" + self.urlDict["notifications"]!, parameters: nil, encoding: ParameterEncoding.URL, headers: nil)
+        
+    }
+
     
     
     func requestForSeatWithId(id:String) ->Request {
@@ -81,6 +86,9 @@ class StudentAuthenticationHelper{
         return self.alamofireManager.request(.PATCH, self.baseRootUrl + self.urlDict["seats"]! + "/\(id)", parameters: patchDict, encoding: .JSON, headers: ["If-Match":etag])
     }
     
+    func requestForTeacherInfoWithTeacherId(id:String) -> Request{
+        return self.alamofireManager.request(.GET, self.baseRootUrl + self.urlDict["teachers"]! + "/\(id)", parameters: nil, encoding: ParameterEncoding.URL, headers: nil)
+    }
     func updateMyInformation(){
         let request = self.requestForMyInfoWithUser("41316014",pass: "")
         request.responseJSON(){
@@ -115,7 +123,7 @@ class StudentAuthenticationHelper{
         }
     }
     
-    func allCoursesRequired(){
+    func allCoursesAcquired(){
         self.delegate.loggedIn!()
     }
     

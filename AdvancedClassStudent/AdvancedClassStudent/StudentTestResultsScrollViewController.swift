@@ -10,7 +10,7 @@ import UIKit
 
 class StudentTestResultsScrollViewController: UIViewController,UIScrollViewDelegate {
     
-    let test = StudentTestHelper.defaultHelper().testToViewResult
+    let test = StudentTestHelper.defaultHelper().testToView
     var scrollView:UIScrollView!
     @IBOutlet weak var notDoneLabel: UILabel!
     var questionViewControllers = [StudentTestResultsTableViewController]()
@@ -31,7 +31,6 @@ class StudentTestResultsScrollViewController: UIViewController,UIScrollViewDeleg
             self.addChildViewController(vc)
             vc.tableView.frame = CGRectMake(frame.origin.x, 0.0, self.scrollView.frame.width, self.scrollView.frame.height)
             self.scrollView.addSubview(vc.tableView)
-            //vc.tableView.frame = frame
             vc.tableView.layer.borderColor = UIColor.grayColor().CGColor
             vc.tableView.layer.borderWidth = 0.5
             frame.origin.x += frame.width

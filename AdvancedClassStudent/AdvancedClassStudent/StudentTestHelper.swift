@@ -13,7 +13,7 @@ import SwiftyJSON
 @objc protocol StudentTestHelperDelegate{
     optional func allQuestionsAcquired()
     func networkError()
-    optional func noQuestionsOrTest()
+    optional func noTests()
     optional func allTestsAcquired()
     optional func testResultsAcquiredWithTestId(id:String)
     optional func resultsUploaded()
@@ -37,15 +37,13 @@ class StudentTestHelper {
     var done = true
     var courseHelper = StudentCourseHelper.defaultHelper()
     var randomNumber = 0
-    var alamofireManager : Alamofire.Manager!
-    
+    var alamofireManager:Alamofire.Manager!
     var testArray = [StudentTest]()
     var testDict = Dictionary<String,StudentTest>()
     var expiredTestArray = [StudentTest]()
     var finishedTestArray = [StudentTest]()
     var unfinishedTestArray = [StudentTest]()
-    var testToTake:StudentTest!
-    var testToViewResult:StudentTest!
+    var testToView:StudentTest!
     
  
     
@@ -82,35 +80,36 @@ class StudentTestHelper {
     
     
     
-    func updateAllTests() -> Int{
-        if !done {
-            return 1
-        }
+    func updateAllTests(){
         self.testArray.removeAll(keepCapacity: false)
         self.testDict.removeAll(keepCapacity: false)
         self.expiredTestArray.removeAll(keepCapacity: false)
         self.finishedTestArray.removeAll(keepCapacity: false)
         self.unfinishedTestArray.removeAll(keepCapacity: false)
         self.current = 0
-        self.done = false
+       // self.done = false
         let request = self.authHelper.requestForTestsWithCourseId(courseHelper.currentCourse.courseId, subId: courseHelper.currentCourse.subId)
         request.responseJSON(){
             (_,_,result) in
             switch result {
             case .Success(let data):
                 let listJSON = JSON(data)["_items"]
+                var hasItems = false
                 for (_,test) in listJSON{
+                    hasItems = true
                     self.processTestJSON(test)
                 }
+                if !hasItems{
+                    self.delegate.noTests!()
+                    return
+                }
                 self.sortTests()
-                self.gotResult(.allTestsAcquired)
+                self.delegate.allTestsAcquired!()
             case .Failure(_, let error):
                 print("Request failed with error: \(error)")
-                self.gotResult(.networkError)
+                self.delegate.networkError()
             }
         }
-        
-        return 0
     }
     
     
@@ -185,27 +184,16 @@ class StudentTestHelper {
         }
     }
     
-    
-    //结束获取
-    func gotResult(result:TestHelperResult){
-        switch result{
-        case .allQuestionsAcquired:
-            delegate.allQuestionsAcquired!()
-        case .networkError:
-            delegate.networkError()
-        case .noQuestionsOrTest:
-            delegate.noQuestionsOrTest!()
-        case .allTestsAcquired:
-            delegate.allTestsAcquired!()
-        }
-        self.done = true
-    }
-
+   
 
     
     
     
     func getQuestionsWithTest(test:StudentTest){
+        if test.questionIds.count == 0{
+            self.delegate.networkError()
+            return
+        }
         if test.questionArray.count != 0{
             self.delegate.allQuestionsAcquired!()
             return
@@ -270,6 +258,10 @@ class StudentTestHelper {
     }
     
     func getTestResultsWithTest(test:StudentTest){
+        if test.results.count != 0{
+            self.delegate.testResultsAcquiredWithTestId!(test.id)
+            return
+        }
         let request = self.authHelper.requestForTestResultsWithTestId(test.id)
         request.responseJSON(){
             (_,_,result) in
