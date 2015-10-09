@@ -110,6 +110,7 @@ class StudentAnswerQuestionsViewController: UIViewController,StudentTestHelperDe
         for vc in self.questionViewControllers{
             vc.allowAnswering = false
         }
+        
         self.submitButton.hidden = false
     }
 

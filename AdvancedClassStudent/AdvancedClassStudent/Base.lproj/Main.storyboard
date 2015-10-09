@@ -1104,7 +1104,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y6p-AZ-g0O" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2022" y="1930"/>
+            <point key="canvasLocation" x="2278.5" y="1990"/>
         </scene>
         <!--Student Test Table View Controller-->
         <scene sceneID="naj-CV-D0l">
@@ -1402,6 +1402,8 @@
                                                 <constraint firstItem="MGv-GQ-SyW" firstAttribute="centerY" secondItem="3pl-Xg-vXE" secondAttribute="centerY" id="Nmd-7M-kMz"/>
                                                 <constraint firstAttribute="trailing" secondItem="MGv-GQ-SyW" secondAttribute="trailing" id="aEO-PK-cvA"/>
                                                 <constraint firstItem="MGv-GQ-SyW" firstAttribute="leading" secondItem="3pl-Xg-vXE" secondAttribute="leading" id="cT3-Zx-aPd"/>
+                                                <constraint firstItem="MGv-GQ-SyW" firstAttribute="top" secondItem="3pl-Xg-vXE" secondAttribute="top" id="n1c-pu-VGO"/>
+                                                <constraint firstAttribute="bottom" secondItem="MGv-GQ-SyW" secondAttribute="bottom" id="pbm-xX-9QI"/>
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="subviews">
@@ -1411,6 +1413,8 @@
                                                     <exclude reference="Nmd-7M-kMz"/>
                                                     <exclude reference="aEO-PK-cvA"/>
                                                     <exclude reference="cT3-Zx-aPd"/>
+                                                    <exclude reference="n1c-pu-VGO"/>
+                                                    <exclude reference="pbm-xX-9QI"/>
                                                 </mask>
                                             </variation>
                                             <variation key="widthClass=compact">
@@ -1421,6 +1425,8 @@
                                                     <include reference="Nmd-7M-kMz"/>
                                                     <include reference="aEO-PK-cvA"/>
                                                     <include reference="cT3-Zx-aPd"/>
+                                                    <include reference="n1c-pu-VGO"/>
+                                                    <include reference="pbm-xX-9QI"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>

@@ -64,7 +64,6 @@ class Seat{
         self.currentCourseId = json["cur_course"]["course_id"].stringValue
         self.currentCourseSubId = json["cur_course"]["sub_id"].stringValue
         //print(self.currentStudentId)
-        self.taken = (self.currentStudentId != "")
         self.id = json["_id"].stringValue
         //self.seatDict[seat.seatId] = seat
         switch json["status"].stringValue{

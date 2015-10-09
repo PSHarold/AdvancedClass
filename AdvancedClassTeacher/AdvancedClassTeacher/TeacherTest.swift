@@ -8,8 +8,24 @@
 
 import Foundation
 import SwiftyJSON
-class TeacherTest{
+
+class Result{
+    var studentId:String!
+    var questionId:String!
+    var answer:String!
+    var choice:String!
+    var isCorrect:Bool!
+    var knowledgePoint:String!
     
+    init(json:JSON){
+        self.isCorrect = json["is_correct"].boolValue
+        self.choice = json["my_choice"].stringValue
+    }
+}
+
+
+
+class TeacherTest{
     var questionIds = [String]()
     var questions = Dictionary<String,Question>()
     var questionArray = [Question]()
@@ -40,6 +56,9 @@ class TeacherTest{
         }
     }
     
+    var resultsByStudentId:Dictionary<String,Dictionary<String,Result>>!
+    var resultsByQuestion:Dictionary<String,Dictionary<String,Result>>!
+    
     var timeLimitDict:Dictionary<String,Int>?{
         get{
             return self._timeLimitDict
@@ -59,8 +78,9 @@ class TeacherTest{
     func addQuestion(question:Question?){
         if let q = question{
             self.questions.updateValue(q, forKey: q.id)
+            self.questionArray.append(q)
+            self.questionIds.append(q.id)
         }
-        
     }
     
     
@@ -68,7 +88,6 @@ class TeacherTest{
         if let q = question{
             self.questions.removeValueForKey(q.id)
         }
-        
     }
 
     init(){
@@ -95,7 +114,6 @@ class TeacherTest{
             self.deadlineDate = formatter.dateFromString(self.deadline)!
             self.expired = self.deadlineDate!.compare(NSDate()) == NSComparisonResult.OrderedAscending
         }
-
         if self.randomNumber == 0{
             self.total = self.questionIds.count
         }

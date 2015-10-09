@@ -28,8 +28,6 @@ class StudentTest{
     var doneAcquiring = false
     var finished = false
     var results = Dictionary<String,String>()
-    
-    
     var current:Int{
         get{
             return self._current

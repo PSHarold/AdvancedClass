@@ -131,6 +131,7 @@
                         <segue destination="QXh-Yz-9U6" kind="relationship" relationship="viewControllers" id="BG7-UR-LS3"/>
                         <segue destination="bkv-Gk-aLd" kind="relationship" relationship="viewControllers" id="q2x-Ly-24t"/>
                         <segue destination="HqM-DX-Tqc" kind="relationship" relationship="viewControllers" id="rpT-bv-GQ0"/>
+                        <segue destination="NcH-Ee-6lM" kind="relationship" relationship="viewControllers" id="sZS-m5-43D"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YrK-6V-Lql" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -189,9 +190,6 @@
                                         <animations/>
                                     </tableViewCell>
                                 </prototypes>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="164" y="14" width="216" height="121"/>
-                                </variation>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CKN-s3-fZp" customClass="SeatView" customModule="AdvancedClassTeacher" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="150" width="600" height="401"/>
@@ -268,6 +266,127 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lia-lI-nt4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-672" y="1784"/>
+        </scene>
+        <!--学生列表-->
+        <scene sceneID="4zs-ht-1vv">
+            <objects>
+                <viewController id="NcH-Ee-6lM" customClass="TeacherPreCurrentStudentListViewController" customModule="AdvancedClassTeacher" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="t4N-ex-hQq"/>
+                        <viewControllerLayoutGuide type="bottom" id="huG-XO-ksu"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="enO-lb-QD3">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JHH-mC-f84">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <animations/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="showStudentList:" destination="NcH-Ee-6lM" eventType="touchUpInside" id="iOA-wG-g9l"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="JHH-mC-f84" firstAttribute="centerX" secondItem="enO-lb-QD3" secondAttribute="centerX" id="Qmz-C3-5Lk"/>
+                            <constraint firstItem="JHH-mC-f84" firstAttribute="centerY" secondItem="enO-lb-QD3" secondAttribute="centerY" id="a1x-xf-b72"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="JHH-mC-f84"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="Qmz-C3-5Lk"/>
+                                <exclude reference="a1x-xf-b72"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="JHH-mC-f84"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="Qmz-C3-5Lk"/>
+                                <include reference="a1x-xf-b72"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="学生列表" id="BRD-pC-oiy"/>
+                    <connections>
+                        <segue destination="oA4-0c-Uzh" kind="show" identifier="ShowStudentList" id="Uqi-PS-DHc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sNq-4h-ztX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="94.5" y="1609"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="Ru5-HU-lw2">
+            <objects>
+                <tableViewController id="oA4-0c-Uzh" customClass="TeacherCurrentStudentListTableViewController" customModule="AdvancedClassTeacher" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="1Z9-3X-Wjy">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MyCell" textLabel="T61-DA-7RG" detailTextLabel="sf4-Tq-Nzt" style="IBUITableViewCellStyleValue1" id="MKZ-Ki-eMf">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MKZ-Ki-eMf" id="QeO-n6-0e3">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="T61-DA-7RG">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <animations/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                            <variation key="widthClass=compact">
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            </variation>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="sf4-Tq-Nzt">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <animations/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                            <variation key="widthClass=compact">
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            </variation>
+                                        </label>
+                                    </subviews>
+                                    <animations/>
+                                </tableViewCellContentView>
+                                <animations/>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="oA4-0c-Uzh" id="Zzg-Qb-no8"/>
+                            <outlet property="delegate" destination="oA4-0c-Uzh" id="hae-DN-fSj"/>
+                        </connections>
+                    </tableView>
+                    <tabBarItem key="tabBarItem" title="Item" id="Fc4-zA-M02"/>
+                    <navigationItem key="navigationItem" id="Wpl-4x-f3E">
+                        <nil key="title"/>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="1xn-3G-Ll4">
+                            <rect key="frame" x="-60" y="-14" width="121" height="29"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <animations/>
+                            <segments>
+                                <segment title="全部"/>
+                                <segment title="已到"/>
+                                <segment title="未到"/>
+                            </segments>
+                        </segmentedControl>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="segmentControl" destination="1xn-3G-Ll4" id="m7v-1d-6fS"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gI7-TG-YXs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="853.5" y="1609"/>
         </scene>
         <!--所有测验-->
         <scene sceneID="c6P-VY-fTl">
@@ -386,6 +505,13 @@
                         <rect key="frame" x="0.0" y="64" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2oD-sd-KGD">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="462"/>
+                                <animations/>
+                                <connections>
+                                    <segue destination="snM-Bz-dDz" kind="embed" identifier="ShowBrowseTable" id="LZI-Zj-mxn"/>
+                                </connections>
+                            </containerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wLb-nS-nqE">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                 <animations/>
@@ -397,13 +523,6 @@
                                     <action selector="SendQuestions:" destination="epN-uw-tki" eventType="touchUpInside" id="R5i-3k-flr"/>
                                 </connections>
                             </button>
-                            <containerView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2oD-sd-KGD">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="462"/>
-                                <animations/>
-                                <connections>
-                                    <segue destination="snM-Bz-dDz" kind="embed" identifier="ShowBrowseTable" id="LZI-Zj-mxn"/>
-                                </connections>
-                            </containerView>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -425,11 +544,11 @@
                                 <exclude reference="wLb-nS-nqE"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="giu-gw-f8f"/>
+                                <exclude reference="rsi-SR-Vqf"/>
                                 <exclude reference="5z8-FT-TTZ"/>
                                 <exclude reference="O6t-08-i54"/>
                                 <exclude reference="cnc-pg-MmM"/>
-                                <exclude reference="giu-gw-f8f"/>
-                                <exclude reference="rsi-SR-Vqf"/>
                                 <exclude reference="86V-rC-tGq"/>
                                 <exclude reference="Q8y-ix-PFX"/>
                             </mask>
@@ -439,6 +558,8 @@
                                 <include reference="wLb-nS-nqE"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="giu-gw-f8f"/>
+                                <include reference="rsi-SR-Vqf"/>
                                 <exclude reference="3Xb-B9-fsH"/>
                                 <include reference="5z8-FT-TTZ"/>
                                 <exclude reference="DQH-Nj-0S6"/>
@@ -446,8 +567,6 @@
                                 <include reference="O6t-08-i54"/>
                                 <include reference="cnc-pg-MmM"/>
                                 <exclude reference="vAk-px-iLA"/>
-                                <include reference="giu-gw-f8f"/>
-                                <include reference="rsi-SR-Vqf"/>
                                 <include reference="86V-rC-tGq"/>
                                 <include reference="Q8y-ix-PFX"/>
                             </mask>
@@ -2100,8 +2219,8 @@
                         <outlet property="deadlineLabel" destination="6Bt-gW-AVf" id="kMn-R0-GNC"/>
                         <outlet property="expireCell" destination="Zjz-lQ-j6Z" id="YxS-N6-dSC"/>
                         <outlet property="messageText" destination="BsN-ho-h9Q" id="0sw-GT-GaF"/>
-                        <outlet property="numberOfQuestionsLabel" destination="R3w-Yz-unm" id="YiB-W9-efu"/>
-                        <outlet property="numberOfStudents" destination="Ijg-EJ-1Hg" id="uy4-RU-ktA"/>
+                        <outlet property="numberOfQuestionsLabel" destination="R3w-Yz-unm" id="gwa-5O-kfO"/>
+                        <outlet property="numberOfStudentsLabel" destination="Ijg-EJ-1Hg" id="33L-nr-XvT"/>
                         <outlet property="startTimeLabel" destination="cX7-2M-fhH" id="S3X-kC-3DW"/>
                         <outlet property="statusLabel" destination="ycB-Vt-g2c" id="g2m-pc-RSM"/>
                         <segue destination="dYL-jE-MQy" kind="show" identifier="ShowDateTimePickers" id="Oqw-Ut-OVP"/>
@@ -2170,6 +2289,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="I63-pU-yaD"/>
         <segue reference="Oqw-Ut-OVP"/>
-        <segue reference="qtA-mg-kQU"/>
+        <segue reference="HcH-cq-s4n"/>
     </inferredMetricsTieBreakers>
 </document>

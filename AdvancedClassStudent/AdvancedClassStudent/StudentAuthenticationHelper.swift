@@ -64,6 +64,10 @@ class StudentAuthenticationHelper{
         return self.alamofireManager.request(.GET, self.baseRootUrl + self.urlDict["students"]! + "/\(user)", parameters: nil, encoding: ParameterEncoding.URL, headers: nil)
     }
     
+    func requestForMyInfoModification(patchDict:Dictionary<String,AnyObject>) -> Request {
+        return self.alamofireManager.request(.PATCH, self.baseRootUrl + self.urlDict["students"]! + "/\(self.myInfo.id)", parameters: patchDict, encoding: .JSON, headers: ["If-Match":self.myInfo.etag])
+    }
+    
     func requestForTestsWithCourseId(id:String,subId:String) ->Request {
         return self.alamofireManager.request(.GET, self.baseRootUrl + self.urlDict["courses"]! + "/" + id + "/" + subId + "/" + self.urlDict["tests"]!, parameters: nil, encoding: ParameterEncoding.URL, headers: nil)
     }
@@ -79,7 +83,7 @@ class StudentAuthenticationHelper{
     }
     
     func requestForTestResultsWithTestId(id:String) ->Request {
-        return self.alamofireManager.request(.GET, self.baseRootUrl + self.urlDict["results"]!, parameters: ["where":["student_id":self.myInfo.studentId],"test_id":id], encoding: ParameterEncoding.URL, headers: nil)
+        return self.alamofireManager.request(.GET, self.baseRootUrl + self.urlDict["results"]!, parameters: ["where":["student_id":self.myInfo.studentId,"test_id":id]], encoding: ParameterEncoding.URL, headers: nil)
     }
     
     func requestForSeatSelectionWithSeatId(id:String,etag:String,patchDict:Dictionary<String,AnyObject>) -> Request{

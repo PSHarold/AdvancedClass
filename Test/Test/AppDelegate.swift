@@ -1,9 +1,9 @@
 //
 //  AppDelegate.swift
-//  MultipleChoice
+//  Test
 //
-//  Created by Harold on 15/7/15.
-//  Copyright (c) 2015年 Harold. All rights reserved.
+//  Created by Harold on 15/10/7.
+//  Copyright © 2015年 Harold. All rights reserved.
 //
 
 import UIKit
@@ -12,7 +12,7 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    static var seat:Seat?
+
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.

@@ -39,6 +39,8 @@
 		F246DEBD1B9C63360058DEA6 /* Student.swift in Sources */ = {isa = PBXBuildFile; fileRef = F246DEBC1B9C63360058DEA6 /* Student.swift */; };
 		F246DEC11B9C64A70058DEA6 /* Teacher.swift in Sources */ = {isa = PBXBuildFile; fileRef = F246DEC01B9C64A70058DEA6 /* Teacher.swift */; };
 		F2534AFB1B96CD40000192E7 /* DateTimeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2534AFA1B96CD40000192E7 /* DateTimeHelper.swift */; };
+		F253B2AA1BC5456200AD0AE4 /* TeacherCurrentStudentListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F253B2A91BC5456200AD0AE4 /* TeacherCurrentStudentListViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		F253B2AC1BC550E300AD0AE4 /* TeacherPreCurrentStudentListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F253B2AB1BC550E300AD0AE4 /* TeacherPreCurrentStudentListViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		F25B8DFD1B9D8B8D00A2587E /* TeacherStudentHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25B8DFC1B9D8B8D00A2587E /* TeacherStudentHelper.swift */; };
 		F25B8E011B9D91A400A2587E /* TeacherCourseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25B8E001B9D91A400A2587E /* TeacherCourseHelper.swift */; };
 		F26456531B9B204700205B6C /* TeacherCreateTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26456521B9B204700205B6C /* TeacherCreateTableViewController.swift */; };
@@ -100,6 +102,8 @@
 		F246DEBC1B9C63360058DEA6 /* Student.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Student.swift; sourceTree = "<group>"; };
 		F246DEC01B9C64A70058DEA6 /* Teacher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Teacher.swift; sourceTree = "<group>"; };
 		F2534AFA1B96CD40000192E7 /* DateTimeHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateTimeHelper.swift; sourceTree = "<group>"; };
+		F253B2A91BC5456200AD0AE4 /* TeacherCurrentStudentListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherCurrentStudentListViewController.swift; sourceTree = "<group>"; };
+		F253B2AB1BC550E300AD0AE4 /* TeacherPreCurrentStudentListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherPreCurrentStudentListViewController.swift; sourceTree = "<group>"; };
 		F25B8DFC1B9D8B8D00A2587E /* TeacherStudentHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherStudentHelper.swift; sourceTree = "<group>"; };
 		F25B8E001B9D91A400A2587E /* TeacherCourseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherCourseHelper.swift; sourceTree = "<group>"; };
 		F26456521B9B204700205B6C /* TeacherCreateTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherCreateTableViewController.swift; sourceTree = "<group>"; };
@@ -193,8 +197,10 @@
 				F21345EF1B9D558000D3BDBF /* TeacherCourseTableViewController.swift */,
 				F2C77C1C1BC0A5E3004FEBF9 /* TeacherCreateNotificationTableViewController.swift */,
 				F26456521B9B204700205B6C /* TeacherCreateTableViewController.swift */,
+				F253B2A91BC5456200AD0AE4 /* TeacherCurrentStudentListViewController.swift */,
 				F2D924321B9DDA99007A783D /* TeacherLoginViewController.swift */,
 				F2ECA79C1BC0B4E9004B0469 /* TeacherNotificationsTableViewController.swift */,
+				F253B2AB1BC550E300AD0AE4 /* TeacherPreCurrentStudentListViewController.swift */,
 				F23EE38A1BAA970D00B75501 /* TeacherPreSeatViewController.swift */,
 				F20A68A51B81B478000BFF24 /* TeacherPreTestViewController.swift */,
 				F246DEB81B9BDAD00058DEA6 /* TeacherQuestionsInTestTableViewController.swift */,
@@ -301,6 +307,7 @@
 				TargetAttributes = {
 					F20A687B1B81B400000BFF24 = {
 						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = G939QJ6E49;
 					};
 					F20A68901B81B400000BFF24 = {
 						CreatedOnToolsVersion = 6.4;
@@ -405,6 +412,7 @@
 				F21313C81B9A89E80088C483 /* TeacherTest.swift in Sources */,
 				F20A56631B96A76A00B8AAB0 /* RandomNumberTableViewController.swift in Sources */,
 				F246DEB91B9BDAD00058DEA6 /* TeacherQuestionsInTestTableViewController.swift in Sources */,
+				F253B2AA1BC5456200AD0AE4 /* TeacherCurrentStudentListViewController.swift in Sources */,
 				F246DEC11B9C64A70058DEA6 /* Teacher.swift in Sources */,
 				F20A68AE1B81B478000BFF24 /* TeacherPreTestViewController.swift in Sources */,
 				F20A565C1B95836D00B8AAB0 /* ChartViewController.swift in Sources */,
@@ -415,6 +423,7 @@
 				F25B8DFD1B9D8B8D00A2587E /* TeacherStudentHelper.swift in Sources */,
 				F23EE3861BAA931700B75501 /* SeatView.swift in Sources */,
 				F299579B1B81CBB20003B64C /* TestSettingsTableViewController.swift in Sources */,
+				F253B2AC1BC550E300AD0AE4 /* TeacherPreCurrentStudentListViewController.swift in Sources */,
 				F25B8E011B9D91A400A2587E /* TeacherCourseHelper.swift in Sources */,
 				F20A56611B95CF7500B8AAB0 /* KnowledgePointsTableViewController.swift in Sources */,
 				F20A68AA1B81B478000BFF24 /* TeacherQuestionTableViewController.swift in Sources */,
@@ -566,12 +575,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Wei Feng Hou (KBW9ML5K4W)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = AdvancedClassTeacher/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "USTB.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "AdvancedClassTeacher/AdvancedClassTeacher-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -583,12 +594,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Wei Feng Hou (KBW9ML5K4W)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = AdvancedClassTeacher/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "USTB.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "AdvancedClassTeacher/AdvancedClassTeacher-Bridging-Header.h";
 			};
 			name = Release;

@@ -10,25 +10,25 @@
 import Foundation
 import SwiftyJSON
 import Alamofire
-protocol PreTeacherStudentHelperDelegate{
-    func allStudentsAcquired()
-}
 protocol TeacherStudentHelperDelegate{
-    
+    func allStudentsAcquired()
+    func networkError()
 }
 class TeacherStudentHelper {
     static var instance:TeacherStudentHelper?
-    var preDelegate:PreTeacherStudentHelperDelegate!
+    var delegate:TeacherStudentHelperDelegate!
     var alamofireManager : Alamofire.Manager!
     var authHelper = TeacherAuthenticationHelper.defaultHelper()
     var studentArray = [Student]()
     var studentDict = Dictionary<String,Student>()
     var totalStudentNumber = 0
     var seatHelper = TeacherSeatHelper.defaultHelper()
-    var _doneRequiring = true
+    var _doneRequiring = false
     var _acquiredStudentNumber = 0
     var absentStudentDict = [String:Student]()
+    var absentStudentArray = [Student]()
     var presentStudentDict = [String:Student]()
+    var presentStudentArray = [Student]()
     var courseHelper = TeacherCourseHelper.defaultHelper()
     var doneRequiring:Bool{
         get{
@@ -68,32 +68,35 @@ class TeacherStudentHelper {
         }
     }
     
-    func getAllStudents() -> Int{
-        if !doneRequiring{
-           return 1
-        }
+    func getAllStudents(){
         self.studentDict.removeAll(keepCapacity: false)
         self.studentArray.removeAll(keepCapacity: false)
         self.totalStudentNumber = self.courseHelper.currentCourse.studentIdList.count
         for id in self.courseHelper.currentCourse.studentIdList{
             self.getStudentWithId(id)
         }
-        return 0
     }
     
     func updateStudentList(){
+        self.absentStudentArray.removeAll()
+        self.presentStudentArray.removeAll()
         for (_,seat) in self.seatHelper.seatDict{
             if seat.currentStudentId != ""{
-                self.presentStudentDict[seat.currentStudentId] = self.studentDict[seat.currentStudentId]!
+                let student = self.studentDict[seat.currentStudentId]!
+                self.presentStudentDict[seat.currentStudentId] = student
+                self.presentStudentArray.append(student)
                 self.absentStudentDict.removeValueForKey(seat.currentStudentId)
             }
         }
+        
         for student in self.studentArray{
             if self.presentStudentDict[student.studentId] == nil{
                 self.absentStudentDict[student.studentId] = student
+                self.absentStudentArray.append(student)
                 self.presentStudentDict.removeValueForKey(student.studentId)
             }
         }
+        self.delegate.allStudentsAcquired()
     }
     
     
@@ -107,9 +110,8 @@ class TeacherStudentHelper {
                 self.studentArray.append(student)
                 self.studentDict[student.studentId] = student
                 ++self.acquiredStudentNumber
-                
                 if self.doneRequiring{
-                    self.preDelegate.allStudentsAcquired()
+                    self.delegate.allStudentsAcquired()
                 }
 
             case .Failure(_, let error):

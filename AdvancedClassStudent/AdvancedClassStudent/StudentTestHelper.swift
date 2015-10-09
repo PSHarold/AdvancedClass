@@ -184,10 +184,6 @@ class StudentTestHelper {
         }
     }
     
-   
-
-    
-    
     
     func getQuestionsWithTest(test:StudentTest){
         if test.questionIds.count == 0{
@@ -198,6 +194,13 @@ class StudentTestHelper {
             self.delegate.allQuestionsAcquired!()
             return
         }
+        if test.finished{
+            for (id,_) in test.results{
+                self.getQuestionWithId(id, test: test)
+            }
+            return
+        }
+        
         if test.randomNumber == 0{
             for id in test.questionIds{
                 self.getQuestionWithId(id,test: test)
@@ -245,17 +248,28 @@ class StudentTestHelper {
             (_,_,result) in
             switch result {
             case .Success:
-                self.delegate.resultsUploaded!()
-            case .Failure(_, let error):
+                self.authHelper.myInfo.finishedTestIdArray.append(test.id)
+                let request = self.authHelper.requestForMyInfoModification(["finished_tests":self.authHelper.myInfo.finishedTestIdArray])
+                request.responseJSON(){
+                    (_,_,result) in
+                    switch result {
+                    case .Success(let data):
+                        self.authHelper.myInfo.etag = JSON(data)["_etag"].stringValue
+                        self.delegate.resultsUploaded!()
+                    case .Failure:
+                        self.delegate.networkError()
+                    }
+                }
+            case .Failure:
                 self.delegate.networkError()
-                print(error)
+                
             }
         }
 
         test.finished = true
         return 0
-        
     }
+    
     
     func getTestResultsWithTest(test:StudentTest){
         if test.results.count != 0{
@@ -267,10 +281,11 @@ class StudentTestHelper {
             (_,_,result) in
             switch result {
             case .Success(let data):
-                let json = JSON(data)
-               
-                for (_,result) in json["_items"][0]{
-                    test.results[result["question_id"].stringValue] = result["result"]["my_choice"].stringValue
+                let results = JSON(data)["_items"][0]
+                for (_,result) in results["results"]{
+                    let questionId = result["question_id"].stringValue
+                    let myChoice = result["result"]["my_choice"].stringValue
+                    test.results[questionId] = myChoice
                 }
                 self.delegate.testResultsAcquiredWithTestId!(test.id)
             case .Failure(_, let error):

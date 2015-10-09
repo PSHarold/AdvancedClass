@@ -38,6 +38,7 @@ class TeacherSeatHelper {
     var seatArray = [[Seat?]]()
     var roomId:String!
     var seatDict = Dictionary<String,Seat>()
+    var seatDictByStudent = Dictionary<String,Seat>()
     static var instance:TeacherSeatHelper!
     var alamofireManager : Alamofire.Manager!
     var baseUrl = "http://localhost:5000/"
@@ -104,7 +105,6 @@ class TeacherSeatHelper {
                     if seatData["status"].stringValue == "N"{
                         continue
                     }
-                    
                     let seatId = seatData["seat_id"].stringValue
                     
                     let seat = self.seatDict[seatId]!
@@ -112,9 +112,9 @@ class TeacherSeatHelper {
                         continue
                     }
                     seat.currentStudentId = seatData["cur_stu_id"].stringValue
+                    self.seatDictByStudent.updateValue(seat, forKey: seat.currentStudentId)
                     seat.taken = (seat.currentStudentId != "")
                     seat.etag = seatData["_etag"].stringValue
-                    
                 }
                 
             case .Failure(_, let error):
@@ -126,6 +126,15 @@ class TeacherSeatHelper {
     
     
    
+    func getSeatWithStudentId(id:String) -> Seat?{
+        let seat = self.seatDictByStudent[id]
+        if seat?.currentStudentId == id{
+            return seat
+        }
+        return nil
+    }
+    
+    
     func getAllSeatsWithRoomId(id:String){
         self.roomId = id
         let request = self.authHelper.requestForRoomWithId(id)
@@ -147,8 +156,7 @@ class TeacherSeatHelper {
                 }
                 // Begin to get all seats in the room.
                 self.getAllSeatsUsingColumnAndRowNumberWithRoomId(id)
-            case .Failure(_, let error):
-                print(error)
+            case .Failure:
                 self.preDelegate.networkError()
             }
         }
@@ -165,8 +173,8 @@ class TeacherSeatHelper {
                 for (_,seatData) in JSON(data)["_items"]{
                     let seat = Seat(json: seatData)
                     self.seatDict[seat.seatId] = seat
-                    // if seat
                     self.seatArray[seat.row - 1][seat.column - 1] = seat
+                    self.seatDictByStudent.updateValue(seat, forKey: seat.currentStudentId)
                 }
                 self.preDelegate.seatMapAquired()
             case .Failure(_, let error):
@@ -175,16 +183,7 @@ class TeacherSeatHelper {
             }
         }
     }    
-    
-    
-    func selectSeat(seat:Seat){
-        
-    }
-    
-    func updateStudentList(){
-        
-    }
-    
+
     
     
     func parseErrorCode(code:String,seat:Seat){

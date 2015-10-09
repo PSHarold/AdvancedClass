@@ -13,7 +13,7 @@ import SwiftyJSON
 
 @objc protocol TeacherTestHelperDelegate{
     optional func allKnowledgePointsAcquired()
-    optional func testResultAcquired()
+    optional func testResultsAcquired()
     optional func allQuestionsAcquired()
     func networkError()
     optional func noQuestionsOrTest()
@@ -282,7 +282,8 @@ class TeacherTestHelper {
         request.responseJSON(){
             (_,_,result) in
             switch result {
-            case .Success:
+            case .Success(let data):
+                test.etag = JSON(data)["_etag"].stringValue
                 self.delegate.testUploaded!()
             case .Failure:
                 self.delegate.networkError()
@@ -321,11 +322,7 @@ class TeacherTestHelper {
         return 0
     }
     
-    
-    func processQuestionList(list:JSON){
-        
-    }
-    
+   
     
     func questionAcquired(question:Question){
         self.allQuestionArray.append(question)
@@ -352,15 +349,22 @@ class TeacherTestHelper {
     func uploadTest() -> Int {
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
-        let dict = ["question_list":self.newTest.questionIds, "has_hint":self.newTest.hasHint,"random_num":self.newTest.randomNumber,"course_id":self.courseHelper.currentCourse.courseId,"expired":false,"start_time":self.dateTimeHelper.currentTime,"time_limit":self.newTest.timeLimitInt,"info":"","message":self.newTest.message,"sub_id":self.courseHelper.currentCourse.subId,"deadline":self.newTest.deadlineDate == nil ? "" : dateFormatter.stringFromDate(self.newTest.deadlineDate!)]
+        let time = self.dateTimeHelper.currentTime
+        let dict = ["question_list":self.newTest.questionIds, "has_hint":self.newTest.hasHint,"random_num":self.newTest.randomNumber,"course_id":self.courseHelper.currentCourse.courseId,"expired":false,"start_time":time,"time_limit":self.newTest.timeLimitInt,"info":"","message":self.newTest.message,"sub_id":self.courseHelper.currentCourse.subId,"deadline":self.newTest.deadlineDate == nil ? "" : dateFormatter.stringFromDate(self.newTest.deadlineDate!)]
+        self.newTest.startTime = time
         
         let request = self.authHelper.requestForTestUploading(dict as! Dictionary<String, AnyObject>)
         request.responseJSON(){
             (_,_,result) in
             switch result {
-            case .Success:
+            case .Success(let data):
+                let json = JSON(data)
+                self.newTest.etag = json["_etag"].stringValue
+                self.newTest.id = json["_id"].stringValue
+                self.unexpiredTestArray.append(self.newTest)
+                self.newTest = nil
+                self.sortTests()
                 self.delegate.testUploaded!()
-                 self.newTest = nil
             case .Failure:
                 self.delegate.networkError()
             }
@@ -402,7 +406,8 @@ class TeacherTestHelper {
         request.responseJSON(){
             (_,_,result) in
             switch result {
-            case .Success:
+            case .Success(let data):
+                question.etag = JSON(data)["_etag"].stringValue
                 self.delegate.questionUploaded!()
             case .Failure:
                self.delegate.networkError()
@@ -440,7 +445,39 @@ class TeacherTestHelper {
     }
     
     func getTestResultsWithTest(test:TeacherTest){
-        
+        if test.resultsByStudentId != nil{
+            self.delegate.testResultsAcquired!()
+        }
+        test.resultsByStudentId = Dictionary<String,Dictionary<String,Result>>()
+        test.resultsByQuestion = Dictionary<String,Dictionary<String,Result>>()
+        let request = self.authHelper.requestForTestResultsWithCourseId(test.id)
+        request.responseJSON(){
+            (_,_,result) in
+            switch result {
+            case .Success(let data):
+                let json = JSON(data)["_items"]
+                for (_,results) in json{
+                    let studentId = results["student_id"].stringValue
+                    for (_,result) in results["results"]{
+                        let questionId = result["question_id"].stringValue
+                        let result = Result(json: result["result"])
+                        result.questionId = questionId
+                        result.studentId = studentId
+                        if test.resultsByQuestion[questionId] == nil{
+                            test.resultsByQuestion[questionId] = Dictionary<String,Result>()
+                        }
+                        if test.resultsByStudentId[studentId] == nil{
+                            test.resultsByStudentId[studentId] = Dictionary<String,Result>()
+                        }
+                        test.resultsByQuestion[questionId]![studentId] = result
+                        test.resultsByStudentId[studentId]![questionId] = result
+                    }
+                }
+                self.delegate.testResultsAcquired!()
+            case .Failure:
+                self.delegate.networkError()
+            }
+        }
     }
     
     

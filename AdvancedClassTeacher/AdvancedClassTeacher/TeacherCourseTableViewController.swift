@@ -8,15 +8,18 @@
 
 import UIKit
 
-class TeacherCourseTableViewController: UITableViewController, PreTeacherStudentHelperDelegate {
+class TeacherCourseTableViewController: UITableViewController, TeacherStudentHelperDelegate {
 
     var courseHelper = TeacherCourseHelper.defaultHelper()
     var studentHelper = TeacherStudentHelper.defaultHelper()
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.studentHelper.preDelegate = self
+        self.studentHelper.delegate = self
     }
- 
+    
+    func networkError() {
+        
+    }
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1

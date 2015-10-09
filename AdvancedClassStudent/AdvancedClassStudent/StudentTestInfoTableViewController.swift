@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StudentTestInfoTableViewController: UITableViewController {
+class StudentTestInfoTableViewController: UITableViewController, StudentTestHelperDelegate {
 
     @IBOutlet weak var startTimeLabel: UILabel!
     @IBOutlet weak var deadlineLabel: UILabel!
@@ -17,6 +17,7 @@ class StudentTestInfoTableViewController: UITableViewController {
     @IBOutlet weak var correctRateLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var continueButton: UIButton!
+    let testHelper = StudentTestHelper.defaultHelper()
     let test = StudentTestHelper.defaultHelper().testToView
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +25,7 @@ class StudentTestInfoTableViewController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.loadInfo()
+        self.testHelper.delegate = self
         //print(test.finished)
         self.tableView.reloadData()
     }
@@ -62,8 +64,21 @@ class StudentTestInfoTableViewController: UITableViewController {
         }
     }
     
-    @IBAction func showTest(sender: AnyObject) {
+    func networkError() {
+        
+    }
+    func allQuestionsAcquired() {
+        if self.test.finished{
+            for (id,question) in self.test.results{
+                test.questions[id]!.result["my_choice"] = test.results[id]!
+            }
+        }
         self.performSegueWithIdentifier(self.test.finished ? "ShowTestResults" : "TakeTest", sender: self)
+    }
+    
+    @IBAction func showTest(sender: AnyObject) {
+        self.testHelper.getQuestionsWithTest(self.test)
+        
     }
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.tableView.deselectRowAtIndexPath(indexPath, animated: true)

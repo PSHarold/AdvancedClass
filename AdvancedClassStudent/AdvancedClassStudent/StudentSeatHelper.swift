@@ -133,9 +133,7 @@ class StudentSeatHelper {
                     if seatData["status"].stringValue == "N"{
                         continue
                     }
-                    
                     let seatId = seatData["seat_id"].stringValue
-                    
                     let seat = self.seatDict[seatId]!
                     if seat.checked{
                         continue
@@ -156,7 +154,7 @@ class StudentSeatHelper {
     
     
     // Get all seats of a room identified with roomId.
-    private func getAllSeatsUsingColumnAndRowNumberWithRoomId(id:String){
+    func getAllSeatsUsingColumnAndRowNumberWithRoomId(id:String){
         let request = self.authHelper.requestForSeatsWithRoomId(id)
         request.responseJSON(){
             (_,_,result) in
@@ -167,14 +165,21 @@ class StudentSeatHelper {
                     if seat.currentCourseId == self.courseHelper.currentCourse.courseId && seat.currentCourseSubId == self.courseHelper.currentCourse.subId{
                         if seat.currentStudentId == self.authHelper.myInfo.studentId{
                             seat.taken = false
+                            AppDelegate.seat = seat
                             seat.checked = true
+                        }
+                        else if seat.currentStudentId == ""{
+                            seat.taken = false
+                            seat.checked = false
+                        }
+                        else{
+                            seat.checked = false
+                            seat.taken = true
                         }
                     }
                     self.seatDict[seat.seatId] = seat
                     self.seatArray[seat.row - 1][seat.column - 1] = seat
                 }
-                //self.seatDict[self.authHelper.myInfo.currentSeatId]?.taken = false
-                //self.seatDict[self.authHelper.myInfo.currentSeatId]?.checked = true
                 self.preDelegate.seatMapAquired()
             case .Failure(_, let error):
                 print("Request failed with error: \(error)")
@@ -222,7 +227,6 @@ class StudentSeatHelper {
                 self.delegate.networkError()
             }
         }
-
     }
     
     func selectSeat(seat:Seat){

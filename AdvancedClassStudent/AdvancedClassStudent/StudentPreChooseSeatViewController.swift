@@ -20,7 +20,7 @@ class StudentPreChooseSeatViewController: UIViewController,PreStudentSeatHelperD
     
     func seatMapAquired() {
         self.hud.removeFromSuperview()
-        performSegueWithIdentifier("ShowSeats", sender: self)
+        self.performSegueWithIdentifier("ShowSeats", sender: self)
     }
     
     @IBAction func chooseSeat(sender: AnyObject) {

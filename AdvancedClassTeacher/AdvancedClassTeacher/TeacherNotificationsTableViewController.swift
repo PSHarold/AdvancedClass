@@ -42,6 +42,10 @@ class TeacherNotificationsTableViewController: UITableViewController {
             cell.textLabel!.textColor = UIColor.redColor()
             cell.detailTextLabel!.textColor = UIColor.redColor()
         }
+        else{
+            cell.textLabel!.textColor = UIColor.blackColor()
+            cell.detailTextLabel!.textColor = UIColor.blackColor()
+        }
         return cell
     }
 

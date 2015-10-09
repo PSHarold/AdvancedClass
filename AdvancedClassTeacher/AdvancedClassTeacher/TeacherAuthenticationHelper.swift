@@ -122,6 +122,10 @@ class TeacherAuthenticationHelper {
         return self.alamofireManager.request(.GET, self.baseRootUrl + self.urlDict["courses"]! + "/\(id)/" + self.urlDict["questions"]!, parameters: nil, encoding: .JSON, headers: nil)
     }
     
+    func requestForTestResultsWithCourseId(id:String) -> Request {
+        return self.alamofireManager.request(.GET, self.baseRootUrl + self.urlDict["results"]!, parameters: ["where":["test_id":id]], encoding: ParameterEncoding.URL, headers: nil)
+    }
+    
     func requestForTestModificationWithQuestionId(id:String,etag:String,patchDict:Dictionary<String,AnyObject>) ->Request {
         return self.alamofireManager.request(.PATCH, self.baseRootUrl + self.urlDict["tests"]! + "/\(id)", parameters: patchDict, encoding: .JSON, headers: ["If-Match":etag])
     }

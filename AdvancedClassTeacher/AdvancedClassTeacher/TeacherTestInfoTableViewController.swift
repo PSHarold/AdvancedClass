@@ -10,17 +10,20 @@ import UIKit
 
 class TeacherTestInfoTableViewController: UITableViewController, TeacherTestHelperDelegate {
     let testHelper = TeacherTestHelper.defaultHelper()
+    let courseHelper = TeacherCourseHelper.defaultHelper()
     var deadlineModified = false
     var expireModified = false
     @IBOutlet weak var startTimeLabel: UILabel!
     @IBOutlet weak var deadlineLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
-    @IBOutlet weak var numberOfStudents: UILabel!
+    @IBOutlet weak var numberOfStudentsLabel: UILabel!
     @IBOutlet weak var expireCell: UITableViewCell!
     @IBOutlet weak var numberOfQuestionsLabel: UILabel!
     @IBOutlet weak var messageText: UITextField!
     @IBOutlet weak var continueButton: UIButton!
     let test = TeacherTestHelper.defaultHelper().testToView
+    let hud = MBProgressHUD()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -34,6 +37,7 @@ class TeacherTestInfoTableViewController: UITableViewController, TeacherTestHelp
     
     func loadInfo(){
         self.startTimeLabel.text = self.test.startTime
+        self.numberOfStudentsLabel.text = self.test.resultsByStudentId == nil ? "点击\"查看结果\"以获取" : "\(self.test.resultsByStudentId.count)/\(self.courseHelper.currentCourse.numberOfStudents)"
         self.loadDeadline()
         self.numberOfQuestionsLabel.text = "\(self.test.questionIds.count)"
         self.messageText.text = self.test.message == "" ? "无" : self.test.message
@@ -64,11 +68,15 @@ class TeacherTestInfoTableViewController: UITableViewController, TeacherTestHelp
             self.test.expired = true
         }
         self.tableView.reloadData()
-        print("DONE!")
+        self.hud.mode = .Text
+        self.hud.labelText = "提交成功！"
+        self.hud.hide(true, afterDelay: 0.8)
     }
     
     func networkError() {
-        print("ERROR!")
+        self.hud.mode = .Text
+        self.hud.labelText = "网络错误！"
+        self.hud.hide(true, afterDelay: 1.2)
     }
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return self.test.expired ? 4 : 5
@@ -100,37 +108,54 @@ class TeacherTestInfoTableViewController: UITableViewController, TeacherTestHelp
         }
     }
     @IBAction func submit(sender: AnyObject) {
+        self.hud.mode = .Indeterminate
+        self.hud.labelText = "正在提交"
+        self.view.addSubview(self.hud)
+        self.hud.show(true)
         self.testHelper.modifyDeadlineWithTest(self.test, date: self.deadlineLabel.text!)
         self.deadlineModified = true
     }
     @IBAction func endTest(sender: AnyObject) {
         let alertController = UIAlertController(title: nil, message: "确定结束测验？", preferredStyle: .Alert)
         alertController.addAction(UIAlertAction(title: "取消", style: .Cancel, handler: nil))
-        alertController.addAction(UIAlertAction(title: "确定", style: .Destructive, handler: {Void in self.testHelper.endTestWithTest(self.test)
-            self.expireModified = true}))
+        alertController.addAction(UIAlertAction(title: "确定", style: .Destructive, handler: {Void in
+            self.hud.mode = .Indeterminate
+            self.hud.labelText = "正在提交"
+            self.view.addSubview(self.hud)
+            self.hud.show(true)
+            self.testHelper.endTestWithTest(self.test)
+            self.expireModified = true
+        }))
         self.presentViewController(alertController, animated: true, completion: nil)
         
     }
     
     func allQuestionsAcquiredWithTestId(id: String) {
-       
         self.testHelper.getKnowledgePoints(TeacherCourseHelper.defaultHelper().currentCourse.courseId)
+        if self.test.expired{
+            self.testHelper.getTestResultsWithTest(self.test)
+            return
+        }
     }
     func allKnowledgePointsAcquired() {
-        self.performSegueWithIdentifier("ShowQuestionsInTest", sender: self)
+        if !self.test.expired{
+            self.hud.removeFromSuperview()
+            self.performSegueWithIdentifier("ShowQuestionsInTest", sender: self)
+        }
+    }
+    
+    func testResultsAcquired() {
+        self.hud.removeFromSuperview()
+        self.loadInfo()
     }
     
     @IBAction func showQuestions(sender: AnyObject){
-        if self.test.expired{
-            self.testHelper.getTestResultsWithTest(test)
-        }
-        else{
-            self.testHelper.getQuestionsWithTest(self.test)
-        }
+        self.hud.mode = .Indeterminate
+        self.hud.labelText = "正在获取"
+        self.view.addSubview(self.hud)
+        self.hud.show(true)
+        self.testHelper.getQuestionsWithTest(self.test)
         
-    }
-    @IBAction func showTestResults(sender: AnyObject) {
-        self.performSegueWithIdentifier("ShowResults", sender: self)
     }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "ShowDateTimePickers"{

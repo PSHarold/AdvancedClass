@@ -60,7 +60,7 @@ class TeacherSeatViewController: UIViewController,SeatViewDataSource,SeatViewDel
     func didSelectSeatAtIndexPath(indexPath: NSIndexPath){
         let seat:Seat = self.seatHelper.seatArray[indexPath.section][indexPath.row]!
         let seatButton = self.seatAtIndexPath(indexPath)
-        if !seat.taken && !seat.checked{
+        if !seat.taken{
             return
         }
         if seatButton.checked{
