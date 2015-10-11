@@ -16,6 +16,7 @@ class TeacherQuestionTableViewController: UITableViewController, TeacherTestHelp
     var testHelper = TeacherTestHelper.defaultHelper()
     var test:TeacherTest!
     let hud = MBProgressHUD()
+    var selectedRows = [UITableViewCell?]()
     override func viewDidLoad() {
         super.viewDidLoad()
         self.rc.attributedTitle = NSAttributedString(string: "下拉刷新")
@@ -25,9 +26,13 @@ class TeacherQuestionTableViewController: UITableViewController, TeacherTestHelp
         self.tableView.tableFooterView = UIView(frame: CGRectZero)
     }
     
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         self.testHelper.delegate = self
+        if self.testHelper.newTest.questionArray.count == 0{
+            self.uncheckAll()
+        }
     }
     
     func refreshNetworkError() {
@@ -106,6 +111,12 @@ class TeacherQuestionTableViewController: UITableViewController, TeacherTestHelp
 
     }
     
+    func uncheckAll(){
+        for row in self.selectedRows{
+            row?.accessoryType = .None
+        }
+        (self.parentViewController as! TeacherBrowseViewController).sendButton.hidden = true
+    }
     
     //选中某个问题
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -117,11 +128,13 @@ class TeacherQuestionTableViewController: UITableViewController, TeacherTestHelp
         if cell!.accessoryType == .Checkmark{
             cell!.accessoryType = UITableViewCellAccessoryType.DetailDisclosureButton
             self.test.removeQuestion(question)
+            
         }
-        //如果为选中，加入列表
+        //如果未选中，加入列表
         else{
             cell!.accessoryType = .Checkmark
             self.test.addQuestion(question)
+            self.selectedRows.append(cell)
 
         }
         (self.parentViewController as! TeacherBrowseViewController).sendButton.hidden = self.test.questions.count == 0

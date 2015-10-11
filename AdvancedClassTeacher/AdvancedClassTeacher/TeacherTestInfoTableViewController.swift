@@ -68,6 +68,7 @@ class TeacherTestInfoTableViewController: UITableViewController, TeacherTestHelp
             self.test.expired = true
         }
         self.tableView.reloadData()
+        self.loadInfo()
         self.hud.mode = .Text
         self.hud.labelText = "提交成功！"
         self.hud.hide(true, afterDelay: 0.8)
@@ -84,7 +85,7 @@ class TeacherTestInfoTableViewController: UITableViewController, TeacherTestHelp
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        if !self.test.expired && indexPath.row == 1{
+        if !self.test.expired && indexPath.section == 0 && indexPath.row == 1{
             self.performSegueWithIdentifier("ShowDateTimePickers", sender: self)
         }
     }
@@ -147,6 +148,7 @@ class TeacherTestInfoTableViewController: UITableViewController, TeacherTestHelp
     func testResultsAcquired() {
         self.hud.removeFromSuperview()
         self.loadInfo()
+        self.performSegueWithIdentifier("ShowResults", sender: self)
     }
     
     @IBAction func showQuestions(sender: AnyObject){

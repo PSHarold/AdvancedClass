@@ -17,7 +17,7 @@ protocol KnowledgePointsDelegate{
 
 class TeacherCreateTableViewController: UITableViewController,TeacherTestHelperDelegate,KnowledgePointsDelegate{
     var hintLabel: UILabel!
-    var question:Question!
+    var question:TeacherQuestion!
     var choiceCells = [String:UITableViewCell]()
     var choiceLabels = [String:UITextField]()
     var questionCell:UITableViewCell!
@@ -89,7 +89,7 @@ class TeacherCreateTableViewController: UITableViewController,TeacherTestHelperD
         self.knowledgePointLabel = self.chapterCell.contentView.viewWithTag(102) as! UILabel
         self.isCreateMode = (self.question == nil)
         if self.isCreateMode{
-            self.question = Question()
+            self.question = TeacherQuestion()
         }
         else{
             self.loadQuestion(self.question)
@@ -111,7 +111,7 @@ class TeacherCreateTableViewController: UITableViewController,TeacherTestHelperD
             
     }
 
-    func loadQuestion(question:Question){
+    func loadQuestion(question:TeacherQuestion){
         self.questionLabel.text = question.question
         for sub in self.subscriptArray{
             self.choiceLabels[sub]!.text = self.question.choices[sub]!
@@ -196,7 +196,10 @@ class TeacherCreateTableViewController: UITableViewController,TeacherTestHelperD
             self.presentViewController(alertController, animated: true, completion: nil)
             return
         }
-        
+        self.hud.mode = .Indeterminate
+        self.hud.labelText = "正在提交"
+        self.view.addSubview(self.hud)
+        self.hud.show(true)
         self.question.courseId = self.courseHelper.currentCourse.courseId
         self.question.answer = self.lastIndex
         for sub in self.subscriptArray{
@@ -270,10 +273,6 @@ class TeacherCreateTableViewController: UITableViewController,TeacherTestHelperD
         
         if indexPath.section == 4{
             if indexPath.row == 0{
-                self.hud.mode = .Indeterminate
-                self.hud.labelText = "正在提交"
-                self.view.addSubview(self.hud)
-                self.hud.show(true)
                 self.uploadQuestion()
             }
             else{

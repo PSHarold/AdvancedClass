@@ -19,8 +19,10 @@ class StudentTest{
     var _timeLimitDict:Dictionary<String,Int>?
     var courseId:String!
     var expired = false
-    var startTime = ""
+    var _startTime = ""
+    var startTimeDate:NSDate!
     var deadline = ""
+    var deadlineDate:NSDate!
     var randomNumber = 0
     var message = ""
     var total = 0
@@ -38,6 +40,19 @@ class StudentTest{
                 self.doneAcquiring = true
             }
         }
+    }
+    
+    var startTime:String{
+        get{
+            return self._startTime
+        }
+        set{
+            self._startTime = newValue
+            let formatter = NSDateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            self.startTimeDate = formatter.dateFromString(self._startTime)!
+        }
+        
     }
     
     init(json:JSON){

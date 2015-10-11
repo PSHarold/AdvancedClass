@@ -40,9 +40,9 @@ class StudentTestHelper {
     var alamofireManager:Alamofire.Manager!
     var testArray = [StudentTest]()
     var testDict = Dictionary<String,StudentTest>()
-    var expiredTestArray = [StudentTest]()
-    var finishedTestArray = [StudentTest]()
-    var unfinishedTestArray = [StudentTest]()
+    //var expiredTestArray = [StudentTest]()
+    //var finishedTestArray = [StudentTest]()
+    //var unfinishedTestArray = [StudentTest]()
     var testToView:StudentTest!
     
  
@@ -69,25 +69,13 @@ class StudentTestHelper {
     }
     
     func getAllTests(){
-       // if self.testArray.count == 0{
-        self.updateAllTests()
-       // }
-       // else{
-        //    self.delegate.allTestsAcquired!()
-        //    return 0
-       // }
-    }
-    
-    
-    
-    func updateAllTests(){
         self.testArray.removeAll(keepCapacity: false)
         self.testDict.removeAll(keepCapacity: false)
-        self.expiredTestArray.removeAll(keepCapacity: false)
-        self.finishedTestArray.removeAll(keepCapacity: false)
-        self.unfinishedTestArray.removeAll(keepCapacity: false)
+        //self.expiredTestArray.removeAll(keepCapacity: false)
+        //self.finishedTestArray.removeAll(keepCapacity: false)
+        // self.unfinishedTestArray.removeAll(keepCapacity: false)
         self.current = 0
-       // self.done = false
+        // self.done = false
         let request = self.authHelper.requestForTestsWithCourseId(courseHelper.currentCourse.courseId, subId: courseHelper.currentCourse.subId)
         request.responseJSON(){
             (_,_,result) in
@@ -97,7 +85,11 @@ class StudentTestHelper {
                 var hasItems = false
                 for (_,test) in listJSON{
                     hasItems = true
-                    self.processTestJSON(test)
+                    let test = StudentTest(json: test)
+                    self.checkIfFinished(test)
+                    self.checkIfExpired(test)
+                    self.testDict[test.id] = test
+                    self.testArray.append(test)
                 }
                 if !hasItems{
                     self.delegate.noTests!()
@@ -112,47 +104,25 @@ class StudentTestHelper {
         }
     }
     
-    
-    func processTestJSON(testJSON: JSON) {
-        let test = StudentTest(json: testJSON)
-        self.checkIfFinished(test)
-        self.checkIfExpired(test)
-        if test.expired{
-            self.expiredTestArray.append(test)
-        }
-        else{
-            if test.finished{
-                self.finishedTestArray.append(test)
-            }
-            else{
-                self.unfinishedTestArray.append(test)
-            }
-        }
-        self.testDict[test.id] = test
-        
-        
-    }
-    
     func checkIfFinished(test:StudentTest){
         test.finished = self.authHelper.myInfo.finishedTestIdArray.contains(test.id)
     }
     
     func checkIfExpired(test:StudentTest){
-        
+        if let deadlineDate = test.deadlineDate{
+            test.expired = self.dateTimeHelper.currentTimeDate.compare(deadlineDate) != NSComparisonResult.OrderedAscending
+        }
     }
     
     
-    //未做的测试放在前面
     func sortTests(){
-        for temp in self.unfinishedTestArray{
-            self.testArray.append(temp)
+        let closure = {(test1:StudentTest,test2:StudentTest) -> Bool in
+            if !test1.expired && !test1.finished{
+                return true
+            }
+            return test1.startTimeDate.compare(test2.startTimeDate) != NSComparisonResult.OrderedAscending
         }
-        for temp in self.finishedTestArray{
-            self.testArray.append(temp)
-        }
-        for temp in self.expiredTestArray{
-            self.testArray.append(temp)
-        }
+        self.testArray.sortInPlace(closure)
     }
     
     

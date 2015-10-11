@@ -45,7 +45,7 @@ class StudentTestInfoTableViewController: UITableViewController, StudentTestHelp
             self.correctRateLabel.text = "\(correctNumber)/\(self.numberOfQuestionsLabel.text!)"
         }
         self.continueButton.setTitle(self.test.finished ? "查看结果" : "开始测验", forState: .Normal)
-        self.statusLabel.text = self.test.expired ? "已结束" : self.test.finished ? "已完成" : "未完成"
+        self.statusLabel.text = self.test.finished ? "已完成" :  self.test.expired ? "已截止" : "未完成"
     }
     
     
@@ -58,10 +58,19 @@ class StudentTestInfoTableViewController: UITableViewController, StudentTestHelp
         case 2:
             return 1
         case 3:
-            return self.test.expired ? 0 : 1
+            if self.test.expired && !self.test.finished{
+                return 0
+            }
+            else {
+                return 1
+            }
         default:
             return 0
         }
+    }
+    
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 4
     }
     
     func networkError() {

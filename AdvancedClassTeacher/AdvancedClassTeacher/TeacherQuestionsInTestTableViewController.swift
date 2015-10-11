@@ -11,7 +11,7 @@ import UIKit
 class TeacherQuestionsInTestTableViewController: UITableViewController {
     
     var test:TeacherTest!
-    var selectedQuestion:Question!
+    var selectedQuestion:TeacherQuestion!
     let hud = MBProgressHUD()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +39,9 @@ class TeacherQuestionsInTestTableViewController: UITableViewController {
         
     }
     
-
+    
+    
+    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let question = self.test.questionArray[indexPath.row]
         self.selectedQuestion = question

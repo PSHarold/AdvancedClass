@@ -83,7 +83,7 @@ class StudentAuthenticationHelper{
     }
     
     func requestForTestResultsWithTestId(id:String) ->Request {
-        return self.alamofireManager.request(.GET, self.baseRootUrl + self.urlDict["results"]!, parameters: ["where":["student_id":self.myInfo.studentId,"test_id":id]], encoding: ParameterEncoding.URL, headers: nil)
+        return self.alamofireManager.request(.GET, self.baseRootUrl + self.urlDict["results"]! + "?where=%7B%22student_id%22:%22\(self.myInfo.studentId)%22,%22test_id%22:%22\(id)%22%7D", parameters: nil, encoding: ParameterEncoding.URL, headers: nil)
     }
     
     func requestForSeatSelectionWithSeatId(id:String,etag:String,patchDict:Dictionary<String,AnyObject>) -> Request{

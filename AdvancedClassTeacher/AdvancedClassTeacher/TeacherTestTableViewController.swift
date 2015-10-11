@@ -61,7 +61,8 @@ class TeacherTestTableViewController: UITableViewController,TeacherTestHelperDel
         let test = self.testHelper.allTestArray[indexPath.row]
         cell.textLabel?.text = test.startTime
         if test.expired{
-            cell.detailTextLabel?.text = "已结束"
+            cell.detailTextLabel?.text = "已截止"
+            cell.detailTextLabel?.textColor = UIColor.grayColor()
         }
         else{
             cell.detailTextLabel?.text = "正在进行"

@@ -8,7 +8,7 @@
 
 import Foundation
 import SwiftyJSON
-class Question:NSObject{
+class TeacherQuestion:NSObject{
     var question:String
     var answer:Int
     var choices = [String:String]()
@@ -19,6 +19,9 @@ class Question:NSObject{
     var courseId:String
     var answerDetail:String
     var difficultyInt = -1
+    var numberOfCorrect = 0
+    var numberOfChoice = ["A":0,"B":0,"C":0,"D":0,"N":0]
+    var studentsWithChocie = ["A":[String](),"B":[String](),"C":[String](),"D":[String](),"N":[String]()]
     
     var difficultyString:String{
         get{

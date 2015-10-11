@@ -14,7 +14,7 @@ class Result{
     var questionId:String!
     var answer:String!
     var choice:String!
-    var isCorrect:Bool!
+    var isCorrect:Bool
     var knowledgePoint:String!
     
     init(json:JSON){
@@ -27,8 +27,8 @@ class Result{
 
 class TeacherTest{
     var questionIds = [String]()
-    var questions = Dictionary<String,Question>()
-    var questionArray = [Question]()
+    var questions = Dictionary<String,TeacherQuestion>()
+    var questionArray = [TeacherQuestion]()
     var id = ""
     var etag = ""
     var hasHint = false
@@ -36,13 +36,14 @@ class TeacherTest{
     var _timeLimitDict:Dictionary<String,Int>!
     var courseId:String!
     var expired = false
-    var startTime = ""
+    var _startTime = ""
     var deadline = ""
     var randomNumber = 0
     var message = ""
     var total = 0
     var _current = 0
-    var done = true
+    var done = false
+    var startTimeDate:NSDate!
     var deadlineDate:NSDate?
     var current:Int{
         get{
@@ -54,6 +55,19 @@ class TeacherTest{
                 self.done = true
             }
         }
+    }
+    
+    var startTime:String{
+        get{
+            return self._startTime
+        }
+        set{
+            self._startTime = newValue
+            let formatter = NSDateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            self.startTimeDate = formatter.dateFromString(self._startTime)!
+        }
+        
     }
     
     var resultsByStudentId:Dictionary<String,Dictionary<String,Result>>!
@@ -75,7 +89,7 @@ class TeacherTest{
     }
     
     
-    func addQuestion(question:Question?){
+    func addQuestion(question:TeacherQuestion?){
         if let q = question{
             self.questions.updateValue(q, forKey: q.id)
             self.questionArray.append(q)
@@ -84,7 +98,7 @@ class TeacherTest{
     }
     
     
-    func removeQuestion(question:Question?){
+    func removeQuestion(question:TeacherQuestion?){
         if let q = question{
             self.questions.removeValueForKey(q.id)
         }
@@ -108,9 +122,9 @@ class TeacherTest{
         self.message = json["message"].stringValue
         self.randomNumber = json["random_num"].intValue
         self.etag = json["_etag"].stringValue
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm"
         if self.deadline != "" && !self.expired{
-            let formatter = NSDateFormatter()
-            formatter.dateFormat = "yyyy-MM-dd HH:mm"
             self.deadlineDate = formatter.dateFromString(self.deadline)!
             self.expired = self.deadlineDate!.compare(NSDate()) == NSComparisonResult.OrderedAscending
         }
@@ -122,7 +136,7 @@ class TeacherTest{
         }
     }
     
-    func addAcquiredQuestion(question:Question){
+    func addAcquiredQuestion(question:TeacherQuestion){
         self.questions[question.id] = question
         self.questionArray.append(question)
         self.current = self.current + 1

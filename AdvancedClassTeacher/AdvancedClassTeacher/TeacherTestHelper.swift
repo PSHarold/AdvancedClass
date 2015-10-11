@@ -76,15 +76,15 @@ class TeacherTestHelper {
     var alamofireManager : Alamofire.Manager!
     var allTestArray = [TeacherTest]()
     var allTestDict = Dictionary<String,TeacherTest>()
-    var expiredTestArray = [TeacherTest]()
-    var unexpiredTestArray = [TeacherTest]()
+    //var expiredTestArray = [TeacherTest]()
+   //var unexpiredTestArray = [TeacherTest]()
     var _newTest:TeacherTest?
     var authHelper = TeacherAuthenticationHelper.defaultHelper()
     var teacherDelegate:TeacherTestHelperDelegate!
     var knowledgePoints:Chapters!
     static var instance:TeacherTestHelper?
-    var allQuestionArray = [Question]()
-    var allQuestionDict = Dictionary<String,Question>()
+    var allQuestionArray = [TeacherQuestion]()
+    var allQuestionDict = Dictionary<String,TeacherQuestion>()
     var testToView:TeacherTest!
     var newTest:TeacherTest!{
         get{
@@ -159,8 +159,8 @@ class TeacherTestHelper {
         }
         self.allTestArray.removeAll(keepCapacity: false)
         self.allTestDict.removeAll(keepCapacity: false)
-        self.expiredTestArray.removeAll(keepCapacity: false)
-        self.unexpiredTestArray.removeAll(keepCapacity: false)
+        //self.expiredTestArray.removeAll(keepCapacity: false)
+        //self.unexpiredTestArray.removeAll(keepCapacity: false)
         self.doneAcquiring = false
         let request = self.authHelper.requestForTestsWithCourseId(courseHelper.currentCourse.courseId, subId: courseHelper.currentCourse.subId)
         request.responseJSON(){
@@ -169,9 +169,11 @@ class TeacherTestHelper {
             case .Success(let data):
                 let listJSON = JSON(data)["_items"]
                 for (_,test) in listJSON{
-                    self.processTest(TeacherTest(json:test))
+                    self.allTestArray.append(TeacherTest(json:test))
                 }
                 self.sortTests()
+                //self.expiredTestArray.removeAll()
+                //self.unexpiredTestArray.removeAll()
                 self.delegate.allTestsAcquired!()
             case .Failure:
                 self.delegate.networkError()
@@ -183,29 +185,38 @@ class TeacherTestHelper {
         return 0
     }
     
-    func processTest(test:TeacherTest){
-        self.addTest(test)
-    }
-    
-    //获取测试后加入到测试列表（分类）
-    func addTest(test:TeacherTest){
-        if test.expired{
-            self.expiredTestArray.append(test)
-        }
-        else{
-            self.unexpiredTestArray.append(test)
-        }
-    }
+//    func processTest(test:TeacherTest){
+//        self.addTest(test)
+//    }
+//
+//    //获取测试后加入到测试列表（分类）
+//    func addTest(test:TeacherTest){
+//        if test.expired{
+//            self.expiredTestArray.append(test)
+//        }
+//        else{
+//            self.unexpiredTestArray.append(test)
+//        }
+//    }
     
     //正在进行的测试放在前面
     func sortTests(){
-        for temp in self.unexpiredTestArray{
-            self.allTestArray.append(temp)
+//        for temp in self.unexpiredTestArray{
+//            self.allTestArray.append(temp)
+//        }
+//        for temp in self.expiredTestArray{
+//            self.allTestArray.append(temp)
+//        }
+        let closure = {(test1:TeacherTest,test2:TeacherTest) -> Bool in
+            if !test1.expired && test2.expired{
+                return true
+            }
+            else if test1.expired && !test2.expired{
+                return false
+            }
+            return test1.startTimeDate.compare(test2.startTimeDate) != NSComparisonResult.OrderedAscending
         }
-        for temp in self.expiredTestArray{
-            self.allTestArray.append(temp)
-        }
-        
+        self.allTestArray.sortInPlace(closure)
     }
     
     
@@ -216,7 +227,7 @@ class TeacherTestHelper {
             switch result {
             case .Success(let data):
                 if data.valueForKey("_error") == nil{
-                    test.addAcquiredQuestion(Question(json: JSON(data)))
+                    test.addAcquiredQuestion(TeacherQuestion(json: JSON(data)))
                     //完成所有题目获取
                     if test.done {
                         self.delegate.allQuestionsAcquiredWithTestId!(test.id)
@@ -259,6 +270,7 @@ class TeacherTestHelper {
             (_,_,result) in
             switch result {
             case .Success:
+                self.sortTests()
                 self.delegate.testUploaded!()
             case .Failure:
                 self.delegate.networkError()
@@ -293,7 +305,6 @@ class TeacherTestHelper {
     
     //获取所有问题
     func updateAllQuestions() -> Int{
-        //未完成则返回，防止重复获取
         if !self.doneAcquiring {
             return 1
         }
@@ -311,7 +322,7 @@ class TeacherTestHelper {
                     return
                 }
                 for (_,questionJSON) in questionList{
-                    self.questionAcquired(Question(json: questionJSON))
+                    self.questionAcquired(TeacherQuestion(json: questionJSON))
                 }
                 self.delegate.allQuestionsAcquired!()
                 
@@ -324,7 +335,7 @@ class TeacherTestHelper {
     
    
     
-    func questionAcquired(question:Question){
+    func questionAcquired(question:TeacherQuestion){
         self.allQuestionArray.append(question)
         self.allQuestionDict[question.id] = question
         ++self.currentQuestionNumber
@@ -332,7 +343,7 @@ class TeacherTestHelper {
     
     
     
-    func uploadQuestion(question:Question) -> Int{
+    func uploadQuestion(question:TeacherQuestion) -> Int{
         let request = self.authHelper.requestForQuestionUploading(question.toDict())
         request.responseJSON(){
             (_,_,result) in
@@ -361,7 +372,7 @@ class TeacherTestHelper {
                 let json = JSON(data)
                 self.newTest.etag = json["_etag"].stringValue
                 self.newTest.id = json["_id"].stringValue
-                self.unexpiredTestArray.append(self.newTest)
+                self.allTestArray.append(self.newTest)
                 self.newTest = nil
                 self.sortTests()
                 self.delegate.testUploaded!()
@@ -387,7 +398,7 @@ class TeacherTestHelper {
         return 0
     }
     
-    func deleteQuestion(question:Question,indexPath:NSIndexPath) -> Int{
+    func deleteQuestion(question:TeacherQuestion,indexPath:NSIndexPath) -> Int{
         let request = self.authHelper.requestForQuestionDeletionWithQuestionId(question.id, etag: question.etag)
         request.responseData(){
             (_,_,result) in
@@ -401,7 +412,7 @@ class TeacherTestHelper {
         return 0
     }
     
-    func modifyQuestion(question:Question) -> Int{
+    func modifyQuestion(question:TeacherQuestion) -> Int{
         let request = self.authHelper.requestForQuestionModificationWithQuestionId(question.id, etag: question.etag, patchDict: question.toDict())
         request.responseJSON(){
             (_,_,result) in
@@ -447,6 +458,7 @@ class TeacherTestHelper {
     func getTestResultsWithTest(test:TeacherTest){
         if test.resultsByStudentId != nil{
             self.delegate.testResultsAcquired!()
+            return
         }
         test.resultsByStudentId = Dictionary<String,Dictionary<String,Result>>()
         test.resultsByQuestion = Dictionary<String,Dictionary<String,Result>>()
@@ -460,9 +472,15 @@ class TeacherTestHelper {
                     let studentId = results["student_id"].stringValue
                     for (_,result) in results["results"]{
                         let questionId = result["question_id"].stringValue
+                        let question = test.questions[questionId]!
                         let result = Result(json: result["result"])
                         result.questionId = questionId
                         result.studentId = studentId
+                        if result.isCorrect{
+                            ++question.numberOfCorrect
+                        }
+                        ++question.numberOfChoice[result.choice]!
+                        question.studentsWithChocie[result.choice]!.append(studentId)
                         if test.resultsByQuestion[questionId] == nil{
                             test.resultsByQuestion[questionId] = Dictionary<String,Result>()
                         }
@@ -478,8 +496,7 @@ class TeacherTestHelper {
                 self.delegate.networkError()
             }
         }
-    }
-    
+    }    
     
     class func defaultHelper() -> TeacherTestHelper{
         if let helper = self.instance{
@@ -492,7 +509,7 @@ class TeacherTestHelper {
     }
     
 }
-extension Question{
+extension TeacherQuestion{
     func toDict() -> Dictionary<String,AnyObject>{
         var answer:String!
         switch self.answer{

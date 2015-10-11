@@ -19,7 +19,7 @@
 		F20A68AA1B81B478000BFF24 /* TeacherQuestionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20A68A11B81B478000BFF24 /* TeacherQuestionTableViewController.swift */; };
 		F20A68AE1B81B478000BFF24 /* TeacherPreTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20A68A51B81B478000BFF24 /* TeacherPreTestViewController.swift */; };
 		F20A68AF1B81B478000BFF24 /* TeacherBrowseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20A68A61B81B478000BFF24 /* TeacherBrowseViewController.swift */; };
-		F20A68B11B81B478000BFF24 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20A68A81B81B478000BFF24 /* Question.swift */; };
+		F20A68B11B81B478000BFF24 /* TeacherQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20A68A81B81B478000BFF24 /* TeacherQuestion.swift */; };
 		F21313C81B9A89E80088C483 /* TeacherTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21313C61B9A89E80088C483 /* TeacherTest.swift */; };
 		F21313CC1B9AC2090088C483 /* TeacherTestTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21313CB1B9AC2090088C483 /* TeacherTestTableViewController.swift */; };
 		F21313CE1B9AE1280088C483 /* TeacherAuthenticationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21313CD1B9AE1280088C483 /* TeacherAuthenticationHelper.swift */; };
@@ -46,6 +46,8 @@
 		F26456531B9B204700205B6C /* TeacherCreateTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26456521B9B204700205B6C /* TeacherCreateTableViewController.swift */; };
 		F299579B1B81CBB20003B64C /* TestSettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F299579A1B81CBB20003B64C /* TestSettingsTableViewController.swift */; };
 		F299579D1B81D8C70003B64C /* TestTimeLimitSettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F299579C1B81D8C70003B64C /* TestTimeLimitSettingsTableViewController.swift */; };
+		F2C224A91BCA4500002DE247 /* TeacherAllResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C224A81BCA4500002DE247 /* TeacherAllResultsViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		F2C224AB1BCA7B0A002DE247 /* TeacherQuestionResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C224AA1BCA7B0A002DE247 /* TeacherQuestionResultViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		F2C77C1D1BC0A5E3004FEBF9 /* TeacherCreateNotificationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C77C1C1BC0A5E3004FEBF9 /* TeacherCreateNotificationTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		F2D924331B9DDA99007A783D /* TeacherLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D924321B9DDA99007A783D /* TeacherLoginViewController.swift */; };
 		F2ECA79D1BC0B4E9004B0469 /* TeacherNotificationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2ECA79C1BC0B4E9004B0469 /* TeacherNotificationsTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
@@ -80,7 +82,7 @@
 		F20A68A11B81B478000BFF24 /* TeacherQuestionTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherQuestionTableViewController.swift; sourceTree = "<group>"; };
 		F20A68A51B81B478000BFF24 /* TeacherPreTestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherPreTestViewController.swift; sourceTree = "<group>"; };
 		F20A68A61B81B478000BFF24 /* TeacherBrowseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherBrowseViewController.swift; sourceTree = "<group>"; };
-		F20A68A81B81B478000BFF24 /* Question.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
+		F20A68A81B81B478000BFF24 /* TeacherQuestion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherQuestion.swift; sourceTree = "<group>"; };
 		F21313C61B9A89E80088C483 /* TeacherTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherTest.swift; sourceTree = "<group>"; };
 		F21313CB1B9AC2090088C483 /* TeacherTestTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherTestTableViewController.swift; sourceTree = "<group>"; };
 		F21313CD1B9AE1280088C483 /* TeacherAuthenticationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherAuthenticationHelper.swift; sourceTree = "<group>"; };
@@ -109,6 +111,8 @@
 		F26456521B9B204700205B6C /* TeacherCreateTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherCreateTableViewController.swift; sourceTree = "<group>"; };
 		F299579A1B81CBB20003B64C /* TestSettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestSettingsTableViewController.swift; sourceTree = "<group>"; };
 		F299579C1B81D8C70003B64C /* TestTimeLimitSettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestTimeLimitSettingsTableViewController.swift; sourceTree = "<group>"; };
+		F2C224A81BCA4500002DE247 /* TeacherAllResultsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherAllResultsViewController.swift; sourceTree = "<group>"; };
+		F2C224AA1BCA7B0A002DE247 /* TeacherQuestionResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherQuestionResultViewController.swift; sourceTree = "<group>"; };
 		F2C77C1C1BC0A5E3004FEBF9 /* TeacherCreateNotificationTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherCreateNotificationTableViewController.swift; sourceTree = "<group>"; };
 		F2D924321B9DDA99007A783D /* TeacherLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherLoginViewController.swift; sourceTree = "<group>"; };
 		F2ECA79C1BC0B4E9004B0469 /* TeacherNotificationsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherNotificationsTableViewController.swift; sourceTree = "<group>"; };
@@ -183,13 +187,13 @@
 				F20A68851B81B400000BFF24 /* Main.storyboard */,
 				F220E2761BB62BF300251C88 /* MBProgressHUD.h */,
 				F220E2771BB62BF300251C88 /* MBProgressHUD.m */,
-				F20A68A81B81B478000BFF24 /* Question.swift */,
 				F23EE3801BAA931700B75501 /* Seat.swift */,
 				F23EE3811BAA931700B75501 /* SeatButton.swift */,
 				F23EE3821BAA931700B75501 /* SeatView.swift */,
 				F246DEBC1B9C63360058DEA6 /* Student.swift */,
 				F20A687F1B81B400000BFF24 /* Supporting Files */,
 				F246DEC01B9C64A70058DEA6 /* Teacher.swift */,
+				F2C224A81BCA4500002DE247 /* TeacherAllResultsViewController.swift */,
 				F21313CD1B9AE1280088C483 /* TeacherAuthenticationHelper.swift */,
 				F20A68A61B81B478000BFF24 /* TeacherBrowseViewController.swift */,
 				F21345ED1B9D456000D3BDBF /* TeacherCourse.swift */,
@@ -203,6 +207,8 @@
 				F253B2AB1BC550E300AD0AE4 /* TeacherPreCurrentStudentListViewController.swift */,
 				F23EE38A1BAA970D00B75501 /* TeacherPreSeatViewController.swift */,
 				F20A68A51B81B478000BFF24 /* TeacherPreTestViewController.swift */,
+				F20A68A81B81B478000BFF24 /* TeacherQuestion.swift */,
+				F2C224AA1BCA7B0A002DE247 /* TeacherQuestionResultViewController.swift */,
 				F246DEB81B9BDAD00058DEA6 /* TeacherQuestionsInTestTableViewController.swift */,
 				F20A68A11B81B478000BFF24 /* TeacherQuestionTableViewController.swift */,
 				F23EE3831BAA931700B75501 /* TeacherSeatHelper.swift */,
@@ -408,15 +414,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				F23EE38B1BAA970D00B75501 /* TeacherPreSeatViewController.swift in Sources */,
-				F20A68B11B81B478000BFF24 /* Question.swift in Sources */,
+				F20A68B11B81B478000BFF24 /* TeacherQuestion.swift in Sources */,
 				F21313C81B9A89E80088C483 /* TeacherTest.swift in Sources */,
 				F20A56631B96A76A00B8AAB0 /* RandomNumberTableViewController.swift in Sources */,
 				F246DEB91B9BDAD00058DEA6 /* TeacherQuestionsInTestTableViewController.swift in Sources */,
 				F253B2AA1BC5456200AD0AE4 /* TeacherCurrentStudentListViewController.swift in Sources */,
 				F246DEC11B9C64A70058DEA6 /* Teacher.swift in Sources */,
 				F20A68AE1B81B478000BFF24 /* TeacherPreTestViewController.swift in Sources */,
+				F2C224A91BCA4500002DE247 /* TeacherAllResultsViewController.swift in Sources */,
 				F20A565C1B95836D00B8AAB0 /* ChartViewController.swift in Sources */,
 				F21313CE1B9AE1280088C483 /* TeacherAuthenticationHelper.swift in Sources */,
+				F2C224AB1BCA7B0A002DE247 /* TeacherQuestionResultViewController.swift in Sources */,
 				F21313CC1B9AC2090088C483 /* TeacherTestTableViewController.swift in Sources */,
 				F26456531B9B204700205B6C /* TeacherCreateTableViewController.swift in Sources */,
 				F246DEBD1B9C63360058DEA6 /* Student.swift in Sources */,

@@ -16,6 +16,10 @@ class DateTimeHelper {
         }
     }
     
+    var currentTimeDate:NSDate{
+        return NSDate()
+    }
+    
     private init(){
         
     }

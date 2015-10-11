@@ -887,10 +887,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loginBackground" translatesAutoresizingMaskIntoConstraints="NO" id="rtj-rU-nNK">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <animations/>
-                            </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="用户名" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="mFo-Sz-t0t">
                                 <rect key="frame" x="80" y="220" width="440" height="30"/>
                                 <animations/>
@@ -923,9 +919,9 @@
                             </button>
                         </subviews>
                         <animations/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="mFo-Sz-t0t" firstAttribute="leading" secondItem="xEZ-5C-xmb" secondAttribute="leadingMargin" constant="60" id="2Yu-3g-yb5"/>
-                            <constraint firstAttribute="trailing" secondItem="rtj-rU-nNK" secondAttribute="trailing" id="91L-ht-jpC"/>
                             <constraint firstItem="mFo-Sz-t0t" firstAttribute="top" secondItem="2Z0-63-Izy" secondAttribute="bottom" constant="200" id="9HS-oR-ngW"/>
                             <constraint firstAttribute="trailingMargin" secondItem="mFo-Sz-t0t" secondAttribute="trailing" constant="60" id="HSy-fK-jcG"/>
                             <constraint firstAttribute="centerX" secondItem="hce-vN-iGJ" secondAttribute="centerX" id="Hd5-de-hY3"/>
@@ -933,12 +929,9 @@
                             <constraint firstItem="hce-vN-iGJ" firstAttribute="leading" secondItem="xEZ-5C-xmb" secondAttribute="leadingMargin" constant="60" id="Ssu-wi-TZo"/>
                             <constraint firstItem="hce-vN-iGJ" firstAttribute="top" secondItem="mFo-Sz-t0t" secondAttribute="bottom" constant="10" id="Wrb-aH-j34"/>
                             <constraint firstAttribute="centerX" secondItem="mFo-Sz-t0t" secondAttribute="centerX" id="X3H-un-q21"/>
-                            <constraint firstItem="rtj-rU-nNK" firstAttribute="leading" secondItem="xEZ-5C-xmb" secondAttribute="leading" id="XaD-D1-IJ0"/>
                             <constraint firstItem="ygI-aP-Nqp" firstAttribute="top" secondItem="hce-vN-iGJ" secondAttribute="bottom" constant="10" id="dPG-ol-Vx3"/>
                             <constraint firstItem="ygI-aP-Nqp" firstAttribute="leading" secondItem="xEZ-5C-xmb" secondAttribute="leadingMargin" constant="60" id="fAk-iR-7En"/>
-                            <constraint firstItem="88W-xm-5ew" firstAttribute="top" secondItem="rtj-rU-nNK" secondAttribute="bottom" id="lQg-ql-w3J"/>
                             <constraint firstAttribute="trailingMargin" secondItem="hce-vN-iGJ" secondAttribute="trailing" constant="60" id="wYh-EU-lKO"/>
-                            <constraint firstItem="rtj-rU-nNK" firstAttribute="top" secondItem="xEZ-5C-xmb" secondAttribute="top" id="wum-Ik-8XW"/>
                             <constraint firstAttribute="centerX" secondItem="ygI-aP-Nqp" secondAttribute="centerX" id="wvp-gK-RfF"/>
                         </constraints>
                     </view>
@@ -1050,7 +1043,7 @@
                             </view>
                         </subviews>
                         <animations/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="YzO-ik-dB7" firstAttribute="top" secondItem="Bpm-yj-zqb" secondAttribute="top" constant="150" id="hTv-rF-ngF"/>
                             <constraint firstItem="gAH-FH-eW0" firstAttribute="top" secondItem="YzO-ik-dB7" secondAttribute="bottom" id="jy3-fA-B3f"/>
@@ -1065,7 +1058,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0aU-BK-Xwn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2643" y="1855.9999999999984"/>
+            <point key="canvasLocation" x="2865" y="1920"/>
         </scene>
         <!--选座-->
         <scene sceneID="faB-tD-laS">
@@ -1104,7 +1097,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y6p-AZ-g0O" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2278.5" y="1990"/>
+            <point key="canvasLocation" x="2176.5" y="1920"/>
         </scene>
         <!--Student Test Table View Controller-->
         <scene sceneID="naj-CV-D0l">
@@ -1604,6 +1597,5 @@
         <image name="B" width="300" height="300"/>
         <image name="C" width="300" height="300"/>
         <image name="D" width="300" height="300"/>
-        <image name="loginBackground" width="600" height="880"/>
     </resources>
 </document>

@@ -123,7 +123,7 @@ class TeacherAuthenticationHelper {
     }
     
     func requestForTestResultsWithCourseId(id:String) -> Request {
-        return self.alamofireManager.request(.GET, self.baseRootUrl + self.urlDict["results"]!, parameters: ["where":["test_id":id]], encoding: ParameterEncoding.URL, headers: nil)
+        return self.alamofireManager.request(.GET, self.baseRootUrl + self.urlDict["results"]! + "?where=%7B%22test_id%22:%22\(id)%22%7D", parameters: nil, encoding: .URL, headers: nil)
     }
     
     func requestForTestModificationWithQuestionId(id:String,etag:String,patchDict:Dictionary<String,AnyObject>) ->Request {
