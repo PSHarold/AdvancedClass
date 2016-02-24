@@ -9,21 +9,28 @@
 
 import Foundation
 import SwiftyJSON
-class TeacherInfo {
+class Teacher {
     var name:String!
     var teacherId:String!
     var title:String!
-    var courses = [String]()
     var description:String!
-    
+    var office:String!
+    var complete = false
     init(json:JSON){
         self.name = json["name"].stringValue
         self.teacherId = json["teacher_id"].stringValue
         self.title = json["title"].stringValue
-        for (_,course) in json["courses"]{
-            self.courses.append(course["course_name"].stringValue)
-        }
         self.description = json["description"].stringValue
+    }
+    
+    func completeInfo(json: JSON){
+        if self.complete{
+            return
+        }
+        self.title = json["title"].stringValue
+        self.description = json["description"].stringValue
+        self.office = json["office"].stringValue
+        self.complete = true
     }
     
 }

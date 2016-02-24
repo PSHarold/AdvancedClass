@@ -16,7 +16,7 @@ class StudentNotificationDetailsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.timeLabel.text = self.notification.time
+        //self.timeLabel.text = self.notification.time
         self.titleLabel.text = self.notification.title
         self.contentText.text = self.notification.content
         // Do any additional setup after loading the view.

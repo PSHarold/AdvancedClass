@@ -9,11 +9,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Charts.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Pods-AdvancedClassStudent.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -27,22 +22,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>75B92BCFA83750F828FF733FF563ED4D</key>
+		<key>4B2F30D90D85A544E9EFE2A49D392C25</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>822E684788388081DF563A1D34191D57</key>
+		<key>630B6BAF6BEA7FCE1138BDAED4CDD8C4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9F3BE5C61C50B9617B0CF1D235C175E7</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>B9A04D3C9B208813656510FDA8ADAE02</key>
+		<key>84BA002C012BBC9C90FB75F9CB574BB3</key>
 		<dict>
 			<key>primary</key>
 			<true/>

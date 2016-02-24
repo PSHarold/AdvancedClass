@@ -13,7 +13,7 @@ protocol SeatViewDelegate {
 protocol SeatViewDataSource {
     func numberOfRows() -> Int
     func numberOfColumns() -> Int
-    func seatAtIndexPath(indexPath:NSIndexPath) -> SeatButton
+    func seatStatusAtIndexPath(indexPath:NSIndexPath) -> SeatStatus
 }
 
 class SeatView: UIView, UIScrollViewDelegate,UITableViewDelegate{
@@ -40,7 +40,7 @@ class SeatView: UIView, UIScrollViewDelegate,UITableViewDelegate{
     let viewRatio = CGFloat(5) // mini map ratio
     var delegate:SeatViewDelegate!
     var dataSource:SeatViewDataSource!
-    var seatButtonArray = [[SeatButton]]() // stores all seat buttons in accordance with their actual row and column info
+    var seatButtonArray: [[SeatButton]]! // stores all seat buttons in accordance with their actual row and column info
     var seatButtonForRotation = [[SeatButton]]() // stores all seat buttons (subscripts give you the seat button on the screen at the given row and column, not the actual seat as the seats can be rotated 180 degrees)
     var platformLabel = UILabel() // a label representing the platform
     var up = true // indicating the direction of the seat map (the platform at the top or bottom of the map)
@@ -50,6 +50,8 @@ class SeatView: UIView, UIScrollViewDelegate,UITableViewDelegate{
         self.frame.size = rect.size
         rows = self.dataSource.numberOfRows()
         columns = self.dataSource.numberOfColumns()
+        self.seatButtonArray = [[SeatButton]]()
+        self.seatButtonForRotation = [[SeatButton]]()
         self.initScrollView()
         self.initMiniMap()
         
@@ -104,7 +106,7 @@ class SeatView: UIView, UIScrollViewDelegate,UITableViewDelegate{
                 self.seatButtonForRotation[i][self.columns - 1 - j] = tempSeat
             }
         }
-        //flip the platform
+        // flip the platform
         if self.up{
             self.platformLabel.center.y = self.platformLabel.center.y + (self.totalHeight + 2 * self.platformSpace + self.platformHeight)
         }
@@ -155,12 +157,14 @@ class SeatView: UIView, UIScrollViewDelegate,UITableViewDelegate{
         self.scrollView.contentSize = self.contentSize
         self.scrollView.backgroundColor = self.seatView.backgroundColor
         for row in 0..<self.rows{
-            var tempArray = [SeatButton]()
-            var tempArrayForRotation = [SeatButton]()
+            var temp = [SeatButton]()
             for column in 0..<self.columns{
-                let seat = self.dataSource.seatAtIndexPath(NSIndexPath(forItem: column, inSection: row))
+                let seat = SeatButton()
+                let seatStatus = self.dataSource.seatStatusAtIndexPath(NSIndexPath(forRow: row, inSection: column))
                 seat.row = row
                 seat.column = column
+                seat.status = seatStatus
+                temp.append(seat)
                 let miniSeat = seat.miniSeat
                 let y = CGFloat(row) * (self.seatSideLength + self.rowSpace) + (self.contentSize.height - self.totalHeight) / 2
                 let x : CGFloat = CGFloat(column) * (self.seatSideLength + self.columnSpace) + (self.contentSize.width - self.totalWidth) / 2
@@ -169,11 +173,11 @@ class SeatView: UIView, UIScrollViewDelegate,UITableViewDelegate{
                 seat.addTarget(self, action: "seatClicked:", forControlEvents: UIControlEvents.TouchUpInside)
                 self.seatView.addSubview(seat)
                 self.miniSeatView.addSubview(miniSeat)
-                tempArray.append(seat)
-                tempArrayForRotation.append(seat)
+
             }
-            self.seatButtonArray.append(tempArray)
-            self.seatButtonForRotation.append(tempArrayForRotation)
+            self.seatButtonArray.append(temp)
+            self.seatButtonForRotation.append(temp)
+            
         }
         
         self.platformLabel.frame.size = CGSizeMake(self.platformWidth, self.platformHeight)
@@ -255,6 +259,12 @@ class SeatView: UIView, UIScrollViewDelegate,UITableViewDelegate{
     }
     
     func seatClicked(seat:SeatButton){
-        self.delegate.didSelectSeatAtIndexPath(NSIndexPath(forItem: seat.column, inSection: seat.row))
+        self.delegate.didSelectSeatAtIndexPath(NSIndexPath(forRow: seat.row, inSection: seat.column))
     }
+    
+    func changeSeatStatusAtIndexPath(indexPath: NSIndexPath, seatStatus: SeatStatus){
+        let seat = self.seatButtonArray[indexPath.row][indexPath.section]
+        seat.status = seatStatus
+    }
+    
 }

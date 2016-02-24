@@ -10,12 +10,11 @@ import UIKit
 
 class StudentCourseTableViewController: UITableViewController {
     
-    var courseHelper = StudentCourseHelper.defaultHelper()
+       
+    var authHelper = StudentAuthenticationHelper.defaultHelper
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController!.interactivePopGestureRecognizer?.enabled = false
-        
-
+        //self.navigationController!.interactivePopGestureRecognizer?.enabled = false  
     }
 
     override func didReceiveMemoryWarning() {
@@ -31,20 +30,20 @@ class StudentCourseTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.courseHelper.courseArray.count
+        return self.authHelper.me.courses.count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("MyCell", forIndexPath: indexPath) 
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
 
-        cell.textLabel?.text = self.courseHelper.courseArray[indexPath.row].name
+        cell.textLabel?.text = self.authHelper.me.courses[indexPath.row].name
 
         return cell
     }
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.courseHelper.currentCourse = self.courseHelper.courseArray[indexPath.row]
+        StudentCourse.currentCourse = self.authHelper.me.courses[indexPath.row]
         self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        self.performSegueWithIdentifier("ShowNotifications", sender: self)
+        self.performSegueWithIdentifier("enterMain", sender: self)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -52,6 +51,4 @@ class StudentCourseTableViewController: UITableViewController {
             
         }
     }
-    
-    
 }

@@ -9,30 +9,27 @@
 import Foundation
 import SwiftyJSON
 class Student {
-    var courses = [Dictionary<String,String>]()
-    var studentId = ""
-    var finishedTestIdArray:[String]!
-    var name = ""
-    var classNo = ""
-    var currentSeatId = ""
-    var currentCourseId = "00000000"
-    var id:String!
-    var etag:String!
-    init(json:JSON,isMe:Bool = false){
-        if isMe{
-            self.finishedTestIdArray = [String]()
-            for (_,testId) in json["finished_tests"]{
-                self.finishedTestIdArray.append(testId.stringValue)
+    var courseNames = [String]()
+    var studentId:String
+    var gender: Bool
+    var name:String
+    var className:String
+    var tel:String
+    var majorName:String
+    var genderString:String{
+        get{
+            if self.gender{
+                return "男"
             }
-            self.studentId = json["student_id"].stringValue
-            self.name = json["name"].stringValue
-            self.classNo = json["class"].stringValue
-            self.currentSeatId = json["cur_seat_id"].stringValue
-            self.id = json["_id"].stringValue
-            self.etag = json["_etag"].stringValue
-            for (_,course) in json["courses"]{
-                self.courses.append(["courseId":course["course_id"].stringValue,"subId":course["sub_id"].stringValue])
-            }
+            return "女"
         }
+    }
+    init(json:JSON){
+        self.studentId = json["user_id"].stringValue
+        self.gender = json["gender"].boolValue
+        self.name = json["name"].stringValue
+        self.className = json["class_name"].stringValue
+        self.tel = json["tel"].stringValue
+        self.majorName = json["major_name"].stringValue
     }
 }

@@ -13,73 +13,83 @@ class Notification {
     var title:String
     var content:String
     var top:Bool
-    var time:String
-    var timeData:NSDate!
-    var id:String
-    var etag:String
-    var courseId:String!
-    var subId:String!
+    var createdOn:String
+    var createdOnTimeData:NSDate
+    var notificationId:String
+    var courseId:String
+    var subId:String
+    var courseName = ""
     init(json:JSON){
         self.title = json["title"].stringValue
         self.content = json["content"].stringValue
         self.top = json["top"].boolValue
-        self.id = json["_id"].stringValue
-        self.etag = json["_etag"].stringValue
-        self.time = json["time"].stringValue
+        self.notificationId = json["ntfc_id"].stringValue
+        self.createdOn = json["created_on"].stringValue
         self.courseId = json["course_id"].stringValue
         self.subId = json["sub_id"].stringValue
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        self.timeData = dateFormatter.dateFromString(self.time) as NSDate!
+        self.createdOnTimeData = dateFormatter.dateFromString(self.createdOn) as NSDate!
     }
-    init(){
-        self.title = ""
-        self.content = ""
-        self.top = false
-        self.id = ""
-        self.etag = ""
-        self.time = ""
-        self.timeData = nil
-    }
+   
 }
 
 class StudentCourse {
+    static var currentCourse: StudentCourse!
+    
     var studentIdList = [String]()
-    var name:String!
-    var courseId:String!
-    var subId:String!
-    var teacher:TeacherInfo!
-    var sortedNotifications = [Notification]()
-    var unsortedNotifications = [Notification]()
-   // var rooms
-    init(json:JSON){
-        self.name = json["name"].stringValue
+    var name:String
+    var courseId:String
+    var subId:String
+    var teachers = [Teacher]()
+    var timesAndRooms:TimesAndRooms
+    var unreadNotifications = [Notification]()
+    var untakenTests = []
+    var students = [Student]()
+    var notifications = [Notification]()
+    var notificationsAcquired = false
+    init(json:JSON, preview:Bool = true){
+        self.name = json["course_name"].stringValue
         self.courseId = json["course_id"].stringValue
         self.subId = json["sub_id"].stringValue
-        for (_,id) in json["students"]{
-            self.studentIdList.append(id.stringValue)
+        self.timesAndRooms = TimesAndRooms(json: json["times"])
+        for (_, n) in json["unread_ntfcs"]{
+            let notification = Notification(json: n)
+            notification.courseName = self.name
+            self.unreadNotifications.append(notification)
         }
     }
-    func sortNotifications(){
-        var normalNotifications = [Notification]()
-        var topNotifications = [Notification]()
-        for notification in self.unsortedNotifications {
-            if notification.top{
-                topNotifications.append(notification)
+    
+    func getNotifications(completionHandler: (error: CError?) -> Void){
+        if self.notificationsAcquired{
+            completionHandler(error: nil)
+            return
+        }
+        else{
+            StudentAuthenticationHelper.defaultHelper.getResponse(RequestType.GET_NOTIFICAIONS, postBody: ["course_id":self.courseId,"sub_id":self.subId]){
+                (error, json) in
+                if error == nil{
+                    for (_, n) in json["notifications"]{
+                        let notification = Notification(json: n)
+                        notification.courseName = self.name
+                        self.notifications.append(notification)
+                    }
+                    self.notificationsAcquired = true
+                }
+                completionHandler(error: error)
+                return
             }
-            else{
-                normalNotifications.append(notification)
-            }
         }
-        let sortClosure = { (noti1:Notification,noti2:Notification) in noti1.timeData.compare(noti2.timeData) == NSComparisonResult.OrderedDescending }
-        normalNotifications.sortInPlace(sortClosure)
-        topNotifications.sortInPlace(sortClosure)
-        for notification in topNotifications{
-            self.sortedNotifications.append(notification)
-        }
-        for notification in normalNotifications{
-            self.sortedNotifications.append(notification)
-        }
+    }
+    
+    func refreshNotifications(){
         
     }
+    
+    func completeInfo(json:JSON){
+        
+    }
+    
+    
+    
 }

@@ -17,139 +17,132 @@ import SwiftyJSON
 }
 
 
+
+
+
+
+
 class StudentAuthenticationHelper{
     
     
     
-    static var instance:StudentAuthenticationHelper?
-    var myInfo:Student!
-    var alamofireManager : Alamofire.Manager!
-   // var request:Request
-    //var courseHelper = StudentCourseHelper.defaultHelper()
-    var delegate:StudentAuthenticationHelperDelegate!
-
-    let baseRootUrl:String = TARGET_IPHONE_SIMULATOR == 0 ? "http://192.168.2.1:5000/" : "http://localhost:5000/"
+    static var _defaultHelper:StudentAuthenticationHelper?
+    static var me: Me!
+    var tokenRetryCount = 0
+    let MAX_TOKEN_RETRY_COUNT = 3
+    var me: Me!
+    var userId = ""
+    var password = ""
+    var token = ""
+    var tempRequestType:RequestType!
+    var tempMethod:Alamofire.Method!
+    var tempPostBody:[String: AnyObject]?
+    var tempHeaders:[String:String]?
+    var originalHandler:((error:CError?, json:JSON!) -> Void)!
     
-    let urlDict = ["knowledgePoints":"knowledge_points","questions":"questions","tests":"tests","results":"results","courses":"courses","students":"students","rooms":"rooms","seats":"seats","teachers":"teachers","notifications":"notifications"]
-    
-    func requestForNotificationsWithCourseId(id:String,subId:String) -> Request{
-        return self.alamofireManager.request(.GET, self.baseRootUrl + self.urlDict["courses"]! + "/" + id + "/" + subId + "/" + self.urlDict["notifications"]!, parameters: nil, encoding: ParameterEncoding.URL, headers: nil)
-        
-    }
-
-    
-    
-    func requestForSeatWithId(id:String) ->Request {
-        
-        return self.alamofireManager.request(.GET, self.baseRootUrl + self.urlDict["seats"]! + "/\(id)", parameters: nil, encoding: ParameterEncoding.URL, headers: nil)
-    }
-    
-    func requestForRoomWithId(id:String) ->Request {
-        return self.alamofireManager.request(.GET, self.baseRootUrl + self.urlDict["rooms"]! + "/\(id)", parameters: nil, encoding: ParameterEncoding.URL, headers: nil)
-    }
-    
-    func requestForSeatsWithRoomId(id:String) ->Request {
-        return self.alamofireManager.request(.GET, self.baseRootUrl + self.urlDict["rooms"]! + "/\(id)/seats", parameters: nil, encoding: ParameterEncoding.URL, headers: nil)
-    }
-    
-    func requestForCourseWithCourseId(id:String,subId:String) ->Request {
-        return self.alamofireManager.request(.GET, self.baseRootUrl + self.urlDict["courses"]! + "/\(id)/\(subId)", parameters: nil, encoding: ParameterEncoding.URL, headers: nil)
-    }
-    
-    func requestForQuestionWithId(id:String) ->Request {
-        return self.alamofireManager.request(.GET, self.baseRootUrl + self.urlDict["questions"]! + "/\(id)", parameters: nil, encoding: ParameterEncoding.URL, headers: nil)
-    }
-    
-    func requestForMyInfoWithUser(user:String,pass:String) ->Request {
-        return self.alamofireManager.request(.GET, self.baseRootUrl + self.urlDict["students"]! + "/\(user)", parameters: nil, encoding: ParameterEncoding.URL, headers: nil)
-    }
-    
-    func requestForMyInfoModification(patchDict:Dictionary<String,AnyObject>) -> Request {
-        return self.alamofireManager.request(.PATCH, self.baseRootUrl + self.urlDict["students"]! + "/\(self.myInfo.id)", parameters: patchDict, encoding: .JSON, headers: ["If-Match":self.myInfo.etag])
-    }
-    
-    func requestForTestsWithCourseId(id:String,subId:String) ->Request {
-        return self.alamofireManager.request(.GET, self.baseRootUrl + self.urlDict["courses"]! + "/" + id + "/" + subId + "/" + self.urlDict["tests"]!, parameters: nil, encoding: ParameterEncoding.URL, headers: nil)
+    static var defaultHelper:StudentAuthenticationHelper{
+        get{
+            if _defaultHelper == nil{
+                _defaultHelper = StudentAuthenticationHelper()
+            }
+            return _defaultHelper!
+        }
     }
     
     
-    func requestForResultsUpload(result:Dictionary<String,AnyObject>) ->Request {
-        return self.alamofireManager.request(.POST, self.baseRootUrl + self.urlDict["results"]!, parameters: result, encoding: .JSON, headers: nil)
-        
-    }
+ 
     
-    func requestForStudentWithId(id:String) -> Request{
-        return self.alamofireManager.request(.GET, self.baseRootUrl + self.urlDict["students"]! + "/\(id)", parameters: nil, encoding: ParameterEncoding.URL, headers: nil)
-    }
-    
-    func requestForTestResultsWithTestId(id:String) ->Request {
-        return self.alamofireManager.request(.GET, self.baseRootUrl + self.urlDict["results"]! + "?where=%7B%22student_id%22:%22\(self.myInfo.studentId)%22,%22test_id%22:%22\(id)%22%7D", parameters: nil, encoding: ParameterEncoding.URL, headers: nil)
-    }
-    
-    func requestForSeatSelectionWithSeatId(id:String,etag:String,patchDict:Dictionary<String,AnyObject>) -> Request{
-        return self.alamofireManager.request(.PATCH, self.baseRootUrl + self.urlDict["seats"]! + "/\(id)", parameters: patchDict, encoding: .JSON, headers: ["If-Match":etag])
-    }
-    
-    func requestForTeacherInfoWithTeacherId(id:String) -> Request{
-        return self.alamofireManager.request(.GET, self.baseRootUrl + self.urlDict["teachers"]! + "/\(id)", parameters: nil, encoding: ParameterEncoding.URL, headers: nil)
-    }
-    func updateMyInformation(){
-        let request = self.requestForMyInfoWithUser("41316014",pass: "")
+    func getResponse(requestType:RequestType, method:Alamofire.Method = .POST, var postBody:[String: AnyObject]?, headers:[String:String]? = nil, tokenRequired:Bool = true, completionHandler: ResponseHandler){
+        if tokenRequired{
+            assert(postBody != nil)
+            postBody!["token"] = self.token
+        }
+        let request = getRequestFor(requestType, method: method, postBody:postBody, headers: headers)
         request.responseJSON(){
             (_,_,result) in
-            switch result {
+            switch result{
             case .Success(let data):
-                _ = data
-            case .Failure(_, let error):
-                _ = error
+                let json = JSON(data)
+                let code = json["error_code"].intValue
+                if code == CError.TOKEN_EXPIRED.rawValue{
+                    self.tempHeaders=headers
+                    self.tempMethod=method
+                    self.tempPostBody=postBody
+                    self.tempRequestType=requestType
+                    self.originalHandler=completionHandler
+                    self.getTokenBackground()
+                    return
+                }
+                else if code > 0{
+                    completionHandler(error: CError(rawValue: code), json: json)
+                }
+                else{
+                    completionHandler(error: nil, json: json)
+                }
+                
+            case .Failure:
+                completionHandler(error: CError.NETWORK_ERROR, json: nil)
             }
         }
+            
     }
     
-    
-    func foo(){
-        
-    }
-    
-    func login(user:String,pass:String){
-        let request = self.requestForMyInfoWithUser("41316014",pass:"")
+    func getTokenBackground(){
+        let request = getRequestFor(.GET_TOKEN_ONLY, method: .POST, postBody: ["user_id": self.userId, "password": self.password, "role": ROLE_FOR_STUDENT], headers: nil)
         request.responseJSON(){
-            (_,_,result) in
-            switch result {
+            _,_,result in
+            switch result{
             case .Success(let data):
-                self.myInfo = Student(json: JSON(data),isMe: true)
-                self.delegate.loggedIn!()
-            case .Failure(_, let error):
-                self.delegate.networkError()
+                let json = JSON(data)
+                let code = json["error_code"].intValue
+                if code > 0{
+                    if self.tokenRetryCount == self.MAX_TOKEN_RETRY_COUNT{
+                        self.tokenRetryCount = 0
+                        self.originalHandler(error: CError(rawValue: code), json: nil)
+                    }
+                    else{
+                        self.getTokenBackground()
+                    }
+                }
+                else{
+                    self.token = json["token"].stringValue
+                    self.getResponse(self.tempRequestType, method: self.tempMethod, postBody: self.tempPostBody, headers: self.tempHeaders, completionHandler:self.originalHandler)
+                }
+            case .Failure(_, _):
+                self.originalHandler(error: CError.NETWORK_ERROR, json: nil)
+            }
+        }
+            
+    }
+    
+
+    func login(userId:String,password:String,completionHandler: ResponseHandler){
+        self.userId = userId
+        self.password = password
+        getResponse(RequestType.LOGIN, postBody:["user_id":userId, "password": password, "role": 2]){
+            (error,json) in
+            if error != nil{
+                completionHandler(error: error, json: json)
+            }
+            else{
+                self.token = json["token"].stringValue
+                self.me = Me(json: json)
+                StudentAuthenticationHelper.me = self.me
+                completionHandler(error: nil, json: json)
             }
             
-            
         }
     }
     
-    func allCoursesAcquired(){
-        self.delegate.loggedIn!()
-    }
-    
-    
-    private init() {
-        let configuration = NSURLSessionConfiguration.ephemeralSessionConfiguration()
-        configuration.timeoutIntervalForResource = 3 // seconds
-        self.alamofireManager = Alamofire.Manager(configuration: configuration)
-        
+    private init(){
         
     }
     
-    class func defaultHelper() -> StudentAuthenticationHelper{
-        if let helper = self.instance{
-            return helper
-        }
-        else{
-            self.instance = StudentAuthenticationHelper()
-            return self.instance!
-        }
+
+    
+    
+    func logout(){
+        
     }
-    
-    
     
 }

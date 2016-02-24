@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A56638952C3463F4DA7C3E2A /* Pods_AdvancedClassStudent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 713E9A37182E3093207E6B0D /* Pods_AdvancedClassStudent.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		A56638952C3463F4DA7C3E2A /* Pods_AdvancedClassStudent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 713E9A37182E3093207E6B0D /* Pods_AdvancedClassStudent.framework */; };
 		F21838AD1B945ACC0075DD47 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F21838AC1B945ACC0075DD47 /* Images.xcassets */; };
-		F220E27C1BB62C2100251C88 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = F220E27B1BB62C2100251C88 /* MBProgressHUD.m */; settings = {ASSET_TAGS = (); }; };
+		F220E27C1BB62C2100251C88 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = F220E27B1BB62C2100251C88 /* MBProgressHUD.m */; };
 		F22DAC981B81AC2B00360027 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22DAC971B81AC2B00360027 /* AppDelegate.swift */; };
 		F22DAC9D1B81AC2B00360027 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F22DAC9B1B81AC2B00360027 /* Main.storyboard */; };
 		F22DACA21B81AC2B00360027 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F22DACA01B81AC2B00360027 /* LaunchScreen.xib */; };
@@ -18,27 +18,31 @@
 		F22DACC01B81ACB600360027 /* StudentPreTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22DACBA1B81ACB600360027 /* StudentPreTestViewController.swift */; };
 		F22DACC11B81ACB600360027 /* StudentQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22DACBB1B81ACB600360027 /* StudentQuestion.swift */; };
 		F22DACC41B81ACD500360027 /* AdvancedClassStudentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22DACC31B81ACD500360027 /* AdvancedClassStudentTests.swift */; };
-		F2329FEF1BC21AEC006A428F /* StudentTestInfoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2329FEE1BC21AEC006A428F /* StudentTestInfoTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		F2329FEF1BC21AEC006A428F /* StudentTestInfoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2329FEE1BC21AEC006A428F /* StudentTestInfoTableViewController.swift */; };
 		F241AE9F1B98170E00E30EAF /* StudentTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F241AE9E1B98170E00E30EAF /* StudentTest.swift */; };
 		F241AEA51B98771000E30EAF /* StudentTestTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F241AEA41B98771000E30EAF /* StudentTestTableViewController.swift */; };
 		F246DEBB1B9C619B0058DEA6 /* Student.swift in Sources */ = {isa = PBXBuildFile; fileRef = F246DEBA1B9C619B0058DEA6 /* Student.swift */; };
 		F246DEC31B9C654B0058DEA6 /* StudentCourse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F246DEC21B9C654B0058DEA6 /* StudentCourse.swift */; };
-		F246DEC51B9C662E0058DEA6 /* TeacherInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F246DEC41B9C662E0058DEA6 /* TeacherInfo.swift */; };
-		F25B8DFF1B9D910800A2587E /* StudentInfoHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25B8DFE1B9D910800A2587E /* StudentInfoHelper.swift */; };
-		F25B8E031B9D95B700A2587E /* StudentCourseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25B8E021B9D95B700A2587E /* StudentCourseHelper.swift */; };
+		F246DEC51B9C662E0058DEA6 /* Teacher.swift in Sources */ = {isa = PBXBuildFile; fileRef = F246DEC41B9C662E0058DEA6 /* Teacher.swift */; };
 		F25B8E051B9DB16400A2587E /* StudentCourseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25B8E041B9DB16400A2587E /* StudentCourseTableViewController.swift */; };
-		F285A6F81BAE94B80057C5B4 /* StudentTestResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F285A6F71BAE94B80057C5B4 /* StudentTestResultsTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		F285A6F81BAE94B80057C5B4 /* StudentTestResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F285A6F71BAE94B80057C5B4 /* StudentTestResultsTableViewController.swift */; };
+		F286A0E91C7DAA5400B1BD3A /* CourseActivityButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F286A0E81C7DAA5400B1BD3A /* CourseActivityButton.swift */; };
 		F29957991B81B89D0003B64C /* StudentAnswerQuestionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29957981B81B89D0003B64C /* StudentAnswerQuestionsViewController.swift */; };
 		F2B5A52A1BA99CFB00A4E38B /* Seat.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B5A5261BA99CFB00A4E38B /* Seat.swift */; };
 		F2B5A52B1BA99CFB00A4E38B /* SeatButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B5A5271BA99CFB00A4E38B /* SeatButton.swift */; };
 		F2B5A52C1BA99CFB00A4E38B /* SeatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B5A5281BA99CFB00A4E38B /* SeatView.swift */; };
 		F2B5A52D1BA99CFB00A4E38B /* StudentSeatHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B5A5291BA99CFB00A4E38B /* StudentSeatHelper.swift */; };
 		F2B5A52F1BA9A02F00A4E38B /* StudentChooseSeatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B5A52E1BA9A02F00A4E38B /* StudentChooseSeatViewController.swift */; };
-		F2B5A5311BA9A10F00A4E38B /* StudentPreChooseSeatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B5A5301BA9A10F00A4E38B /* StudentPreChooseSeatViewController.swift */; };
-		F2BCB68E1BBFF5D200BF14F1 /* StudentNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2BCB68D1BBFF5D200BF14F1 /* StudentNotificationViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		F2BCB6901BBFF9DE00BF14F1 /* StudentNotificationDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2BCB68F1BBFF9DE00BF14F1 /* StudentNotificationDetailsViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		F2D785341BB4E13F00B6DC9A /* StudentTestResultsScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D785331BB4E13F00B6DC9A /* StudentTestResultsScrollViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		F2B5A5311BA9A10F00A4E38B /* StudentCourseActivitiestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B5A5301BA9A10F00A4E38B /* StudentCourseActivitiestViewController.swift */; };
+		F2B992781C780D2600A8DE18 /* Me.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B992771C780D2600A8DE18 /* Me.swift */; };
+		F2B9927A1C78128500A8DE18 /* TimesAndRooms.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B992791C78128500A8DE18 /* TimesAndRooms.swift */; };
+		F2B9928F1C781B3800A8DE18 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B9928E1C781B3800A8DE18 /* Errors.swift */; };
+		F2B992911C782B6400A8DE18 /* Generals.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B992901C782B6400A8DE18 /* Generals.swift */; };
+		F2BCB68E1BBFF5D200BF14F1 /* StudentNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2BCB68D1BBFF5D200BF14F1 /* StudentNotificationViewController.swift */; };
+		F2BCB6901BBFF9DE00BF14F1 /* StudentNotificationDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2BCB68F1BBFF9DE00BF14F1 /* StudentNotificationDetailsViewController.swift */; };
+		F2D785341BB4E13F00B6DC9A /* StudentTestResultsScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D785331BB4E13F00B6DC9A /* StudentTestResultsScrollViewController.swift */; };
 		F2E3DA3E1B96EDA600945513 /* DateTimeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E3DA3D1B96EDA600945513 /* DateTimeHelper.swift */; };
+		F2ED6D951C7BFD1600520468 /* StudentNotificationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2ED6D941C7BFD1600520468 /* StudentNotificationsTableViewController.swift */; };
 		F2F7D52C1B944BF600E07304 /* StudentAuthenticationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F7D52B1B944BF600E07304 /* StudentAuthenticationHelper.swift */; };
 		F2F7D52E1B944FA000E07304 /* StudentLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F7D52D1B944FA000E07304 /* StudentLoginViewController.swift */; };
 /* End PBXBuildFile section */
@@ -78,22 +82,26 @@
 		F241AEA41B98771000E30EAF /* StudentTestTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentTestTableViewController.swift; sourceTree = "<group>"; };
 		F246DEBA1B9C619B0058DEA6 /* Student.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Student.swift; sourceTree = "<group>"; };
 		F246DEC21B9C654B0058DEA6 /* StudentCourse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentCourse.swift; sourceTree = "<group>"; };
-		F246DEC41B9C662E0058DEA6 /* TeacherInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherInfo.swift; sourceTree = "<group>"; };
-		F25B8DFE1B9D910800A2587E /* StudentInfoHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentInfoHelper.swift; sourceTree = "<group>"; };
-		F25B8E021B9D95B700A2587E /* StudentCourseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentCourseHelper.swift; sourceTree = "<group>"; };
+		F246DEC41B9C662E0058DEA6 /* Teacher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Teacher.swift; sourceTree = "<group>"; };
 		F25B8E041B9DB16400A2587E /* StudentCourseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentCourseTableViewController.swift; sourceTree = "<group>"; };
 		F285A6F71BAE94B80057C5B4 /* StudentTestResultsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentTestResultsTableViewController.swift; sourceTree = "<group>"; };
+		F286A0E81C7DAA5400B1BD3A /* CourseActivityButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseActivityButton.swift; sourceTree = "<group>"; };
 		F29957981B81B89D0003B64C /* StudentAnswerQuestionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentAnswerQuestionsViewController.swift; sourceTree = "<group>"; };
 		F2B5A5261BA99CFB00A4E38B /* Seat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Seat.swift; sourceTree = "<group>"; };
 		F2B5A5271BA99CFB00A4E38B /* SeatButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeatButton.swift; sourceTree = "<group>"; };
 		F2B5A5281BA99CFB00A4E38B /* SeatView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeatView.swift; sourceTree = "<group>"; };
 		F2B5A5291BA99CFB00A4E38B /* StudentSeatHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentSeatHelper.swift; sourceTree = "<group>"; };
 		F2B5A52E1BA9A02F00A4E38B /* StudentChooseSeatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentChooseSeatViewController.swift; sourceTree = "<group>"; };
-		F2B5A5301BA9A10F00A4E38B /* StudentPreChooseSeatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentPreChooseSeatViewController.swift; sourceTree = "<group>"; };
+		F2B5A5301BA9A10F00A4E38B /* StudentCourseActivitiestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentCourseActivitiestViewController.swift; sourceTree = "<group>"; };
+		F2B992771C780D2600A8DE18 /* Me.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Me.swift; sourceTree = "<group>"; };
+		F2B992791C78128500A8DE18 /* TimesAndRooms.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimesAndRooms.swift; sourceTree = "<group>"; };
+		F2B9928E1C781B3800A8DE18 /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		F2B992901C782B6400A8DE18 /* Generals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Generals.swift; sourceTree = "<group>"; };
 		F2BCB68D1BBFF5D200BF14F1 /* StudentNotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentNotificationViewController.swift; sourceTree = "<group>"; };
 		F2BCB68F1BBFF9DE00BF14F1 /* StudentNotificationDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentNotificationDetailsViewController.swift; sourceTree = "<group>"; };
 		F2D785331BB4E13F00B6DC9A /* StudentTestResultsScrollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentTestResultsScrollViewController.swift; sourceTree = "<group>"; };
 		F2E3DA3D1B96EDA600945513 /* DateTimeHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateTimeHelper.swift; sourceTree = "<group>"; };
+		F2ED6D941C7BFD1600520468 /* StudentNotificationsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentNotificationsTableViewController.swift; sourceTree = "<group>"; };
 		F2F7D52B1B944BF600E07304 /* StudentAuthenticationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentAuthenticationHelper.swift; sourceTree = "<group>"; };
 		F2F7D52D1B944FA000E07304 /* StudentLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentLoginViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -160,26 +168,29 @@
 				F220E2791BB62C2000251C88 /* AdvancedClassStudent-Bridging-Header.h */,
 				F22DAC971B81AC2B00360027 /* AppDelegate.swift */,
 				F2E3DA3D1B96EDA600945513 /* DateTimeHelper.swift */,
+				F2B9928E1C781B3800A8DE18 /* Errors.swift */,
+				F2B992901C782B6400A8DE18 /* Generals.swift */,
 				F21838AC1B945ACC0075DD47 /* Images.xcassets */,
 				F22DACA01B81AC2B00360027 /* LaunchScreen.xib */,
 				F22DAC9B1B81AC2B00360027 /* Main.storyboard */,
 				F220E27A1BB62C2100251C88 /* MBProgressHUD.h */,
 				F220E27B1BB62C2100251C88 /* MBProgressHUD.m */,
+				F2B992771C780D2600A8DE18 /* Me.swift */,
 				F2B5A5261BA99CFB00A4E38B /* Seat.swift */,
 				F2B5A5271BA99CFB00A4E38B /* SeatButton.swift */,
 				F2B5A5281BA99CFB00A4E38B /* SeatView.swift */,
 				F246DEBA1B9C619B0058DEA6 /* Student.swift */,
+				F286A0E81C7DAA5400B1BD3A /* CourseActivityButton.swift */,
 				F29957981B81B89D0003B64C /* StudentAnswerQuestionsViewController.swift */,
 				F2F7D52B1B944BF600E07304 /* StudentAuthenticationHelper.swift */,
 				F2B5A52E1BA9A02F00A4E38B /* StudentChooseSeatViewController.swift */,
 				F246DEC21B9C654B0058DEA6 /* StudentCourse.swift */,
-				F25B8E021B9D95B700A2587E /* StudentCourseHelper.swift */,
+				F2B5A5301BA9A10F00A4E38B /* StudentCourseActivitiestViewController.swift */,
 				F25B8E041B9DB16400A2587E /* StudentCourseTableViewController.swift */,
-				F25B8DFE1B9D910800A2587E /* StudentInfoHelper.swift */,
 				F2F7D52D1B944FA000E07304 /* StudentLoginViewController.swift */,
 				F2BCB68F1BBFF9DE00BF14F1 /* StudentNotificationDetailsViewController.swift */,
+				F2ED6D941C7BFD1600520468 /* StudentNotificationsTableViewController.swift */,
 				F2BCB68D1BBFF5D200BF14F1 /* StudentNotificationViewController.swift */,
-				F2B5A5301BA9A10F00A4E38B /* StudentPreChooseSeatViewController.swift */,
 				F22DACBA1B81ACB600360027 /* StudentPreTestViewController.swift */,
 				F22DACBB1B81ACB600360027 /* StudentQuestion.swift */,
 				F22DACB71B81ACB600360027 /* StudentQuestionTableViewController.swift */,
@@ -191,7 +202,8 @@
 				F285A6F71BAE94B80057C5B4 /* StudentTestResultsTableViewController.swift */,
 				F241AEA41B98771000E30EAF /* StudentTestTableViewController.swift */,
 				F22DAC951B81AC2B00360027 /* Supporting Files */,
-				F246DEC41B9C662E0058DEA6 /* TeacherInfo.swift */,
+				F246DEC41B9C662E0058DEA6 /* Teacher.swift */,
+				F2B992791C78128500A8DE18 /* TimesAndRooms.swift */,
 			);
 			path = AdvancedClassStudent;
 			sourceTree = "<group>";
@@ -377,12 +389,12 @@
 			files = (
 				F2D785341BB4E13F00B6DC9A /* StudentTestResultsScrollViewController.swift in Sources */,
 				F246DEC31B9C654B0058DEA6 /* StudentCourse.swift in Sources */,
+				F2ED6D951C7BFD1600520468 /* StudentNotificationsTableViewController.swift in Sources */,
 				F2329FEF1BC21AEC006A428F /* StudentTestInfoTableViewController.swift in Sources */,
-				F25B8DFF1B9D910800A2587E /* StudentInfoHelper.swift in Sources */,
 				F2F7D52E1B944FA000E07304 /* StudentLoginViewController.swift in Sources */,
 				F2F7D52C1B944BF600E07304 /* StudentAuthenticationHelper.swift in Sources */,
 				F2B5A52B1BA99CFB00A4E38B /* SeatButton.swift in Sources */,
-				F2B5A5311BA9A10F00A4E38B /* StudentPreChooseSeatViewController.swift in Sources */,
+				F2B5A5311BA9A10F00A4E38B /* StudentCourseActivitiestViewController.swift in Sources */,
 				F22DACC11B81ACB600360027 /* StudentQuestion.swift in Sources */,
 				F2B5A52D1BA99CFB00A4E38B /* StudentSeatHelper.swift in Sources */,
 				F220E27C1BB62C2100251C88 /* MBProgressHUD.m in Sources */,
@@ -395,13 +407,17 @@
 				F2B5A52A1BA99CFB00A4E38B /* Seat.swift in Sources */,
 				F22DACBD1B81ACB600360027 /* StudentQuestionTableViewController.swift in Sources */,
 				F22DACBF1B81ACB600360027 /* StudentTestHelper.swift in Sources */,
+				F2B9927A1C78128500A8DE18 /* TimesAndRooms.swift in Sources */,
 				F2B5A52F1BA9A02F00A4E38B /* StudentChooseSeatViewController.swift in Sources */,
-				F246DEC51B9C662E0058DEA6 /* TeacherInfo.swift in Sources */,
+				F286A0E91C7DAA5400B1BD3A /* CourseActivityButton.swift in Sources */,
+				F246DEC51B9C662E0058DEA6 /* Teacher.swift in Sources */,
 				F241AEA51B98771000E30EAF /* StudentTestTableViewController.swift in Sources */,
-				F25B8E031B9D95B700A2587E /* StudentCourseHelper.swift in Sources */,
+				F2B992781C780D2600A8DE18 /* Me.swift in Sources */,
 				F22DAC981B81AC2B00360027 /* AppDelegate.swift in Sources */,
+				F2B992911C782B6400A8DE18 /* Generals.swift in Sources */,
 				F2E3DA3E1B96EDA600945513 /* DateTimeHelper.swift in Sources */,
 				F29957991B81B89D0003B64C /* StudentAnswerQuestionsViewController.swift in Sources */,
+				F2B9928F1C781B3800A8DE18 /* Errors.swift in Sources */,
 				F285A6F81BAE94B80057C5B4 /* StudentTestResultsTableViewController.swift in Sources */,
 				F22DACC01B81ACB600360027 /* StudentPreTestViewController.swift in Sources */,
 			);
@@ -536,8 +552,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = AdvancedClassStudent/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LLVM_LTO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "USTB.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "AdvancedClassStudent/AdvancedClassStudent-Bridging-Header.h";
@@ -552,11 +570,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = AdvancedClassStudent/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LLVM_LTO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "USTB.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "AdvancedClassStudent/AdvancedClassStudent-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Release;
 		};

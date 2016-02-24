@@ -8,18 +8,19 @@
 
 import UIKit
 
-class StudentLoginViewController: UIViewController,StudentAuthenticationHelperDelegate,StudentCourseHelperDelegate {
+class StudentLoginViewController: UIViewController {
+    
 
     @IBOutlet weak var pwdTextfield: UITextField!
     @IBOutlet weak var userTextfield: UITextField!
     @IBOutlet weak var loginButton: UIButton!
     let hud = MBProgressHUD()
-    var authHelper = StudentAuthenticationHelper.defaultHelper()
-    var courseHelper = StudentCourseHelper.defaultHelper()
+    var authHelper = StudentAuthenticationHelper.defaultHelper
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.authHelper.delegate = self
-        self.courseHelper.delegate = self
+        self.userTextfield.text = "41316014"
+        self.pwdTextfield.text = "123"
+         
         loginButton.layer.cornerRadius = 10.0
         let tapBackgroundGesture = UITapGestureRecognizer(target: self, action: "tapBackground")
         self.view.addGestureRecognizer(tapBackgroundGesture)
@@ -42,7 +43,17 @@ class StudentLoginViewController: UIViewController,StudentAuthenticationHelperDe
     
     @IBAction func Login(sender: AnyObject) {
         self.logingIn()
-        self.authHelper.login("41316014",pass:"")
+        self.authHelper.login(userTextfield.text!,password:pwdTextfield.text!){
+            (error,json) in
+            if let error = error{
+                self.showError(error)
+                self.toLoginIn()
+            }
+            else{
+                //let hud = self.showHudWithText("正在加载", mode: .Indeterminate)
+                self.performSegueWithIdentifier("LoggedIn", sender: self)
+            }
+        }
         
     }
     
@@ -50,11 +61,7 @@ class StudentLoginViewController: UIViewController,StudentAuthenticationHelperDe
         sender.resignFirstResponder()
     }
     
-    func allCoursesAcquired() {
-        self.hud.removeFromSuperview()
-        self.performSegueWithIdentifier("LoggedIn", sender: self)
 
-    }
     func tapBackground(){
         self.pwdTextfield.resignFirstResponder()
         self.userTextfield.resignFirstResponder()
@@ -65,18 +72,7 @@ class StudentLoginViewController: UIViewController,StudentAuthenticationHelperDe
         self.hud.labelText = "加载中"
         self.hud.mode = .Indeterminate
         self.hud.show(true)
-        self.courseHelper.getAllCourses()
-        //self.loginButton.enabled = true
-        //self.toLoginIn()
     }
     
-    func networkError() {
-        self.view.addSubview(self.hud)
-        self.hud.mode = .Text
-        self.hud.labelText = "网络错误！"
-        self.hud.show(true)
-        self.hud.hide(true, afterDelay: 1.0)
-        self.toLoginIn()
-    }
-    
+       
 }
