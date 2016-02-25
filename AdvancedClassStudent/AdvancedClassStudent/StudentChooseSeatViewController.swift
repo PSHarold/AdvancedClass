@@ -8,31 +8,50 @@
 
 import UIKit
 
-class StudentChooseSeatViewController: UIViewController,SeatViewDataSource,SeatViewDelegate{
+class StudentChooseSeatViewController: UIViewController,SeatViewDataSource,SeatViewDelegate, UIPopoverPresentationControllerDelegate{
     
     var seatHelper = StudentSeatHelper.currentHelper
     var timer:NSTimer!
     var seatButtonDict = Dictionary<String,SeatButton>()
-    
+    var popoverViewController: UITableViewController!
+    var myPopoverPresentationController: UIPopoverPresentationController!
     let hud = MBProgressHUD()
-    var currentSeat:Seat?
-    var anotherSeat:Seat!
+    var currentSeatIndex: NSIndexPath?
+    
     @IBOutlet weak var seatView:SeatView!
+    var lock = false
+    
+    
+    
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .None
+    }
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         seatView.delegate = self
         seatView.dataSource = self
+        self.popoverViewController = self.storyboard?.instantiateViewControllerWithIdentifier("StudentInfo") as! UITableViewController
         
-               //self.timer = NSTimer(timeInterval: 5.0, target: self, selector: "tick", userInfo: nil, repeats: true)
+        self.myPopoverPresentationController = UIPopoverPresentationController(presentedViewController: self.popoverViewController, presentingViewController: self)
+        self.popoverViewController.preferredContentSize = CGSizeMake(150, 100)
+        
+                        //self.timer = NSTimer(timeInterval: 5.0, target: self, selector: "tick", userInfo: nil, repeats: true)
        // NSRunLoop.currentRunLoop().addTimer(self.timer!, forMode: NSRunLoopCommonModes)
+        self.popoverViewController.modalPresentationStyle = .Popover
     }
     
     
     
-    override func viewDidDisappear(animated: Bool) {
+    override func viewWillDisappear(animated: Bool) {
+        print(self.seatView.frame)
         super.viewDidDisappear(true)
         self.timer?.invalidate()
     }
+    
+    
     
     
     func numberOfColumns() -> Int {
@@ -45,7 +64,7 @@ class StudentChooseSeatViewController: UIViewController,SeatViewDataSource,SeatV
     
     
     
-    func didSelectSeatAtIndexPath(indexPath: NSIndexPath) {
+    func didSelectSeatAtIndexPath(indexPath: NSIndexPath, seatButton: SeatButton) {
         
         let seat = self.seatHelper.seatArray[indexPath.row][indexPath.section]!
         switch seat.status{
@@ -60,9 +79,10 @@ class StudentChooseSeatViewController: UIViewController,SeatViewDataSource,SeatV
                         self.hideHud()
                         return
                     }
+                    return
                 }
                 if seatStatus == .Empty{
-                    self.currentSeat = nil
+                    self.currentSeatIndex = nil
                 }
                 self.seatView.changeSeatStatusAtIndexPath(indexPath, seatStatus: seatStatus)
                 self.hideHud()
@@ -70,9 +90,9 @@ class StudentChooseSeatViewController: UIViewController,SeatViewDataSource,SeatV
 
         
         case .Empty:
-            if self.currentSeat != nil{
+            
+            if self.currentSeatIndex != nil{
                 self.showHudWithText("请先释放座位", hideAfter: 0.5)
-                self.hideHud()
                 return
             }
             self.showHudWithText("正在锁定座位", mode: .Indeterminate)
@@ -84,11 +104,18 @@ class StudentChooseSeatViewController: UIViewController,SeatViewDataSource,SeatV
                     return
                 }
                 if seatStatus == .Checked{
-                    self.currentSeat = seat
+                    self.currentSeatIndex = indexPath
                 }
-                
                 self.hideHud()
             }
+        case .Taken:
+            if let pop = self.popoverViewController.popoverPresentationController{
+                pop.permittedArrowDirections = .Any
+                pop.delegate = self                
+                pop.sourceView = seatButton
+                pop.sourceRect = seatButton.bounds
+            }
+            self.presentViewController(self.popoverViewController, animated: true, completion: nil)
         default:
             return
         }
@@ -96,7 +123,11 @@ class StudentChooseSeatViewController: UIViewController,SeatViewDataSource,SeatV
     }
 
     func seatStatusAtIndexPath(indexPath:NSIndexPath) -> SeatStatus{
-        return self.seatHelper.getSeatAtIndexPath(indexPath).status
+        let status = self.seatHelper.getSeatAtIndexPath(indexPath).status
+        if status == .Checked{
+            self.currentSeatIndex = indexPath
+        }
+        return status
     }
 
 

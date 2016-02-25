@@ -59,6 +59,7 @@ class StudentAuthenticationHelper{
         }
         let request = getRequestFor(requestType, method: method, postBody:postBody, headers: headers)
         request.responseJSON(){
+            [unowned self]
             (_,_,result) in
             switch result{
             case .Success(let data):
@@ -90,6 +91,7 @@ class StudentAuthenticationHelper{
     func getTokenBackground(){
         let request = getRequestFor(.GET_TOKEN_ONLY, method: .POST, postBody: ["user_id": self.userId, "password": self.password, "role": ROLE_FOR_STUDENT], headers: nil)
         request.responseJSON(){
+            [unowned self]
             _,_,result in
             switch result{
             case .Success(let data):
@@ -120,7 +122,8 @@ class StudentAuthenticationHelper{
         self.userId = userId
         self.password = password
         getResponse(RequestType.LOGIN, postBody:["user_id":userId, "password": password, "role": 2]){
-            (error,json) in
+            [unowned self]
+            (error,json) in            
             if error != nil{
                 completionHandler(error: error, json: json)
             }

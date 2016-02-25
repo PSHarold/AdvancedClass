@@ -13,10 +13,9 @@ class StudentTest{
     var questionIds = [String]()
     var questions = Dictionary<String,Question>()
     var questionArray = [Question]()
-    var id = ""
+    var testId: String!
     var hasHint = false
     var timeLimitInt = -1
-    var _timeLimitDict:Dictionary<String,Int>?
     var courseId:String!
     var expired = false
     var _startTime = ""

@@ -23,7 +23,7 @@ class StudentCourseActivitiestViewController: UIViewController{
         }
     }
     
-    
+   
     
     @IBOutlet weak var seatPromptLabel: UILabel!
     
@@ -54,19 +54,28 @@ class StudentCourseActivitiestViewController: UIViewController{
             (error, json) in
             if let error = error{
                 self.showError(error)
-                if error == CError.SEAT_CHOOSING_NOT_AVAILABLE_YET{
+                switch error{
+                case .SEAT_CHOOSING_NOT_AVAILABLE_YET:
                     if self.timer == nil{
                         self.remainingSeconds = json["remaining_secs"].intValue
                         self.timer = NSTimer(timeInterval: 1.0, target: self, selector: "tick", userInfo: nil, repeats: true)
-                         NSRunLoop.currentRunLoop().addTimer(self.timer!, forMode: NSRunLoopCommonModes)
+                        NSRunLoop.currentRunLoop().addTimer(self.timer!, forMode: NSRunLoopCommonModes)
                     }
+                case .COURSE_ALREADY_OVER:
+                    self.seatPromptLabel.text = "课程已结束"
+                case CError.COURSE_ALREADY_BEGUN:
+                    self.seatPromptLabel.text = "课程已开始"
+                default:
+                    break
                 }
+               
             }
             else{
                 self.seatHelper.getSeatMap{
                      (error, json) in
                     if let error = error{
                         self.showError(error)
+                        
                         
                     }
                     else{
@@ -80,9 +89,7 @@ class StudentCourseActivitiestViewController: UIViewController{
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "ShowSeatMap"{
-            
-        }
+        
     }
    
 }

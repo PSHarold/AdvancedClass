@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A56638952C3463F4DA7C3E2A /* Pods_AdvancedClassStudent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 713E9A37182E3093207E6B0D /* Pods_AdvancedClassStudent.framework */; };
+		F2140CAB1C7F010200598C5C /* StudentInfoPopoverTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2140CAA1C7F010200598C5C /* StudentInfoPopoverTableViewController.swift */; };
 		F21838AD1B945ACC0075DD47 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F21838AC1B945ACC0075DD47 /* Images.xcassets */; };
 		F220E27C1BB62C2100251C88 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = F220E27B1BB62C2100251C88 /* MBProgressHUD.m */; };
 		F22DAC981B81AC2B00360027 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22DAC971B81AC2B00360027 /* AppDelegate.swift */; };
@@ -19,6 +20,7 @@
 		F22DACC11B81ACB600360027 /* StudentQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22DACBB1B81ACB600360027 /* StudentQuestion.swift */; };
 		F22DACC41B81ACD500360027 /* AdvancedClassStudentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22DACC31B81ACD500360027 /* AdvancedClassStudentTests.swift */; };
 		F2329FEF1BC21AEC006A428F /* StudentTestInfoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2329FEE1BC21AEC006A428F /* StudentTestInfoTableViewController.swift */; };
+		F23A572D1C7E0E740007EF5B /* SeatRowIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23A572C1C7E0E740007EF5B /* SeatRowIndicator.swift */; };
 		F241AE9F1B98170E00E30EAF /* StudentTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F241AE9E1B98170E00E30EAF /* StudentTest.swift */; };
 		F241AEA51B98771000E30EAF /* StudentTestTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F241AEA41B98771000E30EAF /* StudentTestTableViewController.swift */; };
 		F246DEBB1B9C619B0058DEA6 /* Student.swift in Sources */ = {isa = PBXBuildFile; fileRef = F246DEBA1B9C619B0058DEA6 /* Student.swift */; };
@@ -61,6 +63,7 @@
 		2EDF93A37027DC2F0A8D21E7 /* Pods-AdvancedClassStudent.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AdvancedClassStudent.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AdvancedClassStudent/Pods-AdvancedClassStudent.debug.xcconfig"; sourceTree = "<group>"; };
 		713E9A37182E3093207E6B0D /* Pods_AdvancedClassStudent.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AdvancedClassStudent.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		99F57689DB25ECF56BF07460 /* Pods-AdvancedClassStudent.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AdvancedClassStudent.release.xcconfig"; path = "Pods/Target Support Files/Pods-AdvancedClassStudent/Pods-AdvancedClassStudent.release.xcconfig"; sourceTree = "<group>"; };
+		F2140CAA1C7F010200598C5C /* StudentInfoPopoverTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentInfoPopoverTableViewController.swift; sourceTree = "<group>"; };
 		F21838AC1B945ACC0075DD47 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		F220E2791BB62C2000251C88 /* AdvancedClassStudent-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AdvancedClassStudent-Bridging-Header.h"; sourceTree = "<group>"; };
 		F220E27A1BB62C2100251C88 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
@@ -78,6 +81,7 @@
 		F22DACBB1B81ACB600360027 /* StudentQuestion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentQuestion.swift; sourceTree = "<group>"; };
 		F22DACC31B81ACD500360027 /* AdvancedClassStudentTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdvancedClassStudentTests.swift; sourceTree = "<group>"; };
 		F2329FEE1BC21AEC006A428F /* StudentTestInfoTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentTestInfoTableViewController.swift; sourceTree = "<group>"; };
+		F23A572C1C7E0E740007EF5B /* SeatRowIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeatRowIndicator.swift; sourceTree = "<group>"; };
 		F241AE9E1B98170E00E30EAF /* StudentTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentTest.swift; sourceTree = "<group>"; };
 		F241AEA41B98771000E30EAF /* StudentTestTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentTestTableViewController.swift; sourceTree = "<group>"; };
 		F246DEBA1B9C619B0058DEA6 /* Student.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Student.swift; sourceTree = "<group>"; };
@@ -167,6 +171,7 @@
 			children = (
 				F220E2791BB62C2000251C88 /* AdvancedClassStudent-Bridging-Header.h */,
 				F22DAC971B81AC2B00360027 /* AppDelegate.swift */,
+				F286A0E81C7DAA5400B1BD3A /* CourseActivityButton.swift */,
 				F2E3DA3D1B96EDA600945513 /* DateTimeHelper.swift */,
 				F2B9928E1C781B3800A8DE18 /* Errors.swift */,
 				F2B992901C782B6400A8DE18 /* Generals.swift */,
@@ -178,15 +183,16 @@
 				F2B992771C780D2600A8DE18 /* Me.swift */,
 				F2B5A5261BA99CFB00A4E38B /* Seat.swift */,
 				F2B5A5271BA99CFB00A4E38B /* SeatButton.swift */,
+				F23A572C1C7E0E740007EF5B /* SeatRowIndicator.swift */,
 				F2B5A5281BA99CFB00A4E38B /* SeatView.swift */,
 				F246DEBA1B9C619B0058DEA6 /* Student.swift */,
-				F286A0E81C7DAA5400B1BD3A /* CourseActivityButton.swift */,
 				F29957981B81B89D0003B64C /* StudentAnswerQuestionsViewController.swift */,
 				F2F7D52B1B944BF600E07304 /* StudentAuthenticationHelper.swift */,
 				F2B5A52E1BA9A02F00A4E38B /* StudentChooseSeatViewController.swift */,
 				F246DEC21B9C654B0058DEA6 /* StudentCourse.swift */,
 				F2B5A5301BA9A10F00A4E38B /* StudentCourseActivitiestViewController.swift */,
 				F25B8E041B9DB16400A2587E /* StudentCourseTableViewController.swift */,
+				F2140CAA1C7F010200598C5C /* StudentInfoPopoverTableViewController.swift */,
 				F2F7D52D1B944FA000E07304 /* StudentLoginViewController.swift */,
 				F2BCB68F1BBFF9DE00BF14F1 /* StudentNotificationDetailsViewController.swift */,
 				F2ED6D941C7BFD1600520468 /* StudentNotificationsTableViewController.swift */,
@@ -404,6 +410,7 @@
 				F2B5A52C1BA99CFB00A4E38B /* SeatView.swift in Sources */,
 				F25B8E051B9DB16400A2587E /* StudentCourseTableViewController.swift in Sources */,
 				F246DEBB1B9C619B0058DEA6 /* Student.swift in Sources */,
+				F23A572D1C7E0E740007EF5B /* SeatRowIndicator.swift in Sources */,
 				F2B5A52A1BA99CFB00A4E38B /* Seat.swift in Sources */,
 				F22DACBD1B81ACB600360027 /* StudentQuestionTableViewController.swift in Sources */,
 				F22DACBF1B81ACB600360027 /* StudentTestHelper.swift in Sources */,
@@ -415,6 +422,7 @@
 				F2B992781C780D2600A8DE18 /* Me.swift in Sources */,
 				F22DAC981B81AC2B00360027 /* AppDelegate.swift in Sources */,
 				F2B992911C782B6400A8DE18 /* Generals.swift in Sources */,
+				F2140CAB1C7F010200598C5C /* StudentInfoPopoverTableViewController.swift in Sources */,
 				F2E3DA3E1B96EDA600945513 /* DateTimeHelper.swift in Sources */,
 				F29957991B81B89D0003B64C /* StudentAnswerQuestionsViewController.swift in Sources */,
 				F2B9928F1C781B3800A8DE18 /* Errors.swift in Sources */,
@@ -555,7 +563,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = AdvancedClassStudent/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LLVM_LTO = YES;
+				LLVM_LTO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "USTB.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "AdvancedClassStudent/AdvancedClassStudent-Bridging-Header.h";
@@ -573,7 +581,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = AdvancedClassStudent/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LLVM_LTO = YES;
+				LLVM_LTO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "USTB.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "AdvancedClassStudent/AdvancedClassStudent-Bridging-Header.h";

@@ -17,7 +17,7 @@ class StudentSeatHelper {
     static var currentHelper = StudentSeatHelper()
     
     
-    var authHelper = StudentAuthenticationHelper.defaultHelper
+    weak var authHelper = StudentAuthenticationHelper.defaultHelper
     var tempSeatDataArray = [JSON]()
     var columns = 0
     var rows = 0
@@ -37,7 +37,8 @@ class StudentSeatHelper {
     
     
     func getSeatToken(completionHandler: ResponseHandler){
-        self.authHelper.getResponse(RequestType.GET_SEAT_TOKEN, postBody: ["course_id": StudentCourse.currentCourse.courseId, "sub_id": StudentCourse.currentCourse.subId]){
+        self.authHelper!.getResponse(RequestType.GET_SEAT_TOKEN, postBody: ["course_id": StudentCourse.currentCourse.courseId, "sub_id": StudentCourse.currentCourse.subId]){
+            [unowned self]
             (error, json) in
             if error == nil{
                 self.seatToken = json["seat_token"].stringValue
@@ -49,7 +50,8 @@ class StudentSeatHelper {
     }
     
     func getSeatMap(completionHandler: ResponseHandler){
-        self.authHelper.getResponse(RequestType.GET_SEAT_MAP, postBody: ["seat_map_token": self.seatMapToken, "check_final": false]){
+        self.authHelper!.getResponse(RequestType.GET_SEAT_MAP, postBody: ["seat_map_token": self.seatMapToken, "check_final": false]){
+            [unowned self]
             (error, json) in
             if error == nil{
                 self.columns = json["col_num"].intValue
@@ -72,7 +74,8 @@ class StudentSeatHelper {
     
     func chooseSeat(indexPath: NSIndexPath, completionHandler: SeatResponseHandler){
         let seat = self.seatArray[indexPath.row][indexPath.section]
-        self.authHelper.getResponse(RequestType.CHOOSE_SEAT, postBody: ["seat_id":seat.seatId, "seat_token":self.seatToken]){
+        self.authHelper!.getResponse(RequestType.CHOOSE_SEAT, postBody: ["seat_id":seat.seatId, "seat_token":self.seatToken]){
+            [unowned self]
             (error, json) in
             if let error = error{
                 if error == CError.SEAT_TOKEN_EXPIRED{
@@ -98,7 +101,8 @@ class StudentSeatHelper {
     
     func freeSeat(indexPath: NSIndexPath, completionHandler: SeatResponseHandler){
         let seat = self.seatArray[indexPath.row][indexPath.section]
-        self.authHelper.getResponse(RequestType.FREE_SEAT, postBody: ["seat_id":seat.seatId, "seat_token":self.seatToken]){
+        self.authHelper!.getResponse(RequestType.FREE_SEAT, postBody: ["seat_id":seat.seatId, "seat_token":self.seatToken]){
+            [unowned self]
             (error, json) in
             if let error = error{
                 if error == CError.SEAT_TOKEN_EXPIRED{
