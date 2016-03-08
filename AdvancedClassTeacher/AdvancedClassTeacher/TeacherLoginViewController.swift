@@ -9,55 +9,62 @@
 
 import UIKit
 
-class TeacherLoginViewController: UIViewController,TeacherAuthenticationHelperDelegate,TeacherCourseHelperDelegate {
-    var authHelper = TeacherAuthenticationHelper.defaultHelper()
-    var courseHelper = TeacherCourseHelper.defaultHelper()
-    let hud = MBProgressHUD()
+class TeacherLoginViewController: UIViewController {
+    @IBOutlet weak var pwdTextfield: UITextField!
+    @IBOutlet weak var userTextfield: UITextField!
+    @IBOutlet weak var loginButton: UIButton!
+    weak var authHelper = TeacherAuthenticationHelper.defaultHelper
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.authHelper.delegate = self
-        self.courseHelper.delegate = self
+        self.userTextfield.text = "B0000000"
+        self.pwdTextfield.text = "123"
+        
+        loginButton.layer.cornerRadius = 10.0
+        let tapBackgroundGesture = UITapGestureRecognizer(target: self, action: "tapBackground")
+        self.view.addGestureRecognizer(tapBackgroundGesture)
+        // Do any additional setup after loading the view.
     }
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        self.courseHelper.delegate = self
-    }
-
-    @IBAction func LoginIn(sender: AnyObject) {
-        self.authHelper.login("B0000000",pass: "")
-        hud.mode = MBProgressHUDMode.Indeterminate
-        self.hud.labelText = "登录中"
-        self.view.addSubview(self.hud)
-        self.hud.show(true)
+    func toLoginIn(){
+        self.loginButton.setTitle("登陆", forState: .Normal)
+        self.loginButton.enabled = true
+        self.pwdTextfield.enabled = true
+        self.userTextfield.enabled = true
     }
     
-    func networkError() {
-        //self.hud.removeFromSuperview()
-        hud.mode = MBProgressHUDMode.Text
-        hud.labelText = "网络错误！"
-        self.view.addSubview(self.hud)
-        //hud.show(true)
-        //延迟隐藏
-        hud.hide(true, afterDelay: 1.2)
+    func logingIn(){
+        self.loginButton.setTitle("登陆中...", forState: .Normal)
+        self.loginButton.enabled = false
+        self.pwdTextfield.enabled = false
+        self.userTextfield.enabled = false
+    }
+    
+    @IBAction func Login(sender: AnyObject) {
+        self.logingIn()
+        self.authHelper?.login(userTextfield.text!,password:pwdTextfield.text!){
+            (error,json) in
+            if let error = error{
+                self.showError(error)
+                self.toLoginIn()
+            }
+            else{
+                //let hud = self.showHudWithText("正在加载", mode: .Indeterminate)
+                self.performSegueWithIdentifier("LoggedIn", sender: self)
+            }
+        }
         
     }
     
-    func allCoursesAcquired() {
-        self.hud.removeFromSuperview()
-        performSegueWithIdentifier("LoggedIn", sender: self)
+    @IBAction func endEditing(sender: AnyObject) {
+        sender.resignFirstResponder()
     }
     
     
-    func loggedIn(){
-        //self.hud.removeFromSuperview()
-        //hud.mode = MBProgressHUDMode.Text
-        hud.labelText = "加载课程"
-        self.view.addSubview(self.hud)
-        hud.show(true)
-        //延迟隐藏
-        hud.hide(true, afterDelay: 0.8)
-        self.courseHelper.getAllCourses()
+    func tapBackground(){
+        self.pwdTextfield.resignFirstResponder()
+        self.userTextfield.resignFirstResponder()
     }
+    
+    
 
 }

@@ -16,8 +16,8 @@ class Notification {
     var createdOn:String
     var createdOnTimeData:NSDate
     var notificationId:String
-    var courseId:String
-    var subId:String
+    var courseId:String!
+    var subId:String!
     var courseName = ""
     init(json:JSON){
         self.title = json["title"].stringValue
@@ -25,11 +25,7 @@ class Notification {
         self.top = json["top"].boolValue
         self.notificationId = json["ntfc_id"].stringValue
         self.createdOn = json["created_on"].stringValue
-        self.courseId = json["course_id"].stringValue
-        self.subId = json["sub_id"].stringValue
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        self.createdOnTimeData = dateFormatter.dateFromString(self.createdOn) as NSDate!
+        self.createdOnTimeData = self.createdOn.toNSDate()
     }
    
 }

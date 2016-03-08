@@ -19,7 +19,7 @@ class TestSettingsTableViewController: UITableViewController,TeacherTestHelperDe
     @IBOutlet weak var messageText: UITextField!
     let hud = MBProgressHUD()
     var randomNumber:Int?
-    var testHelper = TeacherTestHelper.defaultHelper()
+    weak var testHelper = TeacherTestHelper.defaultHelper
     override func viewDidLoad() {
         super.viewDidLoad()
         hintCell.accessoryView = hintSwitch
@@ -28,7 +28,6 @@ class TestSettingsTableViewController: UITableViewController,TeacherTestHelperDe
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        self.testHelper.delegate = self
         self.loadTimeLimit()
         self.loadRandomNumber()
         self.loadDeadline()
@@ -39,12 +38,7 @@ class TestSettingsTableViewController: UITableViewController,TeacherTestHelperDe
         alertController.addAction(UIAlertAction(title: "确定", style: UIAlertActionStyle.Default, handler: {Void in self.navigationController!.popViewControllerAnimated(true)}))
         self.presentViewController(alertController, animated: true, completion: nil)
     }
-    func networkError() {
-        self.hud.mode = .Text
-        self.hud.labelText = "网络错误！"
-        self.hud.show(true)
-        self.hud.hide(true, afterDelay: 1.0)
-    }
+   
     func sendTest(){
         self.testHelper.newTest.hasHint = self.hintSwitch.on
         self.testHelper.newTest.message = self.messageText.text!

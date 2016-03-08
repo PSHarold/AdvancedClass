@@ -8,40 +8,47 @@
 
 import UIKit
 
-class TeacherCourseTableViewController: UITableViewController, TeacherStudentHelperDelegate {
+class TeacherCourseTableViewController: UITableViewController {
 
-    var courseHelper = TeacherCourseHelper.defaultHelper()
-    var studentHelper = TeacherStudentHelper.defaultHelper()
+    var authHelper = TeacherAuthenticationHelper.defaultHelper
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.studentHelper.delegate = self
+        //self.navigationController!.interactivePopGestureRecognizer?.enabled = false
     }
     
-    func networkError() {
-        
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
-
+    
+    
+    
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        
         return 1
     }
-
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.courseHelper.courseArray.count
+        return self.authHelper.me.courses.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("MyCell", forIndexPath: indexPath) 
-        cell.textLabel?.text = self.courseHelper.courseArray[indexPath.row].name
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
+        
+        cell.textLabel?.text = self.authHelper.me.courses[indexPath.row].name
+        
         return cell
     }
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        TeacherCourse.currentCourse = self.authHelper.me.courses[indexPath.row]
         self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        self.courseHelper.currentCourse = self.courseHelper.courseArray[indexPath.row]
-        self.studentHelper.getAllStudents()
+        self.performSegueWithIdentifier("enterMain", sender: self)
     }
     
-    func allStudentsAcquired(){
-        self.performSegueWithIdentifier("ShowCourse", sender: self)
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "ShowNotifications"{
+            
+        }
     }
     
 }

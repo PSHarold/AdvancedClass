@@ -67,12 +67,6 @@ class StudentLoginViewController: UIViewController {
         self.userTextfield.resignFirstResponder()
     }
     
-    func loggedIn() {
-        self.view.addSubview(self.hud)
-        self.hud.labelText = "加载中"
-        self.hud.mode = .Indeterminate
-        self.hud.show(true)
-    }
-    
+        
        
 }

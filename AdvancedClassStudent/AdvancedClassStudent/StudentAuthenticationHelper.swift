@@ -9,17 +9,6 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
-@objc protocol StudentAuthenticationHelperDelegate{
-    optional func myInformationUpdated()
-    optional func loggedIn()
-    optional func needLoggingIn()
-    func networkError()
-}
-
-
-
-
-
 
 
 class StudentAuthenticationHelper{
@@ -27,7 +16,7 @@ class StudentAuthenticationHelper{
     
     
     static var _defaultHelper:StudentAuthenticationHelper?
-    static var me: Me!
+    static weak var me: Me!
     var tokenRetryCount = 0
     let MAX_TOKEN_RETRY_COUNT = 3
     var me: Me!
@@ -129,7 +118,7 @@ class StudentAuthenticationHelper{
             }
             else{
                 self.token = json["token"].stringValue
-                self.me = Me(json: json)
+                self.me = Me(json: json["user"])
                 StudentAuthenticationHelper.me = self.me
                 completionHandler(error: nil, json: json)
             }

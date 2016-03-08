@@ -11,7 +11,7 @@ import SwiftyJSON
 import Alamofire
 import UIKit
 var alamofireManager: Alamofire.Manager!
-let BASE_URL = TARGET_IPHONE_SIMULATOR == 0 ? "http://192.168.1.6:5000" : "http://localhost:5000"
+let BASE_URL = TARGET_IPHONE_SIMULATOR == 0 ? "http://172.20.10.2:5000" : "http://localhost:5000"
 //let BASE_URL = "http://localhost:5000"
 let ROLE_FOR_STUDENT = 2
 
@@ -81,4 +81,13 @@ extension Int{
         let ms = minutes != 0 ? "\(minutes)分钟" : ""
         return hs + ms + "\(seconds)秒"
     }
+}
+
+extension String{
+    func toNSDate() -> NSDate {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        return dateFormatter.dateFromString(self) as NSDate!
+    }
+    
 }
