@@ -9,46 +9,111 @@ enum TestRandomType: Int{
     case MANUAL_FIXED = 0
     case MANUAL_SHUFFLED_ONLY = 1
     case MANUAL_RANDOMLY_CHOOSE = 2
-    case AUTOMATIC_RANDOMLY_CHOOSE  = 3
-    
+    case AUTOMATIC_RANDOMLY_CHOOSE  = 3    
 }
 
 
 
 
-class TeacherNewTest{
-    
-    
-    
-    
-    var courseId = String(TeacherCourse.currentCourse.courseId)
-    var subId = String(TeacherCourse.currentCourse.subId)
-    var beginsOn: String!
-    var beginsOnNSDate: NSDate!
-    
-    var expiresOn: String!
-    var expiresOnNSDate: NSDate!
-    var questions = [String: [Int: [String: AnyObject]]]()
-    var message: String!
-    var randomType: Int!
-    var blacklist: [String]!
-    var totalNum = 0
-    
-    var questiontDict = [String: Bool]()
-    
-    
-    func postNewTest(completionHandler: ResponseHandler){
-        let authHelper = TeacherAuthenticationHelper.defaultHelper
-        authHelper.getResponse(RequestType.POST_TEST, method: .POST, postBody: self.toDict(), headers: nil, tokenRequired: true, completionHandler: completionHandler)
+class TeacherTest{
+    static func getNewTest() -> TeacherTest{
+        let test = TeacherTest()
+        test.courseId = String(TeacherCourse.currentCourse.courseId)
+        test.subId = String(TeacherCourse.currentCourse.subId)
+        test.questionsFixed = [TeacherQuestion]()
+        test.questiontDict = [String: Bool]()
+        test.questions = [String: AnyObject]()
+        return test
     }
+    
+    func previewFromJSON(json: JSON) -> TeacherTest{
+        self.finishedStudentsCount = json["finished_students_count"].intValue
+        self.expiresOn = json["expires_on"].stringValue
+        self.beginsOn = json["begins_on"].stringValue
+        self.finished = json["finished"].boolValue
+        self.testId = json["test_id"].stringValue
+        self.createdOn = json["created_on"].stringValue
+        return self
+    }
+    var testId: String!
+    var courseId = ""
+    var subId = ""
+    var finished = false
+    var createdOn: String!
+    var _beginsOn: String?
+    var beginsOn: String{
+        get{
+            if self._beginsOn == nil{
+                return ""
+            }
+            return self._beginsOn!
+        }
+        set{
+            self._beginsOn = newValue
+            self.beginsOnNSDate = newValue.toNSDate()
+        }
+        
+    }
+    var beginsOnNSDate: NSDate!
+    var timeLimit = -1
+    var finishedStudentsCount: Int!
+    var _expiresOn: String?
+    var expiresOn: String{
+        get{
+            if self._expiresOn == nil{
+                return ""
+            }
+            return self._expiresOn!
+        }
+        set{
+            self._expiresOn = newValue
+            self.expiresOnNSDate = newValue.toNSDate()
+        }
+        
+    }
+    
+    var expiresOnNSDate: NSDate!
+    var questions: [String: AnyObject]!
+    var message = ""
+    var randomType: Int!
+    var _blacklist: [String]?
+    var blacklist: [String]{
+        get{
+            if self._blacklist == nil{
+                return []
+            }
+            return self._blacklist!
+        }
+        set{
+            self._blacklist = newValue
+        }
+    }
+    var totalNum = 0
+    var randomTypeEnum: TestRandomType{
+        get{
+            return TestRandomType(rawValue: self.randomType)!
+        }
+        set{
+            self.randomType = newValue.rawValue
+        }
+    }
+    
+    
+    var questiontDict: [String: Bool]!
+    var questionsFixed: [TeacherQuestion]!
+    var finishedStudents: [Student]!
+    
     
     func toDict() -> [String: AnyObject]{
         var dict = [String: AnyObject]()
         dict["begins_on"] = self.beginsOn
         dict["expires_on"] = self.expiresOn
         dict["message"] = self.message
+        dict["time_limit"] = self.timeLimit
         dict["blacklist"] = self.blacklist
-        dict["questions"] = self.questions
+        if self.randomTypeEnum == .MANUAL_FIXED || self.randomTypeEnum == .MANUAL_SHUFFLED_ONLY{
+            dict["question_settings"] = ["questions": self.questionsFixed.map({$0.questionId}), "has_hint": []]
+        }
         return dict
     }
     
@@ -58,86 +123,39 @@ class TeacherNewTest{
     }
     
     func addQuestion(question: TeacherQuestion, random:Bool=false){
-        if self.questions[question.knowledgePointId] == nil{
-            var t = [Int: [String: AnyObject]]()
-            for type in QuestionType.allValues{
-                t[type] = ["num": 0, "questions": [String]()]
-            }
-            self.questions[question.knowledgePointId] = t
+        
+        if self.randomTypeEnum == .MANUAL_FIXED || self.randomTypeEnum == .MANUAL_SHUFFLED_ONLY{
+            self.questionsFixed.append(question)
+            ++self.totalNum
+            self.questiontDict[question.questionId] = true
+            return
         }
         
-        var qList = self.questions[question.knowledgePointId]!
-        if random{
-            qList[question.questionType.rawValue]!["num"] = qList[question.questionType.rawValue]!["num"] as! Int + 1
-        }
-        var questions = qList[question.questionType.rawValue]!["questions"] as! [String]
-        questions.append(question.questionId)
-        qList[question.questionType.rawValue]!["questions"] = questions
-        self.questions[question.knowledgePointId] = qList
-        
-        
-        self.questiontDict[question.questionId] = true
-        ++self.totalNum
-    }
+           }
     
     func removeQuestion(question: TeacherQuestion, random:Bool=false){
-        if var qList = self.questions[question.knowledgePointId]{
-            if random{
-                qList[question.questionType.rawValue]!["num"] = qList[question.questionType.rawValue]!["num"] as! Int - 1
-            }
-            var questions = qList[question.questionType.rawValue]!["questions"] as! [String]
-            questions.removeAtIndex(questions.indexOf(question.questionId)!)
-            qList[question.questionType.rawValue]!["questions"] = questions
-            self.questions[question.knowledgePointId] = qList
-            self.questiontDict.removeValueForKey(question.questionId)
+        
+        if self.randomTypeEnum == .MANUAL_FIXED || self.randomTypeEnum == .MANUAL_SHUFFLED_ONLY{
+            self.questionsFixed.removeAtIndex(self.questionsFixed.indexOf({ q in return q === question})!)
             --self.totalNum
+            self.questiontDict.removeValueForKey(question.questionId)
+            return
         }
+        
+
         
     }
     
     func removeAllQuestions(){
-        self.questions.removeAll()
+        self.questions?.removeAll()
         self.totalNum = 0
-        self.questiontDict.removeAll()
+        self.questiontDict?.removeAll()
     }
     
     func setRandomNumber(number: Int, questionType: QuestionType, knowledgePointId: String){
-        if self.questions[knowledgePointId] == nil{
-            self.questions[knowledgePointId] = [Int: [String: AnyObject]]()
-        }
-        var t = self.questions[knowledgePointId]!
-        for type in QuestionType.allValues{
-            t[type] = ["num": number, "questions": [String]()]
-        }
     }
-    
+
 }
 
 
-class TeacherTest{
-    var courseId: String!
-    var subId: String!
-    var createdOn: String!
-    var beginsOn: String!
-    var beginsOnNSDate: NSDate!
-    var expiresOn: String!
-    var expiresOnNSDate: NSDate!
-    var questions = [TeacherQuestion]()
-    var questionIds = [String]()
-    var message: String!
-    var randomType: Int!
-    var randomSettings: [String: AnyObject]!
-    var by: String!
-    var blackList: [String]!
-    init(json:JSON){
-        self.createdOn = json["createdOn"].stringValue
-        self.beginsOn = json["begins_on"].stringValue
-        self.beginsOnNSDate = self.beginsOn.toNSDate()
-        self.expiresOn = json["expires_on"].stringValue
-        self.expiresOnNSDate = self.expiresOn.toNSDate()
-        
-    }
-    
-    
-}
 

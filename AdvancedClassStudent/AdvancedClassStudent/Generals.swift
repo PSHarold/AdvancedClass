@@ -11,14 +11,14 @@ import SwiftyJSON
 import Alamofire
 import UIKit
 var alamofireManager: Alamofire.Manager!
-let BASE_URL = TARGET_IPHONE_SIMULATOR == 0 ? "http://172.20.10.2:5000" : "http://localhost:5000"
+let BASE_URL = TARGET_IPHONE_SIMULATOR == 0 ? "http://192.168.2.1:5000" : "http://localhost:5000"
 //let BASE_URL = "http://localhost:5000"
 let ROLE_FOR_STUDENT = 2
 
 
 
 typealias ResponseHandler = (error: CError?, json: JSON!) -> Void
-
+typealias ResponseMessageHandler = (error: CError?) -> Void
 enum RequestType: String{
     
     case REGISTER = "/user/register/student"
@@ -32,6 +32,11 @@ enum RequestType: String{
     case GET_SEAT_MAP = "/seat/getSeatMap"
     case CHOOSE_SEAT = "/seat/chooseSeat"
     case FREE_SEAT = "/seat/freeSeat"
+    case GET_STUDENT = "/course/getStudentInfo"
+    case GET_QUESTIONS_IN_POINT = "/course/question/getQuestionsInPoint"
+    case GET_UNFINISHED_TESTS = "/course/test/getUnfinishedTests"
+    case GET_QUESTIONS_IN_TEST = "/course/test/getQuestionsInTest"
+    case POST_TEST_ANSWERS = "/course/test/postAnswers"
 }
 func getRequestFor(requestType:RequestType, method:Alamofire.Method, postBody:[String: AnyObject]?, headers:[String:String]?) -> Request{
     return alamofireManager.request(method, BASE_URL + requestType.rawValue, parameters: postBody, encoding: .JSON, headers: headers)
@@ -84,10 +89,19 @@ extension Int{
 }
 
 extension String{
-    func toNSDate() -> NSDate {
+    func toNSDate() -> NSDate? {
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        return dateFormatter.dateFromString(self) as NSDate!
+        return dateFormatter.dateFromString(self)
+    }
+    
+}
+
+extension NSDate{
+    func toString() -> String{
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        return dateFormatter.stringFromDate(self)
     }
     
 }

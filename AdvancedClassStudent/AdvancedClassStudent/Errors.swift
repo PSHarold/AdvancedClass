@@ -96,7 +96,7 @@ func parseErrorString(error: CError) -> String{
     case .RESOURCE_NOT_FOUND:
         return ""
     case .USER_NOT_FOUND:
-        return "用户名错误！"
+        return "用户不存在！"
     case .MAIN_COURSE_NOT_FOUND:
         return "找不到此课程！"
     case .SUB_COURSE_NOT_FOUND:

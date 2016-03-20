@@ -25,7 +25,7 @@ class Notification {
         self.top = json["top"].boolValue
         self.notificationId = json["ntfc_id"].stringValue
         self.createdOn = json["created_on"].stringValue
-        self.createdOnTimeData = self.createdOn.toNSDate()
+        self.createdOnTimeData = self.createdOn.toNSDate()!
     }
    
 }
@@ -40,8 +40,10 @@ class StudentCourse {
     var teachers = [Teacher]()
     var timesAndRooms:TimesAndRooms
     var unreadNotifications = [Notification]()
-    var untakenTests = []
-    var students = [Student]()
+    var untakenTests = [StudentTest]()
+    var unfinishedTests = [StudentTest]()
+    
+    var students = [String: Student]()
     var notifications = [Notification]()
     var notificationsAcquired = false
     init(json:JSON, preview:Bool = true){
@@ -86,6 +88,21 @@ class StudentCourse {
         
     }
     
-    
+    func getStudent(studentId: String, completionHandler: ResponseMessageHandler){
+        if self.students[studentId] != nil{
+            completionHandler(error: nil)
+            return
+        }
+        let authHelper = StudentAuthenticationHelper.defaultHelper
+        authHelper.getResponse(RequestType.GET_STUDENT, method: .POST, postBody: ["course_id": self.courseId, "sub_id": self.subId, "student_id": studentId], headers: nil, tokenRequired: true){
+            [unowned self]
+            (error, json) in
+            if error == nil{
+                let student = Student(json: json["student"])
+                self.students[student.studentId] = student
+            }
+            completionHandler(error: error)
+        }
+    }
     
 }

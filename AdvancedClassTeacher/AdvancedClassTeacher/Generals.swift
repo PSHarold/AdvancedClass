@@ -18,7 +18,7 @@ let ROLE_FOR_TEACHER = 1
 
 
 typealias ResponseHandler = (error: CError?, json: JSON!) -> Void
-
+typealias ResponseMessageHandler = (error: CError?) -> Void
 enum RequestType: String{
     
     case REGISTER = "/user/register/student"
@@ -35,6 +35,7 @@ enum RequestType: String{
     case GET_SYLLABUS = "/course/syllabus/getSyllabus"
     case POST_TEST = "/course/test/postTest"
     case GET_QUESTIONS_IN_POINT = "/course/question/getQuestionsInPoint"
+    case GET_UNFINISHED_TESTS = "/course/test/getUnfinishedTests"
 }
 func getRequestFor(requestType:RequestType, method:Alamofire.Method, postBody:[String: AnyObject]?, headers:[String:String]?) -> Request{
     return alamofireManager.request(method, BASE_URL + requestType.rawValue, parameters: postBody, encoding: .JSON, headers: headers)
@@ -84,13 +85,23 @@ extension Int{
         let ms = minutes != 0 ? "\(minutes)分钟" : ""
         return hs + ms + "\(seconds)秒"
     }
+    
+    func toTimeComponents() -> (Int, Int, Int){
+        if self <= 0{
+            return (0, 0, 0)
+        }
+        let hours = self / 3600
+        let minutes = (self - hours * 3600) / 60
+        let seconds = self % 60
+        return (hours, minutes, seconds)
+    }
 }
 
 extension String{
-    func toNSDate() -> NSDate {
+    func toNSDate() -> NSDate? {
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        return dateFormatter.dateFromString(self) as NSDate!
+        return dateFormatter.dateFromString(self)
     }
     
 }

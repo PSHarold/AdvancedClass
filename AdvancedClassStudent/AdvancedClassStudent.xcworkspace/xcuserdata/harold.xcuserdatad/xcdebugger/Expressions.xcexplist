@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "StudentAnswerQuestionsViewController.instantiateQuestionViewControllerIfNeeded(Int) -&gt; ():StudentAnswerQuestionsViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "StudentAnswerQuestionsViewController.viewDidLoad() -&gt; ():StudentAnswerQuestionsViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "StudentAnswerQuestionsViewController.instatiateAndAddSubQuestionPage(Int) -&gt; ():StudentAnswerQuestionsViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "StudentQuestion.init(json : JSON) -&gt; StudentQuestion:StudentQuestion.swift">
+      </ContextState>
+      <ContextState
+         contextName = "StudentTestHelper.(getUnfinishedTestsInCourse(StudentTestHelper) -&gt; (StudentCourse, completionHandler : (error : CError?) -&gt; ()) -&gt; ()).(closure #1):StudentTestHelper.swift">
+      </ContextState>
+      <ContextState
+         contextName = "StudentMultipleChoiceTableViewCell.updateUI() -&gt; ():StudentMultipleChoiceTableViewCell.swift">
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

@@ -55,7 +55,7 @@ class TeacherAuthenticationHelper {
     
     
     
-    func getResponse(requestType:RequestType, method:Alamofire.Method = .POST, var postBody:[String: AnyObject]?, headers:[String:String]? = nil, tokenRequired:Bool = true, completionHandler: ResponseHandler){
+    func getResponse(requestType:RequestType, method:Alamofire.Method = .POST, var postBody:[String: AnyObject]?=nil, headers:[String:String]? = nil, tokenRequired:Bool = true, completionHandler: ResponseHandler){
         if tokenRequired{
             assert(postBody != nil)
             postBody!["token"] = self.token

@@ -13,7 +13,7 @@ class StudentChooseSeatViewController: UIViewController,SeatViewDataSource,SeatV
     var seatHelper = StudentSeatHelper.currentHelper
     var timer:NSTimer!
     var seatButtonDict = Dictionary<String,SeatButton>()
-    var popoverViewController: UITableViewController!
+    var popoverViewController: StudentInfoPopoverTableViewController!
     var myPopoverPresentationController: UIPopoverPresentationController!
     let hud = MBProgressHUD()
     var currentSeatIndex: NSIndexPath?
@@ -33,7 +33,7 @@ class StudentChooseSeatViewController: UIViewController,SeatViewDataSource,SeatV
         super.viewDidLoad()
         seatView.delegate = self
         seatView.dataSource = self
-        self.popoverViewController = self.storyboard?.instantiateViewControllerWithIdentifier("StudentInfo") as! UITableViewController
+        self.popoverViewController = self.storyboard?.instantiateViewControllerWithIdentifier("StudentInfo") as! StudentInfoPopoverTableViewController
         
         self.myPopoverPresentationController = UIPopoverPresentationController(presentedViewController: self.popoverViewController, presentingViewController: self)
         self.popoverViewController.preferredContentSize = CGSizeMake(150, 100)
@@ -109,13 +109,31 @@ class StudentChooseSeatViewController: UIViewController,SeatViewDataSource,SeatV
                 self.hideHud()
             }
         case .Taken:
-            if let pop = self.popoverViewController.popoverPresentationController{
-                pop.permittedArrowDirections = .Any
-                pop.delegate = self                
-                pop.sourceView = seatButton
-                pop.sourceRect = seatButton.bounds
+            let studentId = seat.currentStudentId
+            let course = StudentCourse.currentCourse
+            self.showHudWithText("正在获取", mode: .Indeterminate)
+            course.getStudent(studentId){
+                [unowned self]
+                (error) in
+                if let error = error{
+                    self.showError(error)
+                    return
+                }
+                else{
+                    if let pop = self.popoverViewController.popoverPresentationController{
+                        pop.permittedArrowDirections = .Any
+                        pop.delegate = self
+                        pop.sourceView = seatButton
+                        pop.sourceRect = seatButton.bounds
+                    }
+                    self.hideHud()
+                    self.popoverViewController.student = course.students[studentId]
+                    self.presentViewController(self.popoverViewController, animated: true, completion: nil)
+                }
             }
-            self.presentViewController(self.popoverViewController, animated: true, completion: nil)
+        
+            
+            
         default:
             return
         }

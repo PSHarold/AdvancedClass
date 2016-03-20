@@ -20,7 +20,7 @@ class StudentInfoPopoverTableViewController: UITableViewController {
         self.tableView.separatorStyle = .None
     }
     
-    var student =  StudentAuthenticationHelper.me
+    var student: Student!
     
     override var preferredContentSize: CGSize{
         get{

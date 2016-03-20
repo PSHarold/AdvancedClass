@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TeacherManualQuestionsInPointTableViewController: TeacherQuestionsInPointTableViewController {
+class TeacherManualFixedQuestionsInPointTableViewController: TeacherQuestionsInPointTableViewController {
     
     let test = TeacherTestHelper.defaultHelper.newTest
     
@@ -19,7 +19,7 @@ class TeacherManualQuestionsInPointTableViewController: TeacherQuestionsInPointT
     @IBAction func cancelButtonTapped(sender: AnyObject) {
         let alert = UIAlertController(title: nil, message: "返回后未发布的测验将丢失，确定？", preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler: nil))
-        alert.addAction(UIAlertAction(title: "确定", style: UIAlertActionStyle.Default){ _ in TeacherTestHelper.defaultHelper.dropNewTest(); self.navigationController?.popToViewController((self.navigationController?.viewControllers[1])!, animated: true)})
+        alert.addAction(UIAlertAction(title: "确定", style: UIAlertActionStyle.Default){ _ in TeacherTestHelper.defaultHelper.dropNewTest(); self.navigationController?.popToRootViewControllerAnimated(true)})
         self.presentViewController(alert, animated: true, completion: nil)
 
     }
@@ -49,5 +49,6 @@ class TeacherManualQuestionsInPointTableViewController: TeacherQuestionsInPointT
         }
         self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
     }
+    
     
 }

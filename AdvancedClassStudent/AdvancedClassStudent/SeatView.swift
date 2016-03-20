@@ -52,7 +52,7 @@ class SeatView: UIView, UIScrollViewDelegate,UITableViewDelegate{
     var lastSeat: SeatButton!
     var baseRowSpace = CGFloat(0)
     var blankBackground = UIView()
-    
+    var contentSize: CGSize!
     override var frame: CGRect {
         didSet {
            
@@ -150,7 +150,7 @@ class SeatView: UIView, UIScrollViewDelegate,UITableViewDelegate{
     }
     func initMiniMap(){
         
-        self.miniMap = UIView(frame: CGRectMake(10, 10, self.seatMapSize.width/self.viewRatio, self.seatMapSize.height/self.viewRatio))
+        self.miniMap = UIView(frame: CGRectMake(10, 10, self.contentSize.width/self.viewRatio, self.contentSize.height/self.viewRatio))
         self.miniMap.clipsToBounds = true;
         
         self.miniSeatView.backgroundColor = UIColor.blackColor()
@@ -166,7 +166,8 @@ class SeatView: UIView, UIScrollViewDelegate,UITableViewDelegate{
         transform = CGAffineTransformScale(transform, 1/self.viewRatio/self.scrollView.zoomScale,1/self.viewRatio/self.scrollView.zoomScale)
         
         self.miniSeatView.transform = transform
-        self.miniSeatView.frame = self.miniMap.bounds
+  
+        self.miniSeatView.center = CGPointMake(self.miniMap.bounds.width/2, self.miniMap.bounds.height/2)
         self.miniSeatView.backgroundColor = UIColor.clearColor()
         
         self.miniMap.addSubview(self.miniSeatView)
@@ -229,7 +230,7 @@ class SeatView: UIView, UIScrollViewDelegate,UITableViewDelegate{
         self.platformLabel.textAlignment = .Center
         self.platformLabel.backgroundColor = UIColor.whiteColor()
         self.seatView.addSubview(platformLabel)
-        
+    
         
         
         
@@ -254,7 +255,7 @@ class SeatView: UIView, UIScrollViewDelegate,UITableViewDelegate{
         
         
         self.miniSeatView.backgroundColor = UIColor.clearColor()
-        
+        self.miniSeatView.frame.size = self.seatView.frame.size
         
         
         
@@ -330,7 +331,7 @@ class SeatView: UIView, UIScrollViewDelegate,UITableViewDelegate{
     
     func calculate(){
         self.maxBoundsSize = self.scrollView.bounds.size
-        //self.contentSize = CGSizeMake(max(2*self.margin + self.seatsTotalWidth, self.maxBoundsSize.width), max(2*self.margin + self.seatsTotalHeight + self.platformHeight, self.maxBoundsSize.height))
+        self.contentSize = CGSizeMake(max(2*self.margin + self.seatsTotalWidth, self.maxBoundsSize.width), max(2*self.margin + self.seatsTotalHeight + self.platformHeight, self.maxBoundsSize.height))
        
         
         

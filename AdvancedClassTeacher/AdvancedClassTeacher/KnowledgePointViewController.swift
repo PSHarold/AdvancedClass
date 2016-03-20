@@ -107,6 +107,7 @@ class KnowledgePointViewController: UIViewController, UITableViewDataSource, UIT
             let offset = rowNum - self.sectionHeaderRowNum[sectionNum].last!
             let cell = self.pointsTableView.dequeueReusableCellWithIdentifier("PointCell", forIndexPath: indexPath) as! KnowledgePointTableViewCell
             let point = self.syllabus!.chapters[sectionNum].sections.last!.knowledgePoints[offset-1]
+            self.pointsWithRowNum[sectionNum][rowNum] = point
             cell.knowledgePointContent = "\(offset). " + point.content
             cell.knowledgePointLevel = point.level
             return cell

@@ -477,7 +477,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rhW-WR-lOS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1470.4000000000001" y="3089.9200000000001"/>
+            <point key="canvasLocation" x="1650" y="2484"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="HPg-jN-2t2">
@@ -514,15 +514,15 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="41316014" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gur-OZ-TKz">
-                                            <rect key="frame" x="73" y="0.0" width="232" height="43"/>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="41355083" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gur-OZ-TKz">
+                                            <rect key="frame" x="71" y="0.0" width="234" height="43"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="A" id="j0G-YU-GfN">
-                                            <rect key="frame" x="15" y="0.0" width="43" height="43"/>
+                                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="NO_AVATAR_MALE" id="j0G-YU-GfN">
+                                            <rect key="frame" x="15" y="0.0" width="41" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </imageView>
                                     </subviews>
@@ -671,9 +671,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" tag="101" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eZF-lB-i3a">
-                                <rect key="frame" x="0.0" y="20" width="320" height="504"/>
-                            </scrollView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1bg-r2-YQ6">
                                 <rect key="frame" x="0.0" y="20" width="320" height="21"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -697,6 +694,9 @@
                                     <action selector="submitClicked:" destination="E9u-io-OmV" eventType="touchUpInside" id="PE8-Zv-wxc"/>
                                 </connections>
                             </button>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" tag="101" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eZF-lB-i3a">
+                                <rect key="frame" x="0.0" y="20" width="320" height="504"/>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -725,13 +725,14 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="scrollView" destination="eZF-lB-i3a" id="Pqc-0J-Mfo"/>
                         <outlet property="submitButton" destination="kLu-4b-DLR" id="HBu-4T-0so"/>
                         <outlet property="timeLabel" destination="1bg-r2-YQ6" id="CCI-lX-EKV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hdd-lA-ara" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="735.20000000000005" y="4562.9333333333334"/>
+            <point key="canvasLocation" x="132" y="4817"/>
         </scene>
         <!--Student Choose Seat View Controller-->
         <scene sceneID="Eez-LN-awY">
@@ -839,6 +840,37 @@
             </objects>
             <point key="canvasLocation" x="1650.3999999999999" y="1817.5999999999999"/>
         </scene>
+        <!--Student Pre Test View Controller-->
+        <scene sceneID="Y8i-kz-R4r">
+            <objects>
+                <viewController id="SxM-ny-LqJ" customClass="StudentPreTestViewController" customModule="AdvancedClassStudent" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="OYd-Qv-YIB"/>
+                        <viewControllerLayoutGuide type="bottom" id="P2T-hU-Ty9"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="gH6-pa-Ayq">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kLV-Vk-Acn">
+                                <rect key="frame" x="137" y="245" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="takeTest:" destination="SxM-ny-LqJ" eventType="touchUpInside" id="FHn-ig-EIG"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" systemItem="history" id="HEb-uZ-XQO"/>
+                    <connections>
+                        <segue destination="maJ-pS-amg" kind="push" identifier="ShowTests" id="m54-9H-sZe"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tBR-9t-tJx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="295" y="2563"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="l3d-1u-y0f">
             <objects>
@@ -862,7 +894,7 @@
             <objects>
                 <tableViewController id="maJ-pS-amg" customClass="StudentTestTableViewController" customModule="AdvancedClassStudent" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Gnm-Rk-aFt">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -898,13 +930,13 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="yVg-py-ZH9"/>
                     <connections>
-                        <segue destination="BJn-yG-rE0" kind="modal" identifier="ShowTestDetails" id="ftD-To-20T"/>
                         <segue destination="Ibp-qU-b9z" kind="unwind" unwindAction="unwindToVC:" id="pXU-vx-Byx"/>
+                        <segue destination="E9u-io-OmV" kind="push" identifier="TakeTest" id="3Nm-7z-Er4"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oL1-Nt-CWr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="400" y="4054.5733333333333"/>
+            <point key="canvasLocation" x="295" y="3190"/>
         </scene>
         <!--Student Test Info Table View Controller-->
         <scene sceneID="FCV-Hi-wxh">
@@ -1108,7 +1140,6 @@
                         <outlet property="startTimeLabel" destination="ktW-fv-5Rk" id="mmQ-4m-0M0"/>
                         <outlet property="statusLabel" destination="Yju-Uu-cbF" id="Hxs-I5-9Fh"/>
                         <segue destination="AIX-5J-Pfc" kind="modal" identifier="ShowTestResults" id="qyC-dq-h15"/>
-                        <segue destination="E9u-io-OmV" kind="modal" identifier="TakeTest" id="7sr-OS-Kc6"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Fc-3T-XWV" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1130,6 +1161,7 @@
                     <connections>
                         <segue destination="DF6-Ja-dIm" kind="relationship" relationship="viewControllers" id="G6L-HU-Cq1"/>
                         <segue destination="2J6-V7-wgz" kind="relationship" relationship="viewControllers" id="czR-43-zcO"/>
+                        <segue destination="SxM-ny-LqJ" kind="relationship" relationship="viewControllers" id="DVe-yM-ree"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PZ4-XT-G3u" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1177,7 +1209,7 @@
                     <navigationItem key="navigationItem" id="ddJ-JS-uHf">
                         <nil key="title"/>
                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="2Jq-at-LU6">
-                            <rect key="frame" x="180" y="7" width="240" height="30"/>
+                            <rect key="frame" x="40" y="7" width="240" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <segments>
                                 <segment title="未读通知"/>
@@ -1236,5 +1268,6 @@
         <image name="B" width="300" height="300"/>
         <image name="C" width="300" height="300"/>
         <image name="D" width="300" height="300"/>
+        <image name="NO_AVATAR_MALE" width="1012" height="1063"/>
     </resources>
 </document>

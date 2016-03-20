@@ -155,8 +155,8 @@ class TeacherCourse {
     var subId:String
     var teachers = [String]()
     var timesAndRooms: TimesAndRooms
-    var unreadNotifications = [Notification]()
-    var untakenTests = []
+    var unfinishedTests = [TeacherTest]()
+    var unfinishedTestsDict = [String: TeacherTest]()
     var students = [Student]()
     var notifications = [Notification]()
     var notificationsAcquired = false
@@ -166,11 +166,6 @@ class TeacherCourse {
         self.courseId = json["course_id"].stringValue
         self.subId = json["sub_id"].stringValue
         self.timesAndRooms = TimesAndRooms(json: json["times"])
-        for (_, n) in json["unread_ntfcs"]{
-            let notification = Notification(json: n)
-            notification.courseName = self.name
-            self.unreadNotifications.append(notification)
-        }
     }
     
     func getNotifications(completionHandler: (error: CError?) -> Void){

@@ -8,82 +8,65 @@
 
 import Foundation
 import SwiftyJSON
-class Question:NSObject{
-    var question:String
-    var answer:Int
-    var choices = [String:String]()
-    var id:String
-    var chapter:Int
-    var knowledgePoint:String
-    var etag:String
-    var courseId:String
-    var answerDetail:String
-    var result = ["my_choice":"N","is_correct":false]
-    var difficultyInt = -1
-    
-    var difficultyString:String{
+
+enum QuestionType: Int{
+    case MULTIPLE_CHOICE = 1
+    case TRUE_OR_FALSE
+    case MULTIPLE_CHOICE_MULTIPLE_ANSWERS
+    case COMPLETION
+    case OHTER
+}
+
+class StudentQuestion:NSObject{
+    var questionId: String
+    var content: String
+    var questionType: QuestionType
+    var choices: [String]!
+    var points: Int
+    var hint: String!
+    var myAnswers: AnyObject!
+    var difficulty: Int
+    var difficultyString: String{
         get{
-            switch self.difficultyInt{
-            case 0:
-                return "简单"
+        switch self.difficulty{
             case 1:
-                return "中等"
+                return "很简单"
             case 2:
-                return "困难"
+                return "较简单"
+            case 3:
+                return "一般"
+            case 4:
+                return "较难"
+            case 5:
+                return "很难"
             default:
                 return ""
             }
         }
     }
     
-    init(json:JSON){
-        self.question = json["content"].stringValue
-        self.etag = json["_etag"].stringValue
-        self.choices["A"] = json["choices","A"].stringValue
-        self.choices["B"] = json["choices","B"].stringValue
-        self.choices["C"] = json["choices","C"].stringValue
-        self.choices["D"] = json["choices","D"].stringValue
-        let answers = json["answer"]
-        self.courseId = json["course_id"].stringValue
-        self.id = json["_id"].stringValue
-        self.chapter = json["chapter"].intValue
-        self.knowledgePoint = json["knowledge_point"].stringValue
-        self.answerDetail = json["answer_detail"].stringValue
-        self.difficultyInt = json["difficulty"].intValue
-        switch answers[0].stringValue{
-        case "A":
-            self.answer = 0
-        case "B":
-            self.answer = 1
-        case "C":
-            self.answer = 2
-        case "D":
-            self.answer = 3
+    
+    init(json: JSON){
+        self.questionId = json["question_id"].stringValue
+        self.difficulty = json["difficulty"].intValue
+        self.points = json["points"].intValue
+        self.content = json["content"].stringValue
+        self.questionType = QuestionType(rawValue: json["type"].intValue)!
+        switch self.questionType{
+        case .MULTIPLE_CHOICE:
+            fallthrough
+        case .MULTIPLE_CHOICE_MULTIPLE_ANSWERS:
+            fallthrough
+        case .TRUE_OR_FALSE:
+            self.choices = json["choices"].rawValue as! [String]
+            self.myAnswers = [String]()
         default:
-            self.answer = -1
+            self.choices = nil
+            self.myAnswers = ""
         }
         
     }
     
-    var isDone:Bool{
-        get{
-            return self.result["my_choice"]! != "N"
-        }
-    }
-    
-    override init(){
-        self.question = ""
-        self.answer = -1
-        for name in ["A","B","C","D"]{
-            self.choices[name] = ""
-        }
-        self.id = ""
-        self.chapter = 0
-        self.knowledgePoint = ""
-        self.etag = ""
-        self.courseId = ""
-        self.answerDetail = ""
-    }
 }
 
 

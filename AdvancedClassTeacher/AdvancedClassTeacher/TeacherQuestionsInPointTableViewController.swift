@@ -34,7 +34,11 @@ class TeacherQuestionsInPointTableViewController: UITableViewController {
         cell.textLabel?.text = self.knowledgePoint.questions[indexPath.row].content
         return cell
     }
- 
+    
+    override func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
+        self.selectedQuestion = self.knowledgePoint.questions[indexPath.row]
+
+    }
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.selectedQuestion = self.knowledgePoint.questions[indexPath.row]

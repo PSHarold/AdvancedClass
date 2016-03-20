@@ -39,12 +39,21 @@ class StudentAuthenticationHelper{
     }
     
     
- 
     
-    func getResponse(requestType:RequestType, method:Alamofire.Method = .POST, var postBody:[String: AnyObject]?, headers:[String:String]? = nil, tokenRequired:Bool = true, completionHandler: ResponseHandler){
+  
+    
+    
+    
+    func getResponse(requestType:RequestType, method:Alamofire.Method = .POST, var postBody:[String: AnyObject]?, headers:[String:String]? = nil, tokenRequired:Bool = true, courseIdRequired: Bool = false, completionHandler: ResponseHandler){
         if tokenRequired{
             assert(postBody != nil)
             postBody!["token"] = self.token
+        }
+        if courseIdRequired{
+            assert(postBody != nil)
+            let course = StudentCourse.currentCourse
+            postBody!["course_id"] = course.courseId
+            postBody!["sub_id"] = course.subId
         }
         let request = getRequestFor(requestType, method: method, postBody:postBody, headers: headers)
         request.responseJSON(){
