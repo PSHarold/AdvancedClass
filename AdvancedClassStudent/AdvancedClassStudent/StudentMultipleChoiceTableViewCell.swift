@@ -24,6 +24,9 @@ class StudentMultipleChoiceTableViewCell: UITableViewCell {
         
     }
     
+    
+    
+    
     var choiceNumber: Int!{
         didSet{
             if let number = choiceNumber{

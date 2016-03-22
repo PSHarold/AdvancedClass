@@ -8,11 +8,13 @@
 
 import UIKit
 
-class StudentAnswerQuestionsViewController: UIViewController, UIScrollViewDelegate{
+class StudentAnswerQuestionsViewController: UIViewController, UIScrollViewDelegate, UIPopoverPresentationControllerDelegate{
     weak var testHelper = StudentTestHelper.defaultHelper
+    var popoverViewController: StudentTestQuestionListTableViewController!
+    var myPopoverPresentationController: UIPopoverPresentationController!
     var timer:NSTimer?
     var timeLimit = -1
-    var test: StudentTest!
+    var test = StudentTestHelper.defaultHelper.currentTest
     @IBOutlet weak var scrollView:UIScrollView!
     var _done = 0
     var finished = false
@@ -21,10 +23,23 @@ class StudentAnswerQuestionsViewController: UIViewController, UIScrollViewDelega
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var submitButton: UIButton!
     
+    
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .None
+    }
+    
+    
     var questionViewControllers: [StudentBaseQuestionTableViewController?]!
     override func viewDidLoad() {
         super.viewDidLoad()
        
+        self.popoverViewController = self.storyboard?.instantiateViewControllerWithIdentifier("StudentTestQuestionListTableViewController") as! StudentTestQuestionListTableViewController
+        self.popoverViewController.answerVC = self
+        self.myPopoverPresentationController = UIPopoverPresentationController(presentedViewController: self.popoverViewController, presentingViewController: self)
+        self.popoverViewController.preferredContentSize = CGSizeMake(200, CGFloat(self.test.questionNum*44))
+        self.popoverViewController.modalPresentationStyle = .Popover
+        
+        
         self.scrollView.delegate = self
         self.scrollView.contentSize = CGSizeMake(self.view.bounds.width*CGFloat(self.test.questionNum), 0)
         self.questionViewControllers = [StudentBaseQuestionTableViewController?](count: self.test.questionNum, repeatedValue: nil)
@@ -45,7 +60,6 @@ class StudentAnswerQuestionsViewController: UIViewController, UIScrollViewDelega
     
     func instatiateAndAddSubQuestionPage(page: Int){
         let question = self.test.questions[page]
-    
         var viewController: StudentBaseQuestionTableViewController
         switch question.questionType{
         case .MULTIPLE_CHOICE:
@@ -85,7 +99,7 @@ class StudentAnswerQuestionsViewController: UIViewController, UIScrollViewDelega
         
     }
     
-    func scrollToPage(page: Int){
+    func scrollToPage(page: Int, invokedByScroll: Bool = true){
         if page == self.currentPage{
             return
         }
@@ -94,24 +108,46 @@ class StudentAnswerQuestionsViewController: UIViewController, UIScrollViewDelega
         self.instantiateQuestionViewControllerIfNeeded(page - 1)
         self.instantiateQuestionViewControllerIfNeeded(page + 1)
         
+        for i in 0..<self.questionViewControllers.count{
+            if i < page - 1 || i > page + 1{
+                if let vc = self.questionViewControllers[i]{
+                    vc.view.removeFromSuperview()
+                    vc.removeFromParentViewController()
+                    self.questionViewControllers[i] = nil
+                }
+            }
+            
+        }
+        
+        if !invokedByScroll{
+            self.scrollView.contentOffset = CGPointMake(self.view.bounds.width*CGFloat(page), 0)
+        }
         
     }
     
-    func removeQuestionViewController(viewController: StudentBaseQuestionTableViewController){
-        viewController.view.removeFromSuperview()
-        viewController.removeFromParentViewController()
+  
+    @IBAction func showQuestionList(sender: UIBarButtonItem) {
+        if let pop = self.popoverViewController.popoverPresentationController{
+            pop.permittedArrowDirections = .Any
+            pop.delegate = self
+            let view = sender.valueForKey("view") as? UIView
+            pop.sourceView = view
+            pop.sourceRect = view!.bounds
+        }
+        
+        self.presentViewController(self.popoverViewController, animated: true, completion: nil)
         
     }
+    
+   
     
     func tick(){
-        
         if timeLimit <= 10{
             self.timeLabel.textColor = UIColor.redColor()
         }
         else if self.timeLimit <= 30{
             self.timeLabel.textColor = UIColor.orangeColor()
         }
-
         timeLabel.text = "倒计时：" + (self.test.timeLimit--).toTimeString()
         if timeLimit < 0{
             self.timer!.invalidate()
@@ -127,6 +163,7 @@ class StudentAnswerQuestionsViewController: UIViewController, UIScrollViewDelega
             
         }
     }
+    
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
         let page = Int(scrollView.contentOffset.x / scrollView.frame.size.width + 0.5)

@@ -20,4 +20,5 @@ class StudentBaseQuestionTableViewController: UITableViewController {
         self.tableView.separatorInset = UIEdgeInsetsZero
 
     }
+    
 }

@@ -17,21 +17,21 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OMT-ga-5HX">
-                        <rect key="frame" x="3" y="3" width="68" height="68"/>
+                        <rect key="frame" x="10" y="10" width="54" height="54"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="OMT-ga-5HX" secondAttribute="height" multiplier="1:1" id="bt2-WL-IKf"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OxP-te-YBG">
-                        <rect key="frame" x="79" y="27" width="342" height="21"/>
+                        <rect key="frame" x="72" y="27" width="349" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="OMT-ga-5HX" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="3" id="0qb-lr-4ZJ"/>
-                    <constraint firstItem="OMT-ga-5HX" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="3" id="Bmd-xr-gZA"/>
+                    <constraint firstItem="OMT-ga-5HX" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="0qb-lr-4ZJ"/>
+                    <constraint firstItem="OMT-ga-5HX" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="Bmd-xr-gZA"/>
                     <constraint firstItem="OxP-te-YBG" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="dfD-ah-usp"/>
                     <constraint firstItem="OMT-ga-5HX" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="fZy-10-GTk"/>
                     <constraint firstAttribute="trailingMargin" secondItem="OxP-te-YBG" secondAttribute="trailing" id="qhg-gP-E7c"/>

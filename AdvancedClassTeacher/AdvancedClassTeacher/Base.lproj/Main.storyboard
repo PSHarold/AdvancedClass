@@ -28,6 +28,7 @@
             <objects>
                 <tabBarController id="BvF-qj-N7c" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="Eew-M2-IeI"/>
+                    <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="S5b-IT-4HG">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>

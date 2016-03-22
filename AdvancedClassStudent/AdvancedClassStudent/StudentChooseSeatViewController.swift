@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StudentChooseSeatViewController: UIViewController,SeatViewDataSource,SeatViewDelegate, UIPopoverPresentationControllerDelegate{
+class StudentChooseSeatViewController: UIViewController, SeatViewDataSource, SeatViewDelegate, UIPopoverPresentationControllerDelegate{
     
     var seatHelper = StudentSeatHelper.currentHelper
     var timer:NSTimer!

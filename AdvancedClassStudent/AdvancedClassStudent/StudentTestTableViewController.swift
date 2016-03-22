@@ -12,7 +12,6 @@ class StudentTestTableViewController: UITableViewController {
 
     weak var testHelper = StudentTestHelper.defaultHelper
     weak var currentCourse = StudentCourse.currentCourse
-    var selectedTest: StudentTest!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.tableFooterView = UIView(frame: CGRectZero)
@@ -38,20 +37,10 @@ class StudentTestTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
         let test = self.currentCourse!.unfinishedTests[indexPath.row]
-        self.selectedTest = test
-        self.testHelper!.getQuestionsInTest(test){
-            error in
-            if let error = error{
-                self.showError(error)
-                return
-            }
-            self.performSegueWithIdentifier("TakeTest", sender: nil)
-        }
+        self.testHelper!.currentTest
+            = test
+        self.performSegueWithIdentifier("ShowUntakenTest", sender: nil)
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let vc = segue.destinationViewController as! StudentAnswerQuestionsViewController
-        vc.test = self.selectedTest
-    }
     
 }

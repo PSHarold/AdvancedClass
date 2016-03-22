@@ -29,18 +29,14 @@ class StudentTestHelper {
         }
     }
 
+    var currentTest: StudentTest!
     
-    
-    func getQuestionsInTest(test: StudentTest, completionHandler: ResponseMessageHandler){
-        if test.questionsAcquired{
-            completionHandler(error: nil)
-            return
-        }
-        
+    func getQuestionsInUntakenTest(test: StudentTest, completionHandler: ResponseMessageHandler){
         let authHelper = StudentAuthenticationHelper.defaultHelper
         authHelper.getResponse(RequestType.GET_QUESTIONS_IN_TEST, postBody: ["test_id": test.testId], courseIdRequired: true){
          //   [unowned self]
             (error, json) in
+            test.drop()
             if error == nil{
                 for (_, question_json) in json["questions"]{
                     test.addQuestion(StudentQuestion(json: question_json))
@@ -70,7 +66,6 @@ class StudentTestHelper {
                 for (_, test_json) in json["tests"]{
                     let test = StudentTest().previewFromJSON(test_json)
                     course.unfinishedTests.append(test)
-                    
                 }
             }
             completionHandler(error: error)

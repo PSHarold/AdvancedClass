@@ -22,7 +22,7 @@ class StudentTest{
         self.createdOn = json["created_on"].stringValue
         return self
     }
-    var myAnswers = [String: [AnyObject]]()
+    var myAnswers = [String: AnyObject]()
     var questionsAcquired = false
     var testId: String!
     var courseId = ""
@@ -68,7 +68,11 @@ class StudentTest{
     var message = ""
     var questionNum = 0
     
-    
+    func drop(){
+        self.questions = [StudentQuestion]()
+        self.questionsDict = [String: StudentQuestion]()
+        self.myAnswers = [String: AnyObject]()
+    }
     
     func addQuestion(question: StudentQuestion){
         self.questions.append(question)
@@ -77,15 +81,62 @@ class StudentTest{
     }
     
     
-    func makeAnswerWithQuestionId(questionId: String, answer: AnyObject){
-        if self.myAnswers[questionId] == nil{
-            self.myAnswers[questionId] = [AnyObject]()
+    func changeMyAnswerWithQuestion(question: StudentQuestion, answer: AnyObject) -> AnyObject?{
+        let questionId = question.questionId
+        var already = false
+        if let answer = answer as? Int{
+            if self.myAnswers[questionId] == nil{
+                self.myAnswers[questionId] = [Int]()
+                
+            }
+            var a = self.myAnswers[questionId]! as! [Int]
+            if a.contains({$0 == answer}){
+                a.removeAtIndex(a.indexOf(answer)!)
+                already = true
+            }
+            else{
+                a.append(answer)
+            }
+            self.myAnswers[questionId] = a
+            
         }
-        self.myAnswers[questionId]!.append(answer)
+        else if let answer = answer as? String{
+            if self.myAnswers[questionId] == nil{
+                self.myAnswers[questionId] = [String]()
+            }
+            var a = self.myAnswers[questionId]! as! [String]
+            if a.contains({$0 == answer}){
+                a.removeAtIndex(a.indexOf(answer)!)
+                already = true
+            }
+            else{
+                a.append(answer)
+            }
+            self.myAnswers[questionId] = a
+        }
+        if already{
+            return nil
+        }
+        return answer
     }
+    
+    func getMyAnswersWithQuestion(question: StudentQuestion) -> AnyObject?{
+        return self.myAnswers[question.questionId]
+    }
+    
     
     func toDict() -> [String: AnyObject]{
         return ["my_answers": self.myAnswers, "test_id": self.testId]
+    }
+    
+    func hasAnsweredQuestion(question: StudentQuestion) -> Bool{
+        if let answers = self.myAnswers[question.questionId] as? [AnyObject]{
+            if answers.count == 0{
+                return false
+            }
+            return true
+        }
+        return false
     }
     
     
