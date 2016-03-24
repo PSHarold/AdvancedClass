@@ -48,7 +48,7 @@ class RowIndicator: UIView {
         self.numberHeight = CGFloat(numberHeight)
         
         for _ in 0..<rowNumber{
-            ++self.rowCount
+            self.rowCount += 1
             let label = UILabel(frame: self.frameWithRowNumber(rowCount))
             defer { self.addSubview(label); self.labels.append(label) }
             if exclude.contains(self.rowCount){

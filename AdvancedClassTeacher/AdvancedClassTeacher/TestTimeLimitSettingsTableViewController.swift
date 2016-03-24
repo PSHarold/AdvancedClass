@@ -37,7 +37,7 @@ class TestTimeLimitSettingsTableViewController: UITableViewController,UIPickerVi
                 return
             }
             self._timeLimitSwitch = newValue
-            self._timeLimitSwitch.addTarget(self, action: "switchToggled:", forControlEvents: .ValueChanged)
+            self._timeLimitSwitch.addTarget(self, action: #selector(TestTimeLimitSettingsTableViewController.switchToggled(_:)), forControlEvents: .ValueChanged)
         }
     }
     var hasTimeLimit:Bool = true

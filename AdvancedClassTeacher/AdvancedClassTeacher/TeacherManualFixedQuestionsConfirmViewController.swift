@@ -22,7 +22,7 @@ class TeacherManualFixedQuestionsConfirmTableViewController: UITableViewControll
             }
             self._randomSwitch = newValue
             self._randomSwitch.on = self.isRandom
-            self._randomSwitch.addTarget(self, action: "randomSwitched:", forControlEvents: .ValueChanged)
+            self._randomSwitch.addTarget(self, action: #selector(TeacherManualFixedQuestionsConfirmTableViewController.randomSwitched(_:)), forControlEvents: .ValueChanged)
             
         }
     }

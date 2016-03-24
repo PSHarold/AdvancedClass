@@ -60,4 +60,9 @@ class TeacherTestsViewController: UIViewController, UITableViewDataSource, UITab
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.currentCourse!.unfinishedTests.count
     }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.testHelper?.currentTest = self.currentCourse!.unfinishedTests[indexPath.row]
+        self.performSegueWithIdentifier("ShowFinishedTest", sender: self)
+    }
 }

@@ -38,9 +38,7 @@ class TeacherAuthenticationHelper {
     var password = ""
     var token = ""
     var tempRequestType:RequestType!
-    var tempMethod:Alamofire.Method!
-    var tempPostBody:[String: AnyObject]?
-    var tempHeaders:[String:String]?
+    var tempPostBody:[String: AnyObject]!
     var originalHandler:((error:CError?, json:JSON!) -> Void)!
     
     static var defaultHelper:TeacherAuthenticationHelper{
@@ -54,13 +52,20 @@ class TeacherAuthenticationHelper {
     
     
     
+    func getResposeGET(requestType: RequestType, headers: [String: String]? = nil, completionHandler: ResponseHandler){
+        
+    }
     
-    func getResponse(requestType:RequestType, method:Alamofire.Method = .POST, var postBody:[String: AnyObject]?=nil, headers:[String:String]? = nil, tokenRequired:Bool = true, completionHandler: ResponseHandler){
-        if tokenRequired{
-            assert(postBody != nil)
-            postBody!["token"] = self.token
+    
+    func getResponsePOST(requestType:RequestType, postBody:[String: AnyObject], subIdRequired: Bool = false, completionHandler: ResponseHandler){
+        var postBody = postBody
+        postBody["token"] = self.token
+        if subIdRequired{
+            let course = TeacherCourse.currentCourse
+            postBody["course_id"] = course.courseId
+            postBody["sub_id"] = course.subId
         }
-        let request = getRequestFor(requestType, method: method, postBody:postBody, headers: headers)
+        let request = getRequestFor(requestType, method: .POST, postBody: postBody, headers: nil)
         request.responseJSON(){
             [unowned self]
             (_,_,result) in
@@ -69,8 +74,6 @@ class TeacherAuthenticationHelper {
                 let json = JSON(data)
                 let code = json["error_code"].intValue
                 if code == CError.TOKEN_EXPIRED.rawValue{
-                    self.tempHeaders=headers
-                    self.tempMethod=method
                     self.tempPostBody=postBody
                     self.tempRequestType=requestType
                     self.originalHandler=completionHandler
@@ -111,7 +114,7 @@ class TeacherAuthenticationHelper {
                 }
                 else{
                     self.token = json["token"].stringValue
-                    self.getResponse(self.tempRequestType, method: self.tempMethod, postBody: self.tempPostBody, headers: self.tempHeaders, completionHandler:self.originalHandler)
+                    self.getResponsePOST(self.tempRequestType, postBody: self.tempPostBody, completionHandler: self.originalHandler)
                 }
             case .Failure(_, _):
                 self.originalHandler(error: CError.NETWORK_ERROR, json: nil)
@@ -124,7 +127,8 @@ class TeacherAuthenticationHelper {
     func login(userId:String,password:String,completionHandler: ResponseHandler){
         self.userId = userId
         self.password = password
-        getResponse(RequestType.LOGIN, postBody:["user_id":userId, "password": password, "role": ROLE_FOR_TEACHER]){
+        let dict: [String: AnyObject] = ["user_id":userId, "password": password, "role": ROLE_FOR_TEACHER]
+        getResponsePOST(RequestType.LOGIN, postBody: dict){
             [unowned self]
             (error,json) in
             if error != nil{

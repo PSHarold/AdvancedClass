@@ -24,8 +24,20 @@ class StudentMultipleChoiceTableViewCell: UITableViewCell {
         
     }
     
-    
-    
+    var correct: Bool?{
+        didSet{
+            if let correct = self.correct{
+                if correct{
+                    self.myImageView.image = UIImage(named: "correct")
+                    self.layer.borderColor = UIColor.blueColor().CGColor
+                }
+                else{
+                    self.myImageView.image = UIImage(named: "incorrect")
+                    self.layer.borderColor = UIColor.redColor().CGColor
+                }
+            }
+        }
+    }
     
     var choiceNumber: Int!{
         didSet{

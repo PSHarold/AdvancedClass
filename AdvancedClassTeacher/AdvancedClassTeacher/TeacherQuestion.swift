@@ -44,6 +44,18 @@ class TeacherQuestion{
         return q
     }
     
+    init(json: JSON){
+        self.questionId = json["question_id"].stringValue
+        self.content = json["content"].stringValue
+        self.difficultyInt = json["difficulty"].intValue
+        self.questionType = QuestionType(rawValue: json["type"].intValue)
+        self.choices = json["choices"].rawValue as! [String]
+        self.knowledgePointId = json["point_id"].stringValue
+    }
+    
+    init(){
+        
+    }
 }
 
 

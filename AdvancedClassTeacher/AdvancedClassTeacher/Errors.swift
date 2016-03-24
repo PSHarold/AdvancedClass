@@ -63,6 +63,14 @@ enum CError: Int{
     case YOU_ARE_TOO_LATE = 911
     case RANDOM_TEST_NOT_SET = 920
     case YOU_DO_NOT_HAVE_THIS_COURSE = 921
+    case YOU_ARE_NOT_THE_TEACHER = 922
+    case YOU_ARE_NOT_A_STUDENT = 923
+    case TEST_EXPIRED = 930
+    case TEST_HAVENT_BEGUN = 931
+    case TEST_ALREADY_TAKEN = 932
+    case TEST_STILL_ONGOING = 933
+    case YOU_HAVENT_TAKEN_THE_TEST = 934
+    case BAD_STUDENT_TEST_RESULT = 935
 }
 
 func parseErrorString(error: CError) -> String{

@@ -77,7 +77,7 @@ class StudentTest{
     func addQuestion(question: StudentQuestion){
         self.questions.append(question)
         self.questionsDict[question.questionId] = question
-        ++self.questionNum
+        self.questionNum += 1
     }
     
     

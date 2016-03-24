@@ -42,7 +42,15 @@ class TeacherCourseTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         TeacherCourse.currentCourse = self.authHelper.me.courses[indexPath.row]
         self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        self.performSegueWithIdentifier("enterMain", sender: self)
+        TeacherCourse.currentCourse.getSyllabus{
+            [unowned self]
+            error in
+            if let error = error{
+                self.showError(error)
+                return
+            }
+            self.performSegueWithIdentifier("enterMain", sender: self)
+        }
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

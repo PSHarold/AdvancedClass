@@ -160,7 +160,8 @@ class KnowledgePointViewController: UIViewController, UITableViewDataSource, UIT
         var indexPaths = [NSIndexPath]()
         var i = headerRowNum
         for _ in 0..<sectionCount{
-            indexPaths.append(NSIndexPath(forItem: ++i, inSection: indexPath.section))
+            i += 1
+            indexPaths.append(NSIndexPath(forItem: i, inSection: indexPath.section))
         }
         if expandedNow{
             self.pointsTableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: .Fade)

@@ -27,7 +27,11 @@ class StudentMultipleChoiceTableViewController: StudentBaseQuestionTableViewCont
         }
     }
     
-    
+    var resultMode: Bool{
+        get{
+            return self.currentTest!.finished
+        }
+    }
   
     
     
@@ -45,7 +49,7 @@ class StudentMultipleChoiceTableViewController: StudentBaseQuestionTableViewCont
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 3
+        return self.resultMode ? 4 : 3
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -75,6 +79,10 @@ class StudentMultipleChoiceTableViewController: StudentBaseQuestionTableViewCont
             tempCell.content = self.question.choices[indexPath.row]
             cell = tempCell
             // return cell
+        case 4:
+            let tempCell = self.tableView.dequeueReusableCellWithIdentifier("ContentCell", forIndexPath: indexPath) as! StudentQuestionContentTableViewCell
+            tempCell.content = self.question.detailedAnswer
+            cell = tempCell
         default:
             return UITableViewCell()
         }

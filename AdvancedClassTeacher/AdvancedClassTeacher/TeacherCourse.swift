@@ -33,7 +33,7 @@ class KnowledgePoint{
             return
         }
         let authHelper = TeacherAuthenticationHelper.defaultHelper
-        authHelper.getResponse(.GET_QUESTIONS_IN_POINT, method: .POST, postBody: ["course_id": TeacherCourse.currentCourse.courseId, "sub_id": TeacherCourse.currentCourse.subId, "point_id": self.knowledgePointId], headers: nil, tokenRequired: true){
+        authHelper.getResponsePOST(.GET_QUESTIONS_IN_POINT, postBody: ["course_id": TeacherCourse.currentCourse.courseId, "sub_id": TeacherCourse.currentCourse.subId, "point_id": self.knowledgePointId]){
             [unowned self]
             (error, json) in
             if error == nil{
@@ -68,6 +68,7 @@ class Section{
         self.sectionNum = json["section_num"].intValue
         for (_, point_dict) in json["points"]{
             self.addKnowledgePoint(KnowledgePoint(json: point_dict))
+            
         }
     }
     
@@ -101,6 +102,7 @@ class Chapter{
 class Syllabus{
     var chapters = [Chapter]()
     var chaptersDict = [Int: Chapter]()
+    var knowledgePoints = [String: KnowledgePoint]()
     func getChapterWithChapterNum(chapterNum: Int) -> Chapter?{
         return self.chaptersDict[chapterNum]
     }
@@ -117,6 +119,11 @@ class Syllabus{
     func addChapter(chapter: Chapter){
         self.chapters.append(chapter)
         self.chaptersDict[chapter.chapterNum] = chapter
+        for section in chapter.sections{
+            for point in section.knowledgePoints{
+                self.knowledgePoints[point.knowledgePointId] = point
+            }
+        }
     }
     
 }
@@ -174,7 +181,7 @@ class TeacherCourse {
             return
         }
         else{
-            TeacherAuthenticationHelper.defaultHelper.getResponse(RequestType.GET_NOTIFICAIONS, postBody: ["course_id":self.courseId,"sub_id":self.subId]){
+            TeacherAuthenticationHelper.defaultHelper.getResponsePOST(RequestType.GET_NOTIFICAIONS, postBody: ["course_id":self.courseId,"sub_id":self.subId]){
                 (error, json) in
                 if error == nil{
                     for (_, n) in json["notifications"]{
@@ -190,13 +197,17 @@ class TeacherCourse {
         }
     }
     
+    
+    
+    
+    
     func getSyllabus(completionHandler: (error: CError?) -> Void){
         if self.syllabus != nil{
             completionHandler(error: nil)
             return
         }
         else{
-            TeacherAuthenticationHelper.defaultHelper.getResponse(RequestType.GET_SYLLABUS, method: .POST, postBody: ["course_id": self.courseId, "sub_id": self.subId]){
+            TeacherAuthenticationHelper.defaultHelper.getResponsePOST(RequestType.GET_SYLLABUS, postBody: ["course_id": self.courseId, "sub_id": self.subId]){
                 (error, json) in
                 if error == nil{
                     self.syllabus = Syllabus(json: json)

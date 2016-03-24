@@ -20,6 +20,7 @@ enum QuestionType: Int{
 class StudentQuestion:NSObject{
     var questionId: String
     var content: String
+    var detailedAnswer: String!
     var questionType: QuestionType
     var choices: [String]!
     var points: Int

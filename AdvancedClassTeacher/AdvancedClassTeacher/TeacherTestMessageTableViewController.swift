@@ -16,7 +16,7 @@ class TeacherTestMessageTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.textField.text = self.test!.message
-        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "endEditing:"))
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(TeacherTestMessageTableViewController.endEditing(_:))))
     }
     
     func endEditing(sender: AnyObject){
