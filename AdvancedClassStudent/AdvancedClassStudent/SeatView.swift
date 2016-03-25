@@ -205,7 +205,7 @@ class SeatView: UIView, UIScrollViewDelegate,UITableViewDelegate{
                 let x : CGFloat = CGFloat(column) * (self.seatSideLength + self.columnSpace) + self.margin
                 seat.frame = CGRectMake(x, y, self.seatSideLength, self.seatSideLength)
                 miniSeat.frame = seat.frame
-                seat.addTarget(self, action: "seatClicked:", forControlEvents: UIControlEvents.TouchUpInside)
+                seat.addTarget(self, action: #selector(SeatView.seatClicked(_:)), forControlEvents: UIControlEvents.TouchUpInside)
                 self.seatView.addSubview(seat)
                 self.miniSeatView.addSubview(miniSeat)
                 

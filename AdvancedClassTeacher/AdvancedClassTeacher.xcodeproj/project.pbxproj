@@ -22,6 +22,11 @@
 		F21313CE1B9AE1280088C483 /* TeacherAuthenticationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21313CD1B9AE1280088C483 /* TeacherAuthenticationHelper.swift */; };
 		F21345EE1B9D456000D3BDBF /* TeacherCourse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21345ED1B9D456000D3BDBF /* TeacherCourse.swift */; };
 		F21345F01B9D558000D3BDBF /* TeacherCourseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21345EF1B9D558000D3BDBF /* TeacherCourseTableViewController.swift */; };
+		F2186AAF1CA4D3BF00D72DCF /* TeacherQuestionsInKnowledgePointResultTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2186AAE1CA4D3BF00D72DCF /* TeacherQuestionsInKnowledgePointResultTableViewController.swift */; };
+		F2186AB21CA4F0E700D72DCF /* QuestionContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2186AB01CA4F0E700D72DCF /* QuestionContentTableViewCell.swift */; };
+		F2186AB31CA4F0E700D72DCF /* QuestionContentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2186AB11CA4F0E700D72DCF /* QuestionContentTableViewCell.xib */; };
+		F2186AB61CA4F10100D72DCF /* MultipleChoiceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2186AB41CA4F10100D72DCF /* MultipleChoiceTableViewCell.swift */; };
+		F2186AB71CA4F10100D72DCF /* MultipleChoiceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2186AB51CA4F10100D72DCF /* MultipleChoiceTableViewCell.xib */; };
 		F220E2781BB62BF300251C88 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = F220E2771BB62BF300251C88 /* MBProgressHUD.m */; };
 		F2329FED1BC20E2F006A428F /* TestDateTimeSettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2329FEC1BC20E2F006A428F /* TestDateTimeSettingsTableViewController.swift */; };
 		F23457D11BC36CBE00AD0B87 /* TeacherUnfinishedTestInfoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23457D01BC36CBE00AD0B87 /* TeacherUnfinishedTestInfoTableViewController.swift */; };
@@ -49,6 +54,8 @@
 		F25B8DFD1B9D8B8D00A2587E /* TeacherStudentHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25B8DFC1B9D8B8D00A2587E /* TeacherStudentHelper.swift */; };
 		F25B8E011B9D91A400A2587E /* TeacherCourseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25B8E001B9D91A400A2587E /* TeacherCourseHelper.swift */; };
 		F26456531B9B204700205B6C /* TeacherCreateTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26456521B9B204700205B6C /* TeacherCreateTableViewController.swift */; };
+		F2697E011CA528F800A26D74 /* StudentTestResultInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2697E001CA528F800A26D74 /* StudentTestResultInfoTableViewCell.swift */; };
+		F2697E031CA5365500A26D74 /* TeacherTestResultStudentsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2697E021CA5365500A26D74 /* TeacherTestResultStudentsTableViewController.swift */; };
 		F28F06601C95077200B79866 /* TeachDayHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F28F065F1C95077200B79866 /* TeachDayHelper.swift */; };
 		F298B43F1C8E633E001543E7 /* TeacherManualFixedQuestionsConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F298B43E1C8E633E001543E7 /* TeacherManualFixedQuestionsConfirmViewController.swift */; };
 		F299579B1B81CBB20003B64C /* TestSettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F299579A1B81CBB20003B64C /* TestSettingsTableViewController.swift */; };
@@ -107,6 +114,11 @@
 		F21313CD1B9AE1280088C483 /* TeacherAuthenticationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherAuthenticationHelper.swift; sourceTree = "<group>"; };
 		F21345ED1B9D456000D3BDBF /* TeacherCourse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherCourse.swift; sourceTree = "<group>"; };
 		F21345EF1B9D558000D3BDBF /* TeacherCourseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherCourseTableViewController.swift; sourceTree = "<group>"; };
+		F2186AAE1CA4D3BF00D72DCF /* TeacherQuestionsInKnowledgePointResultTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherQuestionsInKnowledgePointResultTableViewController.swift; sourceTree = "<group>"; };
+		F2186AB01CA4F0E700D72DCF /* QuestionContentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionContentTableViewCell.swift; sourceTree = "<group>"; };
+		F2186AB11CA4F0E700D72DCF /* QuestionContentTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuestionContentTableViewCell.xib; sourceTree = "<group>"; };
+		F2186AB41CA4F10100D72DCF /* MultipleChoiceTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipleChoiceTableViewCell.swift; sourceTree = "<group>"; };
+		F2186AB51CA4F10100D72DCF /* MultipleChoiceTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MultipleChoiceTableViewCell.xib; sourceTree = "<group>"; };
 		F220E2751BB62BF200251C88 /* AdvancedClassTeacher-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AdvancedClassTeacher-Bridging-Header.h"; sourceTree = "<group>"; };
 		F220E2761BB62BF300251C88 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		F220E2771BB62BF300251C88 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
@@ -136,6 +148,8 @@
 		F25B8DFC1B9D8B8D00A2587E /* TeacherStudentHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherStudentHelper.swift; sourceTree = "<group>"; };
 		F25B8E001B9D91A400A2587E /* TeacherCourseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherCourseHelper.swift; sourceTree = "<group>"; };
 		F26456521B9B204700205B6C /* TeacherCreateTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherCreateTableViewController.swift; sourceTree = "<group>"; };
+		F2697E001CA528F800A26D74 /* StudentTestResultInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentTestResultInfoTableViewCell.swift; sourceTree = "<group>"; };
+		F2697E021CA5365500A26D74 /* TeacherTestResultStudentsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherTestResultStudentsTableViewController.swift; sourceTree = "<group>"; };
 		F28F065F1C95077200B79866 /* TeachDayHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeachDayHelper.swift; sourceTree = "<group>"; };
 		F298B43E1C8E633E001543E7 /* TeacherManualFixedQuestionsConfirmViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherManualFixedQuestionsConfirmViewController.swift; sourceTree = "<group>"; };
 		F299579A1B81CBB20003B64C /* TestSettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestSettingsTableViewController.swift; sourceTree = "<group>"; };
@@ -235,6 +249,7 @@
 				F20A68A11B81B478000BFF24 /* KnowledgePointViewController.swift */,
 				F20A688A1B81B400000BFF24 /* LaunchScreen.xib */,
 				F20A68851B81B400000BFF24 /* Main.storyboard */,
+				F2697E001CA528F800A26D74 /* StudentTestResultInfoTableViewCell.swift */,
 				F220E2761BB62BF300251C88 /* MBProgressHUD.h */,
 				F220E2771BB62BF300251C88 /* MBProgressHUD.m */,
 				F246DEC01B9C64A70058DEA6 /* Me.swift */,
@@ -255,6 +270,10 @@
 				F21345EF1B9D558000D3BDBF /* TeacherCourseTableViewController.swift */,
 				F2C77C1C1BC0A5E3004FEBF9 /* TeacherCreateNotificationTableViewController.swift */,
 				F26456521B9B204700205B6C /* TeacherCreateTableViewController.swift */,
+				F2186AB01CA4F0E700D72DCF /* QuestionContentTableViewCell.swift */,
+				F2186AB11CA4F0E700D72DCF /* QuestionContentTableViewCell.xib */,
+				F2186AB41CA4F10100D72DCF /* MultipleChoiceTableViewCell.swift */,
+				F2186AB51CA4F10100D72DCF /* MultipleChoiceTableViewCell.xib */,
 				F2EA202A1C89AB9100FC8340 /* TeacherCreateTestViewController.swift */,
 				F253B2A91BC5456200AD0AE4 /* TeacherCurrentStudentListViewController.swift */,
 				F24252B31CA12DB6004F7E07 /* TeacherFinishedTestInfoTableViewController.swift */,
@@ -268,6 +287,7 @@
 				F20A68A51B81B478000BFF24 /* TeacherPreTestViewController.swift */,
 				F20A68A81B81B478000BFF24 /* TeacherQuestion.swift */,
 				F2C224AA1BCA7B0A002DE247 /* TeacherQuestionResultViewController.swift */,
+				F2186AAE1CA4D3BF00D72DCF /* TeacherQuestionsInKnowledgePointResultTableViewController.swift */,
 				F2A98AF01C8AA80E0067E229 /* TeacherQuestionsInPointTableViewController.swift */,
 				F246DEB81B9BDAD00058DEA6 /* TeacherQuestionsInTestTableViewController.swift */,
 				F23EE3831BAA931700B75501 /* TeacherSeatHelper.swift */,
@@ -278,6 +298,7 @@
 				F246DEB61B9BDA180058DEA6 /* TeacherTestHelper.swift */,
 				F2DDCEF01C8EC0A700561002 /* TeacherTestMessageTableViewController.swift */,
 				F24252B51CA12E0B004F7E07 /* TeacherTestResultViewController.swift */,
+				F2697E021CA5365500A26D74 /* TeacherTestResultStudentsTableViewController.swift */,
 				F2AE1A1A1C913A3C0020FD4E /* TeacherTestsViewController.swift */,
 				F23457D01BC36CBE00AD0B87 /* TeacherUnfinishedTestInfoTableViewController.swift */,
 				F23AD7101C918FC10017C537 /* TestOnGoingTableViewCell.swift */,
@@ -424,6 +445,8 @@
 				F20A68871B81B400000BFF24 /* Main.storyboard in Resources */,
 				F20A688C1B81B400000BFF24 /* LaunchScreen.xib in Resources */,
 				F23AD7131C918FC10017C537 /* TestOnGoingTableViewCell.xib in Resources */,
+				F2186AB31CA4F0E700D72DCF /* QuestionContentTableViewCell.xib in Resources */,
+				F2186AB71CA4F10100D72DCF /* MultipleChoiceTableViewCell.xib in Resources */,
 				F2AE1A1F1C913AC20020FD4E /* UnfinishedTestTableViewCell.xib in Resources */,
 				F2E459751C89C554003B8A4B /* KnowledgePointTableViewCell.xib in Resources */,
 			);
@@ -519,8 +542,10 @@
 				F299579B1B81CBB20003B64C /* TestSettingsTableViewController.swift in Sources */,
 				F253B2AC1BC550E300AD0AE4 /* TeacherPreCurrentStudentListViewController.swift in Sources */,
 				F23465461C7F551B00933615 /* SeatRowIndicator.swift in Sources */,
+				F2186AB61CA4F10100D72DCF /* MultipleChoiceTableViewCell.swift in Sources */,
 				F25B8E011B9D91A400A2587E /* TeacherCourseHelper.swift in Sources */,
 				F20A68AA1B81B478000BFF24 /* KnowledgePointViewController.swift in Sources */,
+				F2697E031CA5365500A26D74 /* TeacherTestResultStudentsTableViewController.swift in Sources */,
 				F23AD7121C918FC10017C537 /* TestOnGoingTableViewCell.swift in Sources */,
 				F21345EE1B9D456000D3BDBF /* TeacherCourse.swift in Sources */,
 				F2534AFB1B96CD40000192E7 /* DateTimeHelper.swift in Sources */,
@@ -536,10 +561,13 @@
 				F2EA202B1C89AB9100FC8340 /* TeacherCreateTestViewController.swift in Sources */,
 				F2D780691C8D987700188A54 /* TeacherManualFixedQuestionsInPointTableViewController.swift in Sources */,
 				F28F06601C95077200B79866 /* TeachDayHelper.swift in Sources */,
+				F2186AB21CA4F0E700D72DCF /* QuestionContentTableViewCell.swift in Sources */,
+				F2186AAF1CA4D3BF00D72DCF /* TeacherQuestionsInKnowledgePointResultTableViewController.swift in Sources */,
 				F23457D11BC36CBE00AD0B87 /* TeacherUnfinishedTestInfoTableViewController.swift in Sources */,
 				F24252B61CA12E0B004F7E07 /* TeacherTestResultViewController.swift in Sources */,
 				F2AE1A231C913C040020FD4E /* MyProgressBar.swift in Sources */,
 				F20A68AF1B81B478000BFF24 /* TeacherBrowseViewController.swift in Sources */,
+				F2697E011CA528F800A26D74 /* StudentTestResultInfoTableViewCell.swift in Sources */,
 				F23EE3891BAA970200B75501 /* TeacherSeatViewController.swift in Sources */,
 				F246DEB71B9BDA180058DEA6 /* TeacherTestHelper.swift in Sources */,
 				F2C77C1D1BC0A5E3004FEBF9 /* TeacherCreateNotificationTableViewController.swift in Sources */,

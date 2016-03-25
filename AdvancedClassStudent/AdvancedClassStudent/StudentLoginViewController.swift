@@ -22,7 +22,7 @@ class StudentLoginViewController: UIViewController {
         self.pwdTextfield.text = "123"
          
         loginButton.layer.cornerRadius = 10.0
-        let tapBackgroundGesture = UITapGestureRecognizer(target: self, action: "tapBackground")
+        let tapBackgroundGesture = UITapGestureRecognizer(target: self, action: #selector(StudentLoginViewController.tapBackground))
         self.view.addGestureRecognizer(tapBackgroundGesture)
         // Do any additional setup after loading the view.
     }

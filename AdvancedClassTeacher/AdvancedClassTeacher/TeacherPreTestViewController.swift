@@ -11,6 +11,7 @@ import UIKit
 class TeacherPreTestViewController: UIViewController {
      
     weak var currentCourse = TeacherCourse.currentCourse
+    weak var courseHelper = TeacherCourseHelper.defaultHelper
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -20,7 +21,7 @@ class TeacherPreTestViewController: UIViewController {
     
     //点击获取题目按钮
     @IBAction func getAllTests(sender: AnyObject) {
-        currentCourse?.getSyllabus{
+        self.courseHelper!.getSyllabus(self.currentCourse!){
             [unowned self]
             _ in
             self.performSegueWithIdentifier("ShowPoints", sender: self)

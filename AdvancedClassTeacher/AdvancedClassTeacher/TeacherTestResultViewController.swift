@@ -13,6 +13,7 @@ class TeacherTestResultViewController: UIViewController, UITableViewDelegate, UI
     weak var test = TeacherTestHelper.defaultHelper.currentTest
     weak var testResult = TeacherTestHelper.defaultHelper.currentTest.results
     weak var testHelper = TeacherTestHelper.defaultHelper
+    weak var knowledgePointResult: KnowledgePointResult!
     @IBOutlet var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,11 +41,23 @@ class TeacherTestResultViewController: UIViewController, UITableViewDelegate, UI
         let point = TeacherCourse.currentCourse.syllabus.knowledgePoints[pointId]!
 
         cell.textLabel?.text = point.content
-        cell.detailTextLabel?.text = "\(self.testResult!.knowledgePointResultsSorted[indexPath.row].correctRatio)%"
+        cell.detailTextLabel?.text = self.testResult!.knowledgePointResultsSorted[indexPath.row].correctRatio.toPercentageString()
+        
         return cell
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.knowledgePointResult = self.test!.results.knowledgePointResultsSorted[indexPath.row]
 
+        self.performSegueWithIdentifier("ShowKnowledgePointResult", sender: self)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "ShowKnowledgePointResult"{
+            let vc = segue.destinationViewController as! TeacherQuestionsInKnowledgePointResultTableViewController
+            vc.knowledgePointResult =  self.knowledgePointResult
+        }
+    }
     
 
 }

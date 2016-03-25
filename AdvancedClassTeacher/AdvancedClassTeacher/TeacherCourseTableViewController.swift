@@ -10,7 +10,8 @@ import UIKit
 
 class TeacherCourseTableViewController: UITableViewController {
 
-    var authHelper = TeacherAuthenticationHelper.defaultHelper
+    weak var authHelper = TeacherAuthenticationHelper.defaultHelper
+    weak var courseHelper = TeacherCourseHelper.defaultHelper
     override func viewDidLoad() {
         super.viewDidLoad()
         //self.navigationController!.interactivePopGestureRecognizer?.enabled = false
@@ -29,20 +30,21 @@ class TeacherCourseTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.authHelper.me.courses.count
+        return self.authHelper!.me.courses.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
         
-        cell.textLabel?.text = self.authHelper.me.courses[indexPath.row].name
+        cell.textLabel?.text = self.authHelper!.me.courses[indexPath.row].name
         
         return cell
     }
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        TeacherCourse.currentCourse = self.authHelper.me.courses[indexPath.row]
+        TeacherCourse.currentCourse = self.authHelper!.me.courses[indexPath.row]
         self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        TeacherCourse.currentCourse.getSyllabus{
+        
+        self.courseHelper?.getCourseDetails(TeacherCourse.currentCourse){
             [unowned self]
             error in
             if let error = error{
@@ -51,6 +53,9 @@ class TeacherCourseTableViewController: UITableViewController {
             }
             self.performSegueWithIdentifier("enterMain", sender: self)
         }
+        
+        
+        
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

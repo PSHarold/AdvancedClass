@@ -11,32 +11,18 @@ import UIKit
 class TeacherManualFixedQuestionsConfirmTableViewController: UITableViewController {
     weak var test: TeacherTest?
     weak var helper = TeacherTestHelper.defaultHelper
-    var _randomSwitch: UISwitch!
-    var randomSwitch: UISwitch!{
-        get{
-            return self.randomSwitch
-        }
-        set{
-            if self._randomSwitch != nil{
-                return
-            }
-            self._randomSwitch = newValue
-            self._randomSwitch.on = self.isRandom
-            self._randomSwitch.addTarget(self, action: #selector(TeacherManualFixedQuestionsConfirmTableViewController.randomSwitched(_:)), forControlEvents: .ValueChanged)
-            
-        }
-    }
     
     @IBAction func tapped(sender: AnyObject) {
         self.performSegueWithIdentifier("Next", sender: self)
     }
     var isRandom = false
     var editButton: UIBarButtonItem!
-    func randomSwitched(randomSwitch: UISwitch){
-        self.isRandom = randomSwitch.on
+    func randomSwitched(isRandom: Bool){
+        self.isRandom = isRandom
         self.editButton?.title = "编辑"
         self.tableView?.setEditing(false, animated: true)
-       
+        
+        self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: .None)
         
     }
     
@@ -65,7 +51,7 @@ class TeacherManualFixedQuestionsConfirmTableViewController: UITableViewControll
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0{
-            return 1
+            return 2
         }
         else{
             return self.test!.questionsFixed.count
@@ -75,9 +61,25 @@ class TeacherManualFixedQuestionsConfirmTableViewController: UITableViewControll
    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.section == 0{
-            let cell = self.tableView.dequeueReusableCellWithIdentifier("randomCell", forIndexPath: indexPath)
-            let randomSwitch = cell.viewWithTag(666) as! UISwitch
-            self.randomSwitch = randomSwitch
+            let cell = self.tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
+            if indexPath.row == 0{
+                cell.textLabel?.text = "随机顺序"
+                if self.isRandom{
+                    cell.accessoryType = .Checkmark
+                }
+                else{
+                    cell.accessoryType = .None
+                }
+            }
+            else{
+                cell.textLabel?.text = "固定顺序"
+                if self.isRandom{
+                    cell.accessoryType = .None
+                }
+                else{
+                    cell.accessoryType = .Checkmark
+                }
+            }
             return cell
         }
         
@@ -88,6 +90,18 @@ class TeacherManualFixedQuestionsConfirmTableViewController: UITableViewControll
         return cell
     }
 
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.section == 0{
+            if indexPath.row == 0{
+                self.randomSwitched(true)
+            }
+            else{
+                self.randomSwitched(false)
+            }
+        }
+    }
+    
     override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         if indexPath.section == 0 {
             return false
@@ -130,4 +144,14 @@ class TeacherManualFixedQuestionsConfirmTableViewController: UITableViewControll
         }
     }
     
+    override func tableView(tableView: UITableView, targetIndexPathForMoveFromRowAtIndexPath sourceIndexPath: NSIndexPath, toProposedIndexPath proposedDestinationIndexPath: NSIndexPath) -> NSIndexPath {
+        if sourceIndexPath.section != proposedDestinationIndexPath.section {
+            var row = 0
+            if sourceIndexPath.section < proposedDestinationIndexPath.section {
+                row = self.tableView(tableView, numberOfRowsInSection: sourceIndexPath.section) - 1
+            }
+            return NSIndexPath(forRow: row, inSection: sourceIndexPath.section)
+        }
+        return proposedDestinationIndexPath
+    }
 }

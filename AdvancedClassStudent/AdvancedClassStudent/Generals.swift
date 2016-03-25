@@ -11,6 +11,7 @@ import SwiftyJSON
 import Alamofire
 import UIKit
 var alamofireManager: Alamofire.Manager!
+
 let BASE_URL = TARGET_IPHONE_SIMULATOR == 0 ? "http://192.168.2.1:5000" : "http://localhost:5000"
 //let BASE_URL = "http://localhost:5000"
 let ROLE_FOR_STUDENT = 2
@@ -62,7 +63,7 @@ extension UIViewController{
     }
     
     func showError(error: CError, hideAfter: NSTimeInterval=1.0){
-        self.showHudWithText(parseErrorString(error), hideAfter: hideAfter)
+        self.showHudWithText(error.description, hideAfter: hideAfter)
     }
     
     func hideHud(){

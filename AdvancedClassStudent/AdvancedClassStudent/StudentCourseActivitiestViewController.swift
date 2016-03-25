@@ -30,7 +30,7 @@ class StudentCourseActivitiestViewController: UIViewController{
     let hud = MBProgressHUD()
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.chooseSeatButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "chooseSeat"))
+        self.chooseSeatButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(StudentCourseActivitiestViewController.chooseSeat)))
         self.chooseSeatButton.layer.masksToBounds = true
         self.chooseSeatButton.layer.cornerRadius = 10.0
         self.chooseSeatButton.layer.borderWidth = 0.3
@@ -58,7 +58,7 @@ class StudentCourseActivitiestViewController: UIViewController{
                 case .SEAT_CHOOSING_NOT_AVAILABLE_YET:
                     if self.timer == nil{
                         self.remainingSeconds = json["remaining_secs"].intValue
-                        self.timer = NSTimer(timeInterval: 1.0, target: self, selector: "tick", userInfo: nil, repeats: true)
+                        self.timer = NSTimer(timeInterval: 1.0, target: self, selector: #selector(StudentCourseActivitiestViewController.tick), userInfo: nil, repeats: true)
                         NSRunLoop.currentRunLoop().addTimer(self.timer!, forMode: NSRunLoopCommonModes)
                     }
                 case .COURSE_ALREADY_OVER:

@@ -14,7 +14,7 @@ protocol TeacherNewTestDelegate{
     func questionRemoved(currentQuestionNum: Int)
 }
 
-class TeacherTestHelper{
+@objc class TeacherTestHelper: NSObject{
     
     static var _defaultHelper: TeacherTestHelper?
     static var defaultHelper:TeacherTestHelper{
@@ -106,7 +106,8 @@ class TeacherTestHelper{
                 [unowned self]
                 (error, json) in
                 if error == nil{
-                    test.results = TestResult(json: json["results"])
+                    test.results = TestResult()
+                    test.results.getResultsFromJSON(json["results"])
                     test.resultAcquired = true
                 }
                 
@@ -114,5 +115,31 @@ class TeacherTestHelper{
             }
         }
     }
+    
+    func getUntakenStudents(test: TeacherTest, completionHandler: ResponseMessageHandler){
+        if !test.finished{
+            completionHandler(error: CError.TEST_STILL_ONGOING)
+            return
+        }
+        if test.results == nil{
+            test.results = TestResult()
+        }
+        if test.results.untakenStudents != nil{
+            completionHandler(error: nil)
+        }
+        else{
+            self.authHelper!.getResponsePOST(RequestType.GET_UNTAKEN_STUDENTS, postBody: ["test_id": test.testId], subIdRequired: true){
+                (error, json) in
+                if error == nil{
+                    test.results.getUntakenStudentFromJSON(json, allStudent: TeacherCourse.currentCourse.studentIds)
+                }
+                completionHandler(error: error)
+            }
+        }
+        
+        
+    }
+
+    
     
 }

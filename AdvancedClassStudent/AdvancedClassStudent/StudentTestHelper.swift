@@ -33,7 +33,7 @@ class StudentTestHelper {
     
     func getQuestionsInUntakenTest(test: StudentTest, completionHandler: ResponseMessageHandler){
         let authHelper = StudentAuthenticationHelper.defaultHelper
-        authHelper.getResponse(RequestType.GET_QUESTIONS_IN_TEST, postBody: ["test_id": test.testId], courseIdRequired: true){
+        authHelper.getResponsePOST(RequestType.GET_QUESTIONS_IN_TEST, postBody: ["test_id": test.testId], subIdRequired: true){
          //   [unowned self]
             (error, json) in
             test.drop()
@@ -48,7 +48,7 @@ class StudentTestHelper {
    
     func postTestAnswers(test: StudentTest, completionHandler: ResponseMessageHandler){
         let authHelper = StudentAuthenticationHelper.defaultHelper
-        authHelper.getResponse(RequestType.POST_TEST_ANSWERS, postBody: test.toDict(), courseIdRequired: true){
+        authHelper.getResponsePOST(RequestType.POST_TEST_ANSWERS, postBody: test.toDict(), subIdRequired: true){
            // [unowned self]
             (error, json) in 
             if error != nil{
@@ -60,7 +60,7 @@ class StudentTestHelper {
     
     func getUnfinishedTestsInCourse(course: StudentCourse, completionHandler: ResponseMessageHandler){
         let authHelper = StudentAuthenticationHelper.defaultHelper
-        authHelper.getResponse(RequestType.GET_UNFINISHED_TESTS, postBody: ["course_id": course.courseId, "sub_id": course.subId]){
+        authHelper.getResponsePOST(RequestType.GET_UNFINISHED_TESTS, postBody: ["course_id": course.courseId, "sub_id": course.subId]){
             (error, json) in
             if error == nil{
                 for (_, test_json) in json["tests"]{

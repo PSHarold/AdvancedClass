@@ -44,7 +44,7 @@ class StudentAnswerQuestionsViewController: UIViewController, UIScrollViewDelega
         self.scrollView.contentSize = CGSizeMake(self.view.bounds.width*CGFloat(self.test.questionNum), 0)
         self.questionViewControllers = [StudentBaseQuestionTableViewController?](count: self.test.questionNum, repeatedValue: nil)
         
-        self.timer = NSTimer(timeInterval: 1.0, target: self, selector: "tick", userInfo: nil, repeats: true)
+        self.timer = NSTimer(timeInterval: 1.0, target: self, selector: #selector(StudentAnswerQuestionsViewController.tick), userInfo: nil, repeats: true)
        // NSRunLoop.currentRunLoop().addTimer(self.timer!, forMode: NSRunLoopCommonModes)
         self.scrollToPage(0)
         self.scrollView.backgroundColor = UIColor.blackColor()
@@ -148,7 +148,8 @@ class StudentAnswerQuestionsViewController: UIViewController, UIScrollViewDelega
         else if self.timeLimit <= 30{
             self.timeLabel.textColor = UIColor.orangeColor()
         }
-        timeLabel.text = "倒计时：" + (self.test.timeLimit--).toTimeString()
+        timeLabel.text = "倒计时：" + (self.test.timeLimit).toTimeString()
+        self.test.timeLimit -= 1
         if timeLimit < 0{
             self.timer!.invalidate()
             if self.presentedViewController != nil{

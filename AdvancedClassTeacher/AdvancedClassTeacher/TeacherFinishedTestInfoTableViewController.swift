@@ -25,7 +25,19 @@ class TeacherFinishedTestInfoTableViewController: UITableViewController {
                 }
             }
         }
+        else if indexPath.section == 3{
+            self.testHelper?.getUntakenStudents(self.test!){
+                error in
+                if let error = error{
+                    self.showError(error)
+                }
+                else{
+                    self.performSegueWithIdentifier("ShowStudents", sender: self)
+                }
+            }
+        }
     }
+    
     
 
 }

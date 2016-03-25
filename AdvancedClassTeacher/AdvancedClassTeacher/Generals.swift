@@ -38,6 +38,8 @@ enum RequestType: String{
     case GET_UNFINISHED_TESTS = "/course/test/getUnfinishedTests"
     case GET_QUESTIONS_IN_LIST = "/course/question/getQuestionsInList"
     case GET_TEST_RESULTS = "/course/test/result/getTestResults"
+    case GET_STUDENTS_IN_COURES = "/course/getStudentIds"
+    case GET_UNTAKEN_STUDENTS = "/course/test/result/getUntakenStudents"
 }
 func getRequestFor(requestType:RequestType, method:Alamofire.Method, postBody:[String: AnyObject]?, headers:[String:String]?) -> Request{
     return alamofireManager.request(method, BASE_URL + requestType.rawValue, parameters: postBody, encoding: .JSON, headers: headers)
@@ -63,7 +65,7 @@ extension UIViewController{
     }
     
     func showError(error: CError, hideAfter: NSTimeInterval=1.0){
-        self.showHudWithText(parseErrorString(error), hideAfter: hideAfter)
+        self.showHudWithText(error.description, hideAfter: hideAfter)
     }
     
     func hideHud(){
@@ -116,3 +118,16 @@ extension NSDate{
     }
     
 }
+
+extension Double {
+    func toPercentageString() -> String{
+        let formatter = NSNumberFormatter()
+        formatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
+        // you can set the minimum fraction digits to 0
+        formatter.minimumFractionDigits = 0
+        // and set the maximum fraction digits to 1
+        formatter.maximumFractionDigits = 2
+        return "\(formatter.stringFromNumber(self*100) ?? "0")%"
+    }
+}
+

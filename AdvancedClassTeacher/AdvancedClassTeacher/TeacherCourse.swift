@@ -164,7 +164,8 @@ class TeacherCourse {
     var timesAndRooms: TimesAndRooms
     var unfinishedTests = [TeacherTest]()
     var unfinishedTestsDict = [String: TeacherTest]()
-    var students = [Student]()
+    var students = [String: Student]()
+    var studentIds = [String]()
     var notifications = [Notification]()
     var notificationsAcquired = false
     var syllabus: Syllabus!
@@ -175,49 +176,7 @@ class TeacherCourse {
         self.timesAndRooms = TimesAndRooms(json: json["times"])
     }
     
-    func getNotifications(completionHandler: (error: CError?) -> Void){
-        if self.notificationsAcquired{
-            completionHandler(error: nil)
-            return
-        }
-        else{
-            TeacherAuthenticationHelper.defaultHelper.getResponsePOST(RequestType.GET_NOTIFICAIONS, postBody: ["course_id":self.courseId,"sub_id":self.subId]){
-                (error, json) in
-                if error == nil{
-                    for (_, n) in json["notifications"]{
-                        let notification = Notification(json: n)
-                        notification.courseName = self.name
-                        self.notifications.append(notification)
-                    }
-                    self.notificationsAcquired = true
-                }
-                completionHandler(error: error)
-                return
-            }
-        }
-    }
-    
-    
-    
-    
-    
-    func getSyllabus(completionHandler: (error: CError?) -> Void){
-        if self.syllabus != nil{
-            completionHandler(error: nil)
-            return
-        }
-        else{
-            TeacherAuthenticationHelper.defaultHelper.getResponsePOST(RequestType.GET_SYLLABUS, postBody: ["course_id": self.courseId, "sub_id": self.subId]){
-                (error, json) in
-                if error == nil{
-                    self.syllabus = Syllabus(json: json)
-                }
-                completionHandler(error: error)
-            }
-        }
-    }
-    
-    
+       
     func refreshNotifications(){
         
     }

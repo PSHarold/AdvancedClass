@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-enum CError: Int{
+enum CError: Int {
     case NETWORK_ERROR
     case NEED_TO_LOGIN_AGAIN
     
@@ -71,86 +71,115 @@ enum CError: Int{
     case TEST_STILL_ONGOING = 933
     case YOU_HAVENT_TAKEN_THE_TEST = 934
     case BAD_STUDENT_TEST_RESULT = 935
-}
-
-func parseErrorString(error: CError) -> String{
-    switch error{
-    case .NETWORK_ERROR:
-        return "网络错误！"
-    case .FORBIDDEN:
-        return "无权限！"
-    case .WRONG_PASSWORD:
-        return "密码错误！"
-    case .ALREADY_LOGGED_IN:
-        return "请不要重复登录！"
-    case .USER_NOT_FOUND:
-        return "用户名错误！"
-    case .MAIN_COURSE_NOT_FOUND:
-        return "找不到此课程！"
-    case .SUB_COURSE_NOT_FOUND:
-        return "找不到此讲台！"
-    case .KNOWLEDGE_POINT_NOT_FOUND:
-        return "找不到此知识点！"
-    case .QUESTION_NOT_FOUND:
-        return "找不到此题目！"
-    case .NOTIFICATION_NOT_FOUND:
-        return "找不到此通知！"
-    case .SEAT_NOT_FOUND:
-        return "找不到此座位！"
-    case .TEST_NOT_FOUND:
-        return "找不到此测验！"
-    case .ROOM_NOT_FOUND:
-        return "找不到此教室！"
-    case .SCHOOL_NOT_FOUND:
-        return "找不到此学院！"
-    case .DEPARTMENT_NOT_FOUND:
-        return "找不到此系！"
-    case .MAJOR_NOT_FOUND:
-        return "找不到此专业！"
-    case .CLASS_NOT_FOUND:
-        return "找不到此班级！"
-    case .USER_ALREADY_EXISTS:
-        return "用户已存在！"
-    case .MAIN_COURSE_ALREADY_EXISTS:
-        return "课程已存在！"
-    case .SUB_COURSE_ALREADY_EXISTS:
-        return "讲台已存在！"
-    case .KNOWLEDGE_POINT_ALREADY_EXISTS:
-        return "知识点已存在！"
-    case .QUESTION_ALREADY_EXISTS:
-        return "题目已存在！"
-    case .NOTIFICATION_ALREADY_EXISTS:
-        return "通知已存在！"
-    case .SEAT_ALREADY_EXISTS:
-        return "座位已存在！"
-    case .TEST_ALREADY_EXISTS:
-        return "测验已存在！"
-    case .SEAT_ALREADY_TAKEN:
-        return "座位被抢走了！"
-    case .SEAT_ALREADY_CHOSEN:
-        return "你已经选了此座位！"
-    case .SEAT_ALREADY_FREE_OR_TAKEN:
-        return "座位已空！"
-
-    case .SEAT_CHOOSING_NOT_AVAILABLE_YET:
-        return "选座还没有开始！"
-    case .COURSE_ALREADY_BEGUN:
-        return "已经上课了！"
-    case .COURSE_IS_NOT_ON_TODAY:
-        return "今天没有这门课！"
-    case .COURSE_ALREADY_OVER:
-        return "今天这节课已经结束了！"
-    case .COURSE_NOT_BEGUN:
-        return "这节课还没有开始！"
-    case .YOU_ARE_TOO_LATE:
-        return "你迟到太久！"
-    case .YOU_DO_NOT_HAVE_THIS_COURSE:
-        return "你没有权限查看这个课程！"
-    default:
-        return "未知错误"
-    }
     
+    
+    
+    
+    
+    var description: String{
+        switch self{
+        case .NETWORK_ERROR:
+            return "网络错误！"
+        case .NEED_TO_LOGIN_AGAIN:
+            return ""
+            
+        case .FORBIDDEN:
+            return "无权限！"
+        case .WRONG_PASSWORD:
+            return "密码错误！"
+        case .ALREADY_LOGGED_IN:
+            return "请不要重复登录！"
+            
+        case .RESOURCE_NOT_FOUND:
+            return ""
+        case .USER_NOT_FOUND:
+            return "用户不存在！"
+        case .MAIN_COURSE_NOT_FOUND:
+            return "找不到此课程！"
+        case .SUB_COURSE_NOT_FOUND:
+            return "找不到此讲台！"
+        case .KNOWLEDGE_POINT_NOT_FOUND:
+            return "找不到此知识点！"
+        case .QUESTION_NOT_FOUND:
+            return "找不到此题目！"
+        case .NOTIFICATION_NOT_FOUND:
+            return "找不到此通知！"
+        case .SEAT_NOT_FOUND:
+            return "找不到此座位！"
+        case .TEST_NOT_FOUND:
+            return "找不到此测验！"
+        case .ROOM_NOT_FOUND:
+            return "找不到此教室！"
+        case .SCHOOL_NOT_FOUND:
+            return "找不到此学院！"
+        case .DEPARTMENT_NOT_FOUND:
+            return "找不到此系！"
+        case .MAJOR_NOT_FOUND:
+            return "找不到此专业！"
+        case .CLASS_NOT_FOUND:
+            return "找不到此班级！"
+            
+        case .RESOURCE_ALREADY_EXISTS:
+            return ""
+        case .USER_ALREADY_EXISTS:
+            return "用户已存在！"
+        case .MAIN_COURSE_ALREADY_EXISTS:
+            return "课程已存在！"
+        case .SUB_COURSE_ALREADY_EXISTS:
+            return "讲台已存在！"
+        case .KNOWLEDGE_POINT_ALREADY_EXISTS:
+            return "知识点已存在！"
+        case .QUESTION_ALREADY_EXISTS:
+            return "题目已存在！"
+        case .NOTIFICATION_ALREADY_EXISTS:
+            return "通知已存在！"
+        case .SEAT_ALREADY_EXISTS:
+            return "座位已存在！"
+        case .TEST_ALREADY_EXISTS:
+            return "测验已存在！"
+        case .ROOM_ALREADY_EXISTS:
+            return ""
+            
+        case .SEAT_ALREADY_TAKEN:
+            return "座位被抢走了！"
+        case .SEAT_ALREADY_CHOSEN:
+            return "你已经选了此座位！"
+        case .SEAT_ALREADY_FREE_OR_TAKEN:
+            return "座位已空！"
+        case .SEAT_TOKEN_EXPIRED:
+            return ""
+        case .BAD_SEAT_TOKEN:
+            return ""
+        case .SEAT_CHOOSING_NOT_AVAILABLE_YET:
+            return "选座还没有开始！"
+        case .COURSE_ALREADY_BEGUN:
+            return "已经上课了！"
+        case .COURSE_IS_NOT_ON_TODAY:
+            return "今天没有这门课！"
+        case .COURSE_ALREADY_OVER:
+            return "今天这节课已经结束了！"
+        case .COURSE_NOT_BEGUN:
+            return "这节课还没有开始！"
+        case .YOU_ARE_TOO_LATE:
+            return "你迟到太久！"
+        case .RANDOM_TEST_NOT_SET:
+            return ""
+        case .YOU_DO_NOT_HAVE_THIS_COURSE:
+            return "你没有权限查看这个课程！"
+        
+        case .TEST_EXPIRED:
+            return "已截止！"
+        case .TEST_HAVENT_BEGUN:
+            return "测验还未开始！"
+        case .TEST_STILL_ONGOING:
+            return "测验还未结束！"
+        default:
+            return "未知错误"
+        }
+        
+    }
 }
+
 
 func parseJSON(json:JSON) -> CError?{
     return CError(rawValue: json["error_code"].intValue)

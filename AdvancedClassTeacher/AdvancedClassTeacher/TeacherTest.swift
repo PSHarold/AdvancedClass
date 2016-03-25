@@ -176,10 +176,14 @@ class QuestionResult{
     var totalCorrect = 0
     var studentsByAnswer = [String: [String]]()
     var answersByStudent = [String: [String]]()
+    var answersCount = [String: Int]()
     var correctRatio: Double = 0
     
     init(json: JSON){
-        self.questionId = json["question_id"].stringValue
+        
+        for (answer, count) in json["answers"]{
+            self.answersCount[answer] = count.intValue
+        }
         self.totalTaken = json["total_taken"].intValue
         self.totalCorrect = json["total_correct"].intValue
         self.correctRatio = self.totalTaken == 0 ? 0.0 : Double(self.totalCorrect)/Double(self.totalTaken)
@@ -192,8 +196,9 @@ class KnowledgePointResult{
     var totalCorrect = 0
     var correctRatio: Double = 0
     var questionResults = [String: QuestionResult]()
+    var questionResultsSorted = [QuestionResult]()
     init(json: JSON){
-        self.knowledgePointId = json["point_id"].stringValue
+       
         self.totalTaken = json["total_taken"].intValue
         self.totalCorrect = json["total_correct"].intValue
         self.correctRatio = self.totalTaken == 0 ? 0.0 : Double(self.totalCorrect)/Double(self.totalTaken)
@@ -203,27 +208,54 @@ class KnowledgePointResult{
 class TestResult {
     var tempQuestionIds = [String]()
     var questionResults = [String: QuestionResult]()
+    var questionResultsSorted = [QuestionResult]()
     var knowledgePointResults = [String: KnowledgePointResult]()
     var knowledgePointResultsSorted = [KnowledgePointResult]()
-    init(json: JSON){
-        for (_, poiontResultDict) in json["point_results"]{
+    var untakenStudents: [String]!
+    var takenStudents: [String]!
+    
+    init(){}
+    
+    func getUntakenStudentFromJSON(json: JSON, allStudent: [String]){
+        self.untakenStudents = [String]()
+        for (_, studentId) in json["students"]{
+            self.untakenStudents.append(studentId.stringValue)
+        }
+        let untaken = Set<String>(self.untakenStudents)
+        let all = Set<String>(allStudent)
+        self.takenStudents = [String](all.subtract(untaken))
+    }
+    
+    func getResultsFromJSON(json: JSON){
+        for (knowledgePointId, poiontResultDict) in json["point_results"]{
             let p = KnowledgePointResult(json: poiontResultDict)
-            self.knowledgePointResults[p.knowledgePointId] = p
+            self.knowledgePointResults[knowledgePointId] = p
+            p.knowledgePointId = knowledgePointId
             self.knowledgePointResultsSorted.append(p)
         }
-        for (_, questionResult) in json["question_results"]{
+        for (questionId, questionResult) in json["question_results"]{
             let p = QuestionResult(json: questionResult)
-            self.questionResults[p.questionId] = p
-            self.tempQuestionIds.append(p.questionId)
-            
+            self.questionResults[questionId] = p
+            self.tempQuestionIds.append(questionId)
+            p.questionId = questionId
+            self.knowledgePointResults[questionResult["point_id"].stringValue]?.questionResults[questionId] = p
+            self.knowledgePointResults[questionResult["point_id"].stringValue]?.questionResultsSorted.append(p)
+            self.questionResultsSorted.append(p)
         }
         self.knowledgePointResultsSorted.sortInPlace({$0.correctRatio < $1.correctRatio})
+        for p in self.knowledgePointResultsSorted{
+            p.questionResultsSorted.sortInPlace({$0.correctRatio < $1.correctRatio})
+        }
+        self.questionResultsSorted.sortInPlace({$0.correctRatio < $1.correctRatio})
     }
     
     
     
     func getQuestionResult(questionId: String) -> QuestionResult?{
         return self.questionResults[questionId]
+    }
+    func getQuestionResult(question: TeacherQuestion) -> QuestionResult?{
+        return self.questionResults[question.questionId]
     }
 }
 

@@ -64,7 +64,7 @@ class StudentCourse {
             return
         }
         else{
-            StudentAuthenticationHelper.defaultHelper.getResponse(RequestType.GET_NOTIFICAIONS, postBody: ["course_id":self.courseId,"sub_id":self.subId]){
+            StudentAuthenticationHelper.defaultHelper.getResponsePOST(RequestType.GET_NOTIFICAIONS, postBody: ["course_id":self.courseId,"sub_id":self.subId]){
                 (error, json) in
                 if error == nil{
                     for (_, n) in json["notifications"]{
@@ -94,7 +94,7 @@ class StudentCourse {
             return
         }
         let authHelper = StudentAuthenticationHelper.defaultHelper
-        authHelper.getResponse(RequestType.GET_STUDENT, method: .POST, postBody: ["course_id": self.courseId, "sub_id": self.subId, "student_id": studentId], headers: nil, tokenRequired: true){
+        authHelper.getResponsePOST(RequestType.GET_STUDENT, postBody: ["course_id": self.courseId, "sub_id": self.subId, "student_id": studentId]){
             [unowned self]
             (error, json) in
             if error == nil{
