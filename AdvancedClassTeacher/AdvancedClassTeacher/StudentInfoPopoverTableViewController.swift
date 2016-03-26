@@ -17,7 +17,7 @@ class StudentInfoPopoverTableViewController: UITableViewController {
         self.tableView.separatorStyle = .None
     }
     
-    var student: Student!
+    var student: Student?
     
     override var preferredContentSize: CGSize{
         get{
@@ -51,17 +51,17 @@ class StudentInfoPopoverTableViewController: UITableViewController {
         var cell: UITableViewCell
         if indexPath.row == 0{
             cell = self.tableView.dequeueReusableCellWithIdentifier("PhotoCell")!
-            cell.textLabel?.text = self.student.studentId
+            cell.textLabel?.text = self.student?.studentId ?? "未知"
             return cell
         }
         cell = self.tableView.dequeueReusableCellWithIdentifier("TextCell")!
         switch indexPath.row{
         case 1:
             cell.textLabel?.text = "姓名"
-            cell.detailTextLabel?.text = self.student.name == "" ? "无权限" : self.student.name
+            cell.detailTextLabel?.text = self.student?.name ?? "未知"
         case 2:
             cell.textLabel?.text = "班级"
-            cell.detailTextLabel?.text = self.student.className == "" ? "无权限" : self.student.className
+            cell.detailTextLabel?.text = self.student?.className ?? "未知"
         default:
             return cell
         }
@@ -71,5 +71,8 @@ class StudentInfoPopoverTableViewController: UITableViewController {
         return cell
     }
     
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
    
 }

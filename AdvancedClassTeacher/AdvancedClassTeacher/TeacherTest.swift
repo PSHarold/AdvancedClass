@@ -118,16 +118,7 @@ class TeacherTest{
         self.randomType = json["random_type"].intValue
     }
     
-    func getUntakenStudentFromJSON(json: JSON, allStudent: [String]){
-        self.unfinishedStudents = [String]()
-        for (_, studentId) in json["students"]{
-            self.unfinishedStudents.append(studentId.stringValue)
-        }
-        let untaken = Set<String>(self.unfinishedStudents)
-        let all = Set<String>(allStudent)
-        self.finishedStudents = [String](all.subtract(untaken))
-    }
-
+    
     
     func toDict() -> [String: AnyObject]{
         var dict = [String: AnyObject]()

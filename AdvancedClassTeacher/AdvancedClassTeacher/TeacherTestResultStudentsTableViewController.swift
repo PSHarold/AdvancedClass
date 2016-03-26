@@ -47,12 +47,16 @@ class TeacherTestResultStudentsTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
+        var student: Student
         if self.showTaken{
-            cell.textLabel?.text = self.test!.finishedStudents[indexPath.row]
+            student = TeacherCourse.currentCourse.students[self.test!.finishedStudents[indexPath.row]]!
+            
         }
         else{
-            cell.textLabel?.text = self.test!.unfinishedStudents[indexPath.row]
+            student = TeacherCourse.currentCourse.students[self.test!.unfinishedStudents[indexPath.row]]!
         }
+        cell.textLabel?.text = student.name
+        cell.detailTextLabel?.text = student.className + " " + student.studentId
         return cell
     }
     

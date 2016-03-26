@@ -50,25 +50,39 @@ class TeacherCourseHelper{
     }
     
     
-    func getStudentIdsInCourse(course: TeacherCourse, completionHandler: ResponseMessageHandler){
+//    func getStudentIdsInCourse(course: TeacherCourse, completionHandler: ResponseMessageHandler){
+//        let authHelper = TeacherAuthenticationHelper.defaultHelper
+//        authHelper.getResponsePOST(RequestType.GET_STUDENTS_IN_COURES, postBody: ["course_id": course.courseId, "sub_id": course.subId]){
+//            (error, json) in
+//            if error == nil{
+//                for (_, studentId) in json["students"]{
+//                    course.studentIds.append(studentId.stringValue)
+//                }
+//            }
+//            completionHandler(error: error)
+//        }
+//    }
+//    
+    func getStudentsInCourse(course: TeacherCourse, completionHandler: ResponseMessageHandler){
         let authHelper = TeacherAuthenticationHelper.defaultHelper
         authHelper.getResponsePOST(RequestType.GET_STUDENTS_IN_COURES, postBody: ["course_id": course.courseId, "sub_id": course.subId]){
             (error, json) in
             if error == nil{
-                for (_, studentId) in json["students"]{
-                    course.studentIds.append(studentId.stringValue)
+                for (_, student_json) in json["students"]{
+                    let s = Student(json: student_json)
+                    course.students[s.studentId] = s
                 }
             }
             completionHandler(error: error)
         }
+
     }
-    
     func getCourseDetails(course: TeacherCourse, completionHandler: ResponseMessageHandler){
         self.getSyllabus(TeacherCourse.currentCourse){
             [unowned self]
             error in
             if error == nil{
-                self.getStudentIdsInCourse(course){
+                self.getStudentsInCourse(course){
                     error in
                     completionHandler(error: error)
                 }
@@ -76,6 +90,7 @@ class TeacherCourseHelper{
         }
 
     }
+    
     
     
     func getStudent(studentId: String, course: TeacherCourse, completionHandler: ResponseMessageHandler){

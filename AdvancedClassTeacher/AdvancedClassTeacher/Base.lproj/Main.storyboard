@@ -1720,7 +1720,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" textLabel="7TL-Td-aVe" style="IBUITableViewCellStyleDefault" id="cMb-hb-kF0" customClass="StudentTestResultInfoTableViewCell" customModule="AdvancedClassTeacher" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" textLabel="7TL-Td-aVe" detailTextLabel="NSe-xN-qvl" style="IBUITableViewCellStyleSubtitle" id="cMb-hb-kF0" customClass="StudentTestResultInfoTableViewCell" customModule="AdvancedClassTeacher" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cMb-hb-kF0" id="tH8-iw-SOk">
@@ -1728,9 +1728,16 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7TL-Td-aVe">
-                                            <rect key="frame" x="15" y="0.0" width="290" height="43"/>
+                                            <rect key="frame" x="15" y="5" width="32" height="20"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NSe-xN-qvl">
+                                            <rect key="frame" x="15" y="25" width="31" height="14"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -1993,7 +2000,20 @@
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
-                    <navigationItem key="navigationItem" id="tow-zf-GU0"/>
+                    <navigationItem key="navigationItem" id="tow-zf-GU0">
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="search" id="UN1-3k-eIb">
+                                <connections>
+                                    <action selector="searchButtonPressed:" destination="Eag-uH-nen" id="tkL-aH-c0A"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="翻转" id="A4d-J5-WFn">
+                                <connections>
+                                    <action selector="flipSeatMap:" destination="Eag-uH-nen" id="lBV-M7-enY"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
                         <outlet property="seatView" destination="ncp-HE-Ae5" id="j9K-yx-DF9"/>

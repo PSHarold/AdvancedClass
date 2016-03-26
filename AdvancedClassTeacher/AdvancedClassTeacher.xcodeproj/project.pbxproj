@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		D1983FB2D0C92874F4112505 /* Pods_AdvancedClassTeacher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7BCC1F8741C7E25C82D8AF5 /* Pods_AdvancedClassTeacher.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		F202BDD41CA635E300B6356D /* TeacherCourseActivitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F202BDD31CA635E300B6356D /* TeacherCourseActivitiesViewController.swift */; };
+		F202BDD61CA6555600B6356D /* TeacherSeatSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F202BDD51CA6555600B6356D /* TeacherSeatSearchTableViewController.swift */; };
 		F20A565C1B95836D00B8AAB0 /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20A565B1B95836D00B8AAB0 /* ChartViewController.swift */; };
 		F20A56631B96A76A00B8AAB0 /* RandomNumberTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20A56621B96A76A00B8AAB0 /* RandomNumberTableViewController.swift */; };
 		F20A68821B81B400000BFF24 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20A68811B81B400000BFF24 /* AppDelegate.swift */; };
@@ -99,6 +100,7 @@
 		D7BCC1F8741C7E25C82D8AF5 /* Pods_AdvancedClassTeacher.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AdvancedClassTeacher.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9FAF596A6DF4C84B66170C4 /* Pods-AdvancedClassTeacher.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AdvancedClassTeacher.release.xcconfig"; path = "Pods/Target Support Files/Pods-AdvancedClassTeacher/Pods-AdvancedClassTeacher.release.xcconfig"; sourceTree = "<group>"; };
 		F202BDD31CA635E300B6356D /* TeacherCourseActivitiesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherCourseActivitiesViewController.swift; sourceTree = "<group>"; };
+		F202BDD51CA6555600B6356D /* TeacherSeatSearchTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherSeatSearchTableViewController.swift; sourceTree = "<group>"; };
 		F20A565B1B95836D00B8AAB0 /* ChartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
 		F20A56621B96A76A00B8AAB0 /* RandomNumberTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomNumberTableViewController.swift; sourceTree = "<group>"; };
 		F20A687C1B81B400000BFF24 /* AdvancedClassTeacher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AdvancedClassTeacher.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -298,6 +300,7 @@
 				F246DEB81B9BDAD00058DEA6 /* TeacherQuestionsInTestTableViewController.swift */,
 				F2CC88731CA6319600FE92C6 /* TeacherSeatHelper.swift */,
 				F2CC88751CA631F600FE92C6 /* TeacherSeatViewController.swift */,
+				F202BDD51CA6555600B6356D /* TeacherSeatSearchTableViewController.swift */,
 				F25B8DFC1B9D8B8D00A2587E /* TeacherStudentHelper.swift */,
 				F2FA432E1C88290F008D93C8 /* TeacherTest */,
 				F21313C61B9A89E80088C483 /* TeacherTest.swift */,
@@ -569,6 +572,7 @@
 				F2329FED1BC20E2F006A428F /* TestDateTimeSettingsTableViewController.swift in Sources */,
 				F2EA202B1C89AB9100FC8340 /* TeacherCreateTestViewController.swift in Sources */,
 				F2D780691C8D987700188A54 /* TeacherManualFixedQuestionsInPointTableViewController.swift in Sources */,
+				F202BDD61CA6555600B6356D /* TeacherSeatSearchTableViewController.swift in Sources */,
 				F28F06601C95077200B79866 /* TeachDayHelper.swift in Sources */,
 				F2186AB21CA4F0E700D72DCF /* QuestionContentTableViewCell.swift in Sources */,
 				F2186AAF1CA4D3BF00D72DCF /* TeacherQuestionsInKnowledgePointResultTableViewController.swift in Sources */,

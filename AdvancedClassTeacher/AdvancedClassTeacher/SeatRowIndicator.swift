@@ -74,7 +74,12 @@ class RowIndicator: UIView {
             changeCenterWithRowNumber(i+1, label: label)
         }
         
-        
+    }
+    
+    func flip(){
+        for label in self.labels{
+            label.text = "\(self.rowNumber - Int(label.text!)! + 1)"
+        }
     }
     
     

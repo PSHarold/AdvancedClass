@@ -147,6 +147,7 @@ class SeatView: UIView, UIScrollViewDelegate,UITableViewDelegate{
             self.platformLabel.center.y = self.platformLabel.center.y - (self.seatsTotalHeight + 2 * self.platformSpace + self.platformHeight)
         }
         self.up = !self.up
+        self.rowIndicator.flip()
     }
     func initMiniMap(){
         

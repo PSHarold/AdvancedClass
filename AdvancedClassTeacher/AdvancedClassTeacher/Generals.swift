@@ -39,9 +39,10 @@ enum RequestType: String{
     case GET_FINISHED_TESTS = "/course/test/getFinishedTests"
     case GET_QUESTIONS_IN_LIST = "/course/question/getQuestionsInList"
     case GET_TEST_RESULTS = "/course/test/result/getTestResults"
-    case GET_STUDENTS_IN_COURES = "/course/getStudentIds"
+    case GET_STUDENTS_IN_COURES = "/course/getStudents"
     case GET_UNFINISHED_STUDENTS = "/course/test/result/getUnfinishedStudents"
     case GET_STUDENT = "/course/getStudentInfo"
+    
 }
 func getRequestFor(requestType:RequestType, method:Alamofire.Method, postBody:[String: AnyObject]?, headers:[String:String]?) -> Request{
     return alamofireManager.request(method, BASE_URL + requestType.rawValue, parameters: postBody, encoding: .JSON, headers: headers)

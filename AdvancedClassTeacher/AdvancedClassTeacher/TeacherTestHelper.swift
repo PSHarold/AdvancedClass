@@ -140,6 +140,9 @@ protocol TeacherNewTestDelegate{
         }
     }
     
+    
+
+    
     func getUntakenStudents(test: TeacherTest, completionHandler: ResponseMessageHandler){
         if test.finished && test.unfinishedStudents != nil{
             completionHandler(error: nil)
@@ -148,7 +151,13 @@ protocol TeacherNewTestDelegate{
             self.authHelper!.getResponsePOST(RequestType.GET_UNFINISHED_STUDENTS, postBody: ["test_id": test.testId], subIdRequired: true){
                 (error, json) in
                 if error == nil{
-                    test.getUntakenStudentFromJSON(json, allStudent: TeacherCourse.currentCourse.studentIds)
+                    test.unfinishedStudents = [String]()
+                    for (_, studentId) in json["students"]{
+                        test.unfinishedStudents.append(studentId.stringValue)
+                    }
+                    let untaken = Set<String>(test.unfinishedStudents)
+                    let all = Set<String>(TeacherCourse.currentCourse.students.keys)
+                    test.finishedStudents = [String](all.subtract(untaken))
                 }
                 completionHandler(error: error)
             }

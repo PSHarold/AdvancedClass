@@ -8,10 +8,10 @@
 
 import UIKit
 
-class TeacherSeatViewController: UIViewController, SeatViewDataSource, SeatViewDelegate, UIPopoverPresentationControllerDelegate{
+class TeacherSeatViewController: UIViewController, SeatViewDataSource, SeatViewDelegate, UIPopoverPresentationControllerDelegate, UISearchBarDelegate, UISearchControllerDelegate{
     
     var seatHelper = TeacherSeatHelper.defaultHelper
-    var timer:NSTimer!
+    var timer: NSTimer!
     var seatButtonDict = Dictionary<String,SeatButton>()
     var popoverViewController: StudentInfoPopoverTableViewController!
     var myPopoverPresentationController: UIPopoverPresentationController!
@@ -20,17 +20,25 @@ class TeacherSeatViewController: UIViewController, SeatViewDataSource, SeatViewD
     weak var courseHelper = TeacherCourseHelper.defaultHelper
     @IBOutlet weak var seatView:SeatView!
     var lock = false
-    
-    
+    var resultsTableViewController = TeacherSeatSearchTableViewController()
+    var filteredStudentIds: [String]!
     
     func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
         return .None
     }
     
+    var searchBar = UISearchBar()
+    var searchBarButtonItem: UIBarButtonItem?
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        super.viewDidLoad()
+      
+        
+        searchBar.delegate = self
+        searchBar.searchBarStyle = UISearchBarStyle.Minimal
+        searchBarButtonItem = navigationItem.rightBarButtonItem
         seatView.delegate = self
         seatView.dataSource = self
         self.popoverViewController = self.storyboard?.instantiateViewControllerWithIdentifier("StudentInfo") as! StudentInfoPopoverTableViewController
@@ -43,6 +51,37 @@ class TeacherSeatViewController: UIViewController, SeatViewDataSource, SeatViewD
         self.popoverViewController.modalPresentationStyle = .Popover
     }
     
+    @IBAction func searchButtonPressed(sender: AnyObject) {
+        showSearchBar()
+    }
+    
+    
+    func showSearchBar() {
+        searchBar.alpha = 0
+        navigationItem.titleView = searchBar
+        navigationItem.setLeftBarButtonItem(nil, animated: true)
+        UIView.animateWithDuration(0.5, animations: {
+            self.searchBar.alpha = 1
+            }, completion: { finished in
+                self.searchBar.becomeFirstResponder()
+        })
+    }
+    
+    func hideSearchBar() {
+        navigationItem.setLeftBarButtonItem(searchBarButtonItem, animated: true)
+        
+        UIView.animateWithDuration(0.3, animations: {
+           
+            }, completion: { finished in
+                
+        })
+    }
+    
+    
+    //MARK: UISearchBarDelegate
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        hideSearchBar()
+    }
     
     
     override func viewWillDisappear(animated: Bool) {
@@ -71,27 +110,15 @@ class TeacherSeatViewController: UIViewController, SeatViewDataSource, SeatViewD
         case .Taken:
             let studentId = seat.currentStudentId
             let course = TeacherCourse.currentCourse
-            self.showHudWithText("正在获取", mode: .Indeterminate)
-            self.courseHelper!.getStudent(studentId, course: course){
-                [unowned self]
-                (error) in
-                if let error = error{
-                    self.showError(error)
-                    return
-                }
-                else{
-                    if let pop = self.popoverViewController.popoverPresentationController{
-                        pop.permittedArrowDirections = .Any
-                        pop.delegate = self
-                        pop.sourceView = seatButton
-                        pop.sourceRect = seatButton.bounds
-                    }
-                    self.hideHud()
-                    self.popoverViewController.student = course.students[studentId]
-                    self.presentViewController(self.popoverViewController, animated: true, completion: nil)
-                }
+            if let pop = self.popoverViewController.popoverPresentationController{
+                pop.permittedArrowDirections = .Any
+                pop.delegate = self
+                pop.sourceView = seatButton
+                pop.sourceRect = seatButton.bounds
             }
-        
+            self.hideHud()
+            self.popoverViewController.student = course.students[studentId]
+            self.presentViewController(self.popoverViewController, animated: true, completion: nil)
             
             
         default:
@@ -108,5 +135,8 @@ class TeacherSeatViewController: UIViewController, SeatViewDataSource, SeatViewD
         return status
     }
 
+    @IBAction func flipSeatMap(sender: UIBarButtonItem) {
+        self.seatView.flipSeats()
+    }
 
 }
