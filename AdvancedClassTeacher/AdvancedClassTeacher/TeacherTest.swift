@@ -23,29 +23,8 @@ class TeacherTest{
     
     var resultAcquired = false
     var results: TestResult!
-    
-    static func getNewTest() -> TeacherTest{
-        let test = TeacherTest()
-        test.courseId = String(TeacherCourse.currentCourse.courseId)
-        test.subId = String(TeacherCourse.currentCourse.subId)
-        test.questionsFixed = [TeacherQuestion]()
-        test.questiontDict = [String: Bool]()
-        return test
-    }
-    
-    init(){
-        
-    }
-    
-    init(json: JSON){
-        self.finishedStudentsCount = json["finished_students_count"].intValue
-        self.expiresOn = json["expires_on"].stringValue
-        self.beginsOn = json["begins_on"].stringValue
-        self.finished = json["finished"].boolValue
-        self.testId = json["test_id"].stringValue
-        self.createdOn = json["created_on"].stringValue
-        self.randomType = json["random_type"].intValue
-    }
+    var unfinishedStudents: [String]!
+    var finishedStudents: [String]!
     var testId: String!
     var courseId = ""
     var subId = ""
@@ -67,7 +46,7 @@ class TeacherTest{
     }
     var beginsOnNSDate: NSDate!
     var timeLimit = -1
-    var finishedStudentsCount: Int!
+    var finishedCount: Int!
     var _expiresOn: String?
     var expiresOn: String{
         get{
@@ -112,8 +91,43 @@ class TeacherTest{
     
     var questiontDict: [String: Bool]!
     var questionsFixed: [TeacherQuestion]!
-    var finishedStudents: [Student]!
+
     
+    
+    
+    static func getNewTest() -> TeacherTest{
+        let test = TeacherTest()
+        test.courseId = String(TeacherCourse.currentCourse.courseId)
+        test.subId = String(TeacherCourse.currentCourse.subId)
+        test.questionsFixed = [TeacherQuestion]()
+        test.questiontDict = [String: Bool]()
+        return test
+    }
+    
+    init(){
+        
+    }
+    
+    init(json: JSON){
+        self.finishedCount = json["finished_count"].intValue
+        self.expiresOn = json["expires_on"].stringValue
+        self.beginsOn = json["begins_on"].stringValue
+        self.finished = json["finished"].boolValue
+        self.testId = json["test_id"].stringValue
+        self.createdOn = json["created_on"].stringValue
+        self.randomType = json["random_type"].intValue
+    }
+    
+    func getUntakenStudentFromJSON(json: JSON, allStudent: [String]){
+        self.unfinishedStudents = [String]()
+        for (_, studentId) in json["students"]{
+            self.unfinishedStudents.append(studentId.stringValue)
+        }
+        let untaken = Set<String>(self.unfinishedStudents)
+        let all = Set<String>(allStudent)
+        self.finishedStudents = [String](all.subtract(untaken))
+    }
+
     
     func toDict() -> [String: AnyObject]{
         var dict = [String: AnyObject]()
@@ -188,6 +202,7 @@ class QuestionResult{
         self.totalCorrect = json["total_correct"].intValue
         self.correctRatio = self.totalTaken == 0 ? 0.0 : Double(self.totalCorrect)/Double(self.totalTaken)
     }
+    
 }
 
 class KnowledgePointResult{
@@ -197,12 +212,24 @@ class KnowledgePointResult{
     var correctRatio: Double = 0
     var questionResults = [String: QuestionResult]()
     var questionResultsSorted = [QuestionResult]()
+    var questionResultsAscending = true
     init(json: JSON){
        
         self.totalTaken = json["total_taken"].intValue
         self.totalCorrect = json["total_correct"].intValue
         self.correctRatio = self.totalTaken == 0 ? 0.0 : Double(self.totalCorrect)/Double(self.totalTaken)
     }
+    func sortQuestionPointResults(ascending: Bool){
+        if ascending{
+            self.questionResultsSorted.sortInPlace({$0.correctRatio < $1.correctRatio})
+        }
+        else{
+            self.questionResultsSorted.sortInPlace({$0.correctRatio > $1.correctRatio})
+        }
+        self.questionResultsAscending = ascending
+    }
+    
+    
 }
 
 class TestResult {
@@ -211,20 +238,12 @@ class TestResult {
     var questionResultsSorted = [QuestionResult]()
     var knowledgePointResults = [String: KnowledgePointResult]()
     var knowledgePointResultsSorted = [KnowledgePointResult]()
-    var untakenStudents: [String]!
-    var takenStudents: [String]!
+    var knowledgePointResultsAscending = true
+    var questionResultsAscending = true
+    
     
     init(){}
     
-    func getUntakenStudentFromJSON(json: JSON, allStudent: [String]){
-        self.untakenStudents = [String]()
-        for (_, studentId) in json["students"]{
-            self.untakenStudents.append(studentId.stringValue)
-        }
-        let untaken = Set<String>(self.untakenStudents)
-        let all = Set<String>(allStudent)
-        self.takenStudents = [String](all.subtract(untaken))
-    }
     
     func getResultsFromJSON(json: JSON){
         for (knowledgePointId, poiontResultDict) in json["point_results"]{
@@ -242,14 +261,39 @@ class TestResult {
             self.knowledgePointResults[questionResult["point_id"].stringValue]?.questionResultsSorted.append(p)
             self.questionResultsSorted.append(p)
         }
-        self.knowledgePointResultsSorted.sortInPlace({$0.correctRatio < $1.correctRatio})
+        self.sortKnowledgePointResults(true)
         for p in self.knowledgePointResultsSorted{
-            p.questionResultsSorted.sortInPlace({$0.correctRatio < $1.correctRatio})
+            p.sortQuestionPointResults(true)
         }
-        self.questionResultsSorted.sortInPlace({$0.correctRatio < $1.correctRatio})
+        self.sortQuestionPointResults(true)
     }
     
     
+    func sortKnowledgePointResults(ascending: Bool){
+        if ascending == self.knowledgePointResultsAscending{
+            return
+        }
+        if ascending{
+            self.knowledgePointResultsSorted.sortInPlace({$0.correctRatio < $1.correctRatio})
+        }
+        else{
+            self.knowledgePointResultsSorted.sortInPlace({$0.correctRatio > $1.correctRatio})
+        }
+        self.knowledgePointResultsAscending = ascending
+    }
+    
+    func sortQuestionPointResults(ascending: Bool){
+        if ascending == self.questionResultsAscending{
+            return
+        }
+        if ascending{
+            self.questionResultsSorted.sortInPlace({$0.correctRatio < $1.correctRatio})
+        }
+        else{
+            self.questionResultsSorted.sortInPlace({$0.correctRatio > $1.correctRatio})
+        }
+        self.questionResultsAscending = ascending
+    }
     
     func getQuestionResult(questionId: String) -> QuestionResult?{
         return self.questionResults[questionId]

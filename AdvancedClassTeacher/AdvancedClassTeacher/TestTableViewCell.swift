@@ -8,10 +8,23 @@
 
 import UIKit
 
-class TestOnGoingTableViewCell: UITableViewCell {
+class TestTableViewCell: UITableViewCell {
     
+    @IBOutlet weak var finishedLabel: UILabel!
     @IBOutlet var createdOnLabel: UILabel!
-    var progressView: UIView!
+    @IBOutlet var progressView: MyProgressBar!
+    var finished: Bool = false{
+        didSet{
+            if finished{
+                self.finishedLabel?.text = "已完成"
+                self.finishedLabel?.textColor = UIColor.greenColor()
+            }
+            else{
+                self.finishedLabel?.text = "正在进行"
+                self.finishedLabel?.textColor = UIColor.redColor()
+            }
+        }
+    }
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

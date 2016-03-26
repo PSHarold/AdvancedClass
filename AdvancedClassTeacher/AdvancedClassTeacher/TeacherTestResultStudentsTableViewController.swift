@@ -37,10 +37,10 @@ class TeacherTestResultStudentsTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         if self.showTaken{
-            return self.test!.results.takenStudents.count
+            return self.test!.finishedStudents.count
         }
         else{
-            return self.test!.results.untakenStudents.count
+            return self.test!.unfinishedStudents.count
         }
         
     }
@@ -48,10 +48,10 @@ class TeacherTestResultStudentsTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
         if self.showTaken{
-            cell.textLabel?.text = self.test!.results.takenStudents[indexPath.row]
+            cell.textLabel?.text = self.test!.finishedStudents[indexPath.row]
         }
         else{
-            cell.textLabel?.text = self.test!.results.untakenStudents[indexPath.row]
+            cell.textLabel?.text = self.test!.unfinishedStudents[indexPath.row]
         }
         return cell
     }
@@ -60,4 +60,13 @@ class TeacherTestResultStudentsTableViewController: UITableViewController {
     @IBAction func segmentIndexChanged(sender: UISegmentedControl) {
         self.tableView.reloadData()
     }
+    
+    @IBAction func back(sender: AnyObject) {
+        self.navigationController?.popViewControllerAnimated(true)
+    }
+    
+    @IBAction func close(sender: AnyObject) {
+        self.navigationController?.popToRootViewControllerAnimated(true)
+    }
+
 }

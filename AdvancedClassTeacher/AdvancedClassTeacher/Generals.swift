@@ -36,10 +36,12 @@ enum RequestType: String{
     case POST_TEST = "/course/test/postTest"
     case GET_QUESTIONS_IN_POINT = "/course/question/getQuestionsInPoint"
     case GET_UNFINISHED_TESTS = "/course/test/getUnfinishedTests"
+    case GET_FINISHED_TESTS = "/course/test/getFinishedTests"
     case GET_QUESTIONS_IN_LIST = "/course/question/getQuestionsInList"
     case GET_TEST_RESULTS = "/course/test/result/getTestResults"
     case GET_STUDENTS_IN_COURES = "/course/getStudentIds"
-    case GET_UNTAKEN_STUDENTS = "/course/test/result/getUntakenStudents"
+    case GET_UNFINISHED_STUDENTS = "/course/test/result/getUnfinishedStudents"
+    case GET_STUDENT = "/course/getStudentInfo"
 }
 func getRequestFor(requestType:RequestType, method:Alamofire.Method, postBody:[String: AnyObject]?, headers:[String:String]?) -> Request{
     return alamofireManager.request(method, BASE_URL + requestType.rawValue, parameters: postBody, encoding: .JSON, headers: headers)
@@ -48,13 +50,27 @@ func getRequestFor(requestType:RequestType, method:Alamofire.Method, postBody:[S
 
 let hud = MBProgressHUD()
 extension UIViewController{
+    
+    
+    
+    
+    
     func showHudWithText(text:String, mode:MBProgressHUDMode = .Text,hideAfter:NSTimeInterval=1.0){
         hud.removeFromSuperViewOnHide = true
         hud.labelText = text
         hud.mode = mode
-        if !self.view.subviews.contains(hud){
-            self.view.addSubview(hud)
+        
+        if let _ = self as? UITableViewController{
+            if !self.parentViewController!.view.subviews.contains(hud){
+                self.parentViewController!.view.addSubview(hud)
+            }
         }
+        else{
+            if !self.view.subviews.contains(hud){
+                self.view.addSubview(hud)
+            }
+        }
+        
         if mode == .Indeterminate{
             hud.show(true)
         }
@@ -130,4 +146,11 @@ extension Double {
         return "\(formatter.stringFromNumber(self*100) ?? "0")%"
     }
 }
+
+
+
+
+
+
+
 

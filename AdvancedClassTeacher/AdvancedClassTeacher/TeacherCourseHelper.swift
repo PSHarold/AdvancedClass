@@ -11,27 +11,26 @@ class TeacherCourseHelper{
         }
     }
     
-    func getNotifications(course: TeacherCourse, completionHandler: (error: CError?) -> Void){
-        if course.notificationsAcquired{
-            completionHandler(error: nil)
-            return
-        }
-        else{
-            TeacherAuthenticationHelper.defaultHelper.getResponsePOST(RequestType.GET_NOTIFICAIONS, postBody: ["course_id":course.courseId,"sub_id":course.subId]){
+    func getNotifications(course: TeacherCourse, page: Int, completionHandler: (error: CError?) -> Void){
+        assert(page >= 1)
+       
+            TeacherAuthenticationHelper.defaultHelper.getResponsePOST(RequestType.GET_NOTIFICAIONS, postBody: ["course_id":course.courseId,"sub_id":course.subId, "page": page]){
                 (error, json) in
                 if error == nil{
+                    if page == 1{
+                        course.notifications = [Notification]()
+                    }
                     for (_, n) in json["notifications"]{
                         let notification = Notification(json: n)
                         notification.courseName = course.name
                         course.notifications.append(notification)
                     }
-                    course.notificationsAcquired = true
                 }
                 completionHandler(error: error)
-                return
             }
-        }
+        
     }
+    
     
     
     func getSyllabus(course: TeacherCourse, completionHandler: (error: CError?) -> Void){
@@ -77,7 +76,23 @@ class TeacherCourseHelper{
         }
 
     }
-
+    
+    
+    func getStudent(studentId: String, course: TeacherCourse, completionHandler: ResponseMessageHandler){
+        if course.students[studentId] != nil{
+            completionHandler(error: nil)
+            return
+        }
+        let authHelper = TeacherAuthenticationHelper.defaultHelper
+        authHelper.getResponsePOST(RequestType.GET_STUDENT, postBody: ["course_id": course.courseId, "sub_id": course.subId, "student_id": studentId]){
+            (error, json) in
+            if error == nil{
+                let student = Student(json: json["student"])
+                course.students[student.studentId] = student
+            }
+            completionHandler(error: error)
+        }
+    }
     
     
 }

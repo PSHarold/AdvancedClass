@@ -163,11 +163,11 @@ class TeacherCourse {
     var teachers = [String]()
     var timesAndRooms: TimesAndRooms
     var unfinishedTests = [TeacherTest]()
-    var unfinishedTestsDict = [String: TeacherTest]()
+    var testsDict = [String: TeacherTest]()
+    var finishedTests = [TeacherTest]()
     var students = [String: Student]()
     var studentIds = [String]()
     var notifications = [Notification]()
-    var notificationsAcquired = false
     var syllabus: Syllabus!
     init(json:JSON, preview:Bool = true){
         self.name = json["course_name"].stringValue
@@ -176,14 +176,7 @@ class TeacherCourse {
         self.timesAndRooms = TimesAndRooms(json: json["times"])
     }
     
-       
-    func refreshNotifications(){
-        
-    }
     
-    func completeInfo(json:JSON){
-        
-    }
     
     
 }

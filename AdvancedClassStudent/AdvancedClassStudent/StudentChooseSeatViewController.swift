@@ -19,12 +19,12 @@ class StudentChooseSeatViewController: UIViewController, SeatViewDataSource, Sea
     var currentSeatIndex: NSIndexPath?
     
     @IBOutlet weak var seatView:SeatView!
-    var lock = false
+    
     
     
     
     func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
-        return .None
+        return .None 
     }
     
     

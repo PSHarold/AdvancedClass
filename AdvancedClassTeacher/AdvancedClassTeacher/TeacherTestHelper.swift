@@ -68,16 +68,40 @@ protocol TeacherNewTestDelegate{
         self.authHelper!.getResponsePOST(RequestType.GET_UNFINISHED_TESTS, postBody: ["course_id": course.courseId, "sub_id": course.subId]){
             (error, json) in
             if error == nil{
+                course.unfinishedTests = [TeacherTest]()
                 for (_, test_json) in json["tests"]{
                     let test = TeacherTest(json: test_json)
                     course.unfinishedTests.append(test)
-                    course.unfinishedTestsDict[test.testId] = test
+                    course.testsDict[test.testId] = test
                 }
             }
             completionHandler(error: error)
             
         }
     }
+    
+    
+    
+    
+    func getFinishedTestsInCourse(course: TeacherCourse, page: Int, completionHandler: ResponseMessageHandler){
+        assert(page >= 1)
+        
+        TeacherAuthenticationHelper.defaultHelper.getResponsePOST(RequestType.GET_FINISHED_TESTS, postBody: ["course_id":course.courseId,"sub_id":course.subId, "page": page, "descending": true]){
+            (error, json) in
+            if error == nil{
+                if page == 1{
+                    course.finishedTests = [TeacherTest]()
+                }
+                for (_, n) in json["tests"]{
+                    let test = TeacherTest(json: n)
+                    course.finishedTests.append(test)
+                }
+            }
+            completionHandler(error: error)
+        }
+
+    }
+    
     
     func getQuestionsWithQuestionIds(questionIds: [String], test: TeacherTest, completionHandler: ResponseMessageHandler){
         self.authHelper!.getResponsePOST(.GET_QUESTIONS_IN_LIST, postBody: ["questions": questionIds], subIdRequired: true){
@@ -117,21 +141,14 @@ protocol TeacherNewTestDelegate{
     }
     
     func getUntakenStudents(test: TeacherTest, completionHandler: ResponseMessageHandler){
-        if !test.finished{
-            completionHandler(error: CError.TEST_STILL_ONGOING)
-            return
-        }
-        if test.results == nil{
-            test.results = TestResult()
-        }
-        if test.results.untakenStudents != nil{
+        if test.finished && test.unfinishedStudents != nil{
             completionHandler(error: nil)
         }
         else{
-            self.authHelper!.getResponsePOST(RequestType.GET_UNTAKEN_STUDENTS, postBody: ["test_id": test.testId], subIdRequired: true){
+            self.authHelper!.getResponsePOST(RequestType.GET_UNFINISHED_STUDENTS, postBody: ["test_id": test.testId], subIdRequired: true){
                 (error, json) in
                 if error == nil{
-                    test.results.getUntakenStudentFromJSON(json, allStudent: TeacherCourse.currentCourse.studentIds)
+                    test.getUntakenStudentFromJSON(json, allStudent: TeacherCourse.currentCourse.studentIds)
                 }
                 completionHandler(error: error)
             }

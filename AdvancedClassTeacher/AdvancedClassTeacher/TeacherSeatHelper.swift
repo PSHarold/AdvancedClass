@@ -1,200 +1,82 @@
-////
-////  TeacherSeatHelper.swift
-////  SeatView
-////
-////  Created by Harold on 15/8/22.
-////  Copyright (c) 2015年 Harold. All rights reserved.
-////
 //
-//import Foundation
-//import Alamofire
-//import SwiftyJSON
+//  StudentSeatHelper.swift
+//  SeatView
 //
+//  Created by Harold on 15/8/22.
+//  Copyright (c) 2015年 Harold. All rights reserved.
 //
-//enum SeatHelperResult{
-//    case networkErrorAquiring
-//    case networkErrorUpdating
-//    case seatMapAquired
-//    case seatAlreadyOccupied
-//}
-//protocol PreTeacherSeatHelperDelegate{
-//    func seatMapAquired()
-//    func networkError()
-//}
-//
-//protocol TeacherSeatHelperDelegate {
-//    func networkError()
-//}
-//
-//class TeacherSeatHelper {
-//    
-//    var authHelper = TeacherAuthenticationHelper.defaultHelper
-//    
-//    var tempSeatDataArray = [JSON]()
-//    var preDelegate:PreTeacherSeatHelperDelegate!
-//    var delegate:TeacherSeatHelperDelegate!
-//    var columns = 0
-//    var rows = 0
-//    var seatArray = [[Seat?]]()
-//    var roomId:String!
-//    var seatDict = Dictionary<String,Seat>()
-//    var seatDictByStudent = Dictionary<String,Seat>()
-//    static var instance:TeacherSeatHelper!
-//    var alamofireManager : Alamofire.Manager!
-//    var baseUrl = "http://localhost:5000/"
-//    var totalSeatNumber = 0
-//    var _currentSeatNumber = 0
-//    var _doneAcquiring = true
-//    // Automatically set doneAcquiring when current number equals total number.
-//    var currentSeatNumber:Int{
-//        get{
-//            return self._currentSeatNumber
-//        }
-//        set{
-//            self._currentSeatNumber = newValue
-//            if newValue == self.totalSeatNumber{
-//                self.doneAcquiring = true
-//            }
-//        }
-//    }
-//    
-//    var numberOfTakenSeats = 0
-//    
-//    
-//    
-//    var doneAcquiring:Bool{
-//        get{
-//            return self._doneAcquiring
-//        }
-//        set{
-//            self._doneAcquiring = newValue
-//            if newValue{
-//                self.currentSeatNumber = 0
-//            }
-//        }
-//    }
-//    
-//    // Configurate connection.
-//    private init(){
-//        let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
-//        configuration.timeoutIntervalForResource = 3 // seconds
-//        self.alamofireManager = Alamofire.Manager(configuration: configuration)
-//    }
-//    
-//    class func defaultHelper() -> TeacherSeatHelper{
-//        if let helper = self.instance{
-//            return helper
-//        }
-//        else{
-//            self.instance = TeacherSeatHelper()
-//            return self.instance!
-//        }
-//    }
-//    
-//    
-//    
-//    func updateSeatMapWithRoomId(id:String){
-//        let request = self.authHelper.requestForSeatsWithRoomId(id)
-//        request.responseJSON(){
-//            (_,_,result) in
-//            switch result {
-//            case .Success(let data):
-//                let json = JSON(data)
-//                for (_,seatData) in json["_items"]{
-//                    // Skip if current seat doesn't exist.
-//                    if seatData["status"].stringValue == "N"{
-//                        continue
-//                    }
-//                    let seatId = seatData["seat_id"].stringValue
-//                    
-//                    let seat = self.seatDict[seatId]!
-//                    if seat.checked{
-//                        continue
-//                    }
-//                    seat.currentStudentId = seatData["cur_stu_id"].stringValue
-//                    self.seatDictByStudent.updateValue(seat, forKey: seat.currentStudentId)
-//                    seat.taken = (seat.currentStudentId != "")
-//                    seat.etag = seatData["_etag"].stringValue
-//                }
-//                
-//            case .Failure(_, let error):
-//                print("Request failed with error: \(error)")
-//                self.delegate.networkError()
-//            }
-//        }
-//    }
-//    
-//    
-//   
-//    func getSeatWithStudentId(id:String) -> Seat?{
-//        let seat = self.seatDictByStudent[id]
-//        if seat?.currentStudentId == id{
-//            return seat
-//        }
-//        return nil
-//    }
-//    
-//    
-//    func getAllSeatsWithRoomId(id:String){
-//        self.roomId = id
-//        let request = self.authHelper.requestForRoomWithId(id)
-//        request.responseJSON(){
-//            (_,_,result) in
-//            switch result {
-//            case .Success(let data):
-//                // Initialize the two dimension array of seats using acquired data.
-//                let json = JSON(data)
-//                self.rows = json["rows"].intValue
-//                self.columns = json["cols"].intValue
-//                self.roomId = json["room_id"].string
-//                for _ in 0...self.rows{
-//                    var temp = [Seat?]()
-//                    for _ in 0...self.columns{
-//                        temp.append(nil)
-//                    }
-//                    self.seatArray.append(temp)
-//                }
-//                // Begin to get all seats in the room.
-//                self.getAllSeatsUsingColumnAndRowNumberWithRoomId(id)
-//            case .Failure:
-//                self.preDelegate.networkError()
-//            }
-//        }
-//        
-//    }
-//    
-//    // Get all seats of a room identified with roomId.
-//    private func getAllSeatsUsingColumnAndRowNumberWithRoomId(id:String){
-//        let request = self.authHelper.requestForSeatsWithRoomId(id)
-//        request.responseJSON(){
-//            (_,_,result) in
-//            switch result {
-//            case .Success(let data):
-//                for (_,seatData) in JSON(data)["_items"]{
-//                    let seat = Seat(json: seatData)
-//                    self.seatDict[seat.seatId] = seat
-//                    self.seatArray[seat.row - 1][seat.column - 1] = seat
-//                    self.seatDictByStudent.updateValue(seat, forKey: seat.currentStudentId)
-//                }
-//                self.preDelegate.seatMapAquired()
-//            case .Failure(_, let error):
-//                print("Request failed with error: \(error)")
-//                self.preDelegate.networkError()
-//            }
-//        }
-//    }    
-//
-//    
-//    
-//    func parseErrorCode(code:String,seat:Seat){
-//        switch code{
-//        case "404":
-//            print("404", terminator: "")
-//        default:
-//            break
-//
-//            
-//        }
-//    }
-//    
-//}
+
+import Foundation
+import Alamofire
+import SwiftyJSON
+
+
+typealias SeatResponseHandler = (error: CError?, seatStatus: SeatStatus!) -> Void
+class TeacherSeatHelper {
+    static var _defaultHelper: TeacherSeatHelper?
+    static var defaultHelper: TeacherSeatHelper{
+        get{
+            if self._defaultHelper == nil{
+                self._defaultHelper = TeacherSeatHelper()
+            }
+            return self._defaultHelper!
+        }
+    }
+    
+    
+    weak var authHelper = TeacherAuthenticationHelper.defaultHelper
+    var tempSeatDataArray = [JSON]()
+    var columns = 0
+    var rows = 0
+    var seatArray: [[Seat!]]!
+    var roomId:String!
+    var seatDict = Dictionary<String,Seat>()
+    var totalSeatNumber = 0
+    var seatToken = ""
+    var seatMapToken = ""
+    var isFinal = false
+    var tempSeat: Seat!
+    var retryTime = 0
+    
+    func getSeatAtIndexPath(indexPath: NSIndexPath) -> Seat{
+        return self.seatArray[indexPath.row][indexPath.section]
+    }
+    
+    
+    func getSeatToken(completionHandler: ResponseHandler){
+        self.authHelper!.getResponsePOST(RequestType.GET_SEAT_TOKEN, postBody: [:], subIdRequired: true){
+            [unowned self]
+            (error, json) in
+            if error == nil{
+                self.seatToken = json["seat_token"].stringValue
+                self.seatMapToken = json["seat_map_token"].stringValue
+                self.roomId = json["room_id"].stringValue
+            }
+            completionHandler(error: error, json: json)
+        }
+    }
+
+    
+    func getSeatMap(completionHandler: ResponseHandler){
+        self.authHelper!.getResponsePOST(RequestType.GET_SEAT_MAP, postBody: ["seat_map_token": self.seatMapToken, "check_final": false]){
+            [unowned self]
+            (error, json) in
+            if error == nil{
+                self.columns = json["col_num"].intValue
+                self.rows = json["row_num"].intValue
+                self.seatArray = [[Seat!]]()
+                for _ in 1...self.rows{
+                    self.seatArray.append(Array<Seat!>(count: self.columns, repeatedValue: nil))
+                }
+                for (_, seat_json) in json["seats"]{
+                    let seat = Seat(json: seat_json)
+                    self.seatArray[seat.row-1][seat.column-1] = seat
+                }
+            }
+            completionHandler(error: error, json: json)
+        }
+    }
+    
+
+    
+}

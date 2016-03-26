@@ -156,5 +156,12 @@ class TeacherQuestionsInKnowledgePointResultTableViewController: UIViewControlle
         self.tableView.reloadData()
         
     }
+    @IBAction func back(sender: AnyObject) {
+        self.navigationController?.popViewControllerAnimated(true)
+    }
+    
+    @IBAction func close(sender: AnyObject) {
+        self.navigationController?.popToRootViewControllerAnimated(true)
+    }
     
 }

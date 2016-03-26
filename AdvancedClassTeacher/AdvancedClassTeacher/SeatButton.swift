@@ -31,6 +31,7 @@ class SeatButton: UIButton {
                 self.miniSeat.image = self.imageView!.image
             case .NONEXISTENT:
                 self.hidden = true
+                self.miniSeat.hidden = true
             }
         }
     }

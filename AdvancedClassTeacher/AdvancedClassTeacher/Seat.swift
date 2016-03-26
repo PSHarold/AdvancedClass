@@ -23,7 +23,6 @@ enum SeatStatus: Int{
 }
 
 class Seat{
-    var me = TeacherAuthenticationHelper.me
     var column: Int
     var row: Int
     var seatId: String
@@ -37,12 +36,7 @@ class Seat{
         let statusInt = json["status"].intValue
         if statusInt == 0{
             if self.currentStudentId != ""{
-                if self.currentStudentId == me.studentId{
-                    self.status = .Checked
-                }
-                else{
-                    self.status = .Taken
-                }
+                self.status = .Taken
             }
             else{
                self.status = .Empty

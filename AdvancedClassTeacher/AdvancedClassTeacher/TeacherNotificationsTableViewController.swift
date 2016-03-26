@@ -1,66 +1,112 @@
-////
-////  TeacherNotificationsTableViewController.swift
-////  AdvancedClassTeacher
-////
-////  Created by Harold on 15/10/4.
-////  Copyright © 2015年 Harold. All rights reserved.
-////
 //
-//import UIKit
+//  TeacherNotificationsTableViewController.swift
+//  AdvancedClassTeacher
 //
-//class TeacherNotificationsTableViewController: UITableViewController {
-//    
-//    let notifications = TeacherCourseHelper.defaultHelper().currentCourse.sortedNotifications
-//    var selectedNotification:Notification!
-//    
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//    }
-//    
-//    override func viewWillAppear(animated: Bool) {
-//        super.viewWillAppear(true)
-//        self.tableView.reloadData()
-//    }
+//  Created by Harold on 15/10/4.
+//  Copyright © 2015年 Harold. All rights reserved.
 //
-//    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-//        // #warning Incomplete implementation, return the number of sections
-//        return 1
-//    }
-//
-//    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return self.notifications.count
-//    }
-//
-//
-//    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCellWithIdentifier("MyCell", forIndexPath: indexPath)
-//
-//        let notification = self.notifications[indexPath.row]
-//        cell.textLabel!.text = notification.title
-//        cell.detailTextLabel!.text = notification.time
-//        if notification.top{
-//            cell.textLabel!.textColor = UIColor.redColor()
-//            cell.detailTextLabel!.textColor = UIColor.redColor()
-//        }
-//        else{
-//            cell.textLabel!.textColor = UIColor.blackColor()
-//            cell.detailTextLabel!.textColor = UIColor.blackColor()
-//        }
-//        return cell
-//    }
-//
-//    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-//        self.selectedNotification = self.notifications[indexPath.row]
-//        self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
-//        self.performSegueWithIdentifier("ShowNotificationDetail", sender: self)
-//    }
-//    
-//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-//        if segue.identifier == "ShowNotificationDetail"{
-//            let next = segue.destinationViewController as! TeacherCreateNotificationTableViewController
-//            next.notification = self.selectedNotification
-//        }
-//    }
-//    
-//
-//}
+
+import UIKit
+
+class TeacherNotificationsTableViewController: UITableViewController {
+    
+    weak var courseHelper = TeacherCourseHelper.defaultHelper
+    weak var currentCourse = TeacherCourse.currentCourse
+    var selectedNotification: Notification!
+    var page = 1
+    var acquiring = false
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        let labelOrigin = CGPointMake(self.tableView.bounds.width/2, self.tableView.bounds.height/2)
+        let label = UILabel()
+        label.text = "下拉刷新"
+        label.textAlignment = .Center
+        label.frame.origin = labelOrigin
+        self.tableView.backgroundView = label
+        self.loadNotificationsToPage(1)
+    }
+    
+    
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+       
+        return 1
+    }
+
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.currentCourse!.notifications.count
+    }
+
+
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
+        let notification = self.currentCourse!.notifications[indexPath.row]
+        cell.textLabel!.text = notification.title
+        cell.detailTextLabel!.text = notification.createdOn
+        if notification.top!{
+            cell.textLabel!.textColor = UIColor.redColor()
+            cell.detailTextLabel!.textColor = UIColor.redColor()
+        }
+        else{
+            cell.textLabel!.textColor = UIColor.blackColor()
+            cell.detailTextLabel!.textColor = UIColor.blackColor()
+        }
+        return cell
+    }
+
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.selectedNotification = self.currentCourse!.notifications[indexPath.row]
+        self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
+    }
+    
+   
+    
+    
+    func loadNotificationsToPage(page: Int){
+        self.acquiring = true
+        self.courseHelper!.getNotifications(self.currentCourse!, page: page){
+            [unowned self]
+            error in
+            if let error = error{
+                self.showError(error)
+                if self.currentCourse!.notifications.count == 0{
+                    let label = self.tableView.backgroundView as! UILabel
+                    label.hidden = false
+                    label.text = "网络错误，下拉重试"
+                }
+            }
+            else{
+                if self.currentCourse!.notifications.count == 0{
+                    let label = self.tableView.backgroundView as! UILabel
+                    label.hidden = false
+                    label.text = "无通知，下拉刷新"
+                }
+                else{
+                    self.tableView.reloadData()
+                    self.page = page
+                }
+            }
+            
+        }
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 60.0
+    }
+    
+    override func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        self.acquiring = false
+    }
+    
+    override func scrollViewDidScroll(scrollView: UIScrollView) {
+        if self.acquiring{
+            return
+        }
+        let offsetY = scrollView.contentOffset.y
+        let judgeOffsetY = scrollView.contentSize.height + scrollView.contentInset.bottom - scrollView.frame.height
+        if offsetY >= judgeOffsetY{
+            self.loadNotificationsToPage(self.page+1)
+        }
+    }
+}

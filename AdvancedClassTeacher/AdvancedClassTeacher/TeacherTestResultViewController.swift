@@ -15,11 +15,52 @@ class TeacherTestResultViewController: UIViewController, UITableViewDelegate, UI
     weak var testHelper = TeacherTestHelper.defaultHelper
     weak var knowledgePointResult: KnowledgePointResult!
     @IBOutlet var tableView: UITableView!
+    @IBOutlet var segmentedControl: UISegmentedControl!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        // Do any additional setup after loading the view.
+        self.knowledgePointResultsAscending = self.testResult!.knowledgePointResultsAscending
+        self.questionResultsAscending = self.testResult!.questionResultsAscending
+        if self.byKnowledgePoints{
+            self.sortBarButton.title = self.knowledgePointResultsAscending ? "降序" : "升序"
+        }
+        else{
+            self.sortBarButton.title = self.questionResultsAscending ? "降序" : "升序"
+        }
+    }
+    
+    @IBOutlet var sortBarButton: UIBarButtonItem!
+    
+    var knowledgePointResultsAscending: Bool = true{
+        didSet{
+            self.testResult!.sortKnowledgePointResults(self.knowledgePointResultsAscending)
+            self.tableView.reloadData()
+            self.setSortBarButtonTitle()
+        }
+    }
+    var questionResultsAscending: Bool = true{
+        didSet{
+            self.testResult!.sortQuestionPointResults(self.questionResultsAscending)
+            self.tableView.reloadData()
+            self.setSortBarButtonTitle()
+        }
+    }
+    
+    
+    func setSortBarButtonTitle(){
+        if self.byKnowledgePoints{
+            self.sortBarButton.title = self.knowledgePointResultsAscending ? "降序" : "升序"
+        }
+        else{
+            self.sortBarButton.title = self.questionResultsAscending ? "降序" : "升序"
+        }
+    }
+    
+    var byKnowledgePoints: Bool{
+        get{
+            return self.segmentedControl.selectedSegmentIndex == 0
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -37,27 +78,60 @@ class TeacherTestResultViewController: UIViewController, UITableViewDelegate, UI
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
-        let pointId = self.testResult!.knowledgePointResultsSorted[indexPath.row].knowledgePointId
-        let point = TeacherCourse.currentCourse.syllabus.knowledgePoints[pointId]!
-
-        cell.textLabel?.text = point.content
-        cell.detailTextLabel?.text = self.testResult!.knowledgePointResultsSorted[indexPath.row].correctRatio.toPercentageString()
+        if self.byKnowledgePoints{
+            let pointId = self.testResult!.knowledgePointResultsSorted[indexPath.row].knowledgePointId
+            let point = TeacherCourse.currentCourse.syllabus.knowledgePoints[pointId]!
+            
+            cell.textLabel?.text = point.content
+            cell.detailTextLabel?.text = self.testResult!.knowledgePointResultsSorted[indexPath.row].correctRatio.toPercentageString()
+            return cell
+        }
+        else{
+            let questionId = self.testResult!.questionResultsSorted[indexPath.row].questionId
+            let question = self.test!.questionsForResults[questionId]!
+            cell.textLabel?.text = question.content
+            cell.detailTextLabel?.text = self.test!.results.getQuestionResult(question)!.correctRatio.toPercentageString()
+            return cell
+        }
         
-        return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.knowledgePointResult = self.test!.results.knowledgePointResultsSorted[indexPath.row]
-
-        self.performSegueWithIdentifier("ShowKnowledgePointResult", sender: self)
+        if self.byKnowledgePoints{
+            self.knowledgePointResult = self.test!.results.knowledgePointResultsSorted[indexPath.row]
+            
+            self.performSegueWithIdentifier("ShowKnowledgePointResult", sender: self)
+        }
+        
     }
     
+    
+    
+    @IBAction func segmentIndexChanged(sender: UISegmentedControl) {
+        self.tableView.reloadData()
+        self.setSortBarButtonTitle()
+    }
+    @IBAction func sortBarButtonTapped(sender: UIBarButtonItem) {
+        if self.byKnowledgePoints{
+            self.knowledgePointResultsAscending = !self.knowledgePointResultsAscending
+        }
+        else{
+            self.questionResultsAscending = !self.questionResultsAscending
+        }
+    }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "ShowKnowledgePointResult"{
             let vc = segue.destinationViewController as! TeacherQuestionsInKnowledgePointResultTableViewController
             vc.knowledgePointResult =  self.knowledgePointResult
         }
     }
+    @IBAction func back(sender: AnyObject) {
+        self.navigationController?.popViewControllerAnimated(true)
+    }
     
+    @IBAction func close(sender: AnyObject) {
+        self.navigationController?.popToRootViewControllerAnimated(true)
+    }
+
 
 }

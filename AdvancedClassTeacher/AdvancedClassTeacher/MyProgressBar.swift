@@ -7,7 +7,7 @@
 //
 
 import UIKit
-@IBDesignable class MyProgressBar: UIView {
+class MyProgressBar: UIView {
     
     private let π = CGFloat(M_PI)
     private let botCircle = CAShapeLayer()
@@ -15,13 +15,13 @@ import UIKit
     private var circlePath = UIBezierPath()
     private var textLabel = UILabel()
     
-    @IBInspectable var botCircleColor: UIColor = UIColor.grayColor()
-    @IBInspectable var progressCircleColor: UIColor = UIColor.greenColor()
-    @IBInspectable var lineWidth: Float = 10
-    @IBInspectable var totalNumber: Int = 100
-    @IBInspectable var valueFontSize: Int = 40
-    var _currentNum: Int = 66
-    @IBInspectable var currentNumber: Int{
+     var botCircleColor: UIColor = UIColor.grayColor()
+     var progressCircleColor: UIColor = UIColor.greenColor()
+     var lineWidth: Float = 10
+     var totalNumber: Int = 100
+     var valueFontSize: Int = 40
+     var _currentNum: Int = 0
+     var currentNumber: Int{
         get{
             return self._currentNum
         }
@@ -31,6 +31,9 @@ import UIKit
             }
             else if newValue > self.totalNumber{
                 self._currentNum = self.totalNumber
+            }
+            else{
+                self._currentNum = newValue
             }
             setNeedsDisplay()
         }
