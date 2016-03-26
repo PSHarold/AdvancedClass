@@ -20,15 +20,11 @@ class TeacherTestResultStudentsTableViewController: UITableViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.registerClass(StudentInfoCell.self, forCellReuseIdentifier: "cell")
+        let xib = UINib(nibName: "StudentInfoCell", bundle: nil)
+        self.tableView.registerNib(xib, forCellReuseIdentifier: "cell")
 
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
@@ -46,7 +42,7 @@ class TeacherTestResultStudentsTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
+        let cell = self.tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! StudentInfoCell
         var student: Student
         if self.showTaken{
             student = TeacherCourse.currentCourse.students[self.test!.finishedStudents[indexPath.row]]!
@@ -55,8 +51,10 @@ class TeacherTestResultStudentsTableViewController: UITableViewController {
         else{
             student = TeacherCourse.currentCourse.students[self.test!.unfinishedStudents[indexPath.row]]!
         }
-        cell.textLabel?.text = student.name
-        cell.detailTextLabel?.text = student.className + " " + student.studentId
+        cell.studentName = student.name
+        cell.studentId = student.studentId
+        cell.className = student.className
+        cell.detailText = ""
         return cell
     }
     

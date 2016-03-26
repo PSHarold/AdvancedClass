@@ -8,7 +8,11 @@
 
 import UIKit
 
-class TeacherSeatViewController: UIViewController, SeatViewDataSource, SeatViewDelegate, UIPopoverPresentationControllerDelegate, UISearchBarDelegate, UISearchControllerDelegate{
+class TeacherSeatViewController: UIViewController, SeatViewDataSource, SeatViewDelegate, UIPopoverPresentationControllerDelegate, UISearchBarDelegate, UISearchControllerDelegate, UISearchResultsUpdating, UITableViewDelegate{
+    
+    
+    var searchBarScopes = ["学号", "姓名"]
+    
     
     var seatHelper = TeacherSeatHelper.defaultHelper
     var timer: NSTimer!
@@ -19,26 +23,32 @@ class TeacherSeatViewController: UIViewController, SeatViewDataSource, SeatViewD
     var currentSeatIndex: NSIndexPath?
     weak var courseHelper = TeacherCourseHelper.defaultHelper
     @IBOutlet weak var seatView:SeatView!
+    @IBOutlet weak var flipBarButton: UIBarButtonItem!
+    @IBOutlet weak var searchBarButton: UIBarButtonItem!
     var lock = false
-    var resultsTableViewController = TeacherSeatSearchTableViewController()
+    var resultsTableViewController: TeacherSeatSearchTableViewController!
     var filteredStudentIds: [String]!
     
     func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
         return .None
     }
     
-    var searchBar = UISearchBar()
-    var searchBarButtonItem: UIBarButtonItem?
+    var searchBar: UISearchBar{
+        get{
+            return self.searchController.searchBar
+        }
+    }
     
+    var searchController: UISearchController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        super.viewDidLoad()
+       
       
         
-        searchBar.delegate = self
-        searchBar.searchBarStyle = UISearchBarStyle.Minimal
-        searchBarButtonItem = navigationItem.rightBarButtonItem
+        
+        self.setupSearchBar()
+        
         seatView.delegate = self
         seatView.dataSource = self
         self.popoverViewController = self.storyboard?.instantiateViewControllerWithIdentifier("StudentInfo") as! StudentInfoPopoverTableViewController
@@ -51,37 +61,93 @@ class TeacherSeatViewController: UIViewController, SeatViewDataSource, SeatViewD
         self.popoverViewController.modalPresentationStyle = .Popover
     }
     
-    @IBAction func searchButtonPressed(sender: AnyObject) {
-        showSearchBar()
+    
+    
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        
     }
     
     
-    func showSearchBar() {
-        searchBar.alpha = 0
-        navigationItem.titleView = searchBar
-        navigationItem.setLeftBarButtonItem(nil, animated: true)
-        UIView.animateWithDuration(0.5, animations: {
-            self.searchBar.alpha = 1
-            }, completion: { finished in
-                self.searchBar.becomeFirstResponder()
-        })
+    
+    
+    func setupSearchBar(){
+        resultsTableViewController = TeacherSeatSearchTableViewController()
+        resultsTableViewController.extendedLayoutIncludesOpaqueBars = true
+    
+        resultsTableViewController.tableView.delegate = self
+        searchController = UISearchController(searchResultsController: resultsTableViewController)
+        searchController.searchResultsUpdater = self
+        searchController.searchBar.sizeToFit()
+        searchController.delegate = self
+        searchController.dimsBackgroundDuringPresentation = false // default is YES
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.searchBar.delegate = self
+        definesPresentationContext = true
+        searchBar.scopeButtonTitles = self.searchBarScopes
+        searchBar.placeholder = "寻找学生"
+        
     }
+    
+    
+    @IBAction func showSearchBar(sender: UIBarButtonItem) {
+        self.presentViewController(self.searchController, animated: true, completion: nil)
+        self.searchBarButton.enabled = false
+    }
+    
+    
     
     func hideSearchBar() {
-        navigationItem.setLeftBarButtonItem(searchBarButtonItem, animated: true)
-        
-        UIView.animateWithDuration(0.3, animations: {
-           
-            }, completion: { finished in
-                
-        })
+        searchBar.resignFirstResponder()
+        self.searchBarButton.enabled = true
+    }
+    
+    func filterStudentIds(){
+        let searchText = searchBar.text ?? ""
+        self.filteredStudentIds = []
+        if searchText != ""{
+            let course = TeacherCourse.currentCourse
+            if self.searchBar.selectedScopeButtonIndex == 0{
+                for studentId in course.students.keys{
+                    if studentId.containsString(searchText){
+                        self.filteredStudentIds.append(studentId)
+                    }
+                }
+            }
+            else{
+                for student in course.students.values{
+                    if student.name.containsString(searchText){
+                        self.filteredStudentIds.append(student.studentId)
+                    }
+                }
+            }
+        }
+        self.resultsTableViewController.studentIds = self.filteredStudentIds
+        self.resultsTableViewController.tableView.reloadData()
+    }
+    
+    func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        self.filterStudentIds()
+    }
+    
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+    
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        self.filterStudentIds()
     }
     
     
-    //MARK: UISearchBarDelegate
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
-        hideSearchBar()
+        self.hideSearchBar()
+        
     }
+
+ 
+
+    
+    
+    
     
     
     override func viewWillDisappear(animated: Bool) {
@@ -89,9 +155,6 @@ class TeacherSeatViewController: UIViewController, SeatViewDataSource, SeatViewD
         super.viewDidDisappear(true)
         self.timer?.invalidate()
     }
-    
-    
-    
     
     func numberOfColumns() -> Int {
         return self.seatHelper.columns
@@ -138,5 +201,29 @@ class TeacherSeatViewController: UIViewController, SeatViewDataSource, SeatViewD
     @IBAction func flipSeatMap(sender: UIBarButtonItem) {
         self.seatView.flipSeats()
     }
-
+    
+    
+    @IBAction func refreshSeatMap(sender: UIBarButtonItem) {
+        self.showHudWithText("正在刷新", mode: .Indeterminate)
+        self.seatHelper.getSeatMap{
+            [unowned self]
+            error in
+            if let error = error{
+                self.showError(error)
+            }
+            else{
+                self.seatView.reloadSeats()
+                self.hideHud()
+            }
+        }
+    }
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+//        if let seat = self.seatHelper.seatToLocate{
+//            let frame = self.seatView.getSeatCenterPointAtIndexPath(NSIndexPath(forRow: seat.row, inSection: seat.column), toView: self.view)
+//            self.seatView.scrollView.setContentOffset(frame.origin, animated: true)
+//        }
+        
+        
+    }
 }

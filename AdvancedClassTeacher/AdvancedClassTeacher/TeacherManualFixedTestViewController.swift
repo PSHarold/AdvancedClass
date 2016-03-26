@@ -39,7 +39,7 @@ class TeacherManualFixedTestViewController: KnowledgePointViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.confirmPostView.hidden = true
-        self.test!.randomTypeEnum = .MANUAL_FIXED
+        self.test!.testTypeEnum = .MANUAL_FIXED
         //test.delegate = self
     }
     

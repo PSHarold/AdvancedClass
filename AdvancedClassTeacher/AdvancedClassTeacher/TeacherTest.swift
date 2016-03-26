@@ -5,11 +5,24 @@ import SwiftyJSON
 
 
 
-enum TestRandomType: Int{
+enum TestType: Int{
     case MANUAL_FIXED = 0
     case MANUAL_SHUFFLED_ONLY = 1
     case MANUAL_RANDOMLY_CHOOSE = 2
-    case AUTOMATIC_RANDOMLY_CHOOSE  = 3    
+    case AUTOMATIC_RANDOMLY_CHOOSE  = 3
+    var description: String{
+        get{
+            switch self {
+            case .MANUAL_FIXED:
+                return "手动选题固定顺序"
+            case .MANUAL_SHUFFLED_ONLY:
+                return "手动选题随机顺序"
+            default:
+                return ""
+            }
+        }
+    }
+    
 }
 
 
@@ -65,7 +78,7 @@ class TeacherTest{
     var expiresOnNSDate: NSDate!
     var questionsForResults = [String: TeacherQuestion]()
     var message = ""
-    var randomType: Int!
+    var testType: Int!
     var _blacklist: [String]?
     var blacklist: [String]{
         get{
@@ -79,12 +92,12 @@ class TeacherTest{
         }
     }
     var totalNum = 0
-    var randomTypeEnum: TestRandomType{
+    var testTypeEnum: TestType{
         get{
-            return TestRandomType(rawValue: self.randomType)!
+            return TestType(rawValue: self.testType)!
         }
         set{
-            self.randomType = newValue.rawValue
+            self.testType = newValue.rawValue
         }
     }
     
@@ -115,7 +128,7 @@ class TeacherTest{
         self.finished = json["finished"].boolValue
         self.testId = json["test_id"].stringValue
         self.createdOn = json["created_on"].stringValue
-        self.randomType = json["random_type"].intValue
+        self.testType = json["random_type"].intValue
     }
     
     
@@ -127,7 +140,7 @@ class TeacherTest{
         dict["message"] = self.message
         dict["time_limit"] = self.timeLimit
         dict["blacklist"] = self.blacklist
-        if self.randomTypeEnum == .MANUAL_FIXED || self.randomTypeEnum == .MANUAL_SHUFFLED_ONLY{
+        if self.testTypeEnum == .MANUAL_FIXED || self.testTypeEnum == .MANUAL_SHUFFLED_ONLY{
             dict["question_settings"] = ["questions": self.questionsFixed.map({$0.questionId}), "has_hint": []]
         }
         return dict
@@ -140,7 +153,7 @@ class TeacherTest{
     
     func addQuestion(question: TeacherQuestion, random:Bool=false){
         
-        if self.randomTypeEnum == .MANUAL_FIXED || self.randomTypeEnum == .MANUAL_SHUFFLED_ONLY{
+        if self.testTypeEnum == .MANUAL_FIXED || self.testTypeEnum == .MANUAL_SHUFFLED_ONLY{
             self.questionsFixed.append(question)
             self.totalNum += 1
             self.questiontDict[question.questionId] = true
@@ -151,7 +164,7 @@ class TeacherTest{
     
     func removeQuestion(question: TeacherQuestion, random:Bool=false){
         
-        if self.randomTypeEnum == .MANUAL_FIXED || self.randomTypeEnum == .MANUAL_SHUFFLED_ONLY{
+        if self.testTypeEnum == .MANUAL_FIXED || self.testTypeEnum == .MANUAL_SHUFFLED_ONLY{
             self.questionsFixed.removeAtIndex(self.questionsFixed.indexOf({ q in return q === question})!)
             self.totalNum -= 1
             self.questiontDict.removeValueForKey(question.questionId)

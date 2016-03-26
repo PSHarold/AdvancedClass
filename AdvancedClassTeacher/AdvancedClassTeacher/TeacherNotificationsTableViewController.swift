@@ -15,7 +15,7 @@ class TeacherNotificationsTableViewController: UITableViewController {
     var selectedNotification: Notification!
     var page = 1
     var acquiring = false
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         let labelOrigin = CGPointMake(self.tableView.bounds.width/2, self.tableView.bounds.height/2)
@@ -24,9 +24,16 @@ class TeacherNotificationsTableViewController: UITableViewController {
         label.textAlignment = .Center
         label.frame.origin = labelOrigin
         self.tableView.backgroundView = label
-        self.loadNotificationsToPage(1)
+        self.refreshControl!.addTarget(self, action: #selector(TeacherNotificationsTableViewController.beginRefreshing), forControlEvents: .ValueChanged)
+        self.refreshControl!.beginRefreshing()
+        self.beginRefreshing()
     }
     
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.loadNotificationsToPage(1)
+    }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
        
@@ -43,7 +50,7 @@ class TeacherNotificationsTableViewController: UITableViewController {
         let notification = self.currentCourse!.notifications[indexPath.row]
         cell.textLabel!.text = notification.title
         cell.detailTextLabel!.text = notification.createdOn
-        if notification.top!{
+        if notification.onTop!{
             cell.textLabel!.textColor = UIColor.redColor()
             cell.detailTextLabel!.textColor = UIColor.redColor()
         }
@@ -57,10 +64,17 @@ class TeacherNotificationsTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.selectedNotification = self.currentCourse!.notifications[indexPath.row]
         self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        
+        self.performSegueWithIdentifier("ShowNotification", sender: self)
     }
     
-   
+    func beginRefreshing(){
+        self.refreshControl!.beginRefreshing()
+        if self.refreshControl!.refreshing{
+            self.refreshControl!.endRefreshing()
+            return
+        }
+        self.loadNotificationsToPage(1)
+    }
     
     
     func loadNotificationsToPage(page: Int){
@@ -68,25 +82,28 @@ class TeacherNotificationsTableViewController: UITableViewController {
         self.courseHelper!.getNotifications(self.currentCourse!, page: page){
             [unowned self]
             error in
+            let label = self.tableView.backgroundView as! UILabel
             if let error = error{
                 self.showError(error)
                 if self.currentCourse!.notifications.count == 0{
-                    let label = self.tableView.backgroundView as! UILabel
+                    
                     label.hidden = false
                     label.text = "网络错误，下拉重试"
                 }
             }
             else{
                 if self.currentCourse!.notifications.count == 0{
-                    let label = self.tableView.backgroundView as! UILabel
+                    
                     label.hidden = false
                     label.text = "无通知，下拉刷新"
                 }
                 else{
                     self.tableView.reloadData()
+                    label.hidden = true
                     self.page = page
                 }
             }
+            self.refreshControl?.endRefreshing()
             
         }
     }
@@ -109,4 +126,33 @@ class TeacherNotificationsTableViewController: UITableViewController {
             self.loadNotificationsToPage(self.page+1)
         }
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "ShowNotification"{
+            let vc = segue.destinationViewController as! TeacherNotificationContentTableViewController
+            vc.notification = self.selectedNotification
+        }
+    }
+    
+    
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == .Delete{
+            let notification = self.currentCourse!.notifications[indexPath.row]
+            self.courseHelper!.deleteNotificationInCourse(self.currentCourse!, notification: notification){
+                [unowned self]
+                error in
+                if let error = error{
+                    self.showError(error)
+                }
+                else{
+                    self.currentCourse!.notifications.removeAtIndex(indexPath.row)
+                    self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+                }
+            }
+        }
+    }
+    override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
+        return .Delete
+    }
+  
 }

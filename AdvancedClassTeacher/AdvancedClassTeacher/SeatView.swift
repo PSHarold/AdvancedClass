@@ -18,7 +18,7 @@ protocol SeatViewDataSource {
 
 class SeatView: UIView, UIScrollViewDelegate,UITableViewDelegate{
     
-    
+    var isManualDragging = false
     var scrollView = UIScrollView()
     let rowSpace = CGFloat(10) // height of the spaces between rows
     let columnSpace = CGFloat(5)// width of the spaces between columns
@@ -45,6 +45,7 @@ class SeatView: UIView, UIScrollViewDelegate,UITableViewDelegate{
     var platformLabel = UILabel() // a label representing the platform
     var up = true // indicating the direction of the seat map (the platform at the top or bottom of the map)
     var rowIndicator: RowIndicator!
+    var columnIndicator: ColumnIndicator!
     var basePoint: CGPoint!
     var baseContentOffset: CGPoint!
     var fisrtSeatCenter: CGPoint!
@@ -53,6 +54,8 @@ class SeatView: UIView, UIScrollViewDelegate,UITableViewDelegate{
     var baseRowSpace = CGFloat(0)
     var blankBackground = UIView()
     var contentSize: CGSize!
+    
+    
     override var frame: CGRect {
         didSet {
            
@@ -77,6 +80,8 @@ class SeatView: UIView, UIScrollViewDelegate,UITableViewDelegate{
         
         self.rowIndicator = RowIndicator(frame: CGRect(x: self.bounds.origin.x, y: 1, width: 1, height: 1))
         self.rowIndicator.initializeIndicator(0.05*self.bounds.width, numberHeight: firstSeat.frame.height, rowNumber: self.seatButtonArray.count, exclude: [])
+       // self.columnIndicator = ColumnIndicator(frame: CGRect(x: self.bounds.origin.y, y: 1, width: 1, height: 1))
+       // self.columnIndicator.initializeIndicator(0.05*self.bounds.width, numberHeight: firstSeat.frame.width, ColumnNumber: self.seatButtonArray[0].count, exclude: <#T##[Int]#>)
         self.baseRowSpace = (self.seatSideLength+self.rowSpace)*self.scrollView.zoomScale
         self.rowIndicator.updateUI(self.getMapCenterY(), space: self.baseRowSpace)
         self.addSubview(self.rowIndicator)
@@ -105,6 +110,12 @@ class SeatView: UIView, UIScrollViewDelegate,UITableViewDelegate{
         return newCenter.y
 
     }
+    
+    
+    func reloadSeats(){
+        self.setNeedsLayout()
+    }
+    
     
     func flipSeats(){
         // flip vertically
@@ -283,14 +294,18 @@ class SeatView: UIView, UIScrollViewDelegate,UITableViewDelegate{
     
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
         self.hideMiniMap()
+        self.isManualDragging = false
     }
     
     func hideMiniMap(){
         //  UIView.transitionWithView(self.miniMap, duration: NSTimeInterval(0.2), options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {} , completion: ({completed in return}))
         self.miniMap.hidden = true
+      
     }
     
-    
+    func scrollViewWillBeginZooming(scrollView: UIScrollView, withView view: UIView?) {
+        self.isManualDragging = true
+    }
     
     
     func scrollViewDidZoom(scrollView: UIScrollView) {
@@ -299,10 +314,16 @@ class SeatView: UIView, UIScrollViewDelegate,UITableViewDelegate{
             , self.miniSeatIndicator.frame.origin.y,
             self.frame.width/self.viewRatio/self.scrollView.zoomScale,
             self.frame.height/self.viewRatio/self.scrollView.zoomScale)
+        self.isManualDragging = false
     }
     
+    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+        self.isManualDragging = true
+    }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
+        
+        
         if !self.scrollView.zooming{
             self.rowIndicator.updateUI(self.getMapCenterY())
         }
@@ -311,8 +332,11 @@ class SeatView: UIView, UIScrollViewDelegate,UITableViewDelegate{
         if self.miniSeatIndicator == nil{
             return
         }
+    
         
-        self.miniMap.hidden = false
+        if isManualDragging{
+            self.miniMap.hidden = false
+        }
         self.miniSeatIndicator.frame = CGRectMake(self.scrollView.contentOffset.x/viewRatio/self.scrollView.zoomScale, self.scrollView.contentOffset.y/viewRatio/self.scrollView.zoomScale, miniSeatIndicator.frame.size.width,
             miniSeatIndicator.frame.size.height)
     }
@@ -345,6 +369,13 @@ class SeatView: UIView, UIScrollViewDelegate,UITableViewDelegate{
     func changeSeatStatusAtIndexPath(indexPath: NSIndexPath, seatStatus: SeatStatus){
         let seat = self.seatButtonArray[indexPath.row][indexPath.section]
         seat.status = seatStatus
+    }
+    
+    func getSeatCenterPointAtIndexPath(indexPath: NSIndexPath, toView: UIView) -> CGRect{
+        var f = self.seatButtonArray[indexPath.row][indexPath.section].frame
+        let newPoint = self.seatView.convertPoint(f.origin, toView: toView)
+        f.origin = newPoint
+        return f
     }
     
 }

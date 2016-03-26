@@ -117,6 +117,20 @@ protocol TeacherNewTestDelegate{
         }
     }
     
+    func endTest(test: TeacherTest, completionHandler: ResponseMessageHandler){
+        let authHelper = TeacherAuthenticationHelper.defaultHelper
+        authHelper.getResponsePOST(RequestType.END_TEST, postBody: ["test_id": test.testId], subIdRequired: true){
+            (error, json) in
+            if error == nil{
+                test.finished = true
+                let course = TeacherCourse.currentCourse
+                course.finishedTests.insert(test, atIndex: 0)
+                course.unfinishedTests.removeAtIndex(course.unfinishedTests.indexOf({$0 === test})!)
+            }
+            completionHandler(error: error)
+        }
+    }
+    
     func getTestResults(test: TeacherTest, completionHandler: ResponseMessageHandler){
         if !test.finished{
             completionHandler(error: CError.TEST_STILL_ONGOING)

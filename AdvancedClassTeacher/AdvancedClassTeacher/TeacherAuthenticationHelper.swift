@@ -40,7 +40,7 @@ class TeacherAuthenticationHelper {
     var tempRequestType:RequestType!
     var tempPostBody:[String: AnyObject]!
     var originalHandler:((error:CError?, json:JSON!) -> Void)!
-    
+    var processing = false
     static var defaultHelper:TeacherAuthenticationHelper{
         get{
             if _defaultHelper == nil{
@@ -90,6 +90,7 @@ class TeacherAuthenticationHelper {
             case .Failure:
                 completionHandler(error: CError.NETWORK_ERROR, json: nil)
             }
+            
         }
         
     }

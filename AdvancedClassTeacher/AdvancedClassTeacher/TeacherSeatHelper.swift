@@ -37,7 +37,8 @@ class TeacherSeatHelper {
     var isFinal = false
     var tempSeat: Seat!
     var retryTime = 0
-    
+    var seatByStudentId: [String: Seat]!
+    var seatToLocate: Seat!
     func getSeatAtIndexPath(indexPath: NSIndexPath) -> Seat{
         return self.seatArray[indexPath.row][indexPath.section]
     }
@@ -57,11 +58,12 @@ class TeacherSeatHelper {
     }
 
     
-    func getSeatMap(completionHandler: ResponseHandler){
+    func getSeatMap(completionHandler: ResponseMessageHandler){
         self.authHelper!.getResponsePOST(RequestType.GET_SEAT_MAP, postBody: ["seat_map_token": self.seatMapToken, "check_final": false]){
             [unowned self]
             (error, json) in
             if error == nil{
+                self.seatByStudentId = [String: Seat]()
                 self.columns = json["col_num"].intValue
                 self.rows = json["row_num"].intValue
                 self.seatArray = [[Seat!]]()
@@ -70,12 +72,17 @@ class TeacherSeatHelper {
                 }
                 for (_, seat_json) in json["seats"]{
                     let seat = Seat(json: seat_json)
+                    if seat.currentStudentId != ""{
+                        self.seatByStudentId[seat.currentStudentId] = seat
+                    }
                     self.seatArray[seat.row-1][seat.column-1] = seat
                 }
             }
-            completionHandler(error: error, json: json)
+            completionHandler(error: error)
         }
     }
+    
+   
     
 
     

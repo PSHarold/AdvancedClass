@@ -91,6 +91,42 @@ class TeacherCourseHelper{
 
     }
     
+    func modifyNotificationInCourse(course: TeacherCourse, notification: Notification, completionHandler: ResponseMessageHandler){
+        let authHelper = TeacherAuthenticationHelper.defaultHelper
+        var a = notification.toDict()
+        a["course_id"] = course.courseId
+        a["sub_id"] = course.subId
+        
+        authHelper.getResponsePOST(RequestType.MODIFY_NOTIFICATION, postBody: a){
+            (error, json) in
+            completionHandler(error: error)
+        }
+    }
+    
+    func postNotificationInCourse(course: TeacherCourse, notification: Notification, completionHandler: ResponseMessageHandler){
+        let authHelper = TeacherAuthenticationHelper.defaultHelper
+        var a = notification.toDict()
+        a["course_id"] = course.courseId
+        a["sub_id"] = course.subId
+        authHelper.getResponsePOST(RequestType.POST_NOTIFICATION, postBody: a){
+            (error, json) in
+            if error == nil{
+                notification.notificationId = json["ntfc_id"].stringValue
+                course.notifications.insert(notification, atIndex: 0)
+            }
+            completionHandler(error: error)
+        }
+    }
+    
+    func deleteNotificationInCourse(course: TeacherCourse, notification: Notification, completionHandler: ResponseMessageHandler){
+        let authHelper = TeacherAuthenticationHelper.defaultHelper
+        authHelper.getResponsePOST(RequestType.DELETE_NOTIFICATION, postBody: ["course_id": course.courseId, "sub_id": course.subId, "ntfc_id": notification.notificationId]){
+            (error, json) in
+            completionHandler(error: error)
+        }
+
+    }
+    
     
     
     func getStudent(studentId: String, course: TeacherCourse, completionHandler: ResponseMessageHandler){

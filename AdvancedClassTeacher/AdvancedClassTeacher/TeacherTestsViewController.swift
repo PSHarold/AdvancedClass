@@ -45,6 +45,11 @@ class TeacherTestsViewController: UIViewController, UITableViewDataSource, UITab
         
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tableView.reloadData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let labelOrigin = CGPointMake(self.tableView.bounds.width/2, self.tableView.bounds.height/2)
@@ -67,10 +72,6 @@ class TeacherTestsViewController: UIViewController, UITableViewDataSource, UITab
     
     func beginRefreshing(){
         self.refreshControl.beginRefreshing()
-        if self.refreshControl.refreshing{
-            self.refreshControl.endRefreshing()
-            return
-        }
         if self.showFinished{
             self.refreshFinishedTests()
         }
@@ -185,12 +186,13 @@ class TeacherTestsViewController: UIViewController, UITableViewDataSource, UITab
         var test: TeacherTest
         if self.showFinished{
             test = self.currentCourse!.finishedTests[indexPath.row]
-            cell.createdOnLabel.text = test.createdOn
+            
         }
         else{
             test = self.currentCourse!.unfinishedTests[indexPath.row]
         }
         cell.finished = test.finished
+        cell.createdOnLabel.text = test.createdOn
         cell.progressView.totalNumber = self.currentCourse!.studentIds.count
         cell.progressView.currentNumber = test.finishedCount
         return cell
@@ -224,6 +226,7 @@ class TeacherTestsViewController: UIViewController, UITableViewDataSource, UITab
         }
         else{
             self.testHelper!.currentTest = self.currentCourse!.unfinishedTests[indexPath.row]
+            self.performSegueWithIdentifier("ShowUnfinishedTest", sender: self)
             
         }
     }

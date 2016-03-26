@@ -12,16 +12,20 @@ class TeacherCourseActivitiesViewController: UIViewController {
     weak var seatHelper = TeacherSeatHelper.defaultHelper
     @IBOutlet weak var chooseSeatButton: UIView!
     @IBOutlet weak var seatPromptLabel: UILabel!
-
+    @IBOutlet weak var showStudentsLabel: UILabel!
+    
+    @IBOutlet weak var showStudentListButton: UIView!
     var timer: NSTimer!
     var remainingSeconds = 0{
         didSet{
             if remainingSeconds == 0{
                 self.seatPromptLabel.text = "已开放"
+                self.showStudentsLabel.text = "已开放"
                 return
             }
-            
-            self.seatPromptLabel.text = self.remainingSeconds.toTimeString()
+            let t = self.remainingSeconds.toTimeString()
+            self.showStudentsLabel.text = t
+            self.seatPromptLabel.text = t
         }
     }
     
@@ -30,13 +34,27 @@ class TeacherCourseActivitiesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.chooseSeatButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(TeacherCourseActivitiesViewController.showSeatMap)))
+        self.showStudentListButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(TeacherCourseActivitiesViewController.showStudentList)))
         self.chooseSeatButton.layer.masksToBounds = true
         self.chooseSeatButton.layer.cornerRadius = 10.0
         self.chooseSeatButton.layer.borderWidth = 0.3
+        self.showStudentListButton.layer.masksToBounds = true
+        self.showStudentListButton.layer.cornerRadius = 10.0
+        self.showStudentListButton.layer.borderWidth = 0.3
+        
         // Do any additional setup after loading the view.
     }
+    
+    
+    func showSeatMap(){
+        self.getSeatMap(true)
+    }
+    
+    func showStudentList(){
+        self.getSeatMap(false)
+    }
 
-    func showSeatMap() {
+    func getSeatMap(showMapOrList: Bool) {
         self.seatHelper!.getSeatToken{
             (error, json) in
             if let error = error{
@@ -50,8 +68,10 @@ class TeacherCourseActivitiesViewController: UIViewController {
                     }
                 case .COURSE_ALREADY_OVER:
                     self.seatPromptLabel.text = "课程已结束"
+                    self.showStudentsLabel.text = "课程已结束"
                 case CError.COURSE_ALREADY_BEGUN:
                     self.seatPromptLabel.text = "课程已开始"
+                    self.showStudentsLabel.text = "课程已开始"
                 default:
                     break
                 }
@@ -59,19 +79,27 @@ class TeacherCourseActivitiesViewController: UIViewController {
             }
             else{
                 self.seatHelper!.getSeatMap{
-                    (error, json) in
+                    (error) in
                     if let error = error{
                         self.showError(error)
                     }
                     else{
                         self.remainingSeconds = 0
                         self.hideHud()
-                        self.performSegueWithIdentifier("ShowSeatMap", sender: self)
+                        if showMapOrList{
+                            self.performSegueWithIdentifier("ShowSeatMap", sender: self)
+                        }
+                        else{
+                            self.performSegueWithIdentifier("ShowStudentList", sender: self)
+                        }
+                        
                     }
                 }
             }
         }
     }
+
+    
     func tick(){
         self.remainingSeconds -= 1
         if self.remainingSeconds == 0{

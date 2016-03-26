@@ -132,7 +132,7 @@ class Syllabus{
 class Notification {
     var title:String!
     var content:String!
-    var top:Bool!
+    var onTop: Bool!
     var createdOn:String!
     var createdOnTimeData:NSDate!
     var notificationId:String!
@@ -140,16 +140,20 @@ class Notification {
     init(json:JSON){
         self.title = json["title"].stringValue
         self.content = json["content"].stringValue
-        self.top = json["top"].boolValue
+        self.onTop = json["on_top"].boolValue
         self.notificationId = json["ntfc_id"].stringValue
         self.createdOn = json["created_on"].stringValue
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        self.createdOnTimeData = dateFormatter.dateFromString(self.createdOn) as NSDate!
+        
     }
     
+    init(){}
+    
     func toDict() -> Dictionary<String,AnyObject>{
-        return ["title":self.title,"top":self.top,"created_on":self.createdOn,"content":self.content]
+        var a = ["title": self.title, "on_top": self.onTop, "content":self.content] as! Dictionary<String, AnyObject>
+        if let id = self.notificationId{
+            a["ntfc_id"] = id
+        }
+        return a
     }
 }
 

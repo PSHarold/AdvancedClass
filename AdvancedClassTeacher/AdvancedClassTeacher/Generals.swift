@@ -34,6 +34,7 @@ enum RequestType: String{
     case FREE_SEAT = "/seat/freeSeat"
     case GET_SYLLABUS = "/course/syllabus/getSyllabus"
     case POST_TEST = "/course/test/postTest"
+    case END_TEST = "/course/test/endTest"
     case GET_QUESTIONS_IN_POINT = "/course/question/getQuestionsInPoint"
     case GET_UNFINISHED_TESTS = "/course/test/getUnfinishedTests"
     case GET_FINISHED_TESTS = "/course/test/getFinishedTests"
@@ -42,7 +43,9 @@ enum RequestType: String{
     case GET_STUDENTS_IN_COURES = "/course/getStudents"
     case GET_UNFINISHED_STUDENTS = "/course/test/result/getUnfinishedStudents"
     case GET_STUDENT = "/course/getStudentInfo"
-    
+    case MODIFY_NOTIFICATION = "/course/notification/modifyNotification"
+    case POST_NOTIFICATION = "/course/notification/postNotification"
+    case DELETE_NOTIFICATION = "/course/notification/deleteNotification"
 }
 func getRequestFor(requestType:RequestType, method:Alamofire.Method, postBody:[String: AnyObject]?, headers:[String:String]?) -> Request{
     return alamofireManager.request(method, BASE_URL + requestType.rawValue, parameters: postBody, encoding: .JSON, headers: headers)
@@ -148,7 +151,11 @@ extension Double {
     }
 }
 
-
+extension Array {
+    subscript (safe index: UInt) -> Element? {
+        return Int(index) < count ? self[Int(index)] : nil
+    }
+}
 
 
 
