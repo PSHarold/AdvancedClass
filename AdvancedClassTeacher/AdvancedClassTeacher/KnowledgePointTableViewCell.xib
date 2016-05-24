@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="55" id="KGk-i7-Jjw" customClass="KnowledgePointTableViewCell" customModule="AdvancedClassTeacher" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="55"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="54"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="知识点：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RmP-RP-WJT">
+                        <rect key="frame" x="8" y="17" width="64" height="20"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已选：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VxM-QF-TeX">
+                        <rect key="frame" x="264" y="17" width="48" height="20"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f8E-Be-mxf">
+                        <rect key="frame" x="73" y="17" width="40" height="20"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailingMargin" secondItem="VxM-QF-TeX" secondAttribute="trailing" id="2V6-oO-z3E"/>
+                    <constraint firstItem="f8E-Be-mxf" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="4ep-HW-lIh"/>
+                    <constraint firstItem="RmP-RP-WJT" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="D6p-Su-ODD"/>
+                    <constraint firstItem="f8E-Be-mxf" firstAttribute="leading" secondItem="RmP-RP-WJT" secondAttribute="trailing" constant="1" id="WyO-q4-FAZ"/>
+                    <constraint firstItem="VxM-QF-TeX" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="YXY-2B-qXr"/>
+                    <constraint firstAttribute="leadingMargin" secondItem="RmP-RP-WJT" secondAttribute="leading" id="oas-zE-4tm"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="chosenNumLabel" destination="VxM-QF-TeX" id="Ub5-Zn-EYY"/>
+                <outlet property="pointContentLabel" destination="f8E-Be-mxf" id="1wj-PF-QgL"/>
+            </connections>
+            <point key="canvasLocation" x="454" y="465.5"/>
+        </tableViewCell>
+    </objects>
+</document>

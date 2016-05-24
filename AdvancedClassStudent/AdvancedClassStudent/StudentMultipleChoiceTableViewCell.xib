@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="75" id="KGk-i7-Jjw" customClass="StudentMultipleChoiceTableViewCell" customModule="AdvancedClassStudent" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="429" height="75"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="429" height="74"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OMT-ga-5HX">
+                        <rect key="frame" x="10" y="10" width="54" height="54"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="OMT-ga-5HX" secondAttribute="height" multiplier="1:1" id="bt2-WL-IKf"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OxP-te-YBG">
+                        <rect key="frame" x="72" y="27" width="349" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="OMT-ga-5HX" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="0qb-lr-4ZJ"/>
+                    <constraint firstItem="OMT-ga-5HX" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="Bmd-xr-gZA"/>
+                    <constraint firstItem="OxP-te-YBG" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="dfD-ah-usp"/>
+                    <constraint firstItem="OMT-ga-5HX" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="fZy-10-GTk"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="OxP-te-YBG" secondAttribute="trailing" id="qhg-gP-E7c"/>
+                    <constraint firstItem="OxP-te-YBG" firstAttribute="leading" secondItem="OMT-ga-5HX" secondAttribute="trailing" constant="8" id="zaR-wF-8C7"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="choiceLabel" destination="OxP-te-YBG" id="CPQ-Dr-VhC"/>
+                <outlet property="myImageView" destination="OMT-ga-5HX" id="P2k-ey-N2w"/>
+            </connections>
+            <point key="canvasLocation" x="270.5" y="474.5"/>
+        </tableViewCell>
+    </objects>
+</document>
