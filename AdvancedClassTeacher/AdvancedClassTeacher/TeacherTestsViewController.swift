@@ -9,7 +9,7 @@
 import UIKit
 
 class TeacherTestsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     weak var currentCourse = TeacherCourse.currentCourse
@@ -35,7 +35,9 @@ class TeacherTestsViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     @IBAction func segmentIndexChanged(sender: UISegmentedControl) {
+        //self.refreshControl.endRefreshing()
         if first{
+            self.refreshControl.beginRefreshing()
             self.beginRefreshing()
             first = false
         }
@@ -45,10 +47,6 @@ class TeacherTestsViewController: UIViewController, UITableViewDataSource, UITab
         
     }
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        self.beginRefreshing()
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,17 +64,20 @@ class TeacherTestsViewController: UIViewController, UITableViewDataSource, UITab
         let nib = UINib(nibName: "TestTableViewCell", bundle: nil)
         self.tableView.registerNib(nib, forCellReuseIdentifier: "TestCell")
         self.tableView.addSubview(self.refreshControl)
-              
+        self.refreshControl.beginRefreshing()
+        self.beginRefreshing()
     }
     
     func beginRefreshing(){
-        self.refreshControl.beginRefreshing()
-        if self.showFinished{
-            self.refreshFinishedTests()
+        if self.refreshControl.refreshing{
+            if self.showFinished{
+                self.refreshFinishedTests()
+            }
+            else{
+                self.refreshUnfinishedTests()
+            }
         }
-        else{
-            self.refreshUnfinishedTests()
-        }
+        
     }
     
     func refreshUnfinishedTests(){
@@ -102,13 +103,13 @@ class TeacherTestsViewController: UIViewController, UITableViewDataSource, UITab
                 }
                 if !self.showFinished{
                     self.tableView.reloadData()
-
+                    
                 }
             }
             self.refreshControl.endRefreshing()
             
         }
-
+        
     }
     
     
@@ -140,38 +141,10 @@ class TeacherTestsViewController: UIViewController, UITableViewDataSource, UITab
             }
             self.refreshControl.endRefreshing()
         }
-
+        
     }
     
-    func loadFinishedTestsToPage(page: Int){
-        self.acquiring = true
-        self.testHelper!.getFinishedTestsInCourse(self.currentCourse!, page: page){
-            [unowned self]
-            error in
-            if let error = error{
-                self.showError(error)
-                if self.currentCourse!.finishedTests.count == 0{
-                    let label = self.tableView.backgroundView as! UILabel
-                    label.hidden = false
-                    label.text = "网络错误，下拉重试"
-                }
-            }
-            else{
-                if self.currentCourse!.finishedTests.count == 0{
-                    let label = self.tableView.backgroundView as! UILabel
-                    label.hidden = false
-                    label.text = "无测验，下拉刷新"
-                }
-                else{
-                    self.tableView.reloadData()
-                    self.page = page
-                }
-            }
-            
-        }
-
-    }
-
+    
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
@@ -206,7 +179,7 @@ class TeacherTestsViewController: UIViewController, UITableViewDataSource, UITab
             number = self.currentCourse!.unfinishedTests.count
         }
         let label = self.tableView.backgroundView as! UILabel
-
+        
         if number == 0{
             label.hidden = false
             label.text = "无测验，下拉刷新"
@@ -229,28 +202,6 @@ class TeacherTestsViewController: UIViewController, UITableViewDataSource, UITab
             
         }
     }
-    
-    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        if self.showFinished{
-            self.acquiring = false
-        }
-        
-    }
-    
-    func scrollViewDidScroll(scrollView: UIScrollView) {
-        if self.showFinished{
-            if self.acquiring{
-                return
-            }
-            let offsetY = scrollView.contentOffset.y
-            let judgeOffsetY = scrollView.contentSize.height + scrollView.contentInset.bottom - scrollView.frame.height
-            if offsetY >= judgeOffsetY{
-                self.loadFinishedTestsToPage(self.page+1)
-            }
-
-        }
-    }
-    
     func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
         if self.segmentedControl.selectedSegmentIndex == 1{
             return .Delete
@@ -275,7 +226,7 @@ class TeacherTestsViewController: UIViewController, UITableViewDataSource, UITab
             }
         }
     }
-
+    
     @IBAction func addNewTest(sender: AnyObject) {
         self.showHudIndeterminate("正在加载")
         let courseHelper = TeacherCourseHelper.defaultHelper

@@ -14,7 +14,7 @@ class StudentCourseHelper{
     func getNotifications(page: Int, course: StudentCourse?=nil, completionHandler: ResponseMessageHandler){
         assert(page >= 1)
         let course = course ?? StudentCourse.currentCourse!
-        StudentAuthenticationHelper.defaultHelper.getResponsePOSTWithCourse(RequestType.GET_NOTIFICAIONS, parameters: ["page": page], course: course){
+        StudentAuthenticationHelper.defaultHelper.getResponsePOSTWithCourse(RequestType.GET_NOTIFICAIONS, parameters: ["page": 1], course: course){
             (error, json) in
             if error == nil{
                 course.notifications = [Notification]()

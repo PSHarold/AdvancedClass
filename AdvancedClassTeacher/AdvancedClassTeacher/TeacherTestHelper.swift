@@ -14,7 +14,7 @@ protocol TeacherNewTestDelegate{
     func questionRemoved(currentQuestionNum: Int)
 }
 
-@objc class TeacherTestHelper: NSObject{
+class TeacherTestHelper {
     
     static var _defaultHelper: TeacherTestHelper?
     static var defaultHelper:TeacherTestHelper{
@@ -28,7 +28,7 @@ protocol TeacherNewTestDelegate{
     var currentTest: TeacherTest!
     private var delegate: TeacherNewTestDelegate?
     private var _newTest: TeacherTest!
-    weak var authHelper = TeacherAuthenticationHelper.defaultHelper
+
     var newTest: TeacherTest{
         get{
             if self._newTest == nil{
@@ -37,7 +37,7 @@ protocol TeacherNewTestDelegate{
             return self._newTest
         }
     }
-
+    
     func dropNewTest(){
         self._newTest = nil
     }
@@ -52,7 +52,7 @@ protocol TeacherNewTestDelegate{
         dict["course_id"] = TeacherCourse.currentCourse.courseId
         dict["sub_id"] = TeacherCourse.currentCourse.subId
         
-        self.authHelper!.getResponsePOSTWithCourse(RequestType.POST_TEST, parameters: dict){
+        TeacherAuthenticationHelper.defaultHelper.getResponsePOSTWithCourse(RequestType.POST_TEST, parameters: dict){
             [unowned self]
             (error, json) in
             if error == nil{
@@ -102,7 +102,7 @@ protocol TeacherNewTestDelegate{
     
     
     func getQuestionsWithQuestionIds(questionIds: [String], test: TeacherTest, completionHandler: ResponseMessageHandler){
-        self.authHelper!.getResponsePOSTWithCourse(.GET_QUESTIONS_IN_LIST, parameters: ["questions": questionIds]){
+        TeacherAuthenticationHelper.defaultHelper.getResponsePOSTWithCourse(.GET_QUESTIONS_IN_LIST, parameters: ["questions": questionIds]){
             (error, json) in
             if error == nil{
                 for (_, question_json) in json["questions"]{
@@ -144,29 +144,42 @@ protocol TeacherNewTestDelegate{
         }
     }
     
+
+
+    func getTestResultsMain(test: TeacherTest, completionHandler: ResponseMessageHandler){
+        TeacherAuthenticationHelper.defaultHelper.getResponsePOSTWithCourse(RequestType.GET_TEST_RESULTS, parameters: ["test_id": test.testId]){
+            [unowned self]
+            (error, json) in
+            if error == nil{
+                test.results = TestResult()
+                test.results.getResultsFromJSON(json["results"])
+                test.resultAcquired = true
+            }
+            
+            self.getQuestionsWithQuestionIds(test.results.tempQuestionIds, test: test, completionHandler: completionHandler)
+        }
+    }
+
+    
     func getTestResults(test: TeacherTest, completionHandler: ResponseMessageHandler){
         if !test.finished{
             completionHandler(error: MyError(cerror: CError.TEST_STILL_ONGOING))
             return
         }
-//        else if test.resultAcquired{
-//            completionHandler(error: nil)
-//        }
         else{
-            self.authHelper!.getResponsePOSTWithCourse(RequestType.GET_TEST_RESULTS, parameters: ["test_id": test.testId]){
-                [unowned self]
-                (error, json) in
-                if error == nil{
-                    test.results = TestResult()
-                    test.results.getResultsFromJSON(json["results"])
-                    test.resultAcquired = true
+            if TeacherCourse.currentCourse.syllabus == nil{
+                TeacherCourseHelper.defaultHelper.getSyllabus{
+                    error in
+                    if let error = error{
+                        completionHandler(error: error)
+                    }
+                    else{
+                        self.getTestResultsMain(test, completionHandler: completionHandler)
+                    }
                 }
-                
-                self.getQuestionsWithQuestionIds(test.results.tempQuestionIds, test: test, completionHandler: completionHandler)
             }
         }
     }
-    
     
 
     
@@ -175,7 +188,7 @@ protocol TeacherNewTestDelegate{
             completionHandler(error: nil)
         }
         else{
-            self.authHelper!.getResponsePOSTWithCourse(RequestType.GET_UNFINISHED_STUDENTS, parameters: ["test_id": test.testId]){
+            TeacherAuthenticationHelper.defaultHelper.getResponsePOSTWithCourse(RequestType.GET_UNFINISHED_STUDENTS, parameters: ["test_id": test.testId]){
                 (error, json) in
                 if error == nil{
                     test.unfinishedStudents = [String]()

@@ -50,11 +50,40 @@ class StudentCourseActivitiesViewController: UIViewController{
 
     
     func getSeatMap() {
+        self.showHudWithText("正在加载")
         self.seatHelper.getSeatMap{
             error in
             if let error = error{
                 if error == CError.SEAT_TOKEN_EXPIRED || error == CError.BAD_SEAT_TOKEN{
-                    self.takeQRCode()
+                    //self.takeQRCode()
+                    self.seatHelper.getSeatToken("SECRET SEAT TOKEN"){
+                        [weak self]
+                        error, json in
+                        if let error = error{
+                            self!.showError(error)
+                            if let error = error.error{
+                                switch error{
+                                case .SEAT_CHOOSING_NOT_AVAILABLE_YET:
+                                    if self!.timer == nil{
+                                        self!.remainingSeconds = json["remaining_secs"].intValue
+                                        self!.timer = NSTimer(timeInterval: 1.0, target: self!, selector: #selector(self!.tick), userInfo: nil, repeats: true)
+                                        NSRunLoop.currentRunLoop().addTimer(self!.timer!, forMode: NSRunLoopCommonModes)
+                                    }
+                                case .COURSE_ALREADY_OVER:
+                                    self!.seatPromptLabel.text = "课程已结束"
+                                    self!.timer?.invalidate()
+                                case CError.COURSE_ALREADY_BEGUN:
+                                    self!.seatPromptLabel.text = "课程已开始"
+                                    self!.timer?.invalidate()
+                                default:
+                                    break
+                                }
+                            }
+                        }
+                        else{
+                            self?.hideHud()
+                        }
+                    }
                 }
                 else{
                     self.showError(error)
@@ -99,7 +128,8 @@ class StudentCourseActivitiesViewController: UIViewController{
                 self?.hideHud()
             }
         }
-        self.presentViewController(qrReader, animated: true, completion: nil)
+        qrReader.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(qrReader, animated: true)//presentViewController(qrReader, animated: true, completion: nil)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

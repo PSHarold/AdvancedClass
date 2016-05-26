@@ -66,7 +66,11 @@ class StudentNotificationsTableViewController: UITableViewController {
         self.performSegueWithIdentifier("ShowNotification", sender: self)
     }
     
-    func beginRefreshing(){
+    func beginRefreshing(){        
+        if self.refreshControl!.refreshing{
+            self.refreshControl!.endRefreshing()
+            return
+        }
         self.refreshControl!.beginRefreshing()
         self.loadNotificationsToPage(1)
     }

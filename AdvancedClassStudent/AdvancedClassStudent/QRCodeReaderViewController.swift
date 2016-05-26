@@ -33,8 +33,9 @@ class QRCodeReaderViewController: UIViewController, AVCaptureMetadataOutputObjec
         self.messageLabel.frame.size = size
         self.messageLabel.frame.origin = origin
         self.messageLabel.backgroundColor = UIColor.greenColor()
-        self.messageLabel.textColor = UIColor.whiteColor()
-        
+        self.messageLabel.textColor = UIColor.blackColor()
+        self.messageLabel.textAlignment = .Center
+        self.view.addSubview(self.messageLabel)
         // Get an instance of the AVCaptureDevice class to initialize a device object and provide the video
         // as the media type parameter.
         let captureDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)

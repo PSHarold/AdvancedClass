@@ -13,6 +13,12 @@ import SwiftyJSON
 class SeatTokenQRCodeReaderViewController: QRCodeReaderViewController {
     
     var completionHandler: ResponseHandler?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.message = "将摄像头对准老师提供的二维码"
+    }
+    
     override func verifyQRCode(code: String){
         self.captureSession?.stopRunning()
         self.showHudWithText("正在验证")
@@ -28,8 +34,7 @@ class SeatTokenQRCodeReaderViewController: QRCodeReaderViewController {
                     self.presentViewController(alert, animated: true, completion: nil)
                     
                 }
-                else{
-                    
+                else{                    
                     self.completionHandler?(error: error, json: json)
                     self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
                 }

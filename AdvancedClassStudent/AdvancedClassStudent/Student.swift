@@ -16,7 +16,7 @@ class Student {
     var className:String
     var tel:String
     var majorName:String
-    var avartar: NSData?
+    var avartar: UIImage?
     var genderString:String{
         get{
             if self.gender{

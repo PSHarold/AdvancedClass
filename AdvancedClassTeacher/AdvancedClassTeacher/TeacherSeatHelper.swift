@@ -86,6 +86,7 @@ class TeacherSeatHelper {
         _defaultHelper = nil
     }
     
-
+    
+    func getAvatars()
     
 }

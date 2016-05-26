@@ -298,6 +298,26 @@ class StudentAuthenticationHelper{
                             }
         })
     }
+    
+    func getAvatar(force: Bool=false, completionHandler: ResponseMessageHandler){
+        if self.me.avartar != nil && !force{
+            completionHandler(error: nil)
+        }
+        self.getResponseGetFile(RequestType.GET_MY_AVATAR, method: .GET, parameters: [:]){
+            [unowned self]
+            error, data in
+            if let error = error{
+                completionHandler(error: error)
+                return
+            }
+            guard let avartar = UIImage(data: data) else{
+                completionHandler(error: error)
+                return
+            }
+            self.me.avartar = avartar
+            completionHandler(error: nil)
+        }
+    }
 
     
     

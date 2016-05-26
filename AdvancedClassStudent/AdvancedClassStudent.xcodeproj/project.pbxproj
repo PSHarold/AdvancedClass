@@ -35,6 +35,8 @@
 		F255B8A11CF4407700D8D49A /* PostedAskTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F255B8991CF4407700D8D49A /* PostedAskTableViewController.swift */; };
 		F255B8A31CF4425A00D8D49A /* StudentAskForLeave.swift in Sources */ = {isa = PBXBuildFile; fileRef = F255B8A21CF4425A00D8D49A /* StudentAskForLeave.swift */; };
 		F255B8A51CF443C200D8D49A /* PopupPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F255B8A41CF443C200D8D49A /* PopupPickerView.swift */; };
+		F255B8A81CF4692500D8D49A /* MyInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F255B8A61CF4692500D8D49A /* MyInfoTableViewCell.swift */; };
+		F255B8A91CF4692500D8D49A /* MyInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F255B8A71CF4692500D8D49A /* MyInfoTableViewCell.xib */; };
 		F25B8E051B9DB16400A2587E /* StudentCourseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25B8E041B9DB16400A2587E /* StudentCourseTableViewController.swift */; };
 		F275AFAD1CA9FAC40009925B /* SeatColumnIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F275AFAC1CA9FAC40009925B /* SeatColumnIndicator.swift */; };
 		F275AFAF1CA9FC210009925B /* StudentSeatSearchResultTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F275AFAE1CA9FC210009925B /* StudentSeatSearchResultTableViewController.swift */; };
@@ -133,6 +135,8 @@
 		F255B8991CF4407700D8D49A /* PostedAskTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostedAskTableViewController.swift; sourceTree = "<group>"; };
 		F255B8A21CF4425A00D8D49A /* StudentAskForLeave.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentAskForLeave.swift; sourceTree = "<group>"; };
 		F255B8A41CF443C200D8D49A /* PopupPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopupPickerView.swift; sourceTree = "<group>"; };
+		F255B8A61CF4692500D8D49A /* MyInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyInfoTableViewCell.swift; sourceTree = "<group>"; };
+		F255B8A71CF4692500D8D49A /* MyInfoTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyInfoTableViewCell.xib; sourceTree = "<group>"; };
 		F25B8E041B9DB16400A2587E /* StudentCourseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentCourseTableViewController.swift; sourceTree = "<group>"; };
 		F275AFAC1CA9FAC40009925B /* SeatColumnIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeatColumnIndicator.swift; sourceTree = "<group>"; };
 		F275AFAE1CA9FC210009925B /* StudentSeatSearchResultTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentSeatSearchResultTableViewController.swift; sourceTree = "<group>"; };
@@ -316,6 +320,8 @@
 				F275AFB81CAA0C6D0009925B /* TestTableViewCell.swift */,
 				F275AFB91CAA0C6D0009925B /* TestTableViewCell.xib */,
 				F2B992791C78128500A8DE18 /* TimesAndRooms.swift */,
+				F255B8A61CF4692500D8D49A /* MyInfoTableViewCell.swift */,
+				F255B8A71CF4692500D8D49A /* MyInfoTableViewCell.xib */,
 			);
 			path = AdvancedClassStudent;
 			sourceTree = "<group>";
@@ -453,6 +459,7 @@
 				F2B917CC1CAD088200ED9521 /* StudentMultipleChoiceResultTableViewCell.xib in Resources */,
 				F283BC931C9ECF7100E0396F /* StudentMultipleChoiceTableViewCell.xib in Resources */,
 				F275AFB31CA9FC430009925B /* StudentInfoCell.xib in Resources */,
+				F255B8A91CF4692500D8D49A /* MyInfoTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -578,6 +585,7 @@
 				F22DACC01B81ACB600360027 /* StudentPreTestViewController.swift in Sources */,
 				F298D6851CF0029200733600 /* PhotoGalleryViewController.swift in Sources */,
 				F255B8A51CF443C200D8D49A /* PopupPickerView.swift in Sources */,
+				F255B8A81CF4692500D8D49A /* MyInfoTableViewCell.swift in Sources */,
 				F255B8A11CF4407700D8D49A /* PostedAskTableViewController.swift in Sources */,
 				F275AFBF1CAA0CFC0009925B /* MyProgressBar.swift in Sources */,
 				F2FD6FE81CF3435200A35C2C /* QRCodeReaderViewController.swift in Sources */,

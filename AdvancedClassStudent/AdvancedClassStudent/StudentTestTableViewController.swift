@@ -37,13 +37,20 @@ class StudentTestsViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     @IBAction func segmentIndexChanged(sender: UISegmentedControl) {
-        self.beginRefreshing()
+        if first{
+            self.refreshControl.beginRefreshing()
+            self.beginRefreshing()
+        }
+        else{
+            self.refreshControl.endRefreshing()
+            self.tableView.reloadData()
+        }
         
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        self.beginRefreshing()
+        
     }
     
     override func viewDidLoad() {
@@ -62,17 +69,19 @@ class StudentTestsViewController: UIViewController, UITableViewDataSource, UITab
         let nib = UINib(nibName: "TestTableViewCell", bundle: nil)
         self.tableView.registerNib(nib, forCellReuseIdentifier: "TestCell")
         self.tableView.addSubview(self.refreshControl)
-       // self.beginRefreshing()
         
     }
     
     func beginRefreshing(){
-        self.refreshControl.beginRefreshing()
-        if self.showFinished{
-            self.refreshFinishedTests()
-        }
-        else{
-            self.refreshUnfinishedTests()
+        if self.refreshControl.refreshing{
+            self.first = false
+            self.refreshControl.beginRefreshing()
+            if self.showFinished{
+                self.refreshFinishedTests()
+            }
+            else{
+                self.refreshUnfinishedTests()
+            }
         }
     }
     
@@ -140,34 +149,6 @@ class StudentTestsViewController: UIViewController, UITableViewDataSource, UITab
         
     }
     
-    func loadFinishedTestsToPage(page: Int){
-        self.acquiring = true
-        self.testHelper!.getFinishedTestsInCourse(self.currentCourse!, page: page){
-            [unowned self]
-            error in
-            if let error = error{
-                self.showError(error)
-                if self.currentCourse!.finishedTests.count == 0{
-                    let label = self.tableView.backgroundView as! UILabel
-                    label.hidden = false
-                    label.text = "网络错误，下拉重试"
-                }
-            }
-            else{
-                if self.currentCourse!.finishedTests.count == 0{
-                    let label = self.tableView.backgroundView as! UILabel
-                    label.hidden = false
-                    label.text = "无测验，下拉刷新"
-                }
-                else{
-                    self.tableView.reloadData()
-                    self.page = page
-                }
-            }
-            
-        }
-        
-    }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
@@ -236,20 +217,6 @@ class StudentTestsViewController: UIViewController, UITableViewDataSource, UITab
             self.acquiring = false
         }
         
-    }
-    
-    func scrollViewDidScroll(scrollView: UIScrollView) {
-        if self.showFinished{
-            if self.acquiring{
-                return
-            }
-            let offsetY = scrollView.contentOffset.y
-            let judgeOffsetY = scrollView.contentSize.height + scrollView.contentInset.bottom - scrollView.frame.height
-            if offsetY >= judgeOffsetY{
-                self.loadFinishedTestsToPage(self.page+1)
-            }
-            
-        }
     }
     
 }

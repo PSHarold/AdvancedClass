@@ -24,12 +24,10 @@ class TeacherCourseHelper{
     func getNotifications(course: TeacherCourse, page: Int, completionHandler: ResponseMessageHandler){
         assert(page >= 1)
        
-            TeacherAuthenticationHelper.defaultHelper.getResponsePOST(RequestType.GET_NOTIFICAIONS, parameters: ["course_id":course.courseId,"sub_id":course.subId, "page": page]){
+            TeacherAuthenticationHelper.defaultHelper.getResponsePOST(RequestType.GET_NOTIFICAIONS, parameters: ["course_id":course.courseId,"sub_id":course.subId, "page": 1]){
                 (error, json) in
                 if error == nil{
-                    if page == 1{
-                        course.notifications = [Notification]()
-                    }
+                    course.notifications = [Notification]()
                     for (_, n) in json["notifications"]{
                         let notification = Notification(json: n)
                         notification.courseName = course.name

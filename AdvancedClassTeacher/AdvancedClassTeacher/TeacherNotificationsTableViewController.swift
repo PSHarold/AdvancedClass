@@ -15,7 +15,7 @@ class TeacherNotificationsTableViewController: UITableViewController {
     var selectedNotification: Notification!
     var page = 1
     var acquiring = false
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let labelOrigin = CGPointMake(self.tableView.bounds.width/2, self.tableView.bounds.height/2)
@@ -24,27 +24,27 @@ class TeacherNotificationsTableViewController: UITableViewController {
         label.textAlignment = .Center
         label.frame.origin = labelOrigin
         self.tableView.backgroundView = label
-        self.refreshControl!.addTarget(self, action: #selector(TeacherNotificationsTableViewController.beginRefreshing), forControlEvents: .ValueChanged)
-        
+        self.refreshControl!.addTarget(self, action: #selector(self.beginRefreshing), forControlEvents: .ValueChanged)
+        self.refreshControl!.beginRefreshing()
+        self.beginRefreshing()
     }
     
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        self.refreshControl!.beginRefreshing()
-        self.beginRefreshing()
+        
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-       
+        
         return 1
     }
-
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.currentCourse!.notifications.count
     }
-
-
+    
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
         let notification = self.currentCourse!.notifications[indexPath.row]
@@ -60,7 +60,7 @@ class TeacherNotificationsTableViewController: UITableViewController {
         }
         return cell
     }
-
+    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.selectedNotification = self.currentCourse!.notifications[indexPath.row]
         self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
@@ -68,12 +68,10 @@ class TeacherNotificationsTableViewController: UITableViewController {
     }
     
     func beginRefreshing(){
-        self.refreshControl!.beginRefreshing()
         if self.refreshControl!.refreshing{
-            self.refreshControl!.endRefreshing()
-            return
+            self.loadNotificationsToPage(1)
+            
         }
-        self.loadNotificationsToPage(1)
     }
     
     
@@ -154,5 +152,5 @@ class TeacherNotificationsTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
         return .Delete
     }
-  
+    
 }

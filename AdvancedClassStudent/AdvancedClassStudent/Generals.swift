@@ -19,7 +19,9 @@ var currentWeekNo: Int = 0
 
 
 
-let BASE_URL = TARGET_IPHONE_SIMULATOR == 0 ? "http://192.168.2.1:5000/api" : "http://localhost:5000/api"
+let BASE_URL = TARGET_IPHONE_SIMULATOR == 0 ? "http://115.159.125.226/api" : "http://localhost:5000/api"
+//let BASE_URL = TARGET_IPHONE_SIMULATOR == 0 ? "http://192.168.2.1:5000/api" : "http://localhost:5000/api"
+
 let ROLE_FOR_TEACHER = 1
 let ROLE_FOR_STUDENT = 2
 
@@ -35,6 +37,8 @@ enum RequestType: String{
     case DEPARTMENTS_INFO = "/user/register/getDepartments"
     case LOGIN = "/user/login"
     case GET_TOKEN_ONLY = "/user/login/getToken"
+    case GET_MY_AVATAR = "/user/my_avatar"
+    
     case GET_NOTIFICAIONS = "/course/notification/getNotifications"
     case GET_SEAT_TOKEN = "/seat/getSeatToken"
     case GET_SEAT_MAP = "/seat/getSeatMap"
