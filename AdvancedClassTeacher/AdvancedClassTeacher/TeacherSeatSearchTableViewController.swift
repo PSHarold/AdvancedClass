@@ -39,7 +39,7 @@ class TeacherSeatSearchTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! StudentInfoCell
         let studentId = self.studentIds![indexPath.row]
-        let student = TeacherCourse.currentCourse.students[studentId]
+        let student = TeacherCourse.currentCourse.studentDict[studentId]
         cell.studentId = studentId
         if let seat = seatHelper?.seatByStudentId[studentId]{
             cell.detailText = "\(seat.row)排\(seat.column)列"

@@ -51,6 +51,13 @@ class StudentInfoPopoverTableViewController: UITableViewController {
         if indexPath.row == 0{
             cell = self.tableView.dequeueReusableCellWithIdentifier("PhotoCell")!
             cell.textLabel?.text = self.student?.studentId ?? "未知"
+            cell.imageView?.contentMode = .ScaleAspectFit
+            if let avatar = self.student?.avartar{
+                cell.imageView?.image = avatar
+            }
+            else{
+                cell.imageView?.image = UIImage(named: "NO_AVATAR_MALE")
+            }
             return cell
         }
         cell = self.tableView.dequeueReusableCellWithIdentifier("TextCell")!
@@ -64,6 +71,7 @@ class StudentInfoPopoverTableViewController: UITableViewController {
         default:
             return cell
         }
+        
         
         
         

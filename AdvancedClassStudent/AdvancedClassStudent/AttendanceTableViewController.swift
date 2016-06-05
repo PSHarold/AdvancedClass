@@ -9,7 +9,6 @@
 import UIKit
 
 class AttendanceTableViewController: UITableViewController {
-    let courseHelper = StudentCourseHelper.defaultHelper
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,7 +19,7 @@ class AttendanceTableViewController: UITableViewController {
         
         if indexPath.section == 1{
             self.showHudWithText("正在加载")
-            self.courseHelper.getAbsenceList(StudentCourse.currentCourse){
+            StudentCourseHelper.defaultHelper.getAbsenceList(StudentCourse.currentCourse){
                 [unowned self]
                 error in
                 if let error = error{
@@ -36,7 +35,7 @@ class AttendanceTableViewController: UITableViewController {
         else if indexPath.section == 0{
             if indexPath.row != 0{
                 self.showHudWithText("正在加载")
-                self.courseHelper.getAsksForLeave(StudentCourse.currentCourse){
+                StudentCourseHelper.defaultHelper.getAsksForLeave(StudentCourse.currentCourse){
                     [unowned self]
                     error in
                     if let error = error{

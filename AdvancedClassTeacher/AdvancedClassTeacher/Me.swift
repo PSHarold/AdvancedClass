@@ -56,6 +56,8 @@ class Me: Teacher {
         for askDict in json["pending_asks"].arrayValue{
             self.pendingAsks.append(AskForLeave(json: askDict))
         }
+        
+        self.courses.sortInPlace({$0.timesAndRooms.getTodaysPeriods() != nil && $1.timesAndRooms.getTodaysPeriods() == nil})
 
     }
 }

@@ -28,29 +28,39 @@ class StudentCourseHelper{
         }
         
     }
-    
-    
-    
-    func getSyllabus(course: StudentCourse, completionHandler: ResponseMessageHandler){
-        if course.syllabus != nil{
-            completionHandler(error: nil)
-            return
-        }
-        else{
-            StudentAuthenticationHelper.defaultHelper.getResponsePOST(RequestType.GET_SYLLABUS, parameters: ["course_id": course.courseId, "sub_id": course.subId]){
-                (error, json) in
-                if error == nil{
-                    course.syllabus = Syllabus(json: json)
-                }
-                completionHandler(error: error)
+    func getCourseCover(course: StudentCourse, completionHandler: ResponseMessageHandler){
+        let auth = StudentAuthenticationHelper.defaultHelper
+        auth.getResponseGetFile(RequestType.GET_COVER, method: .POST, parameters: ["main_course_id": course.mainCourseId]){
+            error, data in
+            if error == nil{
+                course.coverImage = UIImage(data: data)
             }
+            completionHandler(error: error)
         }
     }
+
+    
+    //
+    //    func getSyllabus(course: StudentCourse, completionHandler: ResponseMessageHandler){
+    //        if course.syllabus != nil{
+    //            completionHandler(error: nil)
+    //            return
+    //        }
+    //        else{
+    //            StudentAuthenticationHelper.defaultHelper.getResponsePOST(RequestType.GET_SYLLABUS, parameters: ["course_id": course.courseId, "sub_id": course.subId]){
+    //                (error, json) in
+    //                if error == nil{
+    //                    course.syllabus = Syllabus(json: json)
+    //                }
+    //                completionHandler(error: error)
+    //            }
+    //        }
+    //    }
     
     
     func getStudentsInCourse(course: StudentCourse, completionHandler: ResponseMessageHandler){
         let authHelper = StudentAuthenticationHelper.defaultHelper
-        authHelper.getResponsePOST(RequestType.GET_STUDENTS_IN_COURES, parameters: ["course_id": course.courseId, "sub_id": course.subId]){
+        authHelper.getResponsePOST(RequestType.GET_STUDENTS_IN_COURES, parameters: ["course_id": course.courseId]){
             (error, json) in
             if error == nil{
                 for (_, student_json) in json["students"]{
@@ -63,37 +73,40 @@ class StudentCourseHelper{
         
     }
     func getCourseDetails(course: StudentCourse, completionHandler: ResponseMessageHandler){
-        self.getSyllabus(StudentCourse.currentCourse){
-            [unowned self]
+        //  self.getSyllabus(StudentCourse.currentCourse){
+        //[unowned self]
+        // error in
+        // if error == nil{
+        self.getStudentsInCourse(course){
             error in
-            if error == nil{
-                self.getStudentsInCourse(course){
-                    error in
-                    completionHandler(error: error)
-                }
-            }
-        }
-        
-    }
-    
-    
-    func getStudent(studentId: String, course: StudentCourse, completionHandler: ResponseMessageHandler){
-        if course.students[studentId] != nil{
-            completionHandler(error: nil)
-            return
-        }
-        let authHelper = StudentAuthenticationHelper.defaultHelper
-        authHelper.getResponsePOST(RequestType.GET_STUDENT, parameters: ["course_id": course.courseId, "sub_id": course.subId, "student_id": studentId]){
-            (error, json) in
-            if error == nil{
-                let student = Student(json: json["student"])
-                course.students[student.studentId] = student
-            }
             completionHandler(error: error)
         }
+        // }
+        // }
+        
     }
+    deinit{
+        print("CouresHelper Deinited!")
+    }
+    
+//    func getStudent(studentId: String, course: StudentCourse, completionHandler: ResponseMessageHandler){
+//        if course.students[studentId] != nil{
+//            completionHandler(error: nil)
+//            return
+//        }
+//        let authHelper = StudentAuthenticationHelper.defaultHelper
+//        authHelper.getResponsePOST(RequestType.GET_STUDENT, parameters: ["course_id": course.courseId, "sub_id": course.subId, "student_id": studentId]){
+//            (error, json) in
+//            if error == nil{
+//                let student = Student(json: json["student"])
+//                course.students[student.studentId] = student
+//            }
+//            completionHandler(error: error)
+//        }
+//    }
     static func drop(){
         _defaultHelper = nil
+        StudentCourse.currentCourse = nil
     }
     
     

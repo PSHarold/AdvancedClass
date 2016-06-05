@@ -12,8 +12,6 @@
 		F202BDD61CA6555600B6356D /* TeacherSeatSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F202BDD51CA6555600B6356D /* TeacherSeatSearchTableViewController.swift */; };
 		F20A56631B96A76A00B8AAB0 /* RandomNumberTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20A56621B96A76A00B8AAB0 /* RandomNumberTableViewController.swift */; };
 		F20A68821B81B400000BFF24 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20A68811B81B400000BFF24 /* AppDelegate.swift */; };
-		F20A68871B81B400000BFF24 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F20A68851B81B400000BFF24 /* Main.storyboard */; };
-		F20A688C1B81B400000BFF24 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F20A688A1B81B400000BFF24 /* LaunchScreen.xib */; };
 		F20A68981B81B400000BFF24 /* AdvancedClassTeacherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20A68971B81B400000BFF24 /* AdvancedClassTeacherTests.swift */; };
 		F20A68AA1B81B478000BFF24 /* KnowledgePointViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20A68A11B81B478000BFF24 /* KnowledgePointViewController.swift */; };
 		F20A68AF1B81B478000BFF24 /* TeacherBrowseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20A68A61B81B478000BFF24 /* TeacherBrowseViewController.swift */; };
@@ -47,6 +45,10 @@
 		F246DEB91B9BDAD00058DEA6 /* TeacherQuestionsInTestTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F246DEB81B9BDAD00058DEA6 /* TeacherQuestionsInTestTableViewController.swift */; };
 		F246DEBD1B9C63360058DEA6 /* Student.swift in Sources */ = {isa = PBXBuildFile; fileRef = F246DEBC1B9C63360058DEA6 /* Student.swift */; };
 		F246DEC11B9C64A70058DEA6 /* Me.swift in Sources */ = {isa = PBXBuildFile; fileRef = F246DEC01B9C64A70058DEA6 /* Me.swift */; };
+		F248090C1CFB118700C4FE42 /* FaceStudentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F248090B1CFB118700C4FE42 /* FaceStudentTableViewController.swift */; };
+		F248090E1CFB125E00C4FE42 /* ManualCheckInStudentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F248090D1CFB125E00C4FE42 /* ManualCheckInStudentTableViewController.swift */; };
+		F24809111CFB13B500C4FE42 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F248090F1CFB13B500C4FE42 /* LaunchScreen.xib */; };
+		F24809121CFB13B500C4FE42 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F24809101CFB13B500C4FE42 /* Main.storyboard */; };
 		F2534AFB1B96CD40000192E7 /* DateTimeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2534AFA1B96CD40000192E7 /* DateTimeHelper.swift */; };
 		F25B8DFD1B9D8B8D00A2587E /* TeacherStudentHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25B8DFC1B9D8B8D00A2587E /* TeacherStudentHelper.swift */; };
 		F25B8E011B9D91A400A2587E /* TeacherCourseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25B8E001B9D91A400A2587E /* TeacherCourseHelper.swift */; };
@@ -55,13 +57,14 @@
 		F25E51101CF0234300F10B04 /* AskForLeaveTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25E510D1CF0234300F10B04 /* AskForLeaveTableViewController.swift */; };
 		F25E51111CF0234300F10B04 /* AttendanceListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25E510E1CF0234300F10B04 /* AttendanceListTableViewController.swift */; };
 		F25E51131CF0234900F10B04 /* AttendanceListChoosePeriodTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25E51121CF0234900F10B04 /* AttendanceListChoosePeriodTableViewController.swift */; };
-		F25E51191CF0237C00F10B04 /* Base.lproj in Resources */ = {isa = PBXBuildFile; fileRef = F25E51141CF0237C00F10B04 /* Base.lproj */; };
-		F25E511A1CF0237C00F10B04 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F25E51151CF0237C00F10B04 /* Images.xcassets */; };
 		F25E511B1CF0237C00F10B04 /* NewStatusAsksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25E51161CF0237C00F10B04 /* NewStatusAsksTableViewController.swift */; };
 		F25E511C1CF0237C00F10B04 /* NewStatusAskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25E51171CF0237C00F10B04 /* NewStatusAskTableViewCell.swift */; };
 		F25E511D1CF0237C00F10B04 /* NewStatusAskTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F25E51181CF0237C00F10B04 /* NewStatusAskTableViewCell.xib */; };
 		F2697E011CA528F800A26D74 /* StudentTestResultInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2697E001CA528F800A26D74 /* StudentTestResultInfoTableViewCell.swift */; };
 		F2697E031CA5365500A26D74 /* TeacherTestResultStudentsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2697E021CA5365500A26D74 /* TeacherTestResultStudentsTableViewController.swift */; };
+		F26DA8FF1CF80EE200C05141 /* CourseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26DA8FD1CF80EE200C05141 /* CourseTableViewCell.swift */; };
+		F26DA9001CF80EE200C05141 /* CourseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F26DA8FE1CF80EE200C05141 /* CourseTableViewCell.xib */; };
+		F26DA9011CF82F5800C05141 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F25E51151CF0237C00F10B04 /* Images.xcassets */; };
 		F28F06601C95077200B79866 /* TeachDayHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F28F065F1C95077200B79866 /* TeachDayHelper.swift */; };
 		F298B43F1C8E633E001543E7 /* TeacherManualFixedQuestionsConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F298B43E1C8E633E001543E7 /* TeacherManualFixedQuestionsConfirmViewController.swift */; };
 		F299579B1B81CBB20003B64C /* TestSettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F299579A1B81CBB20003B64C /* TestSettingsTableViewController.swift */; };
@@ -85,7 +88,6 @@
 		F2DDCEF11C8EC0A700561002 /* TeacherTestMessageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DDCEF01C8EC0A700561002 /* TeacherTestMessageTableViewController.swift */; };
 		F2E459741C89C554003B8A4B /* KnowledgePointTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E459721C89C554003B8A4B /* KnowledgePointTableViewCell.swift */; };
 		F2E459751C89C554003B8A4B /* KnowledgePointTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2E459731C89C554003B8A4B /* KnowledgePointTableViewCell.xib */; };
-		F2E459791C89CE4C003B8A4B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2E459781C89CE4C003B8A4B /* Images.xcassets */; };
 		F2E6BFA61CA671310024AE3C /* StudentInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E6BFA41CA671310024AE3C /* StudentInfoCell.swift */; };
 		F2E6BFA71CA671310024AE3C /* StudentInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2E6BFA51CA671310024AE3C /* StudentInfoCell.xib */; };
 		F2E6BFA91CA686390024AE3C /* TeacherStudentAttendanceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E6BFA81CA686390024AE3C /* TeacherStudentAttendanceTableViewController.swift */; };
@@ -118,8 +120,6 @@
 		F20A687C1B81B400000BFF24 /* AdvancedClassTeacher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AdvancedClassTeacher.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F20A68801B81B400000BFF24 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F20A68811B81B400000BFF24 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		F20A68861B81B400000BFF24 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		F20A688B1B81B400000BFF24 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		F20A68911B81B400000BFF24 /* AdvancedClassTeacherTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AdvancedClassTeacherTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F20A68961B81B400000BFF24 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F20A68971B81B400000BFF24 /* AdvancedClassTeacherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedClassTeacherTests.swift; sourceTree = "<group>"; };
@@ -157,6 +157,10 @@
 		F246DEB81B9BDAD00058DEA6 /* TeacherQuestionsInTestTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherQuestionsInTestTableViewController.swift; sourceTree = "<group>"; };
 		F246DEBC1B9C63360058DEA6 /* Student.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Student.swift; sourceTree = "<group>"; };
 		F246DEC01B9C64A70058DEA6 /* Me.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Me.swift; sourceTree = "<group>"; };
+		F248090B1CFB118700C4FE42 /* FaceStudentTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceStudentTableViewController.swift; sourceTree = "<group>"; };
+		F248090D1CFB125E00C4FE42 /* ManualCheckInStudentTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManualCheckInStudentTableViewController.swift; sourceTree = "<group>"; };
+		F248090F1CFB13B500C4FE42 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
+		F24809101CFB13B500C4FE42 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		F2534AFA1B96CD40000192E7 /* DateTimeHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateTimeHelper.swift; sourceTree = "<group>"; };
 		F25B8DFC1B9D8B8D00A2587E /* TeacherStudentHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherStudentHelper.swift; sourceTree = "<group>"; };
 		F25B8E001B9D91A400A2587E /* TeacherCourseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherCourseHelper.swift; sourceTree = "<group>"; };
@@ -165,13 +169,14 @@
 		F25E510D1CF0234300F10B04 /* AskForLeaveTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AskForLeaveTableViewController.swift; sourceTree = "<group>"; };
 		F25E510E1CF0234300F10B04 /* AttendanceListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttendanceListTableViewController.swift; sourceTree = "<group>"; };
 		F25E51121CF0234900F10B04 /* AttendanceListChoosePeriodTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttendanceListChoosePeriodTableViewController.swift; sourceTree = "<group>"; };
-		F25E51141CF0237C00F10B04 /* Base.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Base.lproj; sourceTree = "<group>"; };
 		F25E51151CF0237C00F10B04 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		F25E51161CF0237C00F10B04 /* NewStatusAsksTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewStatusAsksTableViewController.swift; sourceTree = "<group>"; };
 		F25E51171CF0237C00F10B04 /* NewStatusAskTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewStatusAskTableViewCell.swift; sourceTree = "<group>"; };
 		F25E51181CF0237C00F10B04 /* NewStatusAskTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewStatusAskTableViewCell.xib; sourceTree = "<group>"; };
 		F2697E001CA528F800A26D74 /* StudentTestResultInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentTestResultInfoTableViewCell.swift; sourceTree = "<group>"; };
 		F2697E021CA5365500A26D74 /* TeacherTestResultStudentsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherTestResultStudentsTableViewController.swift; sourceTree = "<group>"; };
+		F26DA8FD1CF80EE200C05141 /* CourseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseTableViewCell.swift; sourceTree = "<group>"; };
+		F26DA8FE1CF80EE200C05141 /* CourseTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CourseTableViewCell.xib; sourceTree = "<group>"; };
 		F28F065F1C95077200B79866 /* TeachDayHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeachDayHelper.swift; sourceTree = "<group>"; };
 		F298B43E1C8E633E001543E7 /* TeacherManualFixedQuestionsConfirmViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherManualFixedQuestionsConfirmViewController.swift; sourceTree = "<group>"; };
 		F299579A1B81CBB20003B64C /* TestSettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestSettingsTableViewController.swift; sourceTree = "<group>"; };
@@ -195,7 +200,6 @@
 		F2DDCEF01C8EC0A700561002 /* TeacherTestMessageTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherTestMessageTableViewController.swift; sourceTree = "<group>"; };
 		F2E459721C89C554003B8A4B /* KnowledgePointTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KnowledgePointTableViewCell.swift; sourceTree = "<group>"; };
 		F2E459731C89C554003B8A4B /* KnowledgePointTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KnowledgePointTableViewCell.xib; sourceTree = "<group>"; };
-		F2E459781C89CE4C003B8A4B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		F2E6BFA41CA671310024AE3C /* StudentInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentInfoCell.swift; sourceTree = "<group>"; };
 		F2E6BFA51CA671310024AE3C /* StudentInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StudentInfoCell.xib; sourceTree = "<group>"; };
 		F2E6BFA81CA686390024AE3C /* TeacherStudentAttendanceTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherStudentAttendanceTableViewController.swift; sourceTree = "<group>"; };
@@ -267,8 +271,6 @@
 		F20A687E1B81B400000BFF24 /* AdvancedClassTeacher */ = {
 			isa = PBXGroup;
 			children = (
-				F2228C891CF42A00002B785F /* PendingAskTableViewController.swift */,
-				F2228C8A1CF42A00002B785F /* PostedAskTableViewController.swift */,
 				F25E510C1CF0234300F10B04 /* AbsenceStatisticsTableViewController.swift */,
 				F220E2751BB62BF200251C88 /* AdvancedClassTeacher-Bridging-Header.h */,
 				F20A68811B81B400000BFF24 /* AppDelegate.swift */,
@@ -276,9 +278,11 @@
 				F25E51121CF0234900F10B04 /* AttendanceListChoosePeriodTableViewController.swift */,
 				F25E510E1CF0234300F10B04 /* AttendanceListTableViewController.swift */,
 				F25E510A1CF01F4B00F10B04 /* AttendanceTableViewController.swift */,
-				F25E51141CF0237C00F10B04 /* Base.lproj */,
+				F26DA8FD1CF80EE200C05141 /* CourseTableViewCell.swift */,
+				F26DA8FE1CF80EE200C05141 /* CourseTableViewCell.xib */,
 				F2534AFA1B96CD40000192E7 /* DateTimeHelper.swift */,
 				F23465401C7F551B00933615 /* Errors.swift */,
+				F248090B1CFB118700C4FE42 /* FaceStudentTableViewController.swift */,
 				F23465411C7F551B00933615 /* Generals.swift */,
 				F25E51151CF0237C00F10B04 /* Images.xcassets */,
 				F2FA432F1C882E8A008D93C8 /* KnowledgePointSectionTableViewCell.swift */,
@@ -286,8 +290,9 @@
 				F2E459721C89C554003B8A4B /* KnowledgePointTableViewCell.swift */,
 				F2E459731C89C554003B8A4B /* KnowledgePointTableViewCell.xib */,
 				F20A68A11B81B478000BFF24 /* KnowledgePointViewController.swift */,
-				F20A688A1B81B400000BFF24 /* LaunchScreen.xib */,
-				F20A68851B81B400000BFF24 /* Main.storyboard */,
+				F248090F1CFB13B500C4FE42 /* LaunchScreen.xib */,
+				F24809101CFB13B500C4FE42 /* Main.storyboard */,
+				F248090D1CFB125E00C4FE42 /* ManualCheckInStudentTableViewController.swift */,
 				F220E2761BB62BF300251C88 /* MBProgressHUD.h */,
 				F220E2771BB62BF300251C88 /* MBProgressHUD.m */,
 				F246DEC01B9C64A70058DEA6 /* Me.swift */,
@@ -299,6 +304,8 @@
 				F25E51161CF0237C00F10B04 /* NewStatusAsksTableViewController.swift */,
 				F25E51171CF0237C00F10B04 /* NewStatusAskTableViewCell.swift */,
 				F25E51181CF0237C00F10B04 /* NewStatusAskTableViewCell.xib */,
+				F2228C891CF42A00002B785F /* PendingAskTableViewController.swift */,
+				F2228C8A1CF42A00002B785F /* PostedAskTableViewController.swift */,
 				F2186AB01CA4F0E700D72DCF /* QuestionContentTableViewCell.swift */,
 				F2186AB11CA4F0E700D72DCF /* QuestionContentTableViewCell.xib */,
 				F23EE3801BAA931700B75501 /* Seat.swift */,
@@ -354,7 +361,6 @@
 				F23465431C7F551B00933615 /* TimesAndRooms.swift */,
 				F2AE1A1C1C913AC20020FD4E /* UnfinishedTestTableViewCell.swift */,
 				F2AE1A1D1C913AC20020FD4E /* UnfinishedTestTableViewCell.xib */,
-				F2E459781C89CE4C003B8A4B /* Images.xcassets */,
 			);
 			path = AdvancedClassTeacher;
 			sourceTree = "<group>";
@@ -488,18 +494,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F26DA9011CF82F5800C05141 /* Images.xcassets in Resources */,
 				F25E511D1CF0237C00F10B04 /* NewStatusAskTableViewCell.xib in Resources */,
 				F2FA43321C882E8A008D93C8 /* KnowledgePointSectionTableViewCell.xib in Resources */,
-				F2E459791C89CE4C003B8A4B /* Images.xcassets in Resources */,
-				F20A68871B81B400000BFF24 /* Main.storyboard in Resources */,
-				F20A688C1B81B400000BFF24 /* LaunchScreen.xib in Resources */,
+				F24809121CFB13B500C4FE42 /* Main.storyboard in Resources */,
+				F26DA9001CF80EE200C05141 /* CourseTableViewCell.xib in Resources */,
 				F23AD7131C918FC10017C537 /* TestTableViewCell.xib in Resources */,
 				F2186AB31CA4F0E700D72DCF /* QuestionContentTableViewCell.xib in Resources */,
-				F25E51191CF0237C00F10B04 /* Base.lproj in Resources */,
 				F2186AB71CA4F10100D72DCF /* MultipleChoiceTableViewCell.xib in Resources */,
 				F2AE1A1F1C913AC20020FD4E /* UnfinishedTestTableViewCell.xib in Resources */,
-				F25E511A1CF0237C00F10B04 /* Images.xcassets in Resources */,
 				F2E459751C89C554003B8A4B /* KnowledgePointTableViewCell.xib in Resources */,
+				F24809111CFB13B500C4FE42 /* LaunchScreen.xib in Resources */,
 				F2E6BFA71CA671310024AE3C /* StudentInfoCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -580,6 +585,7 @@
 				F2C224A91BCA4500002DE247 /* TeacherAllResultsViewController.swift in Sources */,
 				F24252B41CA12DB6004F7E07 /* TeacherFinishedTestInfoTableViewController.swift in Sources */,
 				F21313CE1B9AE1280088C483 /* TeacherAuthenticationHelper.swift in Sources */,
+				F26DA8FF1CF80EE200C05141 /* CourseTableViewCell.swift in Sources */,
 				F2E6BFA91CA686390024AE3C /* TeacherStudentAttendanceTableViewController.swift in Sources */,
 				F2AE1A1E1C913AC20020FD4E /* UnfinishedTestTableViewCell.swift in Sources */,
 				F2C9163B1CEF16000058AD60 /* MeTableViewController.swift in Sources */,
@@ -597,6 +603,7 @@
 				F2228C8C1CF42A00002B785F /* PostedAskTableViewController.swift in Sources */,
 				F23EE3861BAA931700B75501 /* SeatView.swift in Sources */,
 				F25E510F1CF0234300F10B04 /* AbsenceStatisticsTableViewController.swift in Sources */,
+				F248090E1CFB125E00C4FE42 /* ManualCheckInStudentTableViewController.swift in Sources */,
 				F299579B1B81CBB20003B64C /* TestSettingsTableViewController.swift in Sources */,
 				F23465461C7F551B00933615 /* SeatRowIndicator.swift in Sources */,
 				F2186AB61CA4F10100D72DCF /* MultipleChoiceTableViewCell.swift in Sources */,
@@ -617,6 +624,7 @@
 				F20A68821B81B400000BFF24 /* AppDelegate.swift in Sources */,
 				F25E51111CF0234300F10B04 /* AttendanceListTableViewController.swift in Sources */,
 				F2C9163C1CEF16000058AD60 /* ModifyPasswordTableViewController.swift in Sources */,
+				F248090C1CFB118700C4FE42 /* FaceStudentTableViewController.swift in Sources */,
 				F2ECA79D1BC0B4E9004B0469 /* TeacherNotificationsTableViewController.swift in Sources */,
 				F2329FED1BC20E2F006A428F /* TestDateTimeSettingsTableViewController.swift in Sources */,
 				F2EA202B1C89AB9100FC8340 /* TeacherCreateTestViewController.swift in Sources */,
@@ -660,25 +668,6 @@
 			targetProxy = F20A68921B81B400000BFF24 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		F20A68851B81B400000BFF24 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F20A68861B81B400000BFF24 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		F20A688A1B81B400000BFF24 /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F20A688B1B81B400000BFF24 /* Base */,
-			);
-			name = LaunchScreen.xib;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		F20A68991B81B400000BFF24 /* Debug */ = {

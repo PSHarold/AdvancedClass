@@ -29,7 +29,7 @@ class QRCodeReaderViewController: UIViewController, AVCaptureMetadataOutputObjec
     override func viewDidLoad() {
         super.viewDidLoad()
         let size = CGSizeMake(self.view.bounds.width, self.view.bounds.height/20)
-        let origin = CGPointMake(0, self.view.bounds.height - size.height)
+        let origin = CGPointMake(0, self.view.bounds.height - size.height - self.navigationController!.navigationBar.frame.size.height - 20)
         self.messageLabel.frame.size = size
         self.messageLabel.frame.origin = origin
         self.messageLabel.backgroundColor = UIColor.greenColor()
@@ -109,7 +109,7 @@ class QRCodeReaderViewController: UIViewController, AVCaptureMetadataOutputObjec
     func verifyQRCode(QRCode: String){
         assert(false, "Not Implemented!")
     }
-
     
-
+    
+    
 }

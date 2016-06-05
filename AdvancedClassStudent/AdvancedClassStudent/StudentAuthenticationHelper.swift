@@ -16,7 +16,7 @@ class StudentAuthenticationHelper{
     
     
     static var _defaultHelper:StudentAuthenticationHelper?
-    static weak var me: Me!
+   // static weak var me: Me!
     var tokenRetryCount = 0
     let MAX_TOKEN_RETRY_COUNT = 3
     var me: Me!
@@ -63,7 +63,7 @@ class StudentAuthenticationHelper{
                     return
                 }
                 else if code > 0{
-                    completionHandler(error: MyError(json: json), json: nil)
+                    completionHandler(error: MyError(json: json), json: json)
                 }
                 else{
                     completionHandler(error: nil, json: json)
@@ -122,7 +122,6 @@ class StudentAuthenticationHelper{
                 self.me = Me(json: json["user"])
                 currentWeekNo = json["week_no"].intValue
                 currentDayNo = json["day_no"].intValue
-                StudentAuthenticationHelper.me = self.me
                 completionHandler(error: nil, json: json)
             }
             

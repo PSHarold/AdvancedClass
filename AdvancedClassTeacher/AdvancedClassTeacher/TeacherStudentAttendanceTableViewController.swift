@@ -45,12 +45,12 @@ class TeacherStudentAttendanceTableViewController: UITableViewController {
             return self.seatHelper!.seatByStudentId.count
         }
         else{
-            return self.currentCourse!.students.count - self.seatHelper!.seatByStudentId.count
+            return self.currentCourse!.studentDict.count - self.seatHelper!.seatByStudentId.count
         }
     }
     
     func getAbsentAndPresentStudents(){
-        let all = Set<String>(currentCourse!.students.keys)
+        let all = Set<String>(currentCourse!.studentDict.keys)
         let present = Set<String>(self.seatHelper!.seatByStudentId.keys)
         self.absentStudents = [String](all.subtract(present))
         self.presentStudents = [String](self.seatHelper!.seatByStudentId.keys)
@@ -69,7 +69,7 @@ class TeacherStudentAttendanceTableViewController: UITableViewController {
             studentId = self.absentStudents[indexPath.row]
             cell.detailText = ""
         }
-        let student = self.currentCourse?.students[studentId]
+        let student = self.currentCourse?.studentDict[studentId]
         cell.studentId = student?.studentId ?? "未知"
         cell.studentName = student?.name ?? "未知"
         cell.className = student?.className ?? "未知"

@@ -11,7 +11,6 @@ import UIKit
 class StudentSeatSearchResultTableViewController: UITableViewController {
 
     var studentIds: [String]?
-    weak var seatHelper = StudentSeatHelper.defaultHelper
     override func viewDidLoad() {
         super.viewDidLoad()
         self.definesPresentationContext = true
@@ -31,6 +30,7 @@ class StudentSeatSearchResultTableViewController: UITableViewController {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
+
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.studentIds?.count ?? 0
@@ -41,13 +41,13 @@ class StudentSeatSearchResultTableViewController: UITableViewController {
         let studentId = self.studentIds![indexPath.row]
         let student = StudentCourse.currentCourse.students[studentId]
         cell.studentId = studentId
-        if let seat = seatHelper?.seatByStudentId[studentId]{
+        if let seat = StudentSeatHelper.defaultHelper.seatByStudentId[studentId]{
             cell.detailText = "\(seat.row)排\(seat.column)列"
             cell.detailLabel.textColor = UIColor.blackColor()
-            self.seatHelper!.seatToLocate = seat
+            StudentSeatHelper.defaultHelper.seatToLocate = seat
         }
         else{
-            self.seatHelper!.seatToLocate = nil
+            StudentSeatHelper.defaultHelper.seatToLocate = nil
             cell.detailText = "未到"
             cell.detailLabel.textColor = UIColor.grayColor()
         }

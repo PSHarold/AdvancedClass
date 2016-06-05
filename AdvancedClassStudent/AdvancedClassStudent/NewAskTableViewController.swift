@@ -21,7 +21,7 @@ class NewAskTableViewController: UITableViewController, PopUpPickerViewDelegate,
     var selectedPeriodNo: Int!
     var pickerViewShowing = false
     var ask = AskForLeave()
-    var courseHelper = StudentCourseHelper.defaultHelper
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         self.availableWeeks = self.times.getAvailableWeeks(.Future)
@@ -65,7 +65,7 @@ class NewAskTableViewController: UITableViewController, PopUpPickerViewDelegate,
                 return
             }
             self.ask.reason = self.reasonTextView.text
-            self.courseHelper.askForLeave(ask, course: StudentCourse.currentCourse){
+            StudentCourseHelper.defaultHelper.askForLeave(ask, course: StudentCourse.currentCourse){
                 [unowned self]
                 error in
                 if let error = error{

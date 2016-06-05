@@ -165,7 +165,7 @@ class TeacherTestsViewController: UIViewController, UITableViewDataSource, UITab
         }
         cell.finished = test.finished
         cell.createdOnLabel.text = test.beginsOn
-        cell.progressView.totalNumber = self.currentCourse!.students.count
+        cell.progressView.totalNumber = self.currentCourse!.studentDict.count
         cell.progressView.currentNumber = test.finishedCount
         return cell
     }

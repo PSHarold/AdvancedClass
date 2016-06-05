@@ -24,7 +24,7 @@ class TeacherCourseHelper{
     func getNotifications(course: TeacherCourse, page: Int, completionHandler: ResponseMessageHandler){
         assert(page >= 1)
        
-            TeacherAuthenticationHelper.defaultHelper.getResponsePOST(RequestType.GET_NOTIFICAIONS, parameters: ["course_id":course.courseId,"sub_id":course.subId, "page": 1]){
+            TeacherAuthenticationHelper.defaultHelper.getResponsePOST(RequestType.GET_NOTIFICAIONS, parameters: ["course_id":course.courseId, "page": 1]){
                 (error, json) in
                 if error == nil{
                     course.notifications = [Notification]()
@@ -48,7 +48,7 @@ class TeacherCourseHelper{
             return
         }
         else{
-            TeacherAuthenticationHelper.defaultHelper.getResponsePOST(RequestType.GET_SYLLABUS, parameters: ["course_id": course.courseId, "sub_id": course.subId]){
+            TeacherAuthenticationHelper.defaultHelper.getResponsePOST(RequestType.GET_SYLLABUS, parameters: ["course_id": course.courseId]){
                 (error, json) in
                 if error == nil{
                     course.syllabus = Syllabus(json: json)
@@ -61,7 +61,7 @@ class TeacherCourseHelper{
     
 //    func getStudentIdsInCourse(course: TeacherCourse, completionHandler: ResponseMessageHandler){
 //        let authHelper = TeacherAuthenticationHelper.defaultHelper
-//        authHelper.getResponsePOST(RequestType.GET_STUDENTS_IN_COURES, postBody: ["course_id": course.courseId, "sub_id": course.subId]){
+//        authHelper.getResponsePOST(RequestType.GET_STUDENTS_IN_COURES, postBody: ["course_id": course.courseId]){
 //            (error, json) in
 //            if error == nil{
 //                for (_, studentId) in json["students"]{
@@ -74,16 +74,17 @@ class TeacherCourseHelper{
 //    
     func getStudentsInCourse(course: TeacherCourse, completionHandler: ResponseMessageHandler){
         let authHelper = TeacherAuthenticationHelper.defaultHelper
-        authHelper.getResponsePOST(RequestType.GET_STUDENTS_IN_COURES, parameters: ["course_id": course.courseId, "sub_id": course.subId]){
+        authHelper.getResponsePOST(RequestType.GET_STUDENTS_IN_COURES, parameters: ["course_id": course.courseId]){
             (error, json) in
             if error == nil{
-                course.students = [:]
                 course.studentDict = [:]
+                course.studentIds = []
                 for (_, student_json) in json["students"]{
                     let s = Student(json: student_json)
-                    course.students[s.studentId] = s
+                    course.studentIds.append(s.studentId)
                     course.studentDict[s.studentId] = s
                 }
+                course.studentIds.sortInPlace(<)
             }
             completionHandler(error: error)
         }
@@ -107,8 +108,7 @@ class TeacherCourseHelper{
         let authHelper = TeacherAuthenticationHelper.defaultHelper
         var a = notification.toDict()
         a["course_id"] = course.courseId
-        a["sub_id"] = course.subId
-        
+     
         authHelper.getResponsePOST(RequestType.MODIFY_NOTIFICATION, parameters: a){
             (error, json) in
             completionHandler(error: error)
@@ -119,7 +119,7 @@ class TeacherCourseHelper{
         let authHelper = TeacherAuthenticationHelper.defaultHelper
         var a = notification.toDict()
         a["course_id"] = course.courseId
-        a["sub_id"] = course.subId
+ 
         authHelper.getResponsePOST(RequestType.POST_NOTIFICATION, parameters: a){
             (error, json) in
             if error == nil{
@@ -132,7 +132,7 @@ class TeacherCourseHelper{
     
     func deleteNotificationInCourse(course: TeacherCourse, notification: Notification, completionHandler: ResponseMessageHandler){
         let authHelper = TeacherAuthenticationHelper.defaultHelper
-        authHelper.getResponsePOST(RequestType.DELETE_NOTIFICATION, parameters: ["course_id": course.courseId, "sub_id": course.subId, "ntfc_id": notification.notificationId]){
+        authHelper.getResponsePOST(RequestType.DELETE_NOTIFICATION, parameters: ["course_id": course.courseId, "ntfc_id": notification.notificationId]){
             (error, json) in
             completionHandler(error: error)
         }
@@ -142,16 +142,16 @@ class TeacherCourseHelper{
     
     
     func getStudent(studentId: String, course: TeacherCourse, completionHandler: ResponseMessageHandler){
-        if course.students[studentId] != nil{
+        if course.studentDict[studentId] != nil{
             completionHandler(error: nil)
             return
         }
         let authHelper = TeacherAuthenticationHelper.defaultHelper
-        authHelper.getResponsePOST(RequestType.GET_STUDENT, parameters: ["course_id": course.courseId, "sub_id": course.subId, "student_id": studentId]){
+        authHelper.getResponsePOST(RequestType.GET_STUDENT, parameters: ["course_id": course.courseId, "student_id": studentId]){
             (error, json) in
             if error == nil{
                 let student = Student(json: json["student"])
-                course.students[student.studentId] = student
+                course.studentDict[student.studentId] = student
             }
             completionHandler(error: error)
         }
@@ -261,7 +261,7 @@ class TeacherCourseHelper{
         }
     }
     
-    func getAbsenceStatistics(course: TeacherCourse, completionHandler: ResponseMessageHandler){
+    func getAbsenceStatistics(course: TeacherCourse?=nil, completionHandler: ResponseMessageHandler){
         let auth = TeacherAuthenticationHelper.defaultHelper
         let course = course ?? TeacherCourse.currentCourse!
         auth.getResponsePOSTWithCourse(RequestType.GET_ABSENCE_STATISTICS, parameters: [:], course: course){
@@ -278,6 +278,41 @@ class TeacherCourseHelper{
         }
     }
 
+    func getStudentAvatar(studentId: String, course: TeacherCourse?=nil, completionHandler: ResponseFileHandler){
+        let auth = TeacherAuthenticationHelper.defaultHelper
+        let course = course ?? TeacherCourse.currentCourse!
+        auth.getResponseGetFile(RequestType.GET_STUDENT_AVATAR, method: .POST, parameters: ["course_id": course.courseId, "student_id": studentId]){
+            error, data in
+            if let error = error{
+                completionHandler(error: error, data: nil)
+            }
+            else{
+                course.studentDict[studentId]?.avartar = UIImage(data: data)
+                completionHandler(error: nil, data: data)
+            }
+        }
+    }
+    
+    func getCourseCover(course: TeacherCourse, completionHandler: ResponseMessageHandler){
+        let auth = TeacherAuthenticationHelper.defaultHelper
+        auth.getResponseGetFile(RequestType.GET_COVER, method: .POST, parameters: ["main_course_id": course.mainCourseId]){
+            error, data in
+            if error == nil{
+                course.coverImage = UIImage(data: data)
+            }
+            completionHandler(error: error)
+        }
+    }
+    
+    func checkInWithFace(course: TeacherCourse?=nil, studentId: String, photo: UIImage, completionHandler: ResponseHandler){
+        let auth = TeacherAuthenticationHelper.defaultHelper
+        let course = course ?? TeacherCourse.currentCourse!
+        auth.postFile(RequestType.CHECK_IN_WITH_FACE, fileName: "", fileType: .JPG, fileData: UIImageJPEGRepresentation(photo, 0.8)!, args: ["course_id": course.courseId, "student_id": studentId]){
+            error, json in
+            completionHandler(error: error, json: json)
+        }
+    }
+    
     
     static func drop(){
         _defaultHelper = nil

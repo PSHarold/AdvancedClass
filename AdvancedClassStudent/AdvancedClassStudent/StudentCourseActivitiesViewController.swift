@@ -9,7 +9,6 @@
 import UIKit
 
 class StudentCourseActivitiesViewController: UIViewController{
-    var seatHelper = StudentSeatHelper.defaultHelper
     @IBOutlet weak var chooseSeatButton: UIView!
     var timer: NSTimer!
     var remainingSeconds = 0{
@@ -47,89 +46,73 @@ class StudentCourseActivitiesViewController: UIViewController{
         }
     }
     
-
-    
-    func getSeatMap() {
+    func getSeatMapMain(){
         self.showHudWithText("正在加载")
-        self.seatHelper.getSeatMap{
+        self.remainingSeconds = 0
+        StudentSeatHelper.defaultHelper.getSeatMap{
+            [unowned self]
             error in
             if let error = error{
-                if error == CError.SEAT_TOKEN_EXPIRED || error == CError.BAD_SEAT_TOKEN{
-                    //self.takeQRCode()
-                    self.seatHelper.getSeatToken("SECRET SEAT TOKEN"){
-                        [weak self]
-                        error, json in
-                        if let error = error{
-                            self!.showError(error)
-                            if let error = error.error{
-                                switch error{
-                                case .SEAT_CHOOSING_NOT_AVAILABLE_YET:
-                                    if self!.timer == nil{
-                                        self!.remainingSeconds = json["remaining_secs"].intValue
-                                        self!.timer = NSTimer(timeInterval: 1.0, target: self!, selector: #selector(self!.tick), userInfo: nil, repeats: true)
-                                        NSRunLoop.currentRunLoop().addTimer(self!.timer!, forMode: NSRunLoopCommonModes)
-                                    }
-                                case .COURSE_ALREADY_OVER:
-                                    self!.seatPromptLabel.text = "课程已结束"
-                                    self!.timer?.invalidate()
-                                case CError.COURSE_ALREADY_BEGUN:
-                                    self!.seatPromptLabel.text = "课程已开始"
-                                    self!.timer?.invalidate()
-                                default:
-                                    break
-                                }
-                            }
-                        }
-                        else{
-                            self?.hideHud()
-                        }
-                    }
-                }
-                else{
-                    self.showError(error)
-                }
+                self.showError(error)
             }
             else{
-                self.remainingSeconds = 0
                 self.hideHud()
                 self.performSegueWithIdentifier("ShowSeatMap", sender: self)
             }
         }
     }
     
-    func takeQRCode(){
+    func getSeatMap() {
         self.showHudWithText("正在加载")
+        StudentSeatHelper.defaultHelper.getSeatMap{
+            error in
+            if let error = error{
+                if error == CError.SEAT_TOKEN_EXPIRED || error == CError.BAD_SEAT_TOKEN{
+                    self.takeQRCode()
+                }
+                else{
+                    self.showError(error)
+                }
+            }
+            else{
+                self.getSeatMapMain()
+            }
+        }
+    }
+    
+    func takeQRCode(){
+        self.hideHud()
         let qrReader = SeatTokenQRCodeReaderViewController()
         qrReader.completionHandler = {
-            [weak self]
+            [unowned self]
             error, json in
             if let error = error{
-                self!.showError(error)
+                self.showError(error)
                 if let error = error.error{
                     switch error{
                     case .SEAT_CHOOSING_NOT_AVAILABLE_YET:
-                        if self!.timer == nil{
-                            self!.remainingSeconds = json["remaining_secs"].intValue
-                            self!.timer = NSTimer(timeInterval: 1.0, target: self!, selector: #selector(self!.tick), userInfo: nil, repeats: true)
-                            NSRunLoop.currentRunLoop().addTimer(self!.timer!, forMode: NSRunLoopCommonModes)
+                        if self.timer == nil{
+                            self.remainingSeconds = json["remaining_secs"].intValue
+                            self.timer = NSTimer(timeInterval: 1.0, target: self, selector: #selector(self.tick), userInfo: nil, repeats: true)
+                            NSRunLoop.currentRunLoop().addTimer(self.timer!, forMode: NSRunLoopCommonModes)
                         }
                     case .COURSE_ALREADY_OVER:
-                        self!.seatPromptLabel.text = "课程已结束"
-                        self!.timer?.invalidate()
+                        self.seatPromptLabel.text = "课程已结束"
+                        self.timer?.invalidate()
                     case CError.COURSE_ALREADY_BEGUN:
-                        self!.seatPromptLabel.text = "课程已开始"
-                        self!.timer?.invalidate()
+                        self.seatPromptLabel.text = "课程已开始"
+                        self.timer?.invalidate()
                     default:
                         break
                     }
                 }
             }
             else{
-                self?.hideHud()
+                self.getSeatMapMain()
             }
         }
         qrReader.hidesBottomBarWhenPushed = true
-        self.navigationController?.pushViewController(qrReader, animated: true)//presentViewController(qrReader, animated: true, completion: nil)
+        self.navigationController?.pushViewController(qrReader, animated: true)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

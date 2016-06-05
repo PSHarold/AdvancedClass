@@ -15,7 +15,9 @@ import SwiftyJSON
 class StudentTestHelper {
     static var instance:StudentTestHelper?
     
- 
+    deinit{
+        print("TestHelper Deinited!")
+    }
     
     static var defaultHelper: StudentTestHelper{
         get{
@@ -68,7 +70,7 @@ class StudentTestHelper {
     func getFinishedTestsInCourse(course: StudentCourse, page: Int, completionHandler: ResponseMessageHandler){
         assert(page >= 1)
         
-        StudentAuthenticationHelper.defaultHelper.getResponsePOSTWithCourse(RequestType.GET_FINISHED_TESTS, parameters: ["course_id":course.courseId,"sub_id":course.subId, "page": page, "descending": true]){
+        StudentAuthenticationHelper.defaultHelper.getResponsePOSTWithCourse(RequestType.GET_FINISHED_TESTS, parameters: ["course_id":course.courseId, "page": page, "descending": true]){
             (error, json) in
             if error == nil{
                 course.finishedTests = [StudentTest]()
@@ -85,7 +87,7 @@ class StudentTestHelper {
     
     func getUnfinishedTestsInCourse(course: StudentCourse, completionHandler: ResponseMessageHandler){
         let authHelper = StudentAuthenticationHelper.defaultHelper
-        authHelper.getResponsePOSTWithCourse(RequestType.GET_UNFINISHED_TESTS, parameters: ["course_id": course.courseId, "sub_id": course.subId]){
+        authHelper.getResponsePOSTWithCourse(RequestType.GET_UNFINISHED_TESTS, parameters: ["course_id": course.courseId]){
             (error, json) in
             if error == nil{
                 course.unfinishedTests = [StudentTest]()

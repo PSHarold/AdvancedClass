@@ -13,6 +13,16 @@ class SeatButton: UIButton {
     var miniSeat = UIImageView()
     var row:Int!
     var column:Int!
+    private var _avatar: UIImage?
+    var avatar: UIImage?{
+        get{
+            return self._avatar
+        }
+        set{
+            self._avatar = newValue
+            self.setImage(self._avatar, forState: .Normal)
+        }
+    }
     
     var status: SeatStatus{
         didSet{
@@ -45,6 +55,7 @@ class SeatButton: UIButton {
         self.miniSeat.backgroundColor = UIColor.whiteColor()
         self.layer.cornerRadius = 1.0
         self.layer.masksToBounds = true
+        self.imageView?.contentMode = .ScaleAspectFit
     }
     
     required init?(coder aDecoder: NSCoder) {

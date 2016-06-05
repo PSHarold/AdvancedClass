@@ -12,7 +12,7 @@ import SwiftyJSON
 
 
 typealias SeatResponseHandler = (error: CError?, seatStatus: SeatStatus!) -> Void
-
+typealias SeatAvatarResponseHandler = (error: MyError?, location: SeatLocation!, avatar: UIImage!) -> Void
 
 class TeacherSeatHelper {
     static var _defaultHelper: TeacherSeatHelper?
@@ -40,8 +40,8 @@ class TeacherSeatHelper {
     var retryTime = 0
     var seatByStudentId: [String: Seat]!
     var seatToLocate: Seat!
-    func getSeatAtIndexPath(indexPath: NSIndexPath) -> Seat{
-        return self.seatArray[indexPath.row][indexPath.section]
+    func getSeatAtLocation(location: SeatLocation) -> Seat{
+        return self.seatArray[location.rowForArray][location.colForArray]
     }
     
     
@@ -56,7 +56,7 @@ class TeacherSeatHelper {
             completionHandler(error: error, json: json)
         }
     }
-
+    
     
     func getSeatMap(completionHandler: ResponseMessageHandler){
         self.authHelper!.getResponsePOSTWithCourse(RequestType.GET_SEAT_MAP, parameters: ["seat_token": self.seatToken, "check_final": false]){
@@ -67,7 +67,7 @@ class TeacherSeatHelper {
                 self.columns = json["col_num"].intValue
                 self.rows = json["row_num"].intValue
                 self.seatArray = [[Seat!]]()
-                for _ in 1...self.rows{
+                for _ in 0..<self.rows{
                     self.seatArray.append(Array<Seat!>(count: self.columns, repeatedValue: nil))
                 }
                 for (_, seat_json) in json["seats"]{
@@ -82,11 +82,37 @@ class TeacherSeatHelper {
         }
     }
     
+    
     static func drop(){
         _defaultHelper = nil
     }
     
     
-    func getAvatars()
+    func getAvatars(completionHandler: SeatAvatarResponseHandler){
+        let course = TeacherCourse.currentCourse
+        let courseHelper = TeacherCourseHelper.defaultHelper
+        for studentId in seatByStudentId.keys{
+            let seat = seatByStudentId[studentId]!
+            if let student = course.studentDict[studentId]{
+                if student.avartar != nil{
+                    completionHandler(error: nil, location: SeatLocation(seat), avatar: student.avartar)
+                }
+                else{
+                    courseHelper.getStudentAvatar(studentId){
+                        error, data in
+                        if let error = error{
+                            completionHandler(error: error, location: nil, avatar: nil)
+                        }
+                        else{
+                            completionHandler(error: nil, location: SeatLocation(seat), avatar: UIImage(data: data)!)
+                        }
+                    }
+                }
+            }
+            else{
+                completionHandler(error: nil, location: SeatLocation(seat), avatar: nil)
+            }
+        }
+    }
     
 }

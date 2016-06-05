@@ -8,11 +8,31 @@
 
 import UIKit
 import SwiftyJSON
-protocol SeatDelegate{
-    func seatTakenWithId(seatId:String,taken:Bool)
-    //func seatDidBecomeAvailableWithId(seatId:String)
-    func seatSelectedWithId(seatId:String,checked:Bool)
+
+
+struct SeatLocation{
+    var row: Int
+    var col: Int
+    var rowForArray: Int{
+        get{
+            return self.row - 1
+        }
+    }
+    var colForArray: Int{
+        get{
+            return self.col - 1
+        }
+    }
+    init(row: Int, col: Int){
+        self.row = row
+        self.col = col
+    }
+    init(_ seat: Seat){
+        self.row = seat.row
+        self.col = seat.column
+    }
 }
+
 
 enum SeatStatus: Int{
     case Empty = 5

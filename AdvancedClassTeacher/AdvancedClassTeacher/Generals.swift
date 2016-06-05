@@ -11,8 +11,8 @@ import SwiftyJSON
 import Alamofire
 import UIKit
 var alamofireManager: Alamofire.Manager!
-let BASE_URL = TARGET_IPHONE_SIMULATOR == 0 ? "http://115.159.125.226/api" : "http://localhost:5000/api"
-//let BASE_URL = "http://115.159.125.226"
+//let BASE_URL = TARGET_IPHONE_SIMULATOR == 0 ? "http://115.159.125.226/api" : "http://localhost:5000/api"
+let BASE_URL = TARGET_IPHONE_SIMULATOR == 0 ? "http://192.168.2.1:5000/api" : "http://localhost:5000/api"
 let ROLE_FOR_TEACHER = 1
 let ROLE_FOR_STUDENT = 2
 
@@ -69,6 +69,9 @@ enum RequestType: String{
     case DISAPPROVE_ASK_FOR_LEAVE = "/course/disapprove_ask_for_leave"
     case GET_ASKS_FOR_LEAVE = "/course/get_asks_for_leave"
     case GET_STUDENTS = "/course/get_students"
+    case GET_STUDENT_AVATAR = "/course/getStudentAvatar"
+    case GET_COVER = "/course/get_cover"
+    case CHECK_IN_WITH_FACE = "/course/check_in_with_face"
 }
 
 enum FileType: String{
@@ -205,6 +208,66 @@ extension Double {
 extension Array {
     subscript (safe index: UInt) -> Element? {
         return Int(index) < count ? self[Int(index)] : nil
+    }
+}
+
+extension UIImage{
+    func fixOrientation() -> UIImage {
+        
+        // No-op if the orientation is already correct
+        if ( self.imageOrientation == UIImageOrientation.Up ) {
+            return self;
+        }
+        
+        // We need to calculate the proper transformation to make the image upright.
+        // We do it in 2 steps: Rotate if Left/Right/Down, and then flip if Mirrored.
+        var transform: CGAffineTransform = CGAffineTransformIdentity
+        
+        if ( self.imageOrientation == UIImageOrientation.Down || self.imageOrientation == UIImageOrientation.DownMirrored ) {
+            transform = CGAffineTransformTranslate(transform, self.size.width, self.size.height)
+            transform = CGAffineTransformRotate(transform, CGFloat(M_PI))
+        }
+        
+        if ( self.imageOrientation == UIImageOrientation.Left || self.imageOrientation == UIImageOrientation.LeftMirrored ) {
+            transform = CGAffineTransformTranslate(transform, self.size.width, 0)
+            transform = CGAffineTransformRotate(transform, CGFloat(M_PI_2))
+        }
+        
+        if ( self.imageOrientation == UIImageOrientation.Right || self.imageOrientation == UIImageOrientation.RightMirrored ) {
+            transform = CGAffineTransformTranslate(transform, 0, self.size.height);
+            transform = CGAffineTransformRotate(transform,  CGFloat(-M_PI_2));
+        }
+        
+        if ( self.imageOrientation == UIImageOrientation.UpMirrored || self.imageOrientation == UIImageOrientation.DownMirrored ) {
+            transform = CGAffineTransformTranslate(transform, self.size.width, 0)
+            transform = CGAffineTransformScale(transform, -1, 1)
+        }
+        
+        if ( self.imageOrientation == UIImageOrientation.LeftMirrored || self.imageOrientation == UIImageOrientation.RightMirrored ) {
+            transform = CGAffineTransformTranslate(transform, self.size.height, 0);
+            transform = CGAffineTransformScale(transform, -1, 1);
+        }
+        
+        // Now we draw the underlying CGImage into a new context, applying the transform
+        // calculated above.
+        let ctx: CGContextRef = CGBitmapContextCreate(nil, Int(self.size.width), Int(self.size.height),
+                                                      CGImageGetBitsPerComponent(self.CGImage), 0,
+                                                      CGImageGetColorSpace(self.CGImage),
+                                                      CGImageGetBitmapInfo(self.CGImage).rawValue)!;
+        
+        CGContextConcatCTM(ctx, transform)
+        
+        if ( self.imageOrientation == UIImageOrientation.Left ||
+            self.imageOrientation == UIImageOrientation.LeftMirrored ||
+            self.imageOrientation == UIImageOrientation.Right ||
+            self.imageOrientation == UIImageOrientation.RightMirrored ) {
+            CGContextDrawImage(ctx, CGRectMake(0,0,self.size.height,self.size.width), self.CGImage)
+        } else {
+            CGContextDrawImage(ctx, CGRectMake(0,0,self.size.width,self.size.height), self.CGImage)
+        }
+        
+        // And now we just create a new UIImage from the drawing context and return it
+        return UIImage(CGImage: CGBitmapContextCreateImage(ctx)!)
     }
 }
 

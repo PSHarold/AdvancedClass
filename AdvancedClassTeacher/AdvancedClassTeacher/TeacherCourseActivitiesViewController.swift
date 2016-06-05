@@ -8,9 +8,10 @@
 
 import UIKit
 
-class TeacherCourseActivitiesViewController: UIViewController {
+class TeacherCourseActivitiesViewController: UIViewController{
     weak var seatHelper = TeacherSeatHelper.defaultHelper
     @IBOutlet weak var chooseSeatButton: UIView!
+    @IBOutlet weak var checkInWithFaceButton: UIView!
     @IBOutlet weak var seatPromptLabel: UILabel!
     @IBOutlet weak var showStudentsLabel: UILabel!
     
@@ -35,6 +36,7 @@ class TeacherCourseActivitiesViewController: UIViewController {
         super.viewDidLoad()
         self.chooseSeatButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(TeacherCourseActivitiesViewController.showSeatMap)))
         self.showStudentListButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(TeacherCourseActivitiesViewController.showStudentList)))
+        self.checkInWithFaceButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.checkInWithFace)))
         self.chooseSeatButton.layer.masksToBounds = true
         self.chooseSeatButton.layer.cornerRadius = 10.0
         self.chooseSeatButton.layer.borderWidth = 0.3
@@ -45,7 +47,9 @@ class TeacherCourseActivitiesViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    
+    func checkInWithFace(){
+        self.performSegueWithIdentifier("CheckInWithFace", sender: self)
+    }
     func showSeatMap(){
         self.getSeatMap(true)
     }
@@ -138,7 +142,7 @@ class TeacherCourseActivitiesViewController: UIViewController {
         }
     }
 
-    
+   
     func tick(){
         self.remainingSeconds -= 1
         if self.remainingSeconds == 0{

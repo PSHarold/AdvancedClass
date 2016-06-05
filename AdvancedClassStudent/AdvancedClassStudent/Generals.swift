@@ -18,9 +18,8 @@ var currentDayNo: Int = 0
 var currentWeekNo: Int = 0
 
 
-
-let BASE_URL = TARGET_IPHONE_SIMULATOR == 0 ? "http://115.159.125.226/api" : "http://localhost:5000/api"
-//let BASE_URL = TARGET_IPHONE_SIMULATOR == 0 ? "http://192.168.2.1:5000/api" : "http://localhost:5000/api"
+//let BASE_URL = TARGET_IPHONE_SIMULATOR == 0 ? "http://115.159.125.226/api" : "http://localhost:5000/api"
+let BASE_URL = TARGET_IPHONE_SIMULATOR == 0 ? "http://192.168.2.1:5000/api" : "http://localhost:5000/api"
 
 let ROLE_FOR_TEACHER = 1
 let ROLE_FOR_STUDENT = 2
@@ -79,7 +78,7 @@ enum RequestType: String{
     case MODIFY_EMAIL = "/user/modify_email"
     case RESET_PASSWORD_GET_EMAIL = "/user/reset_password_get_email"
     case RESET_PASSWORD_CONFIRM_EMAIL = "/user/reset_password"
-    
+    case GET_COVER = "/course/get_cover"
 }
 enum FileType: String{
     case JPG = "image/jpeg"

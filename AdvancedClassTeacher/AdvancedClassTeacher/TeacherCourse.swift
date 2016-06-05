@@ -63,7 +63,7 @@ class KnowledgePoint{
     
     func getQuestions(completionHandler: ResponseHandler){
         let authHelper = TeacherAuthenticationHelper.defaultHelper
-        authHelper.getResponsePOST(.GET_QUESTIONS_IN_POINT, parameters: ["course_id": TeacherCourse.currentCourse.courseId, "sub_id": TeacherCourse.currentCourse.subId, "point_id": self.knowledgePointId]){
+        authHelper.getResponsePOST(.GET_QUESTIONS_IN_POINT, parameters: ["course_id": TeacherCourse.currentCourse.courseId, "point_id": self.knowledgePointId]){
             [unowned self]
             (error, json) in
             if error == nil{
@@ -193,15 +193,17 @@ class TeacherCourse {
     static var currentCourse: TeacherCourse!
     var studentDict = [String: Student]()
     var studentIdList = [String]()
+    var classNames = [String]()
     var name:String
     var courseId:String
-    var subId:String
+    var mainCourseId: String
+    var subCourseId: String
     var teachers = [String]()
     var timesAndRooms: TimesAndRooms
     var unfinishedTests = [TeacherTest]()
     var testsDict = [String: TeacherTest]()
     var finishedTests = [TeacherTest]()
-    var students = [String: Student]()
+    var coverImage: UIImage?
     var studentIds = [String]()
     var notifications = [Notification]()
     var syllabus: Syllabus!
@@ -212,8 +214,13 @@ class TeacherCourse {
     init(json:JSON, preview:Bool = true){
         self.name = json["course_name"].stringValue
         self.courseId = json["course_id"].stringValue
-        self.subId = json["sub_id"].stringValue
+        let a = self.courseId.characters.split("_")
+        self.mainCourseId = String(a[0])
+        self.subCourseId = String(a[1])
         self.timesAndRooms = TimesAndRooms(json: json["times"])
+        for className in json["classes"].arrayValue{
+            self.classNames.append(className.stringValue)
+        }
     }
     
     

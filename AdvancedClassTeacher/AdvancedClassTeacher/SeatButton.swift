@@ -55,6 +55,7 @@ class SeatButton: UIButton {
         self.miniSeat.backgroundColor = UIColor.whiteColor()
         self.layer.cornerRadius = 1.0
         self.layer.masksToBounds = true
+        self.imageView?.contentMode = .ScaleAspectFit
     }
     
     required init?(coder aDecoder: NSCoder) {

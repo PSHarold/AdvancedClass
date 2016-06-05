@@ -9,7 +9,6 @@
 import UIKit
 
 class StudentNotificationsTableViewController: UITableViewController {
-    weak var courseHelper = StudentCourseHelper.defaultHelper
     weak var currentCourse = StudentCourse.currentCourse
     var selectedNotification: Notification!
     var page = 1
@@ -78,7 +77,7 @@ class StudentNotificationsTableViewController: UITableViewController {
     
     func loadNotificationsToPage(page: Int){
         self.acquiring = true
-        self.courseHelper!.getNotifications(page){
+        StudentCourseHelper.defaultHelper.getNotifications(page){
             [unowned self]
             error in
             let label = self.tableView.backgroundView as! UILabel

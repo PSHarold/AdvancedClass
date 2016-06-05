@@ -33,7 +33,7 @@ class StudentAnswerQuestionsViewController: UIViewController, UIScrollViewDelega
         super.viewDidLoad()
         
         self.test.delegate = self
-        self.popoverViewController = self.storyboard?.instantiateViewControllerWithIdentifier("StudentTestQuestionListTableViewController") as! StudentTestQuestionListTableViewController
+        self.popoverViewController = StudentTestQuestionListTableViewController()
         self.popoverViewController.answerVC = self
         self.myPopoverPresentationController = UIPopoverPresentationController(presentedViewController: self.popoverViewController, presentingViewController: self)
         self.popoverViewController.preferredContentSize = CGSizeMake(200, CGFloat(self.test.questionNum*44))

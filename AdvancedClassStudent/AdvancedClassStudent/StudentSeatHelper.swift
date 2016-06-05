@@ -25,7 +25,10 @@ class StudentSeatHelper {
         }
     }
     
-    
+    deinit{
+        self.seatArray = nil
+        print("SeatHelper Deinited!")
+    }
     weak var authHelper = StudentAuthenticationHelper.defaultHelper
     var tempSeatDataArray = [JSON]()
     var columns = 0
@@ -40,8 +43,8 @@ class StudentSeatHelper {
     var retryTime = 0
     var seatByStudentId: [String: Seat]!
     var seatToLocate: Seat!
-    func getSeatAtIndexPath(indexPath: NSIndexPath) -> Seat{
-        return self.seatArray[indexPath.row][indexPath.section]
+    func getSeatAtLocation(location: SeatLocation) -> Seat{
+        return self.seatArray[location.rowForArray][location.colForArray]
     }
     
     
@@ -78,13 +81,13 @@ class StudentSeatHelper {
                 self.columns = json["col_num"].intValue
                 self.rows = json["row_num"].intValue
                 self.seatArray = [[Seat!]]()
-                for _ in 1...self.rows{
+                for _ in 0..<self.rows{
                     self.seatArray.append(Array<Seat!>(count: self.columns, repeatedValue: nil))
                 }
                 for (_, seat_json) in json["seats"]{
                     let seat = Seat(json: seat_json)
                     if seat.currentStudentId != ""{
-                        if seat.currentStudentId == StudentAuthenticationHelper.me.studentId{
+                        if seat.currentStudentId == StudentAuthenticationHelper.defaultHelper.me.studentId{
                             seat.status = .Checked
                         }
                         else{
@@ -98,8 +101,8 @@ class StudentSeatHelper {
         }
     }
     
-    func chooseSeat(indexPath: NSIndexPath, completionHandler: SeatResponseHandler){
-        let seat = self.seatArray[indexPath.row][indexPath.section]
+    func chooseSeat(location: SeatLocation, completionHandler: SeatResponseHandler){
+        let seat = self.seatArray[location.rowForArray][location.colForArray]
         self.authHelper!.getResponsePOST(RequestType.CHOOSE_SEAT, parameters: ["seat_id":seat.seatId, "seat_token":self.seatToken]){
             (error, json) in
             if let error = error{
@@ -110,15 +113,15 @@ class StudentSeatHelper {
                 completionHandler(error: error, seatStatus: seat.status)
             }
             else{
-                seat.currentStudentId = StudentAuthenticationHelper.me.studentId
+                seat.currentStudentId = StudentAuthenticationHelper.defaultHelper.me.studentId
                 seat.status = .Checked
                 completionHandler(error: error, seatStatus: .Checked)
             }
         }
     }
     
-    func freeSeat(indexPath: NSIndexPath, completionHandler: SeatResponseHandler){
-        let seat = self.seatArray[indexPath.row][indexPath.section]
+    func freeSeat(location: SeatLocation, completionHandler: SeatResponseHandler){
+        let seat = self.seatArray[location.rowForArray][location.colForArray]
         self.authHelper!.getResponsePOST(RequestType.FREE_SEAT, parameters: ["seat_id":seat.seatId, "seat_token":self.seatToken]){
             (error, json) in
             if let error = error{
@@ -131,7 +134,8 @@ class StudentSeatHelper {
             }
         }
     }
-       
+    
+    
     
     static func drop(){
         _defaultHelper = nil

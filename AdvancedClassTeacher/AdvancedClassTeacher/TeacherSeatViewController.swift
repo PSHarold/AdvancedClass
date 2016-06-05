@@ -20,7 +20,7 @@ class TeacherSeatViewController: UIViewController, SeatViewDataSource, SeatViewD
     var popoverViewController: StudentInfoPopoverTableViewController!
     var myPopoverPresentationController: UIPopoverPresentationController!
     let hud = MBProgressHUD()
-    var currentSeatIndex: NSIndexPath?
+    var currentSeatIndex: SeatLocation?
     weak var courseHelper = TeacherCourseHelper.defaultHelper
     @IBOutlet weak var seatView:SeatView!
     @IBOutlet weak var flipBarButton: UIBarButtonItem!
@@ -41,6 +41,11 @@ class TeacherSeatViewController: UIViewController, SeatViewDataSource, SeatViewD
     
     var searchController: UISearchController!
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
        
@@ -59,16 +64,25 @@ class TeacherSeatViewController: UIViewController, SeatViewDataSource, SeatViewD
                         //self.timer = NSTimer(timeInterval: 5.0, target: self, selector: "tick", userInfo: nil, repeats: true)
        // NSRunLoop.currentRunLoop().addTimer(self.timer!, forMode: NSRunLoopCommonModes)
         self.popoverViewController.modalPresentationStyle = .Popover
+        
+        }
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        self.seatHelper.getAvatars{
+            [unowned self]
+            error, location, avatar in
+            if let _ = error{
+                //self.showError(error)
+            }
+            else{
+                self.seatView.setAvatarAtLocation(location, avatar: avatar)
+            }
+        }
     }
-    
-    
     
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         
-    }
-    
-    
-    
+    }    
     
     func setupSearchBar(){
         resultsTableViewController = TeacherSeatSearchTableViewController()
@@ -107,14 +121,14 @@ class TeacherSeatViewController: UIViewController, SeatViewDataSource, SeatViewD
         if searchText != ""{
             let course = TeacherCourse.currentCourse
             if self.searchBar.selectedScopeButtonIndex == 0{
-                for studentId in course.students.keys{
+                for studentId in course.studentDict.keys{
                     if studentId.containsString(searchText){
                         self.filteredStudentIds.append(studentId)
                     }
                 }
             }
             else{
-                for student in course.students.values{
+                for student in course.studentDict.values{
                     if student.name.containsString(searchText){
                         self.filteredStudentIds.append(student.studentId)
                     }
@@ -166,9 +180,9 @@ class TeacherSeatViewController: UIViewController, SeatViewDataSource, SeatViewD
     
     
     
-    func didSelectSeatAtIndexPath(indexPath: NSIndexPath, seatButton: SeatButton) {
+    func didSelectSeatAtLocation(location: SeatLocation, seatButton: SeatButton) {
         
-        let seat = self.seatHelper.seatArray[indexPath.row][indexPath.section]!
+        let seat = self.seatHelper.seatArray[location.rowForArray][location.colForArray]!
         switch seat.status{
         case .Taken:
             let studentId = seat.currentStudentId
@@ -180,7 +194,7 @@ class TeacherSeatViewController: UIViewController, SeatViewDataSource, SeatViewD
                 pop.sourceRect = seatButton.bounds
             }
             self.hideHud()
-            self.popoverViewController.student = course.students[studentId]
+            self.popoverViewController.student = course.studentDict[studentId]
             self.presentViewController(self.popoverViewController, animated: true, completion: nil)
             
             
@@ -190,16 +204,17 @@ class TeacherSeatViewController: UIViewController, SeatViewDataSource, SeatViewD
 
     }
 
-    func seatStatusAtIndexPath(indexPath:NSIndexPath) -> SeatStatus{
-        let status = self.seatHelper.getSeatAtIndexPath(indexPath).status
+    func seatStatusAtLocation(location:SeatLocation) -> SeatStatus{
+        let status = self.seatHelper.getSeatAtLocation(location).status
         if status == .Checked{
-            self.currentSeatIndex = indexPath
+            self.currentSeatIndex = location
         }
         return status
     }
 
     @IBAction func flipSeatMap(sender: UIBarButtonItem) {
         self.seatView.flipSeats()
+        
     }
     
     
@@ -208,19 +223,31 @@ class TeacherSeatViewController: UIViewController, SeatViewDataSource, SeatViewD
         self.seatHelper.getSeatMap{
             [unowned self]
             error in
-            if let error = error{
-                self.showError(error)
+            if let _ = error{
+               // self.showError(error)
             }
             else{
                 self.seatView.reloadSeats()
                 self.hideHud()
+                self.seatHelper.getAvatars{
+                    [unowned self]
+                    error, location, avatar in
+                    if let _ = error{
+                       // self.showError(error)
+                        self.seatView.setAvatarAtLocation(location, avatar: nil)
+                    }
+                    else{
+                        self.seatView.setAvatarAtLocation(location, avatar: avatar)
+                    }
+                }
             }
         }
+        
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
 //        if let seat = self.seatHelper.seatToLocate{
-//            let frame = self.seatView.getSeatCenterPointAtIndexPath(NSIndexPath(forRow: seat.row, inSection: seat.column), toView: self.view)
+//            let frame = self.seatView.getSeatCenterPointAtLocation(SeatLocation(forRow: seat.row, inSection: seat.column), toView: self.view)
 //            self.seatView.scrollView.setContentOffset(frame.origin, animated: true)
 //        }
         

@@ -17,7 +17,7 @@ class StudentTestQuestionListTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -46,12 +46,15 @@ class StudentTestQuestionListTableViewController: UITableViewController {
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
-
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.test!.questionNum
     }
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
+        let cell = self.tableView.dequeueReusableCellWithIdentifier("cell") ?? UITableViewCell(style: .Value1, reuseIdentifier: "cell"
+        )
+        
+        
         cell.textLabel?.text = "第\(indexPath.row+1)题"
         let question = self.test!.questions[indexPath.row]
         
@@ -78,7 +81,7 @@ class StudentTestQuestionListTableViewController: UITableViewController {
                 cell.detailTextLabel?.text = "未作答"
                 cell.detailTextLabel?.textColor = UIColor.lightGrayColor()
             }
-
+            
         }
         return cell
     }

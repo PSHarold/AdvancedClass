@@ -34,6 +34,7 @@ enum AvailablePeriodsMode{
 }
 class TimesAndRooms {
     var times = [OnePeriod]()
+    var periodDict: [Int: [Int: OnePeriod]] = [:]
     init(json:JSON){
         for (_,time):(String,JSON) in json{
             let period = OnePeriod()
@@ -46,6 +47,7 @@ class TimesAndRooms {
             period.room_id = time["room_id"].stringValue
             period.room_name = time["room_name"].stringValue
             period.period = time["period"].intValue
+            
             self.times.append(period)
         }
     }
@@ -113,6 +115,15 @@ class TimesAndRooms {
             }
         }
         return Array(periods).sort()
+    }
+    func getTodaysPeriods() -> [OnePeriod]? {
+        var periods = [OnePeriod]()
+        for time in self.times{
+            if time.weeks.contains(currentWeekNo) && time.days.contains(currentDayNo){
+                periods.append(time)
+            }
+        }
+        return periods.count > 0 ? periods : nil
     }
     
 }

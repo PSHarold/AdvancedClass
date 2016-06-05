@@ -45,11 +45,11 @@ class TeacherTestResultStudentsTableViewController: UITableViewController {
         let cell = self.tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! StudentInfoCell
         var student: Student
         if self.showTaken{
-            student = TeacherCourse.currentCourse.students[self.test!.finishedStudents[indexPath.row]]!
+            student = TeacherCourse.currentCourse.studentDict[self.test!.finishedStudents[indexPath.row]]!
             
         }
         else{
-            student = TeacherCourse.currentCourse.students[self.test!.unfinishedStudents[indexPath.row]]!
+            student = TeacherCourse.currentCourse.studentDict[self.test!.unfinishedStudents[indexPath.row]]!
         }
         cell.studentName = student.name
         cell.studentId = student.studentId

@@ -8,12 +8,15 @@
 
 import UIKit
 protocol SeatViewDelegate {
-    func didSelectSeatAtIndexPath(indexPath: NSIndexPath, seatButton: SeatButton)
+    func didSelectSeatAtLocation(location: SeatLocation, seatButton: SeatButton)
 }
+
+
+
 protocol SeatViewDataSource {
     func numberOfRows() -> Int
     func numberOfColumns() -> Int
-    func seatStatusAtIndexPath(indexPath:NSIndexPath) -> SeatStatus
+    func seatStatusAtLocation(location:SeatLocation) -> SeatStatus
 }
 
 class SeatView: UIView, UIScrollViewDelegate,UITableViewDelegate{
@@ -62,7 +65,6 @@ class SeatView: UIView, UIScrollViewDelegate,UITableViewDelegate{
             
         }
     }
-    
     
     override func drawRect(rect: CGRect) {
         self.scrollView.delegate = self
@@ -113,7 +115,15 @@ class SeatView: UIView, UIScrollViewDelegate,UITableViewDelegate{
     
     
     func reloadSeats(){
-        self.setNeedsLayout()
+        for row in 0..<self.rows{
+            for column in 0..<self.columns{
+                let seat = self.seatButtonArray[row][column]
+                let seatStatus = self.dataSource.seatStatusAtLocation(SeatLocation(row: row, col: column))
+                seat.status = seatStatus                
+            
+            }
+        }
+
     }
     
     
@@ -176,7 +186,6 @@ class SeatView: UIView, UIScrollViewDelegate,UITableViewDelegate{
         
         var transform = self.miniSeatView.transform
         transform = CGAffineTransformScale(transform, 1/self.viewRatio/self.scrollView.zoomScale,1/self.viewRatio/self.scrollView.zoomScale)
-        
         self.miniSeatView.transform = transform
   
         self.miniSeatView.center = CGPointMake(self.miniMap.bounds.width/2, self.miniMap.bounds.height/2)
@@ -207,9 +216,9 @@ class SeatView: UIView, UIScrollViewDelegate,UITableViewDelegate{
             for column in 0..<self.columns{
                 let seat = SeatButton()
                 seat.exclusiveTouch = true
-                let seatStatus = self.dataSource.seatStatusAtIndexPath(NSIndexPath(forRow: row, inSection: column))
-                seat.row = row
-                seat.column = column
+                let seatStatus = self.dataSource.seatStatusAtLocation(SeatLocation(row: row+1, col: column+1))
+                seat.row = row + 1
+                seat.column = column + 1
                 seat.status = seatStatus
                 temp.append(seat)
                 let miniSeat = seat.miniSeat
@@ -357,25 +366,26 @@ class SeatView: UIView, UIScrollViewDelegate,UITableViewDelegate{
     func calculate(){
         self.maxBoundsSize = self.scrollView.bounds.size
         self.contentSize = CGSizeMake(max(2*self.margin + self.seatsTotalWidth, self.maxBoundsSize.width), max(2*self.margin + self.seatsTotalHeight + self.platformHeight, self.maxBoundsSize.height))
-       
-        
-        
     }
     
-    func seatClicked(seat:SeatButton){
-        self.delegate.didSelectSeatAtIndexPath(NSIndexPath(forRow: seat.row, inSection: seat.column), seatButton: seat)
+    func seatClicked(seat: SeatButton){
+        self.delegate.didSelectSeatAtLocation(SeatLocation(row: seat.row, col: seat.column), seatButton: seat)
     }
     
-    func changeSeatStatusAtIndexPath(indexPath: NSIndexPath, seatStatus: SeatStatus){
-        let seat = self.seatButtonArray[indexPath.row][indexPath.section]
+    func changeSeatStatusAtLocation(location: SeatLocation, seatStatus: SeatStatus){
+        let seat = self.seatButtonArray[location.rowForArray][location.colForArray]
         seat.status = seatStatus
     }
     
-    func getSeatCenterPointAtIndexPath(indexPath: NSIndexPath, toView: UIView) -> CGRect{
-        var f = self.seatButtonArray[indexPath.row][indexPath.section].frame
+    func getSeatCenterPointAtLocation(location: SeatLocation, toView: UIView) -> CGRect{
+        var f = self.seatButtonArray[location.rowForArray][location.colForArray].frame
         let newPoint = self.seatView.convertPoint(f.origin, toView: toView)
         f.origin = newPoint
         return f
     }
     
+    
+    func setAvatarAtLocation(location: SeatLocation, avatar: UIImage?){
+        self.seatButtonArray[location.rowForArray][location.colForArray].avatar = avatar == nil ? UIImage(named: "taken") : avatar
+    }
 }

@@ -43,7 +43,7 @@ class TeacherAuthenticationHelper {
     var tempPostBody: [String: AnyObject]!
     var tempHeaders: [String:String]!
     var originalHandler: ResponseHandler!
-    var originalImageHandler: ResponseFileHandler!
+    var originalFileHandler: ResponseFileHandler!
     var processing = false
     static var defaultHelper:TeacherAuthenticationHelper{
         get{
@@ -220,34 +220,46 @@ class TeacherAuthenticationHelper {
             }
         }
     }
-    
-    func getResponseGetFile(requestType: RequestType, parameters:[String: AnyObject]?, completionHandler: ResponseFileHandler){
+    func getResponseGetFile(requestType: RequestType, method: Alamofire.Method, parameters:[String: AnyObject]?, completionHandler: ResponseFileHandler){
         var argsOrBody = parameters
-        if argsOrBody == nil{
+        if argsOrBody == nil && method == .GET{
             argsOrBody = ["token": self.token]
         }
-        argsOrBody!["token"] = self.token
-        let request = getRequestPOST(requestType, parameters: argsOrBody ?? [:], headers: nil)
+        else if method == .GET{
+            argsOrBody!["token"] = self.token
+        }
+        var request: Request
+        if method == .GET{
+            request = getRequestGET(requestType, parameters: argsOrBody, headers: nil)
+        }
+        else{
+            request = getRequestPOST(requestType, parameters: argsOrBody ?? [:], GETParameters: ["token": self.token], headers: nil)
+        }
         request.responseData(){
             [unowned self]
             (_,_,result) in
             switch result{
             case .Success(let data):
-                let json = JSON(data)
-                let code = json["error_code"].intValue
-                if code == CError.TOKEN_EXPIRED.rawValue{
-                    self.tempArgsOrBody=argsOrBody
-                    self.tempRequestType=requestType
-                    self.originalHandler = nil
-                    self.originalImageHandler=completionHandler
-                    self.getTokenBackground()
-                    return
-                }
-                else if code > 0{
-                    completionHandler(error: MyError(json: json), data: nil)
+                if let jsonData = result.value{
+                    let json = JSON(data: jsonData)
+                    let code = json["error_code"].intValue
+                    if code == CError.TOKEN_EXPIRED.rawValue{
+                        self.tempArgsOrBody=argsOrBody
+                        self.tempRequestType=requestType
+                        self.originalHandler = nil
+                        self.originalFileHandler=completionHandler
+                        self.getTokenBackground()
+                        return
+                    }
+                    else if code > 0{
+                        completionHandler(error: MyError(json: json), data: nil)
+                    }
+                    else{
+                        completionHandler(error: nil, data: data)
+                    }
                 }
                 else{
-                    completionHandler(error: nil, data: data)
+                    fallthrough
                 }
                 
             case .Failure:
@@ -257,9 +269,14 @@ class TeacherAuthenticationHelper {
         
     }
     
-    
-    func postFile(requestType: RequestType, fileName: String, fileType: FileType, fileData: NSData, completionHandler: ResponseHandler){
-        Alamofire.upload(.POST, BASE_URL+requestType.rawValue+"?token=\(self.token)",
+    func postFile(requestType: RequestType, fileName: String, fileType: FileType, fileData: NSData, args: [String: AnyObject]?=nil, completionHandler: ResponseHandler){
+        var s = ""
+        if let args = args{
+            for (key, value) in args {
+                s+="&\(key)=\(value)"
+            }
+        }
+        Alamofire.upload(.POST, BASE_URL+requestType.rawValue+"?token=\(self.token)"+s,
                          headers: nil,
                          multipartFormData: {
                             multipartFormData in

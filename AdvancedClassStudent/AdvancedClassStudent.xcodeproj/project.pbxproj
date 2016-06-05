@@ -25,6 +25,8 @@
 		F246DEBB1B9C619B0058DEA6 /* Student.swift in Sources */ = {isa = PBXBuildFile; fileRef = F246DEBA1B9C619B0058DEA6 /* Student.swift */; };
 		F246DEC31B9C654B0058DEA6 /* StudentCourse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F246DEC21B9C654B0058DEA6 /* StudentCourse.swift */; };
 		F246DEC51B9C662E0058DEA6 /* Teacher.swift in Sources */ = {isa = PBXBuildFile; fileRef = F246DEC41B9C662E0058DEA6 /* Teacher.swift */; };
+		F24EA84B1CF98A34003DD2A5 /* CourseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24EA8491CF98A34003DD2A5 /* CourseTableViewCell.swift */; };
+		F24EA84C1CF98A34003DD2A5 /* CourseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F24EA84A1CF98A34003DD2A5 /* CourseTableViewCell.xib */; };
 		F255B89A1CF4407700D8D49A /* AbsenceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F255B8921CF4407700D8D49A /* AbsenceTableViewController.swift */; };
 		F255B89B1CF4407700D8D49A /* AskForLeaveTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F255B8931CF4407700D8D49A /* AskForLeaveTableViewController.swift */; };
 		F255B89C1CF4407700D8D49A /* AttendanceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F255B8941CF4407700D8D49A /* AttendanceTableViewController.swift */; };
@@ -125,6 +127,8 @@
 		F246DEBA1B9C619B0058DEA6 /* Student.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Student.swift; sourceTree = "<group>"; };
 		F246DEC21B9C654B0058DEA6 /* StudentCourse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentCourse.swift; sourceTree = "<group>"; };
 		F246DEC41B9C662E0058DEA6 /* Teacher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Teacher.swift; sourceTree = "<group>"; };
+		F24EA8491CF98A34003DD2A5 /* CourseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseTableViewCell.swift; sourceTree = "<group>"; };
+		F24EA84A1CF98A34003DD2A5 /* CourseTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CourseTableViewCell.xib; sourceTree = "<group>"; };
 		F255B8921CF4407700D8D49A /* AbsenceTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbsenceTableViewController.swift; sourceTree = "<group>"; };
 		F255B8931CF4407700D8D49A /* AskForLeaveTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AskForLeaveTableViewController.swift; sourceTree = "<group>"; };
 		F255B8941CF4407700D8D49A /* AttendanceTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttendanceTableViewController.swift; sourceTree = "<group>"; };
@@ -247,6 +251,8 @@
 		F22DAC941B81AC2B00360027 /* AdvancedClassStudent */ = {
 			isa = PBXGroup;
 			children = (
+				F24EA8491CF98A34003DD2A5 /* CourseTableViewCell.swift */,
+				F24EA84A1CF98A34003DD2A5 /* CourseTableViewCell.xib */,
 				F255B8921CF4407700D8D49A /* AbsenceTableViewController.swift */,
 				F220E2791BB62C2000251C88 /* AdvancedClassStudent-Bridging-Header.h */,
 				F22DAC971B81AC2B00360027 /* AppDelegate.swift */,
@@ -451,6 +457,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F283BC831C9EB4BC00E0396F /* Images.xcassets in Resources */,
+				F24EA84C1CF98A34003DD2A5 /* CourseTableViewCell.xib in Resources */,
 				F22DAC9D1B81AC2B00360027 /* Main.storyboard in Resources */,
 				F22DACA21B81AC2B00360027 /* LaunchScreen.xib in Resources */,
 				F283BC871C9EBC4000E0396F /* StudentQuestionContentTableViewCell.xib in Resources */,
@@ -561,6 +568,7 @@
 				F275AFB21CA9FC430009925B /* StudentInfoCell.swift in Sources */,
 				F275AFAD1CA9FAC40009925B /* SeatColumnIndicator.swift in Sources */,
 				F255B89A1CF4407700D8D49A /* AbsenceTableViewController.swift in Sources */,
+				F24EA84B1CF98A34003DD2A5 /* CourseTableViewCell.swift in Sources */,
 				F22DACBD1B81ACB600360027 /* StudentMultipleChoiceTableViewController.swift in Sources */,
 				F22DACBF1B81ACB600360027 /* StudentTestHelper.swift in Sources */,
 				F275AFB71CAA052D0009925B /* StudentCourseHelper.swift in Sources */,

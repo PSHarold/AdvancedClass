@@ -111,7 +111,6 @@ class TeacherTest{
     static func getNewTest() -> TeacherTest{
         let test = TeacherTest()
         test.courseId = String(TeacherCourse.currentCourse.courseId)
-        test.subId = String(TeacherCourse.currentCourse.subId)
         test.questionsFixed = [TeacherQuestion]()
         test.questiontDict = [String: Bool]()
         return test

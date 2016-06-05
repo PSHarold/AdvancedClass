@@ -10,5 +10,21 @@
             </PersistentString>
          </PersistentStrings>
       </ContextState>
+      <ContextState
+         contextName = "TeacherCourseTableViewController.tableView(UITableView, cellForRowAtIndexPath : NSIndexPath) -&gt; UITableViewCell:TeacherCourseTableViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "strings">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "TeacherCourseTableViewController.viewDidAppear(Bool) -&gt; ():TeacherCourseTableViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "TeacherAuthenticationHelper.defaultHelper.me">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
    </ContextStates>
 </VariablesViewState>

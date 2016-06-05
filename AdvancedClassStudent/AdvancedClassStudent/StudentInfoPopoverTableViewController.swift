@@ -17,8 +17,10 @@ class StudentInfoPopoverTableViewController: UITableViewController {
         self.tableView.separatorStyle = .None
     }
     
-    var student: Student?
-    
+    weak var student: Student?
+    deinit{
+        print("StudentInfoPopoverTableViewController deinited")
+    }
     override var preferredContentSize: CGSize{
         get{
             return self.tableView.frame.size

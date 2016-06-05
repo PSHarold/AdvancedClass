@@ -42,22 +42,22 @@ class TeacherTestHelper {
         self._newTest = nil
     }
     
-    func moveNewTestToTestList(){
-        
-    }
     
     
-    func postNewTest(completionHandler: ResponseMessageHandler){
+    func postNewTest(course: TeacherCourse?=nil, completionHandler: ResponseMessageHandler){
         var dict = self.newTest.toDict()
-        dict["course_id"] = TeacherCourse.currentCourse.courseId
-        dict["sub_id"] = TeacherCourse.currentCourse.subId
+        let course = course ?? TeacherCourse.currentCourse!
+        dict["course_id"] = course.courseId
+      
         
         TeacherAuthenticationHelper.defaultHelper.getResponsePOSTWithCourse(RequestType.POST_TEST, parameters: dict){
             [unowned self]
             (error, json) in
             if error == nil{
                 self.newTest.testId = json["test_id"].stringValue
-                self.moveNewTestToTestList()
+                course.unfinishedTests.insert(self.newTest, atIndex: 0)
+                self.dropNewTest()
+
             }
             completionHandler(error: error)
         }
@@ -65,7 +65,7 @@ class TeacherTestHelper {
     
     
     func getUnfinishedTestsInCourse(course: TeacherCourse, completionHandler: ResponseMessageHandler){
-        TeacherAuthenticationHelper.defaultHelper.getResponsePOSTWithCourse(RequestType.GET_UNFINISHED_TESTS, parameters: ["course_id": course.courseId, "sub_id": course.subId]){
+        TeacherAuthenticationHelper.defaultHelper.getResponsePOSTWithCourse(RequestType.GET_UNFINISHED_TESTS, parameters: ["course_id": course.courseId]){
             (error, json) in
             if error == nil{
                 course.unfinishedTests = [TeacherTest]()
@@ -80,13 +80,10 @@ class TeacherTestHelper {
         }
     }
     
-    
-    
-    
     func getFinishedTestsInCourse(course: TeacherCourse, page: Int, completionHandler: ResponseMessageHandler){
         assert(page >= 1)
         
-        TeacherAuthenticationHelper.defaultHelper.getResponsePOSTWithCourse(RequestType.GET_FINISHED_TESTS, parameters: ["course_id":course.courseId,"sub_id":course.subId, "page": page, "descending": true]){
+        TeacherAuthenticationHelper.defaultHelper.getResponsePOSTWithCourse(RequestType.GET_FINISHED_TESTS, parameters: ["course_id":course.courseId, "page": page, "descending": true]){
             (error, json) in
             if error == nil{
                 course.finishedTests = [TeacherTest]()
@@ -178,6 +175,9 @@ class TeacherTestHelper {
                     }
                 }
             }
+            else{
+                self.getTestResultsMain(test, completionHandler: completionHandler)
+            }
         }
     }
     
@@ -196,7 +196,7 @@ class TeacherTestHelper {
                         test.unfinishedStudents.append(studentId.stringValue)
                     }
                     let untaken = Set<String>(test.unfinishedStudents)
-                    let all = Set<String>(TeacherCourse.currentCourse.students.keys)
+                    let all = Set<String>(TeacherCourse.currentCourse.studentDict.keys)
                     test.finishedStudents = [String](all.subtract(untaken))
                 }
                 completionHandler(error: error)

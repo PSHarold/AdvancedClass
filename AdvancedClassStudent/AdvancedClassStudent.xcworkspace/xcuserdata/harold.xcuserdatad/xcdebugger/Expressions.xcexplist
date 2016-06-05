@@ -3,13 +3,51 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "StudentQuestion.init(json : JSON) -&gt; StudentQuestion:StudentQuestion.swift">
+         contextName = "StudentAnswerQuestionsViewController.viewDidLoad() -&gt; ():StudentAnswerQuestionsViewController.swift">
       </ContextState>
       <ContextState
-         contextName = "StudentAnswerQuestionsViewController.instatiateAndAddSubQuestionPage(Int) -&gt; ():StudentAnswerQuestionsViewController.swift">
+         contextName = "StudentTestHelper.(getUnfinishedTestsInCourse(StudentTestHelper) -&gt; (StudentCourse, completionHandler : (error : CError?) -&gt; ()) -&gt; ()).(closure #1):StudentTestHelper.swift">
       </ContextState>
       <ContextState
-         contextName = "StudentMultipleChoiceTableViewCell.updateUI() -&gt; ():StudentMultipleChoiceTableViewCell.swift">
+         contextName = "StudentSeatHelper.getSeatAtLocation(SeatLocation) -&gt; Seat:StudentSeatHelper.swift">
+      </ContextState>
+      <ContextState
+         contextName = "StudentAuthenticationHelper.login(String, password : String, completionHandler : (error : CError?, json : JSON?) -&gt; ()) -&gt; ():StudentAuthenticationHelper.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "StudentAuthenticationHelper._defaultHelper">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "StudentChooseSeatViewController.didSelectSeatAtLocation(SeatLocation, seatButton : SeatButton) -&gt; ():StudentChooseSeatViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.seatHelper.seatArray">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "mach_msg_trap:(null)">
+         <PersistentStrings>
+            <PersistentString
+               value = "StudentCourse.currentCourse">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "StudentCourseHelper.getStudent(String, course : StudentCourse, completionHandler : (error : MyError?) -&gt; ()) -&gt; ():StudentCourseHelper.swift">
+      </ContextState>
+      <ContextState
+         contextName = "StudentAnswerQuestionsViewController.instantiateQuestionViewControllerIfNeeded(Int) -&gt; ():StudentAnswerQuestionsViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "QRCodeReaderViewController.viewDidLoad() -&gt; ():QRCodeReaderViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.view.bounds.height">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "StudentCourseTableViewController.tableView(UITableView, numberOfRowsInSection : Int) -&gt; Int:StudentCourseTableViewController.swift">
@@ -23,21 +61,16 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "StudentAuthenticationHelper.login(String, password : String, completionHandler : (error : CError?, json : JSON?) -&gt; ()) -&gt; ():StudentAuthenticationHelper.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "StudentAuthenticationHelper._defaultHelper">
-            </PersistentString>
-         </PersistentStrings>
+         contextName = "StudentQuestion.init(json : JSON) -&gt; StudentQuestion:StudentQuestion.swift">
       </ContextState>
       <ContextState
-         contextName = "StudentTestHelper.(getUnfinishedTestsInCourse(StudentTestHelper) -&gt; (StudentCourse, completionHandler : (error : CError?) -&gt; ()) -&gt; ()).(closure #1):StudentTestHelper.swift">
+         contextName = "StudentMultipleChoiceTableViewCell.updateUI() -&gt; ():StudentMultipleChoiceTableViewCell.swift">
       </ContextState>
       <ContextState
-         contextName = "StudentAnswerQuestionsViewController.viewDidLoad() -&gt; ():StudentAnswerQuestionsViewController.swift">
+         contextName = "SeatView.initScrollView() -&gt; ():SeatView.swift">
       </ContextState>
       <ContextState
-         contextName = "StudentAnswerQuestionsViewController.instantiateQuestionViewControllerIfNeeded(Int) -&gt; ():StudentAnswerQuestionsViewController.swift">
+         contextName = "StudentAnswerQuestionsViewController.instatiateAndAddSubQuestionPage(Int) -&gt; ():StudentAnswerQuestionsViewController.swift">
       </ContextState>
    </ContextStates>
 </VariablesViewState>

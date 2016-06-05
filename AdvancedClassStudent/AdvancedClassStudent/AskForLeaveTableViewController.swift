@@ -10,14 +10,9 @@ import UIKit
 
 class AskForLeaveTableViewController: UITableViewController {
     let course = StudentCourse.currentCourse
-    let courseHelper = StudentCourseHelper.defaultHelper
     var selectedAsk: AskForLeave!
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.refreshControl = UIRefreshControl()
-        self.refreshControl!.addTarget(self, action: #selector(AskForLeaveTableViewController.beginRefreshing), forControlEvents: .ValueChanged)
-        self.refreshControl!.beginRefreshing()
-        self.beginRefreshing()
         let label = UILabel()
         label.text = "无请假记录"
         label.textAlignment = .Center
@@ -80,21 +75,6 @@ class AskForLeaveTableViewController: UITableViewController {
         return cell
     }
     
-    func beginRefreshing(){
-        self.courseHelper.getAsksForLeave(self.course){
-            [unowned self]
-            error in
-            if let error = error{
-                self.showError(error)
-            }
-            else{
-                
-                self.tableView.reloadData()
-            }
-            self.refreshControl!.endRefreshing()
-        }
-    }
-    
     override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
         let ask = self.course.asks[indexPath.row]
         if ask.status == .PENDING {
@@ -110,7 +90,7 @@ class AskForLeaveTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         let ask = self.course.asks[indexPath.row]
-        self.courseHelper.deleteAskForLeave(ask, course: StudentCourse.currentCourse){
+        StudentCourseHelper.defaultHelper.deleteAskForLeave(ask, course: StudentCourse.currentCourse){
             [unowned self]
             error in
             if let error = error{

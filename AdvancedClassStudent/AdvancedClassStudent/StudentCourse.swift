@@ -23,6 +23,7 @@ class KnowledgePoint{
     
 }
 
+
 class Section{
     var sectionName: String!
     var chapterNum: Int!
@@ -120,8 +121,10 @@ class StudentCourse {
     var studentIdList = [String]()
     var name:String
     var courseId:String
-    var subId:String
-    var teachers = [Teacher]()
+    var mainCourseId: String
+    var subCourseId: String
+    var coverImage: UIImage?
+    var teacherNames: [String]!
     var timesAndRooms:TimesAndRooms
     var unreadNotifications = [Notification]()
     var finishedTests = [StudentTest]()
@@ -135,7 +138,13 @@ class StudentCourse {
     init(json:JSON, preview:Bool = true){
         self.name = json["course_name"].stringValue
         self.courseId = json["course_id"].stringValue
-        self.subId = json["sub_id"].stringValue
+        let a = self.courseId.characters.split("_")
+        self.teacherNames = []
+        for teacherName in json["teacher_names"].arrayValue{
+            teacherNames.append(teacherName.stringValue)
+        }
+        self.mainCourseId = String(a[0])
+        self.subCourseId = String(a[1])
         self.timesAndRooms = TimesAndRooms(json: json["times"])
         for (_, n) in json["unread_ntfcs"]{
             let notification = Notification(json: n)
@@ -144,7 +153,9 @@ class StudentCourse {
         }
     }
     
-    
+    deinit{
+        print("Course Deinited!")
+    }
 
     
 }

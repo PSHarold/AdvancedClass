@@ -69,12 +69,13 @@ class StudentTestsViewController: UIViewController, UITableViewDataSource, UITab
         let nib = UINib(nibName: "TestTableViewCell", bundle: nil)
         self.tableView.registerNib(nib, forCellReuseIdentifier: "TestCell")
         self.tableView.addSubview(self.refreshControl)
+        self.refreshControl.beginRefreshing()
+        self.beginRefreshing()
         
     }
     
     func beginRefreshing(){
         if self.refreshControl.refreshing{
-            self.first = false
             self.refreshControl.beginRefreshing()
             if self.showFinished{
                 self.refreshFinishedTests()

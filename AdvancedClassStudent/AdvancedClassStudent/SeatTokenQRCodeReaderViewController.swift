@@ -34,14 +34,16 @@ class SeatTokenQRCodeReaderViewController: QRCodeReaderViewController {
                     self.presentViewController(alert, animated: true, completion: nil)
                     
                 }
-                else{                    
-                    self.completionHandler?(error: error, json: json)
-                    self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+                else{
+                    self.showError(error)
+                    //self.navigationController?.popViewControllerAnimated(true)
+                    //self.completionHandler?(error: error, json: json)
                 }
             }
             else{
                 self.hideHud()
-                self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+                self.navigationController?.popViewControllerAnimated(true)
+                self.completionHandler?(error: nil, json: json)
             }
         }
     }
