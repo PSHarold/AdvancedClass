@@ -46,6 +46,7 @@ class StudentAuthenticationHelper{
     
     
     func getResponsePOST(requestType:RequestType, parameters:[String: AnyObject], completionHandler: ResponseHandler){
+       
         let request = getRequestPOST(requestType, parameters: parameters, GETParameters: ["token": self.token], headers: nil)
         request.responseJSON(){
             [unowned self]

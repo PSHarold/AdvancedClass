@@ -12,7 +12,7 @@ class StudentAnswerQuestionsViewController: UIViewController, UIScrollViewDelega
     weak var testHelper = StudentTestHelper.defaultHelper
     var popoverViewController: StudentTestQuestionListTableViewController!
     var myPopoverPresentationController: UIPopoverPresentationController!
-    var timer:NSTimer?
+    var timer: NSTimer?
     var test = StudentTestHelper.defaultHelper.currentTest
     @IBOutlet weak var scrollView: UIScrollView!
     var _done = 0
@@ -158,8 +158,6 @@ class StudentAnswerQuestionsViewController: UIViewController, UIScrollViewDelega
             })
         alertController.addAction(UIAlertAction(title: "继续答题", style: .Default, handler: nil))
         self.presentViewController(alertController, animated: true, completion: nil)
-        
-        
     }
     
     func tick(){

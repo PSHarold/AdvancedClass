@@ -28,6 +28,7 @@ let ROLE_FOR_STUDENT = 2
 typealias ResponseHandler = (error: MyError?, json: JSON!) -> Void
 typealias ResponseMessageHandler = (error: MyError?) -> Void
 typealias ResponseFileHandler = (error: MyError?, data: NSData!) -> Void
+
 enum RequestType: String{
     
     case REGISTER = "/user/register/student"
@@ -138,7 +139,6 @@ extension UIViewController{
     func hideHud(){
         hud.hide(true)
     }
-    
 }
 
 extension Int{
@@ -258,6 +258,7 @@ extension UIImage{
         } else {
             CGContextDrawImage(ctx, CGRectMake(0,0,self.size.width,self.size.height), self.CGImage)
         }
+        let a = StudentSeatHelper.defaultHelper
         
         // And now we just create a new UIImage from the drawing context and return it
         return UIImage(CGImage: CGBitmapContextCreateImage(ctx)!)

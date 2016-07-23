@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D1983FB2D0C92874F4112505 /* Pods_AdvancedClassTeacher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7BCC1F8741C7E25C82D8AF5 /* Pods_AdvancedClassTeacher.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		3C831F0DAB8F127347C9F0D9 /* Pods_AdvancedClassTeacher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD637761341D4EA6C65BB753 /* Pods_AdvancedClassTeacher.framework */; };
+		75FA3EF3477230922BEAC990 /* libPods-AdvancedClassTeacherTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BC318AB03D59DBA9C62D757 /* libPods-AdvancedClassTeacherTests.a */; };
 		F202BDD41CA635E300B6356D /* TeacherCourseActivitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F202BDD31CA635E300B6356D /* TeacherCourseActivitiesViewController.swift */; };
 		F202BDD61CA6555600B6356D /* TeacherSeatSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F202BDD51CA6555600B6356D /* TeacherSeatSearchTableViewController.swift */; };
 		F20A56631B96A76A00B8AAB0 /* RandomNumberTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20A56621B96A76A00B8AAB0 /* RandomNumberTableViewController.swift */; };
@@ -111,9 +112,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		9C02F6862D7AB22141B4A362 /* Pods-AdvancedClassTeacher.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AdvancedClassTeacher.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AdvancedClassTeacher/Pods-AdvancedClassTeacher.debug.xcconfig"; sourceTree = "<group>"; };
-		D7BCC1F8741C7E25C82D8AF5 /* Pods_AdvancedClassTeacher.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AdvancedClassTeacher.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D9FAF596A6DF4C84B66170C4 /* Pods-AdvancedClassTeacher.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AdvancedClassTeacher.release.xcconfig"; path = "Pods/Target Support Files/Pods-AdvancedClassTeacher/Pods-AdvancedClassTeacher.release.xcconfig"; sourceTree = "<group>"; };
+		04839E3119B945A015EEA694 /* Pods-AdvancedClassTeacher.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AdvancedClassTeacher.release.xcconfig"; path = "Pods/Target Support Files/Pods-AdvancedClassTeacher/Pods-AdvancedClassTeacher.release.xcconfig"; sourceTree = "<group>"; };
+		14BD084B660763842C1F0EB0 /* Pods-AdvancedClassTeacherTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AdvancedClassTeacherTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AdvancedClassTeacherTests/Pods-AdvancedClassTeacherTests.release.xcconfig"; sourceTree = "<group>"; };
+		7BC318AB03D59DBA9C62D757 /* libPods-AdvancedClassTeacherTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AdvancedClassTeacherTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8C326DE446DF52F07388DB90 /* Pods-AdvancedClassTeacherTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AdvancedClassTeacherTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AdvancedClassTeacherTests/Pods-AdvancedClassTeacherTests.debug.xcconfig"; sourceTree = "<group>"; };
+		98B46265AF8D661AA0DE7A84 /* Pods-AdvancedClassTeacher.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AdvancedClassTeacher.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AdvancedClassTeacher/Pods-AdvancedClassTeacher.debug.xcconfig"; sourceTree = "<group>"; };
 		F202BDD31CA635E300B6356D /* TeacherCourseActivitiesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherCourseActivitiesViewController.swift; sourceTree = "<group>"; };
 		F202BDD51CA6555600B6356D /* TeacherSeatSearchTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherSeatSearchTableViewController.swift; sourceTree = "<group>"; };
 		F20A56621B96A76A00B8AAB0 /* RandomNumberTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomNumberTableViewController.swift; sourceTree = "<group>"; };
@@ -210,6 +213,7 @@
 		F2ECA79C1BC0B4E9004B0469 /* TeacherNotificationsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherNotificationsTableViewController.swift; sourceTree = "<group>"; };
 		F2FA432F1C882E8A008D93C8 /* KnowledgePointSectionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KnowledgePointSectionTableViewCell.swift; sourceTree = "<group>"; };
 		F2FA43301C882E8A008D93C8 /* KnowledgePointSectionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KnowledgePointSectionTableViewCell.xib; sourceTree = "<group>"; };
+		FD637761341D4EA6C65BB753 /* Pods_AdvancedClassTeacher.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AdvancedClassTeacher.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -217,7 +221,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D1983FB2D0C92874F4112505 /* Pods_AdvancedClassTeacher.framework in Frameworks */,
+				3C831F0DAB8F127347C9F0D9 /* Pods_AdvancedClassTeacher.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -225,27 +229,31 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75FA3EF3477230922BEAC990 /* libPods-AdvancedClassTeacherTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		14C59BD210A6FA92B7390E56 /* Pods */ = {
+		6D0FF781362AAF20E39651ED /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				9C02F6862D7AB22141B4A362 /* Pods-AdvancedClassTeacher.debug.xcconfig */,
-				D9FAF596A6DF4C84B66170C4 /* Pods-AdvancedClassTeacher.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		BAE0603D676DDA9CAD7F3503 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				D7BCC1F8741C7E25C82D8AF5 /* Pods_AdvancedClassTeacher.framework */,
+				FD637761341D4EA6C65BB753 /* Pods_AdvancedClassTeacher.framework */,
+				7BC318AB03D59DBA9C62D757 /* libPods-AdvancedClassTeacherTests.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C06531315A078150D773F48D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				98B46265AF8D661AA0DE7A84 /* Pods-AdvancedClassTeacher.debug.xcconfig */,
+				04839E3119B945A015EEA694 /* Pods-AdvancedClassTeacher.release.xcconfig */,
+				8C326DE446DF52F07388DB90 /* Pods-AdvancedClassTeacherTests.debug.xcconfig */,
+				14BD084B660763842C1F0EB0 /* Pods-AdvancedClassTeacherTests.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		F20A68731B81B400000BFF24 = {
@@ -253,9 +261,9 @@
 			children = (
 				F20A687E1B81B400000BFF24 /* AdvancedClassTeacher */,
 				F20A68941B81B400000BFF24 /* AdvancedClassTeacherTests */,
-				BAE0603D676DDA9CAD7F3503 /* Frameworks */,
-				14C59BD210A6FA92B7390E56 /* Pods */,
 				F20A687D1B81B400000BFF24 /* Products */,
+				C06531315A078150D773F48D /* Pods */,
+				6D0FF781362AAF20E39651ED /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -415,12 +423,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F20A689B1B81B400000BFF24 /* Build configuration list for PBXNativeTarget "AdvancedClassTeacher" */;
 			buildPhases = (
-				51210E1BE02F3A395FE287D0 /* Check Pods Manifest.lock */,
+				1A47B23B72C7566CE1207C7A /* [CP] Check Pods Manifest.lock */,
 				F20A68781B81B400000BFF24 /* Sources */,
 				F20A68791B81B400000BFF24 /* Frameworks */,
 				F20A687A1B81B400000BFF24 /* Resources */,
-				C608EC4EB573879FA2CA18D0 /* Embed Pods Frameworks */,
-				DB46AF111CD9BBA473B0A92B /* Copy Pods Resources */,
+				376C7860FFDA7CC0ECD728BA /* [CP] Embed Pods Frameworks */,
+				BA1B71F038E35DA4595ACB56 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -435,9 +443,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F20A689E1B81B400000BFF24 /* Build configuration list for PBXNativeTarget "AdvancedClassTeacherTests" */;
 			buildPhases = (
+				C709E63678C425736A2BE135 /* [CP] Check Pods Manifest.lock */,
 				F20A688D1B81B400000BFF24 /* Sources */,
 				F20A688E1B81B400000BFF24 /* Frameworks */,
 				F20A688F1B81B400000BFF24 /* Resources */,
+				4A60C646E572C807D8ECDC7E /* [CP] Embed Pods Frameworks */,
+				4E5B41DE77505DBB3E47A4B9 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -519,14 +530,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		51210E1BE02F3A395FE287D0 /* Check Pods Manifest.lock */ = {
+		1A47B23B72C7566CE1207C7A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -534,14 +545,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		C608EC4EB573879FA2CA18D0 /* Embed Pods Frameworks */ = {
+		376C7860FFDA7CC0ECD728BA /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -549,19 +560,64 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AdvancedClassTeacher/Pods-AdvancedClassTeacher-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		DB46AF111CD9BBA473B0A92B /* Copy Pods Resources */ = {
+		4A60C646E572C807D8ECDC7E /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AdvancedClassTeacherTests/Pods-AdvancedClassTeacherTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4E5B41DE77505DBB3E47A4B9 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AdvancedClassTeacherTests/Pods-AdvancedClassTeacherTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BA1B71F038E35DA4595ACB56 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AdvancedClassTeacher/Pods-AdvancedClassTeacher-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C709E63678C425736A2BE135 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -756,7 +812,7 @@
 		};
 		F20A689C1B81B400000BFF24 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9C02F6862D7AB22141B4A362 /* Pods-AdvancedClassTeacher.debug.xcconfig */;
+			baseConfigurationReference = 98B46265AF8D661AA0DE7A84 /* Pods-AdvancedClassTeacher.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -775,7 +831,7 @@
 		};
 		F20A689D1B81B400000BFF24 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D9FAF596A6DF4C84B66170C4 /* Pods-AdvancedClassTeacher.release.xcconfig */;
+			baseConfigurationReference = 04839E3119B945A015EEA694 /* Pods-AdvancedClassTeacher.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -793,6 +849,7 @@
 		};
 		F20A689F1B81B400000BFF24 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8C326DE446DF52F07388DB90 /* Pods-AdvancedClassTeacherTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -813,6 +870,7 @@
 		};
 		F20A68A01B81B400000BFF24 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 14BD084B660763842C1F0EB0 /* Pods-AdvancedClassTeacherTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (

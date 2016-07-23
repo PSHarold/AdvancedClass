@@ -78,8 +78,8 @@ class TeacherAuthenticationHelper {
         let request = getRequestGET(requestType, parameters: args, headers: nil)
         request.responseJSON(){
             [unowned self]
-            (_,_,result) in
-            switch result{
+            response in
+            switch response.result{
             case .Success(let data):
                 let json = JSON(data)
                 let code = json["error_code"].intValue
@@ -107,8 +107,8 @@ class TeacherAuthenticationHelper {
         let request = getRequestPOST(requestType, parameters: parameters, GETParameters: ["token": self.token], headers: nil)
         request.responseJSON(){
             [unowned self]
-            (_,_,result) in
-            switch result{
+            response in
+            switch response.result{
             case .Success(let data):
                 let json = JSON(data)
                 let code = json["error_code"].intValue
@@ -134,6 +134,7 @@ class TeacherAuthenticationHelper {
         
     }
     
+    
     func getResponsePOSTWithCourse(requestType:RequestType, parameters:[String: AnyObject], course: TeacherCourse?=nil, completionHandler: ResponseHandler){
         var postBody = parameters
         var course = course
@@ -142,10 +143,11 @@ class TeacherAuthenticationHelper {
         }
         postBody["course_id"] = course!.courseId
         let request = getRequestPOST(requestType, parameters: postBody, GETParameters: ["token": self.token], headers: nil)
+
         request.responseJSON(){
             [unowned self]
-            (_,_,result) in
-            switch result{
+            response in
+            switch response.result{
             case .Success(let data):
                 let json = JSON(data)
                 let code = json["error_code"].intValue
@@ -174,8 +176,8 @@ class TeacherAuthenticationHelper {
         let request = getRequestPOST(.GET_TOKEN_ONLY, parameters: ["user_id": self.userId, "password": self.password, "role": ROLE_FOR_TEACHER], headers: nil)
         request.responseJSON(){
             [unowned self]
-            _,_,result in
-            switch result{
+            response in
+            switch response.result{
             case .Success(let data):
                 let json = JSON(data)
                 let code = json["error_code"].intValue
@@ -192,7 +194,7 @@ class TeacherAuthenticationHelper {
                     self.token = json["token"].stringValue
                     self.getResponsePOST(self.tempRequestType, parameters: self.tempPostBody, completionHandler: self.originalHandler)
                 }
-            case .Failure(_, _):
+            case .Failure:
                 self.originalHandler(error: MyError.NETWORK_ERROR, json: nil)
             }
         }
@@ -237,10 +239,10 @@ class TeacherAuthenticationHelper {
         }
         request.responseData(){
             [unowned self]
-            (_,_,result) in
-            switch result{
+            response in
+            switch response.result{
             case .Success(let data):
-                if let jsonData = result.value{
+                if let jsonData = response.result.value{
                     let json = JSON(data: jsonData)
                     let code = json["error_code"].intValue
                     if code == CError.TOKEN_EXPIRED.rawValue{
@@ -292,8 +294,8 @@ class TeacherAuthenticationHelper {
                          encodingCompletion: { encodingResult in
                             switch encodingResult {
                             case .Success(let upload, _, _):
-                                upload.responseJSON { _, _, result in
-                                    switch result{
+                                upload.responseJSON {response in
+                                    switch response.result{
                                     case .Success(let data):
                                         let json = JSON(data)
                                         let code = json["error_code"].intValue

@@ -234,11 +234,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AdvancedClassStudent/StudentAuthenticationHelper.swift"
-            timestampString = "485771118.351495"
+            timestampString = "486804408.393641"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "108"
-            endingLineNumber = "108"
+            startingLineNumber = "109"
+            endingLineNumber = "109"
             landmarkName = "StudentAuthenticationHelper"
             landmarkType = "3">
          </BreakpointContent>
@@ -250,11 +250,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AdvancedClassStudent/StudentAuthenticationHelper.swift"
-            timestampString = "486114332.858133"
+            timestampString = "486804408.393641"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "149"
-            endingLineNumber = "149"
+            startingLineNumber = "150"
+            endingLineNumber = "150"
             landmarkName = "getResponseGET(_:parameters:completionHandler:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -282,11 +282,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AdvancedClassStudent/SeatTokenQRCodeReaderViewController.swift"
-            timestampString = "486213995.449777"
+            timestampString = "486804610.277798"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "22"
-            endingLineNumber = "22"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
             landmarkName = "verifyQRCode(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -298,11 +298,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AdvancedClassStudent/SeatTokenQRCodeReaderViewController.swift"
-            timestampString = "486213995.449777"
+            timestampString = "486804610.277798"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "29"
-            endingLineNumber = "29"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
             landmarkName = "verifyQRCode(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -346,11 +346,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AdvancedClassStudent/StudentAuthenticationHelper.swift"
-            timestampString = "486114332.858133"
+            timestampString = "486804408.393641"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "302"
-            endingLineNumber = "302"
+            startingLineNumber = "303"
+            endingLineNumber = "303"
             landmarkName = "getAvatar(_:completionHandler:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -362,27 +362,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AdvancedClassStudent/StudentAuthenticationHelper.swift"
-            timestampString = "486114332.858133"
+            timestampString = "486804408.393641"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "310"
+            endingLineNumber = "310"
+            landmarkName = "getAvatar(_:completionHandler:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AdvancedClassStudent/StudentAuthenticationHelper.swift"
+            timestampString = "486804408.393641"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "309"
             endingLineNumber = "309"
-            landmarkName = "getAvatar(_:completionHandler:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "AdvancedClassStudent/StudentAuthenticationHelper.swift"
-            timestampString = "486114332.858133"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "308"
-            endingLineNumber = "308"
             landmarkName = "getAvatar(_:completionHandler:)"
             landmarkType = "5">
             <Locations>

@@ -13,7 +13,7 @@ import SwiftyJSON
 
 
 class StudentTestHelper {
-    static var instance:StudentTestHelper?
+    static var instance: StudentTestHelper?
     
     deinit{
         print("TestHelper Deinited!")

@@ -15,8 +15,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
         let configuration = NSURLSessionConfiguration.ephemeralSessionConfiguration()
         configuration.timeoutIntervalForResource = 6 // seconds
+        
         alamofireManager = Alamofire.Manager(configuration: configuration)
         return true
     }

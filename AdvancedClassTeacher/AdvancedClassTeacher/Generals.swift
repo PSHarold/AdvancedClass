@@ -17,6 +17,9 @@ let ROLE_FOR_TEACHER = 1
 let ROLE_FOR_STUDENT = 2
 
 
+
+
+
 var currentWeekNo = 0
 var currentDayNo = 0
 
@@ -79,9 +82,14 @@ enum FileType: String{
     case PNG = "image/png"
 }
 
+
+
 func getRequestGET(requestType:RequestType, parameters:[String: AnyObject]?, headers:[String:String]?) -> Request{
     return alamofireManager.request(.GET, BASE_URL + requestType.rawValue, parameters: parameters, encoding: .URL, headers: headers)
 }
+
+
+
 func getRequestPOST(requestType:RequestType, parameters: [String: AnyObject], GETParameters: [String: AnyObject]?=nil, headers:[String:String]?) -> Request{
     var s = ""
     if let params = GETParameters{

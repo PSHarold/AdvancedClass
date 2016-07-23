@@ -49,6 +49,7 @@ struct MyError{
 }
 
 
+
 enum CError: Int {
     
     case NETWORK_ERROR = -1

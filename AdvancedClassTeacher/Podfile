@@ -1,8 +1,7 @@
 # Uncomment this line to define a global platform for your project
 platform :ios, '8.0'
-source 'http://git.oschina.net/akuandev/Specs.git' 
 target 'AdvancedClassTeacher’ do
-pod 'Alamofire', '~> 2.0'
+pod 'Alamofire', '~> 3.4'
 pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
 pod 'Charts', :git => 'https://github.com/danielgindi/ios-charts.git'
 use_frameworks!

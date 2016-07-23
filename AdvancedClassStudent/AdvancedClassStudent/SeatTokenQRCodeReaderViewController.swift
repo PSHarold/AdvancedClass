@@ -17,6 +17,7 @@ class SeatTokenQRCodeReaderViewController: QRCodeReaderViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.message = "将摄像头对准老师提供的二维码"
+        self.verifyQRCode("")
     }
     
     override func verifyQRCode(code: String){
