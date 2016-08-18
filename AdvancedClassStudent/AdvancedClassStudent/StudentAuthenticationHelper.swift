@@ -16,7 +16,7 @@ class StudentAuthenticationHelper{
     
     
     static var _defaultHelper:StudentAuthenticationHelper?
-   // static weak var me: Me!
+    // static weak var me: Me!
     var tokenRetryCount = 0
     let MAX_TOKEN_RETRY_COUNT = 3
     var me: Me!
@@ -43,10 +43,8 @@ class StudentAuthenticationHelper{
     }
     
     
-    
-    
     func getResponsePOST(requestType:RequestType, parameters:[String: AnyObject], completionHandler: ResponseHandler){
-       
+        
         let request = getRequestPOST(requestType, parameters: parameters, GETParameters: ["token": self.token], headers: nil)
         request.responseJSON(){
             [unowned self]
@@ -106,15 +104,15 @@ class StudentAuthenticationHelper{
         }
         
     }
-
     
-
+    
+    
     func login(userId:String,password:String,completionHandler: ResponseHandler){
         self.userId = userId
         self.password = password
         getResponsePOST(RequestType.LOGIN, parameters:["user_id":userId, "password": password, "role": 2]){
             [unowned self]
-            (error,json) in            
+            (error,json) in
             if error != nil{
                 completionHandler(error: error, json: json)
             }
@@ -311,6 +309,7 @@ class StudentAuthenticationHelper{
                 return
             }
             guard let avartar = UIImage(data: data) else{
+                self.me.avartar = UIImage(named: "no_avatar")
                 completionHandler(error: error)
                 return
             }
@@ -318,16 +317,25 @@ class StudentAuthenticationHelper{
             completionHandler(error: nil)
         }
     }
-
+    func uploadAvatar(avatar: UIImage, completionHandler: ResponseMessageHandler){
+        self.postFile(RequestType.POST_AVATAR, fileName: "avatar.jpg", fileType: FileType.JPG, fileData: UIImageJPEGRepresentation(avatar, 0.95)!){
+            [unowned self]
+            error, json in
+            if error == nil{
+                self.me.avartar = avatar
+            }
+            completionHandler(error: error)
+        }
+    }
     
     
     private init(){
         
     }
     
-
+    
     static func drop(){
-       
+        
         _defaultHelper = nil
         
     }

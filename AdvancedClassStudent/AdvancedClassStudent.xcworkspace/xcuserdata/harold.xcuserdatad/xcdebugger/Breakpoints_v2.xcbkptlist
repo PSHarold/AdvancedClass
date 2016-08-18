@@ -234,11 +234,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AdvancedClassStudent/StudentAuthenticationHelper.swift"
-            timestampString = "486804408.393641"
+            timestampString = "493104436.714936"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "109"
-            endingLineNumber = "109"
+            startingLineNumber = "107"
+            endingLineNumber = "107"
             landmarkName = "StudentAuthenticationHelper"
             landmarkType = "3">
          </BreakpointContent>
@@ -250,11 +250,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AdvancedClassStudent/StudentAuthenticationHelper.swift"
-            timestampString = "486804408.393641"
+            timestampString = "493104436.714936"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "150"
-            endingLineNumber = "150"
+            startingLineNumber = "148"
+            endingLineNumber = "148"
             landmarkName = "getResponseGET(_:parameters:completionHandler:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -346,11 +346,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AdvancedClassStudent/StudentAuthenticationHelper.swift"
-            timestampString = "486804408.393641"
+            timestampString = "493104436.714936"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "303"
-            endingLineNumber = "303"
+            startingLineNumber = "301"
+            endingLineNumber = "301"
             landmarkName = "getAvatar(_:completionHandler:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -362,11 +362,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AdvancedClassStudent/StudentAuthenticationHelper.swift"
-            timestampString = "486804408.393641"
+            timestampString = "493104436.714936"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "310"
-            endingLineNumber = "310"
+            startingLineNumber = "308"
+            endingLineNumber = "308"
             landmarkName = "getAvatar(_:completionHandler:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -378,11 +378,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AdvancedClassStudent/StudentAuthenticationHelper.swift"
-            timestampString = "486804408.393641"
+            timestampString = "493104436.714936"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "309"
-            endingLineNumber = "309"
+            startingLineNumber = "307"
+            endingLineNumber = "307"
             landmarkName = "getAvatar(_:completionHandler:)"
             landmarkType = "5">
             <Locations>

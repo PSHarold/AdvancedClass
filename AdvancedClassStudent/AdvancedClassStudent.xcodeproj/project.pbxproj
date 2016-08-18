@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A56638952C3463F4DA7C3E2A /* Pods_AdvancedClassStudent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 713E9A37182E3093207E6B0D /* Pods_AdvancedClassStudent.framework */; };
+		3273DCD05B569D999A6D10F7 /* Pods_AdvancedClassStudent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6BF08A497864571ACFE70DC /* Pods_AdvancedClassStudent.framework */; };
 		F2140CAB1C7F010200598C5C /* StudentInfoPopoverTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2140CAA1C7F010200598C5C /* StudentInfoPopoverTableViewController.swift */; };
 		F21B8EAD1C9FDA6000791429 /* StudentTestQuestionListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21B8EAC1C9FDA6000791429 /* StudentTestQuestionListTableViewController.swift */; };
 		F220E27C1BB62C2100251C88 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = F220E27B1BB62C2100251C88 /* MBProgressHUD.m */; };
@@ -101,9 +101,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2EDF93A37027DC2F0A8D21E7 /* Pods-AdvancedClassStudent.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AdvancedClassStudent.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AdvancedClassStudent/Pods-AdvancedClassStudent.debug.xcconfig"; sourceTree = "<group>"; };
-		713E9A37182E3093207E6B0D /* Pods_AdvancedClassStudent.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AdvancedClassStudent.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		99F57689DB25ECF56BF07460 /* Pods-AdvancedClassStudent.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AdvancedClassStudent.release.xcconfig"; path = "Pods/Target Support Files/Pods-AdvancedClassStudent/Pods-AdvancedClassStudent.release.xcconfig"; sourceTree = "<group>"; };
+		BF1012EA78EEA9878580A400 /* Pods-AdvancedClassStudent.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AdvancedClassStudent.release.xcconfig"; path = "Pods/Target Support Files/Pods-AdvancedClassStudent/Pods-AdvancedClassStudent.release.xcconfig"; sourceTree = "<group>"; };
+		D6BF08A497864571ACFE70DC /* Pods_AdvancedClassStudent.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AdvancedClassStudent.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DE45D7382A8E48DDB5D149A0 /* Pods-AdvancedClassStudent.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AdvancedClassStudent.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AdvancedClassStudent/Pods-AdvancedClassStudent.debug.xcconfig"; sourceTree = "<group>"; };
 		F2140CAA1C7F010200598C5C /* StudentInfoPopoverTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentInfoPopoverTableViewController.swift; sourceTree = "<group>"; };
 		F21B8EAC1C9FDA6000791429 /* StudentTestQuestionListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentTestQuestionListTableViewController.swift; sourceTree = "<group>"; };
 		F220E2791BB62C2000251C88 /* AdvancedClassStudent-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AdvancedClassStudent-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -197,7 +197,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A56638952C3463F4DA7C3E2A /* Pods_AdvancedClassStudent.framework in Frameworks */,
+				3273DCD05B569D999A6D10F7 /* Pods_AdvancedClassStudent.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -211,19 +211,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		5E8F227542F11F06C406A797 /* Pods */ = {
+		EA8BE66BFD80579A9414BE50 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				2EDF93A37027DC2F0A8D21E7 /* Pods-AdvancedClassStudent.debug.xcconfig */,
-				99F57689DB25ECF56BF07460 /* Pods-AdvancedClassStudent.release.xcconfig */,
+				DE45D7382A8E48DDB5D149A0 /* Pods-AdvancedClassStudent.debug.xcconfig */,
+				BF1012EA78EEA9878580A400 /* Pods-AdvancedClassStudent.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		C4ECA59C3F3E2C9CABD9F7C4 /* Frameworks */ = {
+		EF448B5FE1E1099341AD64F7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				713E9A37182E3093207E6B0D /* Pods_AdvancedClassStudent.framework */,
+				D6BF08A497864571ACFE70DC /* Pods_AdvancedClassStudent.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -234,8 +234,8 @@
 				F22DAC941B81AC2B00360027 /* AdvancedClassStudent */,
 				F22DACAA1B81AC2B00360027 /* AdvancedClassStudentTests */,
 				F22DAC931B81AC2B00360027 /* Products */,
-				5E8F227542F11F06C406A797 /* Pods */,
-				C4ECA59C3F3E2C9CABD9F7C4 /* Frameworks */,
+				EA8BE66BFD80579A9414BE50 /* Pods */,
+				EF448B5FE1E1099341AD64F7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -377,12 +377,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F22DACB11B81AC2B00360027 /* Build configuration list for PBXNativeTarget "AdvancedClassStudent" */;
 			buildPhases = (
-				F8A08BA9FA63B50212AFA2A9 /* Check Pods Manifest.lock */,
+				D6D6BF8F0B0065D2F36F4A05 /* [CP] Check Pods Manifest.lock */,
 				F22DAC8E1B81AC2B00360027 /* Sources */,
 				F22DAC8F1B81AC2B00360027 /* Frameworks */,
 				F22DAC901B81AC2B00360027 /* Resources */,
-				2618A4C5AFC837FA6367DA11 /* Embed Pods Frameworks */,
-				656264D94E552AB7CA0E0695 /* Copy Pods Resources */,
+				41EC156F34755A4292BFE446 /* [CP] Embed Pods Frameworks */,
+				AB61698BE2C9A3E90EFF7607 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -480,14 +480,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2618A4C5AFC837FA6367DA11 /* Embed Pods Frameworks */ = {
+		41EC156F34755A4292BFE446 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -495,14 +495,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AdvancedClassStudent/Pods-AdvancedClassStudent-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		656264D94E552AB7CA0E0695 /* Copy Pods Resources */ = {
+		AB61698BE2C9A3E90EFF7607 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -510,14 +510,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AdvancedClassStudent/Pods-AdvancedClassStudent-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F8A08BA9FA63B50212AFA2A9 /* Check Pods Manifest.lock */ = {
+		D6D6BF8F0B0065D2F36F4A05 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -727,7 +727,7 @@
 		};
 		F22DACB21B81AC2B00360027 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2EDF93A37027DC2F0A8D21E7 /* Pods-AdvancedClassStudent.debug.xcconfig */;
+			baseConfigurationReference = DE45D7382A8E48DDB5D149A0 /* Pods-AdvancedClassStudent.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -745,7 +745,7 @@
 		};
 		F22DACB31B81AC2B00360027 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 99F57689DB25ECF56BF07460 /* Pods-AdvancedClassStudent.release.xcconfig */;
+			baseConfigurationReference = BF1012EA78EEA9878580A400 /* Pods-AdvancedClassStudent.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;

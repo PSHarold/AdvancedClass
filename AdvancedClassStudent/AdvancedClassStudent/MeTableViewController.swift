@@ -8,8 +8,8 @@
 
 import UIKit
 
-class MeTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-  //  weak var faceHelper = FaceHelper.defaultHelper
+class MeTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, RSKImageCropViewControllerDelegate {
+    //  weak var faceHelper = FaceHelper.defaultHelper
     @IBOutlet weak var courseLabel: UILabel!
     @IBOutlet weak var studentIdLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
@@ -22,13 +22,13 @@ class MeTableViewController: UITableViewController, UIImagePickerControllerDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //self.avatarImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.avatarClicked)))
+        self.avatarImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.avatarClicked)))
         let helper = StudentAuthenticationHelper.defaultHelper
         let me = helper.me
         self.courseLabel.text = StudentCourse.currentCourse.name
         self.studentIdLabel.text = me.studentId
         self.nameLabel.text = me.name
-      //  self.genderLabel.text = me.genderString
+        //  self.genderLabel.text = me.genderString
         self.classLabel.text = me.className
         self.timeLabel.text = "第\(currentWeekNo)周  周\(currentDayNo)"
         self.avatarImageView.layer.cornerRadius = self.avatarImageView.frame.size.width / 2
@@ -38,12 +38,12 @@ class MeTableViewController: UITableViewController, UIImagePickerControllerDeleg
             error in
             if error == nil{
                 self.avatarImageView.image = auth.me.avartar
-               // self.avatarImageView.setNeedsDisplay()
+                // self.avatarImageView.setNeedsDisplay()
             }
         }
         
     }
-
+    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         if indexPath.section == 2{
@@ -73,12 +73,65 @@ class MeTableViewController: UITableViewController, UIImagePickerControllerDeleg
         }
         return 44.0
     }
-//    
-//    func choosePhoto()
-//    
-//    func avatarClicked(){
-//        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
-//        alert.addAction(UIAlertAction(title: "拍照", style: .Default, handler: ((UIAlertAction) -> Void)?)
-//    }
     
+    
+    func imageCropViewControllerDidCancelCrop(controller: RSKImageCropViewController) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    func imageCropViewController(controller: RSKImageCropViewController, didCropImage croppedImage: UIImage, usingCropRect cropRect: CGRect) {
+        self.dismissViewControllerAnimated(true){
+            self.showHudWithText("正在上传")
+            StudentAuthenticationHelper.defaultHelper.uploadAvatar(croppedImage){
+                [unowned self]
+                error in
+                if error == nil{
+                   self.showHudWithText("上传成功！", mode: .Text, hideAfter: 1.0)
+                   self.avatarImageView.image = StudentAuthenticationHelper.defaultHelper.me.avartar
+                }
+                else{
+                    self.showError(error!)
+                }
+            }
+            
+        }
+    }
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        picker.dismissViewControllerAnimated(true, completion: nil)
+        var img = info[UIImagePickerControllerOriginalImage] as! UIImage
+        img = img.myFixOrientation()
+        let cropper = RSKImageCropViewController(image: img, cropMode: .Square)
+        cropper.delegate = self
+        self.presentViewController(cropper, animated: true, completion: nil)
+        
+    }
+    
+    func choosePhoto(from: UIImagePickerControllerSourceType) {
+        
+        let imagePicker =  UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.sourceType = from
+        
+        self.presentViewController(imagePicker, animated: true, completion: nil)
+    }
+    
+    
+    func avatarClicked(){
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+        alert.addAction(UIAlertAction(title: "从相册选择照片", style: .Default){
+            [unowned self]
+            _ in
+            self.choosePhoto(.PhotoLibrary)
+            
+            })
+        
+        alert.addAction(UIAlertAction(title: "使用摄像头拍照", style: .Default){
+            [unowned self]
+            _ in
+            self.choosePhoto(.Camera)
+            
+            })
+        alert.addAction(UIAlertAction(title: "取消", style: .Destructive, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
 }

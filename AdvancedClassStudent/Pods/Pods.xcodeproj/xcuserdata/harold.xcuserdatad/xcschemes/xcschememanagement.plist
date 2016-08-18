@@ -14,6 +14,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>RSKImageCropper.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>SwiftyJSON.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -22,17 +27,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>3904B69BEC786B1DE3192EFF055D8388</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>4B2F30D90D85A544E9EFE2A49D392C25</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>630B6BAF6BEA7FCE1138BDAED4CDD8C4</key>
+		<key>DEB5732304732D166CDE5F4B50968F20</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>84BA002C012BBC9C90FB75F9CB574BB3</key>
+		<key>EAA8B1A3BCAD5D965C6E9A45BD88BD2D</key>
 		<dict>
 			<key>primary</key>
 			<true/>

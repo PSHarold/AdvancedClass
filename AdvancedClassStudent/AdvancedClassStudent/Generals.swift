@@ -38,7 +38,7 @@ enum RequestType: String{
     case LOGIN = "/user/login"
     case GET_TOKEN_ONLY = "/user/login/getToken"
     case GET_MY_AVATAR = "/user/my_avatar"
-    
+    case POST_AVATAR = "/user/upload_avatar"
     case GET_NOTIFICAIONS = "/course/notification/getNotifications"
     case GET_SEAT_TOKEN = "/seat/getSeatToken"
     case GET_SEAT_MAP = "/seat/getSeatMap"
@@ -205,7 +205,7 @@ extension Array {
 }
 
 extension UIImage{
-    func fixOrientation() -> UIImage {
+    func myFixOrientation() -> UIImage {
         
         // No-op if the orientation is already correct
         if ( self.imageOrientation == UIImageOrientation.Up ) {

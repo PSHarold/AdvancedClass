@@ -18,7 +18,7 @@ class StudentLoginViewController: UIViewController {
     var authHelper = StudentAuthenticationHelper.defaultHelper
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.userTextfield.text = "41358001"
+        self.userTextfield.text = "41316014"
         self.pwdTextfield.text = "123"
          
         loginButton.layer.cornerRadius = 10.0

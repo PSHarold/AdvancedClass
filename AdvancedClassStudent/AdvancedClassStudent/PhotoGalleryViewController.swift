@@ -102,7 +102,7 @@ class PhotoGalleryViewController: UIViewController, UICollectionViewDataSource, 
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         picker.dismissViewControllerAnimated(true, completion: nil)
         var img = info[UIImagePickerControllerOriginalImage] as! UIImage
-        img = img.fixOrientation()
+        img = img.myFixOrientation()
         self.showHudWithText("正在上传")
         if self.takePhotoType == 0{
             self.faceHelper.addFace(img){

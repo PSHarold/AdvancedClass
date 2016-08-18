@@ -1,9 +1,11 @@
 PODS:
   - Alamofire (2.0.1)
+  - RSKImageCropper (1.5.1)
   - SwiftyJSON (2.3.0)
 
 DEPENDENCIES:
-  - Alamofire (~> 2.0)
+  - Alamofire
+  - RSKImageCropper
   - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`)
 
 EXTERNAL SOURCES:
@@ -17,6 +19,9 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Alamofire: 1d8e208d616fbbfd2391b15eae766d07c96cdc49
+  RSKImageCropper: edd65fedb3734332818deb139906d6b7f54b8a44
   SwiftyJSON: 8d6b61a70277ef2a5d710d372e06e7e2d87fb9e4
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: 89d888084d974df557ce7b6830539ee1e144c586
+
+COCOAPODS: 1.0.1
