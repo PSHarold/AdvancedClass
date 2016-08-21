@@ -3,10 +3,21 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "TeacherCourseTableViewController.viewWillAppear(Bool) -&gt; ():TeacherCourseTableViewController.swift">
+         contextName = "FaceStudentsTableViewController.imagePickerController(UIImagePickerController, didFinishPickingMediaWithInfo : [String : AnyObject]) -&gt; ():FaceStudentsTableViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "TeacherAuthenticationHelper.defaultHelper">
+               value = "TeacherSeatHelper.defaultHelper">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "FaceStudentsTableViewController.tableView(UITableView, cellForRowAtIndexPath : NSIndexPath) -&gt; UITableViewCell:FaceStudentsTableViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "TeacherCourseTableViewController.viewDidAppear(Bool) -&gt; ():TeacherCourseTableViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "TeacherAuthenticationHelper.defaultHelper.me">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -19,10 +30,26 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "TeacherCourseTableViewController.viewDidAppear(Bool) -&gt; ():TeacherCourseTableViewController.swift">
+         contextName = "TeacherCourseTableViewController.viewWillAppear(Bool) -&gt; ():TeacherCourseTableViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "TeacherAuthenticationHelper.defaultHelper.me">
+               value = "TeacherAuthenticationHelper.defaultHelper">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "FaceStudentsTableViewController.tableView(UITableView, numberOfRowsInSection : Int) -&gt; Int:FaceStudentsTableViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "TeacherCourse.currentCourse">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "TeacherSeatHelper.(getHistorySeatMap(Int, day : Int, period : Int, completionHandler : (error : MyError?) -&gt; ()) -&gt; ()).(closure #1):TeacherSeatHelper.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "json.description">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

@@ -111,6 +111,7 @@ class TeacherAuthenticationHelper {
             switch response.result{
             case .Success(let data):
                 let json = JSON(data)
+              
                 let code = json["error_code"].intValue
                 if code == CError.TOKEN_EXPIRED.rawValue{
                     self.tempPostBody=parameters
@@ -315,6 +316,7 @@ class TeacherAuthenticationHelper {
                                     
                                 }
                             case .Failure(let encodingError):
+                                completionHandler(error: MyError.NETWORK_ERROR, json: nil)
                                 print(encodingError)
                             }
         })

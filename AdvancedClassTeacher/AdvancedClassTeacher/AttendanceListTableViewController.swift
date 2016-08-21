@@ -11,9 +11,16 @@ import UIKit
 class AttendanceListTableViewController: UITableViewController {
     let courseHelper = TeacherCourseHelper.defaultHelper
     var auto = false
+    var history = false
+    var week: Int!
+    var day: Int!
+    var period: Int!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     override func viewDidLoad() {
         super.viewDidLoad()
+        if !history{
+            self.showSeatMapButton.enabled = false
+        }
         if self.auto{
             self.setupRefreshControl()
         }
@@ -84,4 +91,24 @@ class AttendanceListTableViewController: UITableViewController {
     @IBAction func segmentChanged(sender: AnyObject) {
         self.tableView.reloadData()
     }
+    
+    @IBOutlet weak var showSeatMapButton: UIBarButtonItem!
+    
+    @IBAction func showSeatMap(sender: AnyObject) {
+        self.showHudIndeterminate("正在加载")
+        TeacherSeatHelper.defaultHelper.getHistorySeatMap(week, day: day, period: period){
+            [unowned self]
+            error in
+            if let error = error{
+                self.showError(error)
+            }
+            else{
+                self.hideHud()
+                let vc = self.storyboard!.instantiateViewControllerWithIdentifier("TeacherSeatViewController") as! TeacherSeatViewController
+                vc.history = true
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+        }
+    }
+    
 }

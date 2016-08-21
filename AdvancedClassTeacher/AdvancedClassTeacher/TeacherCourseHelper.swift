@@ -88,7 +88,6 @@ class TeacherCourseHelper{
             }
             completionHandler(error: error)
         }
-
     }
 //    func getCourseDetails(course: TeacherCourse, completionHandler: ResponseMessageHandler){
 //        self.getSyllabus(TeacherCourse.currentCourse){
@@ -103,6 +102,9 @@ class TeacherCourseHelper{
 //        }
 //
 //    }
+    
+    
+    
     
     func modifyNotificationInCourse(course: TeacherCourse, notification: Notification, completionHandler: ResponseMessageHandler){
         let authHelper = TeacherAuthenticationHelper.defaultHelper
@@ -197,8 +199,13 @@ class TeacherCourseHelper{
                 }
                 for (student_id, seat) in json["students"]["present"].dictionaryValue{
                     let seat = seat.stringValue
-                    let s = seat.characters.split("_")
-                    self.attendanceList.seatMap[student_id]="\(String(s[0]))排\(String(s[1]))列"
+                    if seat == "刷脸"{
+                        self.attendanceList.seatMap[student_id] = "刷脸"
+                    }
+                    else{
+                        let s = seat.characters.split("_")
+                        self.attendanceList.seatMap[student_id]="\(String(s[0]))排\(String(s[1]))列"
+                    }
                     self.attendanceList.presentStudents.append(student_id)
                 }
                 for student_id in json["students"]["asked"].arrayValue{
@@ -208,6 +215,8 @@ class TeacherCourseHelper{
             completionHandler(error: error, json: json)
         }
     }
+    
+    
     
     
     func getAttendanceList(course: TeacherCourse?=nil, weekNo: Int, dayNo: Int, periodNo: Int, completionHandler: ResponseMessageHandler){
@@ -223,8 +232,14 @@ class TeacherCourseHelper{
                 }
                 for (student_id, seat) in json["students"]["present"].dictionaryValue{
                     let seat = seat.stringValue
-                    let s = seat.characters.split("_")
-                    self.attendanceList.seatMap[student_id]="\(String(s[0]))排\(String(s[1]))列"
+                    if seat == "刷脸"{
+                        self.attendanceList.seatMap[student_id] = "刷脸"
+                    }
+                    else{
+                        let s = seat.characters.split("_")
+                        self.attendanceList.seatMap[student_id]="\(String(s[0]))排\(String(s[1]))列"
+                    }
+                    
                     self.attendanceList.presentStudents.append(student_id)
                 }
                 for student_id in json["students"]["asked"].arrayValue{
@@ -304,14 +319,15 @@ class TeacherCourseHelper{
         }
     }
     
-    func checkInWithFace(course: TeacherCourse?=nil, studentId: String, photo: UIImage, completionHandler: ResponseHandler){
+    func checkInWithFace(course: TeacherCourse?=nil, seat_token: String, studentId: String, photo: UIImage, completionHandler: ResponseHandler){
         let auth = TeacherAuthenticationHelper.defaultHelper
         let course = course ?? TeacherCourse.currentCourse!
-        auth.postFile(RequestType.CHECK_IN_WITH_FACE, fileName: "", fileType: .JPG, fileData: UIImageJPEGRepresentation(photo, 0.8)!, args: ["course_id": course.courseId, "student_id": studentId]){
+        auth.postFile(RequestType.CHECK_IN_WITH_FACE, fileName: "face.jpg", fileType: .JPG, fileData: UIImageJPEGRepresentation(photo, 0.8)!, args: ["course_id": course.courseId, "student_id": studentId, "seat_token": seat_token]){
             error, json in
             completionHandler(error: error, json: json)
         }
     }
+
     
     
     static func drop(){

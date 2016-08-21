@@ -29,6 +29,8 @@
 		F220E2781BB62BF300251C88 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = F220E2771BB62BF300251C88 /* MBProgressHUD.m */; };
 		F2228C8B1CF42A00002B785F /* PendingAskTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2228C891CF42A00002B785F /* PendingAskTableViewController.swift */; };
 		F2228C8C1CF42A00002B785F /* PostedAskTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2228C8A1CF42A00002B785F /* PostedAskTableViewController.swift */; };
+		F231F4391D696DDF005D1F12 /* QRCodeReaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F231F4371D696DDF005D1F12 /* QRCodeReaderViewController.swift */; };
+		F231F43C1D697005005D1F12 /* FaceStudentsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F231F43B1D697005005D1F12 /* FaceStudentsTableViewController.swift */; };
 		F2329FED1BC20E2F006A428F /* TestDateTimeSettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2329FEC1BC20E2F006A428F /* TestDateTimeSettingsTableViewController.swift */; };
 		F23457D11BC36CBE00AD0B87 /* TeacherUnfinishedTestInfoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23457D01BC36CBE00AD0B87 /* TeacherUnfinishedTestInfoTableViewController.swift */; };
 		F23465441C7F551B00933615 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23465401C7F551B00933615 /* Errors.swift */; };
@@ -46,7 +48,6 @@
 		F246DEB91B9BDAD00058DEA6 /* TeacherQuestionsInTestTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F246DEB81B9BDAD00058DEA6 /* TeacherQuestionsInTestTableViewController.swift */; };
 		F246DEBD1B9C63360058DEA6 /* Student.swift in Sources */ = {isa = PBXBuildFile; fileRef = F246DEBC1B9C63360058DEA6 /* Student.swift */; };
 		F246DEC11B9C64A70058DEA6 /* Me.swift in Sources */ = {isa = PBXBuildFile; fileRef = F246DEC01B9C64A70058DEA6 /* Me.swift */; };
-		F248090C1CFB118700C4FE42 /* FaceStudentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F248090B1CFB118700C4FE42 /* FaceStudentTableViewController.swift */; };
 		F248090E1CFB125E00C4FE42 /* ManualCheckInStudentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F248090D1CFB125E00C4FE42 /* ManualCheckInStudentTableViewController.swift */; };
 		F24809111CFB13B500C4FE42 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F248090F1CFB13B500C4FE42 /* LaunchScreen.xib */; };
 		F24809121CFB13B500C4FE42 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F24809101CFB13B500C4FE42 /* Main.storyboard */; };
@@ -143,6 +144,8 @@
 		F220E2771BB62BF300251C88 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		F2228C891CF42A00002B785F /* PendingAskTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendingAskTableViewController.swift; sourceTree = "<group>"; };
 		F2228C8A1CF42A00002B785F /* PostedAskTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostedAskTableViewController.swift; sourceTree = "<group>"; };
+		F231F4371D696DDF005D1F12 /* QRCodeReaderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeReaderViewController.swift; sourceTree = "<group>"; };
+		F231F43B1D697005005D1F12 /* FaceStudentsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceStudentsTableViewController.swift; sourceTree = "<group>"; };
 		F2329FEC1BC20E2F006A428F /* TestDateTimeSettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestDateTimeSettingsTableViewController.swift; sourceTree = "<group>"; };
 		F23457D01BC36CBE00AD0B87 /* TeacherUnfinishedTestInfoTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherUnfinishedTestInfoTableViewController.swift; sourceTree = "<group>"; };
 		F23465401C7F551B00933615 /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
@@ -160,7 +163,6 @@
 		F246DEB81B9BDAD00058DEA6 /* TeacherQuestionsInTestTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherQuestionsInTestTableViewController.swift; sourceTree = "<group>"; };
 		F246DEBC1B9C63360058DEA6 /* Student.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Student.swift; sourceTree = "<group>"; };
 		F246DEC01B9C64A70058DEA6 /* Me.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Me.swift; sourceTree = "<group>"; };
-		F248090B1CFB118700C4FE42 /* FaceStudentTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceStudentTableViewController.swift; sourceTree = "<group>"; };
 		F248090D1CFB125E00C4FE42 /* ManualCheckInStudentTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManualCheckInStudentTableViewController.swift; sourceTree = "<group>"; };
 		F248090F1CFB13B500C4FE42 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		F24809101CFB13B500C4FE42 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -290,7 +292,7 @@
 				F26DA8FE1CF80EE200C05141 /* CourseTableViewCell.xib */,
 				F2534AFA1B96CD40000192E7 /* DateTimeHelper.swift */,
 				F23465401C7F551B00933615 /* Errors.swift */,
-				F248090B1CFB118700C4FE42 /* FaceStudentTableViewController.swift */,
+				F231F43B1D697005005D1F12 /* FaceStudentsTableViewController.swift */,
 				F23465411C7F551B00933615 /* Generals.swift */,
 				F25E51151CF0237C00F10B04 /* Images.xcassets */,
 				F2FA432F1C882E8A008D93C8 /* KnowledgePointSectionTableViewCell.swift */,
@@ -314,6 +316,7 @@
 				F25E51181CF0237C00F10B04 /* NewStatusAskTableViewCell.xib */,
 				F2228C891CF42A00002B785F /* PendingAskTableViewController.swift */,
 				F2228C8A1CF42A00002B785F /* PostedAskTableViewController.swift */,
+				F231F4371D696DDF005D1F12 /* QRCodeReaderViewController.swift */,
 				F2186AB01CA4F0E700D72DCF /* QuestionContentTableViewCell.swift */,
 				F2186AB11CA4F0E700D72DCF /* QuestionContentTableViewCell.xib */,
 				F23EE3801BAA931700B75501 /* Seat.swift */,
@@ -628,6 +631,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F2E6BFAB1CA6A7840024AE3C /* SeatColumnIndicator.swift in Sources */,
+				F231F43C1D697005005D1F12 /* FaceStudentsTableViewController.swift in Sources */,
 				F2DDCEF11C8EC0A700561002 /* TeacherTestMessageTableViewController.swift in Sources */,
 				F25E51131CF0234900F10B04 /* AttendanceListChoosePeriodTableViewController.swift in Sources */,
 				F20A68B11B81B478000BFF24 /* TeacherQuestion.swift in Sources */,
@@ -669,6 +673,7 @@
 				F2697E031CA5365500A26D74 /* TeacherTestResultStudentsTableViewController.swift in Sources */,
 				F23AD7121C918FC10017C537 /* TestTableViewCell.swift in Sources */,
 				F21345EE1B9D456000D3BDBF /* TeacherCourse.swift in Sources */,
+				F231F4391D696DDF005D1F12 /* QRCodeReaderViewController.swift in Sources */,
 				F2534AFB1B96CD40000192E7 /* DateTimeHelper.swift in Sources */,
 				F23EE3851BAA931700B75501 /* SeatButton.swift in Sources */,
 				F2EA20291C89A88400FC8340 /* TeacherAllQuestionsViewController.swift in Sources */,
@@ -680,7 +685,6 @@
 				F20A68821B81B400000BFF24 /* AppDelegate.swift in Sources */,
 				F25E51111CF0234300F10B04 /* AttendanceListTableViewController.swift in Sources */,
 				F2C9163C1CEF16000058AD60 /* ModifyPasswordTableViewController.swift in Sources */,
-				F248090C1CFB118700C4FE42 /* FaceStudentTableViewController.swift in Sources */,
 				F2ECA79D1BC0B4E9004B0469 /* TeacherNotificationsTableViewController.swift in Sources */,
 				F2329FED1BC20E2F006A428F /* TestDateTimeSettingsTableViewController.swift in Sources */,
 				F2EA202B1C89AB9100FC8340 /* TeacherCreateTestViewController.swift in Sources */,

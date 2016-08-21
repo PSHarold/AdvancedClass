@@ -17,7 +17,7 @@ class SeatTokenQRCodeReaderViewController: QRCodeReaderViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.message = "将摄像头对准老师提供的二维码"
-        self.verifyQRCode("")
+   
     }
     
     override func verifyQRCode(code: String){
@@ -36,9 +36,9 @@ class SeatTokenQRCodeReaderViewController: QRCodeReaderViewController {
                     
                 }
                 else{
-                    self.showError(error)
-                    //self.navigationController?.popViewControllerAnimated(true)
-                    //self.completionHandler?(error: error, json: json)
+                    let alert = UIAlertController(title: nil, message: "网络错误！", preferredStyle: .Alert)
+                    alert.addAction(UIAlertAction(title: "确定", style: .Default, handler: {[unowned self]_ in self.captureSession?.startRunning()}))
+                    self.presentViewController(alert, animated: true, completion: nil)
                 }
             }
             else{

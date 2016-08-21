@@ -38,7 +38,7 @@ class StudentCourseHelper{
             completionHandler(error: error)
         }
     }
-
+    
     
     //
     //    func getSyllabus(course: StudentCourse, completionHandler: ResponseMessageHandler){
@@ -70,8 +70,9 @@ class StudentCourseHelper{
             }
             completionHandler(error: error)
         }
-        
     }
+    
+    
     func getCourseDetails(course: StudentCourse, completionHandler: ResponseMessageHandler){
         //  self.getSyllabus(StudentCourse.currentCourse){
         //[unowned self]
@@ -89,21 +90,21 @@ class StudentCourseHelper{
         print("CouresHelper Deinited!")
     }
     
-//    func getStudent(studentId: String, course: StudentCourse, completionHandler: ResponseMessageHandler){
-//        if course.students[studentId] != nil{
-//            completionHandler(error: nil)
-//            return
-//        }
-//        let authHelper = StudentAuthenticationHelper.defaultHelper
-//        authHelper.getResponsePOST(RequestType.GET_STUDENT, parameters: ["course_id": course.courseId, "sub_id": course.subId, "student_id": studentId]){
-//            (error, json) in
-//            if error == nil{
-//                let student = Student(json: json["student"])
-//                course.students[student.studentId] = student
-//            }
-//            completionHandler(error: error)
-//        }
-//    }
+    //    func getStudent(studentId: String, course: StudentCourse, completionHandler: ResponseMessageHandler){
+    //        if course.students[studentId] != nil{
+    //            completionHandler(error: nil)
+    //            return
+    //        }
+    //        let authHelper = StudentAuthenticationHelper.defaultHelper
+    //        authHelper.getResponsePOST(RequestType.GET_STUDENT, parameters: ["course_id": course.courseId, "sub_id": course.subId, "student_id": studentId]){
+    //            (error, json) in
+    //            if error == nil{
+    //                let student = Student(json: json["student"])
+    //                course.students[student.studentId] = student
+    //            }
+    //            completionHandler(error: error)
+    //        }
+    //    }
     static func drop(){
         _defaultHelper = nil
         StudentCourse.currentCourse = nil

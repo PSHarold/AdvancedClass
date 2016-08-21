@@ -12,7 +12,7 @@ class TeacherSeatViewController: UIViewController, SeatViewDataSource, SeatViewD
     
     
     var searchBarScopes = ["学号", "姓名"]
-    
+    var history: Bool = false
     
     var seatHelper = TeacherSeatHelper.defaultHelper
     var timer: NSTimer!
@@ -22,6 +22,7 @@ class TeacherSeatViewController: UIViewController, SeatViewDataSource, SeatViewD
     let hud = MBProgressHUD()
     var currentSeatIndex: SeatLocation?
     weak var courseHelper = TeacherCourseHelper.defaultHelper
+    @IBOutlet weak var refreshButton: UIBarButtonItem!
     @IBOutlet weak var seatView:SeatView!
     @IBOutlet weak var flipBarButton: UIBarButtonItem!
     @IBOutlet weak var searchBarButton: UIBarButtonItem!
@@ -48,7 +49,9 @@ class TeacherSeatViewController: UIViewController, SeatViewDataSource, SeatViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        if self.history{
+            self.refreshButton.enabled = false
+        }
       
         
         
@@ -223,8 +226,8 @@ class TeacherSeatViewController: UIViewController, SeatViewDataSource, SeatViewD
         self.seatHelper.getSeatMap{
             [unowned self]
             error in
-            if let _ = error{
-               // self.showError(error)
+            if let error = error{
+                self.showError(error)
             }
             else{
                 self.seatView.reloadSeats()
@@ -244,6 +247,9 @@ class TeacherSeatViewController: UIViewController, SeatViewDataSource, SeatViewD
         }
         
     }
+    
+    
+    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
 //        if let seat = self.seatHelper.seatToLocate{

@@ -118,7 +118,7 @@ class SeatView: UIView, UIScrollViewDelegate,UITableViewDelegate{
         for row in 0..<self.rows{
             for column in 0..<self.columns{
                 let seat = self.seatButtonArray[row][column]
-                let seatStatus = self.dataSource.seatStatusAtLocation(SeatLocation(row: row, col: column))
+                let seatStatus = self.dataSource.seatStatusAtLocation(SeatLocation(row: row+1, col: column+1))
                 seat.status = seatStatus                
             
             }

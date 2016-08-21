@@ -9,7 +9,7 @@
 import UIKit
 
 class AttendanceListChoosePeriodTableViewController: UITableViewController, UIPickerViewDelegate {
-
+    
     var times = TeacherCourse.currentCourse.timesAndRooms
     
     @IBOutlet weak var pickerView: UIPickerView!
@@ -31,7 +31,7 @@ class AttendanceListChoosePeriodTableViewController: UITableViewController, UIPi
         self.pickerView.delegate = self
     }
     
-   
+    
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
@@ -43,9 +43,15 @@ class AttendanceListChoosePeriodTableViewController: UITableViewController, UIPi
                     self.showError(error)
                 }
                 else{
-                    if let vc = self.storyboard?.instantiateViewControllerWithIdentifier("AttendanceListTableViewController"){
+                    if let vc = self.storyboard?.instantiateViewControllerWithIdentifier("AttendanceListTableViewController") as? AttendanceListTableViewController{
+                        vc.week=self.selectedWeekNo
+                        vc.day = self.selectedDayNo
+                        vc.period = self.selectedPeriodNo
+                        vc.history = true
                         self.navigationController?.pushViewController(vc, animated: true)
+                        
                     }
+                    
                 }
             }
             
@@ -87,7 +93,12 @@ class AttendanceListChoosePeriodTableViewController: UITableViewController, UIPi
         case 0:
             self.selectedWeekNo = self.availableWeeks[row]
             self.availableDays = self.times.getAvailableDaysInWeek(self.selectedWeekNo, mode: .Past)
+            self.selectedDayNo = self.availableDays[0]
+            self.availablePeriods = self.times.getAvailablePeriodInWeek(self.selectedWeekNo, andDay: self.selectedDayNo)
+            self.selectedPeriodNo = self.availablePeriods[0]
             self.pickerView.reloadComponent(1)
+            self.pickerView.reloadComponent(2)
+            
         case 1:
             self.selectedDayNo = self.availableDays[row]
             self.availablePeriods = self.times.getAvailablePeriodInWeek(self.selectedWeekNo, andDay: self.availableDays[row])
@@ -99,6 +110,6 @@ class AttendanceListChoosePeriodTableViewController: UITableViewController, UIPi
             break
         }
     }
-
-
+    
+    
 }

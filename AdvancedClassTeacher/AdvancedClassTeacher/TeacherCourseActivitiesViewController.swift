@@ -43,12 +43,25 @@ class TeacherCourseActivitiesViewController: UIViewController{
         self.showStudentListButton.layer.masksToBounds = true
         self.showStudentListButton.layer.cornerRadius = 10.0
         self.showStudentListButton.layer.borderWidth = 0.3
+        self.checkInWithFaceButton.layer.masksToBounds = true
+        self.checkInWithFaceButton.layer.cornerRadius = 10.0
+        self.checkInWithFaceButton.layer.borderWidth = 0.3
         
         // Do any additional setup after loading the view.
     }
     
     func checkInWithFace(){
-        self.performSegueWithIdentifier("CheckInWithFace", sender: self)
+        self.seatHelper!.getSeatToken{
+            (error, json) in
+            if let error = error{
+                self.showError(error)
+            }
+            else{
+               self.performSegueWithIdentifier("ShowFaceStudentList", sender: self)
+            }
+        }
+
+        
     }
     func showSeatMap(){
         self.getSeatMap(true)

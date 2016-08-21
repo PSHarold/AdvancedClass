@@ -74,7 +74,8 @@ enum RequestType: String{
     case GET_STUDENTS = "/course/get_students"
     case GET_STUDENT_AVATAR = "/course/getStudentAvatar"
     case GET_COVER = "/course/get_cover"
-    case CHECK_IN_WITH_FACE = "/course/check_in_with_face"
+    case CHECK_IN_WITH_FACE = "/seat/checkInWithFace"
+    case GET_HISTORY_SEAT_MAP = "/seat/getHistorySeatMap"
 }
 
 enum FileType: String{

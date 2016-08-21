@@ -66,6 +66,7 @@ enum CError: Int {
     case BASE64_ERROR = 620
     case FACE_TRAINING_NOT_DONE = 621
     case IMAGE_CONTAINS_NO_FACE = 622
+    case FACE_DOES_NOT_MATCH = 624
     case RESOURCE_NOT_FOUND = 700
     case USER_NOT_FOUND = 701
     case MAIN_COURSE_NOT_FOUND = 702
@@ -113,7 +114,7 @@ enum CError: Int {
     case TEST_STILL_ONGOING = 933
     case YOU_HAVENT_TAKEN_THE_TEST = 934
     case BAD_STUDENT_TEST_RESULT = 935
-    
+    case ALREADY_CHECKED_IN = 936
     
     case EMAIL_NOT_ACTIVATED = 650
     case WRONG_EMAIL_ADDRESS = 651
@@ -125,8 +126,7 @@ enum CError: Int {
     case ASK_FOR_LEAVE_HAS_BEEN_APPROVED = 950
     case ASK_FOR_LEAVE_HAS_BEEN_DISAPPROVED = 951
     case ASK_FOR_LEAVE_STILL_PENDING = 952
-    case ALREADY_CHECKED_IN = 953
-    case FACE_DOES_NOT_MATCH = 954
+ 
     
     var description: String{
         switch self{
@@ -190,7 +190,8 @@ enum CError: Int {
             return "测验已存在！"
         case .ROOM_ALREADY_EXISTS:
             return ""
-            
+        case .FACE_DOES_NOT_MATCH:
+            return "脸部信息不匹配！"
         case .SEAT_ALREADY_TAKEN:
             return "座位被抢走了！"
         case .SEAT_ALREADY_CHOSEN:

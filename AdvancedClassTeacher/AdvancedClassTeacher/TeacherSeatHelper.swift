@@ -82,6 +82,33 @@ class TeacherSeatHelper {
         }
     }
     
+    func getHistorySeatMap(week: Int, day: Int, period: Int, completionHandler: ResponseMessageHandler){
+        self.authHelper!.getResponsePOSTWithCourse(RequestType.GET_HISTORY_SEAT_MAP, parameters: ["week_no": week, "day_no": day, "period_no": period]){
+            [unowned self]
+            (error, json) in
+            if error == nil{
+                self.seatByStudentId = [String: Seat]()
+                self.columns = json["col_num"].intValue
+                self.rows = json["row_num"].intValue
+                self.seatArray = [[Seat!]]()
+                for _ in 0..<self.rows{
+                    self.seatArray.append(Array<Seat!>(count: self.columns, repeatedValue: nil))
+                }
+                for (_, seat_json) in json["seats"]{
+                    let seat = Seat(json: seat_json)
+                    if seat.currentStudentId != ""{
+                        self.seatByStudentId[seat.currentStudentId] = seat
+                    }
+                    self.seatArray[seat.row-1][seat.column-1] = seat
+                }
+            }
+            completionHandler(error: error)
+        }
+    }
+
+    
+    
+    
     
     static func drop(){
         _defaultHelper = nil
@@ -101,7 +128,7 @@ class TeacherSeatHelper {
                     courseHelper.getStudentAvatar(studentId){
                         error, data in
                         if let error = error{
-                            completionHandler(error: error, location: nil, avatar: nil)
+                            completionHandler(error: error, location: SeatLocation(seat), avatar: nil)
                         }
                         else{
                             completionHandler(error: nil, location: SeatLocation(seat), avatar: UIImage(data: data)!)

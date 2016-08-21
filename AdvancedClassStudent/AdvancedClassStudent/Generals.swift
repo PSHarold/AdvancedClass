@@ -19,7 +19,7 @@ var currentWeekNo: Int = 0
 
 
 //let BASE_URL = TARGET_IPHONE_SIMULATOR == 0 ? "http://115.159.125.226/api" : "http://localhost:5000/api"
-let BASE_URL = TARGET_IPHONE_SIMULATOR == 0 ? "http://192.168.2.1:5000/api" : "http://localhost:5000/api"
+let BASE_URL = TARGET_IPHONE_SIMULATOR == 1 ? "http://121.42.48.79/api" : "http://localhost:5000/api"
 
 let ROLE_FOR_TEACHER = 1
 let ROLE_FOR_STUDENT = 2

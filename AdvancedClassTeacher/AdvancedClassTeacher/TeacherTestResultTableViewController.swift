@@ -96,7 +96,8 @@ class TeacherTestResultViewController: UIViewController, UITableViewDelegate, UI
             let questionId = self.testResult!.questionResultsSorted[indexPath.row].questionId
             let question = self.test!.questionsForResults[questionId]!
             let content = question.content
-            let rangeOfDomain = content.startIndex..<content.startIndex.advancedBy(8)
+            
+            let rangeOfDomain = content.characters.count >= 8 ? content.startIndex..<content.startIndex.advancedBy(8) : content.startIndex..<content.startIndex.advancedBy(content.characters.count)
             cell.textLabel?.text = content[rangeOfDomain] + "......"
             cell.detailTextLabel?.text = self.test!.results.getQuestionResult(question)!.correctRatio.toPercentageString()
             return cell
