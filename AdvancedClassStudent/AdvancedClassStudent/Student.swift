@@ -44,8 +44,12 @@ class Me: Student {
     var unreadNotifications = [Notification]()
     var untakenTests = [Notification]()
     var newStatusAsks = [AskForLeave]()
+    var email: String!
+    var emailActivated: Bool!
     override init(json: JSON) {
         super.init(json: json)
+        self.email = json["email"].stringValue
+        self.emailActivated = json["email_activated"].boolValue
         for (_, course_json) in json["courses"]{
             let course = StudentCourse(json: course_json, preview: true)
             self.courses.append(course)

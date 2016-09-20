@@ -18,6 +18,7 @@ class MeTableViewController: UITableViewController, UIImagePickerControllerDeleg
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var avatarImageView: UIImageView!
     
+    @IBOutlet weak var emailCell: UITableViewCell!
     @IBOutlet weak var infoCell: UITableViewCell!
     
     override func viewDidLoad() {
@@ -42,6 +43,22 @@ class MeTableViewController: UITableViewController, UIImagePickerControllerDeleg
             }
         }
         
+        
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        let me = StudentAuthenticationHelper.defaultHelper.me
+        
+        if me.email == ""{
+            emailCell.detailTextLabel?.text = "未填写"
+        }
+        else if !me.emailActivated{
+            emailCell.detailTextLabel?.text = "未激活"
+        }
+        else{
+            emailCell.detailTextLabel?.text = ""
+        }
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

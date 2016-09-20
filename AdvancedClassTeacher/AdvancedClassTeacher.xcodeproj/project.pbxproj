@@ -11,6 +11,9 @@
 		75FA3EF3477230922BEAC990 /* libPods-AdvancedClassTeacherTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BC318AB03D59DBA9C62D757 /* libPods-AdvancedClassTeacherTests.a */; };
 		F202BDD41CA635E300B6356D /* TeacherCourseActivitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F202BDD31CA635E300B6356D /* TeacherCourseActivitiesViewController.swift */; };
 		F202BDD61CA6555600B6356D /* TeacherSeatSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F202BDD51CA6555600B6356D /* TeacherSeatSearchTableViewController.swift */; };
+		F204F6A71D6BDD5200254257 /* EmailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F204F6A61D6BDD5200254257 /* EmailTableViewController.swift */; };
+		F204F6AA1D6BDD6F00254257 /* ResetPasswordConfirmTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F204F6A81D6BDD6F00254257 /* ResetPasswordConfirmTableViewController.swift */; };
+		F204F6AB1D6BDD6F00254257 /* ResetPasswordUserIDTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F204F6A91D6BDD6F00254257 /* ResetPasswordUserIDTableViewController.swift */; };
 		F20A56631B96A76A00B8AAB0 /* RandomNumberTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20A56621B96A76A00B8AAB0 /* RandomNumberTableViewController.swift */; };
 		F20A68821B81B400000BFF24 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20A68811B81B400000BFF24 /* AppDelegate.swift */; };
 		F20A68981B81B400000BFF24 /* AdvancedClassTeacherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20A68971B81B400000BFF24 /* AdvancedClassTeacherTests.swift */; };
@@ -120,6 +123,9 @@
 		98B46265AF8D661AA0DE7A84 /* Pods-AdvancedClassTeacher.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AdvancedClassTeacher.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AdvancedClassTeacher/Pods-AdvancedClassTeacher.debug.xcconfig"; sourceTree = "<group>"; };
 		F202BDD31CA635E300B6356D /* TeacherCourseActivitiesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherCourseActivitiesViewController.swift; sourceTree = "<group>"; };
 		F202BDD51CA6555600B6356D /* TeacherSeatSearchTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherSeatSearchTableViewController.swift; sourceTree = "<group>"; };
+		F204F6A61D6BDD5200254257 /* EmailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailTableViewController.swift; sourceTree = "<group>"; };
+		F204F6A81D6BDD6F00254257 /* ResetPasswordConfirmTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordConfirmTableViewController.swift; sourceTree = "<group>"; };
+		F204F6A91D6BDD6F00254257 /* ResetPasswordUserIDTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordUserIDTableViewController.swift; sourceTree = "<group>"; };
 		F20A56621B96A76A00B8AAB0 /* RandomNumberTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomNumberTableViewController.swift; sourceTree = "<group>"; };
 		F20A687C1B81B400000BFF24 /* AdvancedClassTeacher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AdvancedClassTeacher.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F20A68801B81B400000BFF24 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -281,6 +287,9 @@
 		F20A687E1B81B400000BFF24 /* AdvancedClassTeacher */ = {
 			isa = PBXGroup;
 			children = (
+				F204F6A81D6BDD6F00254257 /* ResetPasswordConfirmTableViewController.swift */,
+				F204F6A91D6BDD6F00254257 /* ResetPasswordUserIDTableViewController.swift */,
+				F204F6A61D6BDD5200254257 /* EmailTableViewController.swift */,
 				F25E510C1CF0234300F10B04 /* AbsenceStatisticsTableViewController.swift */,
 				F220E2751BB62BF200251C88 /* AdvancedClassTeacher-Bridging-Header.h */,
 				F20A68811B81B400000BFF24 /* AppDelegate.swift */,
@@ -665,8 +674,10 @@
 				F25E510F1CF0234300F10B04 /* AbsenceStatisticsTableViewController.swift in Sources */,
 				F248090E1CFB125E00C4FE42 /* ManualCheckInStudentTableViewController.swift in Sources */,
 				F299579B1B81CBB20003B64C /* TestSettingsTableViewController.swift in Sources */,
+				F204F6AA1D6BDD6F00254257 /* ResetPasswordConfirmTableViewController.swift in Sources */,
 				F23465461C7F551B00933615 /* SeatRowIndicator.swift in Sources */,
 				F2186AB61CA4F10100D72DCF /* MultipleChoiceTableViewCell.swift in Sources */,
+				F204F6A71D6BDD5200254257 /* EmailTableViewController.swift in Sources */,
 				F25B8E011B9D91A400A2587E /* TeacherCourseHelper.swift in Sources */,
 				F20A68AA1B81B478000BFF24 /* KnowledgePointViewController.swift in Sources */,
 				F25E511C1CF0237C00F10B04 /* NewStatusAskTableViewCell.swift in Sources */,
@@ -679,6 +690,7 @@
 				F2EA20291C89A88400FC8340 /* TeacherAllQuestionsViewController.swift in Sources */,
 				F2E6BFAD1CA6AD6A0024AE3C /* TeacherNotificationContentTableViewController.swift in Sources */,
 				F23465451C7F551B00933615 /* Generals.swift in Sources */,
+				F204F6AB1D6BDD6F00254257 /* ResetPasswordUserIDTableViewController.swift in Sources */,
 				F23EE3841BAA931700B75501 /* Seat.swift in Sources */,
 				F220E2781BB62BF300251C88 /* MBProgressHUD.m in Sources */,
 				F23465471C7F551B00933615 /* TimesAndRooms.swift in Sources */,

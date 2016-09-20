@@ -59,7 +59,7 @@ class TeacherTest{
     }
     var beginsOnNSDate: NSDate!
     var timeLimit = -1
-    var finishedCount: Int!
+    var finishedCount = 0
     var _expiresOn: String?
     var expiresOn: String{
         get{

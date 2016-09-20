@@ -13,6 +13,7 @@ class Teacher{
     var name: String!
     var gender: Bool!
     var userId: String
+    
     var genderString:String{
         get{
             if !self.gender{
@@ -34,6 +35,8 @@ class Me: Teacher {
     var courses = [TeacherCourse]()
     var courseDict = [String:TeacherCourse]()
     var pendingAsks = [AskForLeave]()
+    var emailActivated: Bool!
+    var email: String!
     var pendingCount: Int{
         get{
             var count = 0
@@ -48,6 +51,8 @@ class Me: Teacher {
     
     override init(json: JSON) {
         super.init(json: json)
+        self.email = json["email"].stringValue
+        self.emailActivated = json["email_activated"].boolValue
         for (_, course_json) in json["courses"]{
             let course = TeacherCourse(json: course_json, preview: true)
             self.courses.append(course)

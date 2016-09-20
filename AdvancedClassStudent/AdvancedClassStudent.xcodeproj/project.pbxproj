@@ -83,6 +83,12 @@
 		F2C916381CEF08500058AD60 /* ModifyPasswordTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C916371CEF08500058AD60 /* ModifyPasswordTableViewController.swift */; };
 		F2D785341BB4E13F00B6DC9A /* StudentTestResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D785331BB4E13F00B6DC9A /* StudentTestResultsViewController.swift */; };
 		F2E3DA3E1B96EDA600945513 /* DateTimeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E3DA3D1B96EDA600945513 /* DateTimeHelper.swift */; };
+		F2E6E1FE1D6A83B200DEF262 /* EmailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E6E1FD1D6A83B200DEF262 /* EmailTableViewController.swift */; };
+		F2E6E2061D6AF4E200DEF262 /* Base.lproj in Resources */ = {isa = PBXBuildFile; fileRef = F2E6E2001D6AF4E200DEF262 /* Base.lproj */; };
+		F2E6E2071D6AF4E200DEF262 /* Image.imageset in Resources */ = {isa = PBXBuildFile; fileRef = F2E6E2011D6AF4E200DEF262 /* Image.imageset */; };
+		F2E6E2081D6AF4E200DEF262 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2E6E2021D6AF4E200DEF262 /* Images.xcassets */; };
+		F2E6E2091D6AF4E200DEF262 /* ResetPasswordConfirmTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E6E2031D6AF4E200DEF262 /* ResetPasswordConfirmTableViewController.swift */; };
+		F2E6E20A1D6AF4E200DEF262 /* ResetPasswordUserIDTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E6E2041D6AF4E200DEF262 /* ResetPasswordUserIDTableViewController.swift */; };
 		F2ED6D951C7BFD1600520468 /* StudentNotificationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2ED6D941C7BFD1600520468 /* StudentNotificationsTableViewController.swift */; };
 		F2F7D52C1B944BF600E07304 /* StudentAuthenticationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F7D52B1B944BF600E07304 /* StudentAuthenticationHelper.swift */; };
 		F2F7D52E1B944FA000E07304 /* StudentLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F7D52D1B944FA000E07304 /* StudentLoginViewController.swift */; };
@@ -185,6 +191,12 @@
 		F2C916371CEF08500058AD60 /* ModifyPasswordTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModifyPasswordTableViewController.swift; sourceTree = "<group>"; };
 		F2D785331BB4E13F00B6DC9A /* StudentTestResultsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentTestResultsViewController.swift; sourceTree = "<group>"; };
 		F2E3DA3D1B96EDA600945513 /* DateTimeHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateTimeHelper.swift; sourceTree = "<group>"; };
+		F2E6E1FD1D6A83B200DEF262 /* EmailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailTableViewController.swift; sourceTree = "<group>"; };
+		F2E6E2001D6AF4E200DEF262 /* Base.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Base.lproj; sourceTree = "<group>"; };
+		F2E6E2011D6AF4E200DEF262 /* Image.imageset */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Image.imageset; sourceTree = "<group>"; };
+		F2E6E2021D6AF4E200DEF262 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		F2E6E2031D6AF4E200DEF262 /* ResetPasswordConfirmTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordConfirmTableViewController.swift; sourceTree = "<group>"; };
+		F2E6E2041D6AF4E200DEF262 /* ResetPasswordUserIDTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordUserIDTableViewController.swift; sourceTree = "<group>"; };
 		F2ED6D941C7BFD1600520468 /* StudentNotificationsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentNotificationsTableViewController.swift; sourceTree = "<group>"; };
 		F2F7D52B1B944BF600E07304 /* StudentAuthenticationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentAuthenticationHelper.swift; sourceTree = "<group>"; };
 		F2F7D52D1B944FA000E07304 /* StudentLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentLoginViewController.swift; sourceTree = "<group>"; };
@@ -251,15 +263,21 @@
 		F22DAC941B81AC2B00360027 /* AdvancedClassStudent */ = {
 			isa = PBXGroup;
 			children = (
-				F24EA8491CF98A34003DD2A5 /* CourseTableViewCell.swift */,
-				F24EA84A1CF98A34003DD2A5 /* CourseTableViewCell.xib */,
+				F2E6E2001D6AF4E200DEF262 /* Base.lproj */,
+				F2E6E2011D6AF4E200DEF262 /* Image.imageset */,
+				F2E6E2021D6AF4E200DEF262 /* Images.xcassets */,
+				F2E6E2031D6AF4E200DEF262 /* ResetPasswordConfirmTableViewController.swift */,
+				F2E6E2041D6AF4E200DEF262 /* ResetPasswordUserIDTableViewController.swift */,
 				F255B8921CF4407700D8D49A /* AbsenceTableViewController.swift */,
 				F220E2791BB62C2000251C88 /* AdvancedClassStudent-Bridging-Header.h */,
 				F22DAC971B81AC2B00360027 /* AppDelegate.swift */,
 				F255B8931CF4407700D8D49A /* AskForLeaveTableViewController.swift */,
 				F255B8941CF4407700D8D49A /* AttendanceTableViewController.swift */,
 				F286A0E81C7DAA5400B1BD3A /* CourseActivityButton.swift */,
+				F24EA8491CF98A34003DD2A5 /* CourseTableViewCell.swift */,
+				F24EA84A1CF98A34003DD2A5 /* CourseTableViewCell.xib */,
 				F2E3DA3D1B96EDA600945513 /* DateTimeHelper.swift */,
+				F2E6E1FD1D6A83B200DEF262 /* EmailTableViewController.swift */,
 				F2B9928E1C781B3800A8DE18 /* Errors.swift */,
 				F298D67D1CF0028400733600 /* Face */,
 				F2B992901C782B6400A8DE18 /* Generals.swift */,
@@ -270,6 +288,8 @@
 				F220E27B1BB62C2100251C88 /* MBProgressHUD.m */,
 				F2C916351CEF072E0058AD60 /* MeTableViewController.swift */,
 				F2C916371CEF08500058AD60 /* ModifyPasswordTableViewController.swift */,
+				F255B8A61CF4692500D8D49A /* MyInfoTableViewCell.swift */,
+				F255B8A71CF4692500D8D49A /* MyInfoTableViewCell.xib */,
 				F275AFBE1CAA0CFC0009925B /* MyProgressBar.swift */,
 				F255B8951CF4407700D8D49A /* NewAskTableViewController.swift */,
 				F255B8961CF4407700D8D49A /* NewStatusAsksTableViewController.swift */,
@@ -326,8 +346,6 @@
 				F275AFB81CAA0C6D0009925B /* TestTableViewCell.swift */,
 				F275AFB91CAA0C6D0009925B /* TestTableViewCell.xib */,
 				F2B992791C78128500A8DE18 /* TimesAndRooms.swift */,
-				F255B8A61CF4692500D8D49A /* MyInfoTableViewCell.swift */,
-				F255B8A71CF4692500D8D49A /* MyInfoTableViewCell.xib */,
 			);
 			path = AdvancedClassStudent;
 			sourceTree = "<group>";
@@ -460,12 +478,15 @@
 				F24EA84C1CF98A34003DD2A5 /* CourseTableViewCell.xib in Resources */,
 				F22DAC9D1B81AC2B00360027 /* Main.storyboard in Resources */,
 				F22DACA21B81AC2B00360027 /* LaunchScreen.xib in Resources */,
+				F2E6E2071D6AF4E200DEF262 /* Image.imageset in Resources */,
 				F283BC871C9EBC4000E0396F /* StudentQuestionContentTableViewCell.xib in Resources */,
 				F275AFBB1CAA0C6D0009925B /* TestTableViewCell.xib in Resources */,
 				F255B8A01CF4407700D8D49A /* NewStatusAskTableViewCell.xib in Resources */,
 				F2B917CC1CAD088200ED9521 /* StudentMultipleChoiceResultTableViewCell.xib in Resources */,
+				F2E6E2081D6AF4E200DEF262 /* Images.xcassets in Resources */,
 				F283BC931C9ECF7100E0396F /* StudentMultipleChoiceTableViewCell.xib in Resources */,
 				F275AFB31CA9FC430009925B /* StudentInfoCell.xib in Resources */,
+				F2E6E2061D6AF4E200DEF262 /* Base.lproj in Resources */,
 				F255B8A91CF4692500D8D49A /* MyInfoTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -533,6 +554,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F255B89C1CF4407700D8D49A /* AttendanceTableViewController.swift in Sources */,
+				F2E6E1FE1D6A83B200DEF262 /* EmailTableViewController.swift in Sources */,
 				F2C916381CEF08500058AD60 /* ModifyPasswordTableViewController.swift in Sources */,
 				F2D785341BB4E13F00B6DC9A /* StudentTestResultsViewController.swift in Sources */,
 				F283BC951C9ECFA100E0396F /* StudentQuestionContentTableViewCell.swift in Sources */,
@@ -540,6 +562,7 @@
 				F2B917CE1CAD0DA900ED9521 /* StudentUntakenTestInfoTableViewController.swift in Sources */,
 				F2ED6D951C7BFD1600520468 /* StudentNotificationsTableViewController.swift in Sources */,
 				F2F7D52E1B944FA000E07304 /* StudentLoginViewController.swift in Sources */,
+				F2E6E2091D6AF4E200DEF262 /* ResetPasswordConfirmTableViewController.swift in Sources */,
 				F2F7D52C1B944BF600E07304 /* StudentAuthenticationHelper.swift in Sources */,
 				F2B5A52B1BA99CFB00A4E38B /* SeatButton.swift in Sources */,
 				F2B5A5311BA9A10F00A4E38B /* StudentCourseActivitiesViewController.swift in Sources */,
@@ -553,6 +576,7 @@
 				F275AFAF1CA9FC210009925B /* StudentSeatSearchResultTableViewController.swift in Sources */,
 				F275AFC11CAA8F360009925B /* StudentFinishedTestInfoTableViewController.swift in Sources */,
 				F255B8A31CF4425A00D8D49A /* StudentAskForLeave.swift in Sources */,
+				F2E6E20A1D6AF4E200DEF262 /* ResetPasswordUserIDTableViewController.swift in Sources */,
 				F241AE9F1B98170E00E30EAF /* StudentTest.swift in Sources */,
 				F298D6861CF0029200733600 /* SinglePhotoCollectionViewCell.swift in Sources */,
 				F255B89E1CF4407700D8D49A /* NewStatusAsksTableViewController.swift in Sources */,

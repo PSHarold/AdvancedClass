@@ -329,6 +329,39 @@ class StudentAuthenticationHelper{
     }
     
     
+    
+    func modifyEmail(newEmail: String, completionHandler: ResponseMessageHandler){
+        self.getResponsePOST(RequestType.MODIFY_EMAIL, parameters: ["email": newEmail] ){
+            error, json in
+            completionHandler(error: error)
+        }
+        
+    }
+    
+    var userIdToReset: String!
+    var emailToVerify: String!
+    
+    
+    func requestToResetPassword(userId: String, completionHandler: ResponseMessageHandler){
+        self.userIdToReset = userId
+        self.getResponsePOST(RequestType.RESET_PASSWORD_GET_EMAIL, parameters: ["user_id": userId, "role": ROLE_FOR_STUDENT]){
+            [unowned self]
+            error, json in
+            if error == nil{
+                self.emailToVerify = json["email"].stringValue
+            }
+            completionHandler(error: error)
+        }
+    }
+    
+    func resetPasswordConfirmEmail(email: String, completionHandler: ResponseMessageHandler){
+        self.getResponsePOST(RequestType.RESET_PASSWORD_CONFIRM_EMAIL,  parameters: ["user_id": self.userIdToReset!, "role": ROLE_FOR_STUDENT, "email": email]){
+            error, json in
+            completionHandler(error: error)
+        }
+    }
+
+    
     private init(){
         
     }

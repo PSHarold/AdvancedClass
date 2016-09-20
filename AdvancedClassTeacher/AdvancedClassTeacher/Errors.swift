@@ -67,6 +67,8 @@ enum CError: Int {
     case FACE_TRAINING_NOT_DONE = 621
     case IMAGE_CONTAINS_NO_FACE = 622
     case FACE_DOES_NOT_MATCH = 624
+    case WRONG_EMAIL_ADDRESS = 625
+    case EMAIL_NOT_ACTIVATED = 626
     case RESOURCE_NOT_FOUND = 700
     case USER_NOT_FOUND = 701
     case MAIN_COURSE_NOT_FOUND = 702
@@ -116,8 +118,7 @@ enum CError: Int {
     case BAD_STUDENT_TEST_RESULT = 935
     case ALREADY_CHECKED_IN = 936
     
-    case EMAIL_NOT_ACTIVATED = 650
-    case WRONG_EMAIL_ADDRESS = 651
+
     
     
     case ASK_FOR_LEAVE_NOT_FOUND = 720
@@ -236,6 +237,8 @@ enum CError: Int {
             return "已经签过到了！"
         case .FACE_DOES_NOT_MATCH:
             return "脸部信息不匹配！"
+        case .WRONG_EMAIL_ADDRESS:
+            return "邮箱地址错误！"
         default:
             return ""
         }
