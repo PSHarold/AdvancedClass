@@ -37,6 +37,7 @@ class FaceStudentsTableViewController: UITableViewController, UIImagePickerContr
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         let picker = UIImagePickerController()
         picker.delegate = self
+        picker.sourceType = .Camera
         self.presentViewController(picker, animated: true, completion: nil)
     }
     

@@ -29,17 +29,9 @@ class SeatTokenQRCodeReaderViewController: QRCodeReaderViewController {
             error, json in
             if let error = error{
                 self.hideHud()
-                if error == CError.BAD_QR_CODE{
-                    let alert = UIAlertController(title: nil, message: "无效的二维码！", preferredStyle: .Alert)
-                    alert.addAction(UIAlertAction(title: "确定", style: .Default, handler: {[unowned self]_ in self.captureSession?.startRunning()}))
-                    self.presentViewController(alert, animated: true, completion: nil)
-                    
-                }
-                else{
-                    let alert = UIAlertController(title: nil, message: "网络错误！", preferredStyle: .Alert)
-                    alert.addAction(UIAlertAction(title: "确定", style: .Default, handler: {[unowned self]_ in self.captureSession?.startRunning()}))
-                    self.presentViewController(alert, animated: true, completion: nil)
-                }
+                let alert = UIAlertController(title: nil, message: error.description, preferredStyle: .Alert)
+                alert.addAction(UIAlertAction(title: "确定", style: .Default, handler: {[unowned self]_ in self.captureSession?.startRunning()}))
+                self.presentViewController(alert, animated: true, completion: nil)
             }
             else{
                 self.hideHud()

@@ -102,6 +102,9 @@ class StudentCourseActivitiesViewController: UIViewController{
                     case CError.COURSE_ALREADY_BEGUN:
                         self.seatPromptLabel.text = "课程已开始"
                         self.timer?.invalidate()
+                    case .COURSE_IS_NOT_ON_TODAY:
+                        self.seatPromptLabel.text = "今天没有这门课"
+                        self.timer?.invalidate()
                     default:
                         break
                     }

@@ -19,7 +19,7 @@ var currentWeekNo: Int = 0
 
 
 //let BASE_URL = TARGET_IPHONE_SIMULATOR == 0 ? "http://115.159.125.226/api" : "http://localhost:5000/api"
-let BASE_URL = TARGET_IPHONE_SIMULATOR == 0 ? "http://172.20.10.2:5000/api" : "http://localhost:5000/api"
+let BASE_URL = TARGET_IPHONE_SIMULATOR == 0 ? "http://192.168.2.1:5000/api" : "http://localhost:5000/api"
 
 let ROLE_FOR_TEACHER = 1
 let ROLE_FOR_STUDENT = 2
@@ -259,7 +259,6 @@ extension UIImage{
         } else {
             CGContextDrawImage(ctx, CGRectMake(0,0,self.size.width,self.size.height), self.CGImage)
         }
-        let a = StudentSeatHelper.defaultHelper
         
         // And now we just create a new UIImage from the drawing context and return it
         return UIImage(CGImage: CGBitmapContextCreateImage(ctx)!)

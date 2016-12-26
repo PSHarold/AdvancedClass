@@ -67,11 +67,11 @@ class TeacherStudentAttendanceTableViewController: UITableViewController {
         }
         else{
             studentId = self.absentStudents[indexPath.row]
-            cell.detailText = ""
+            cell.detailText = studentId
         }
         let student = self.currentCourse?.studentDict[studentId]
         cell.studentId = student?.studentId ?? "未知"
-        cell.studentName = student?.name ?? "未知"
+        cell.studentName = (student?.name ?? "未知") + " " + cell.studentId
         cell.className = student?.className ?? "未知"
         return cell
     }

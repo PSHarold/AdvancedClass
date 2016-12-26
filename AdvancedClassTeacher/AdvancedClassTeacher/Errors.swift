@@ -83,6 +83,7 @@ enum CError: Int {
     case DEPARTMENT_NOT_FOUND = 711
     case MAJOR_NOT_FOUND = 712
     case CLASS_NOT_FOUND = 713
+    case NO_FACE_UPLOADED = 716
     
     case RESOURCE_ALREADY_EXISTS = 800
     case USER_ALREADY_EXISTS = 801
@@ -170,6 +171,8 @@ enum CError: Int {
             return "找不到此专业！"
         case .CLASS_NOT_FOUND:
             return "找不到此班级！"
+        case .NO_FACE_UPLOADED:
+            return "该学生未上传人脸识别训练照片！"
             
         case .RESOURCE_ALREADY_EXISTS:
             return ""

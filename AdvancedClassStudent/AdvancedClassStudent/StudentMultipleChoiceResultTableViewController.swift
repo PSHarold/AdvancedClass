@@ -111,5 +111,8 @@ class StudentMultipleChoiceResultTableViewController: StudentBaseQuestionTableVi
         }
         return 55
     }
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
     
 }
